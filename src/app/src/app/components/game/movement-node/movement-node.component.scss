@@ -1,7 +1,7 @@
 // I took this original code from here: https://codepen.io/laverboy/pen/ngwMdw
 // So, I can put other things within the node if I want
 
-@-webkit-keyframes pulse {
+@keyframes pulse {
   0% {
     box-shadow: 0 0 8px #ea4c89, inset 0 0 8px #ea4c89;
   }
