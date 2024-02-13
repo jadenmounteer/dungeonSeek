@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { PlayerComponent } from '../../src/app/components/characters/player/player.component';
+import { MovementNodeComponent } from '../../src/app/components/game/movement-node/movement-node.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [PlayerComponent],
+  imports: [PlayerComponent, MovementNodeComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })

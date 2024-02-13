@@ -1,0 +1,36 @@
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0 0 8px #ea4c89, inset 0 0 8px #ea4c89;
+  }
+  50% {
+    box-shadow: 0 0 16px #ea4c89, inset 0 0 14px #ea4c89;
+  }
+  100% {
+    box-shadow: 0 0 8px #ea4c89, inset 0 0 8px #ea4c89;
+  }
+}
+
+body {
+  background: #1f1f1f;
+  width: 100px;
+  margin: 60px auto;
+}
+
+.inner {
+  background-color: transparent;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  box-shadow: 0 0 8px #ea4c89, inset 0 0 8px #ea4c89;
+  -webkit-animation: pulse 2s linear 1s infinite;
+}
+.inner p {
+  display: block;
+  text-align: center;
+  line-height: 100px;
+  font-family: sans-serif;
+  font-weight: 100;
+  font-size: 24px;
+  color: #ea4c89;
+  text-shadow: 0 0 4px #ea4c89;
+}
