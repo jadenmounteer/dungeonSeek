@@ -45,5 +45,16 @@
     >
       <app-movement-node />
     </div>
+
+    <div
+      class="movement-node-wrapper"
+      (click)="movementNodeService.clickOnNode(elderForestNodeInfo)"
+      [ngStyle]="{
+        'left.px': elderForestNodeInfo.position.xPosition,
+        'top.px': elderForestNodeInfo.position.yPosition
+      }"
+    >
+      <app-movement-node />
+    </div>
   </div>
 </div>

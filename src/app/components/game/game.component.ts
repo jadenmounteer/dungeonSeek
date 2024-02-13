@@ -52,6 +52,12 @@ export class GameComponent implements OnInit, OnDestroy {
     adjacentNodes: [],
   };
 
+  protected elderForestNodeInfo: MovementNodeInfo = {
+    name: 'The Elder Forest',
+    position: { xPosition: 730, yPosition: 470 },
+    adjacentNodes: [],
+  };
+
   protected playerBeingControlled: Player = this.players[0];
 
   private playerPositionSub: Subscription;
@@ -83,7 +89,11 @@ export class GameComponent implements OnInit, OnDestroy {
     this.enoachDesertNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
     this.arlanNodeInfo.adjacentNodes.push(this.enoachDesertNodeInfo);
     this.arlanNodeInfo.adjacentNodes.push(this.draebarNodeInfo);
+    this.arlanNodeInfo.adjacentNodes.push(this.elderForestNodeInfo);
     this.draebarNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
+    this.draebarNodeInfo.adjacentNodes.push(this.elderForestNodeInfo);
+    this.elderForestNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
+    this.elderForestNodeInfo.adjacentNodes.push(this.draebarNodeInfo);
   }
 
   private movePlayerToNode(
@@ -91,6 +101,7 @@ export class GameComponent implements OnInit, OnDestroy {
     initializing: boolean = false
   ) {
     if (!this.playerBeingControlled.currentNode) {
+      // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
       return;
     }
 
