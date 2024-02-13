@@ -1,0 +1,11 @@
+@mixin game-board-width-and-smaller {
+  @media (max-width: 1600px) {
+    @content;
+  }
+}
+
+@mixin game-board-height-and-smaller {
+  @media (max-height: 1131px) {
+    @content;
+  }
+}
