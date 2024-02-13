@@ -5,6 +5,8 @@
   width: $game-board-width;
   height: $game-board-height;
   background-image: url("../../../assets/map.jpeg");
+  position: relative;
+  border: 2px solid red;
 }
 
 .table {
@@ -19,4 +21,28 @@
   @include game-board-height-and-smaller {
     height: $game-board-height;
   }
+}
+.player-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  width: $game-board-width / 10;
+}
+
+.movement-node-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  width: $game-board-width / 40;
+  height: $game-board-height / 30;
 }

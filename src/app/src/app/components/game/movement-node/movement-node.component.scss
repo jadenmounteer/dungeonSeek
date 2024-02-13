@@ -15,12 +15,6 @@
   }
 }
 
-body {
-  background: #1f1f1f;
-  width: 100px;
-  margin: 60px auto;
-}
-
 .inner {
   background-color: transparent;
   // width: 100px;
@@ -33,13 +27,15 @@ body {
   animation: pulse 2s linear 1s infinite;
   cursor: pointer;
 }
-.inner p {
-  display: block;
-  text-align: center;
-  line-height: 100px;
-  font-family: sans-serif;
-  font-weight: 100;
-  font-size: 24px;
-  color: $node-color;
-  text-shadow: 0 0 4px $node-color;
-}
+
+// If I ever want to place something inside of the node I can use this as a reference
+// .inner p {
+//   display: block;
+//   text-align: center;
+//   line-height: 100px;
+//   font-family: sans-serif;
+//   font-weight: 100;
+//   font-size: 24px;
+//   color: $node-color;
+//   text-shadow: 0 0 4px $node-color;
+// }
