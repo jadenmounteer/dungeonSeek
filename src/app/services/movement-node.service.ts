@@ -10,7 +10,7 @@ export type Position = {
 export type MovementNodeInfo = {
   name: string;
   position: Position;
-  // TODO have a property that keeps track of the adjacent nodes
+  adjacentNodes: MovementNodeInfo[];
 };
 
 @Injectable({

@@ -14,6 +14,7 @@ export type Player = {
   position: Position;
   beingControlledOnClient: boolean; // False if not your turn and pass and play
   movementSpeed: number;
+  currentNode: MovementNodeInfo | null;
 };
 @Component({
   selector: 'app-game',
@@ -29,22 +30,26 @@ export class GameComponent implements OnInit, OnDestroy {
       position: { xPosition: 0, yPosition: 0 },
       beingControlledOnClient: true,
       movementSpeed: 4,
+      currentNode: null,
     },
   ];
 
   protected enoachDesertNodeInfo: MovementNodeInfo = {
     name: 'Enoach Desert',
     position: { xPosition: 400, yPosition: 400 },
+    adjacentNodes: [],
   };
 
   protected arlanNodeInfo: MovementNodeInfo = {
     name: 'arlan',
     position: { xPosition: 600, yPosition: 550 },
+    adjacentNodes: [],
   };
 
   protected draebarNodeInfo: MovementNodeInfo = {
     name: 'draebar',
     position: { xPosition: 830, yPosition: 660 },
+    adjacentNodes: [],
   };
 
   protected playerBeingControlled: Player = this.players[0];
@@ -52,7 +57,9 @@ export class GameComponent implements OnInit, OnDestroy {
   private playerPositionSub: Subscription;
 
   constructor(protected movementNodeService: MovementNodeService) {
-    // Subscribe to the player's position
+    this.initializeAdjacentNodes();
+    this.initializePlayerStartingNode();
+
     this.playerPositionSub =
       this.movementNodeService.playerPositionSubject.subscribe(
         (MovementNodeInfo: MovementNodeInfo) => {
@@ -65,6 +72,18 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.playerPositionSub.unsubscribe();
+  }
+
+  private initializePlayerStartingNode() {
+    this.playerBeingControlled.currentNode = this.enoachDesertNodeInfo;
+    this.movePlayerToNode(this.enoachDesertNodeInfo);
+  }
+
+  private initializeAdjacentNodes() {
+    this.enoachDesertNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
+    this.arlanNodeInfo.adjacentNodes.push(this.enoachDesertNodeInfo);
+    this.arlanNodeInfo.adjacentNodes.push(this.draebarNodeInfo);
+    this.draebarNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
   }
 
   private movePlayerToNode(movementNodeInfo: MovementNodeInfo) {
