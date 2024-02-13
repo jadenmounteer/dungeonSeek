@@ -28,6 +28,7 @@
   align-items: center;
   z-index: 1;
   width: $game-board-width / 10;
+  pointer-events: none;
 }
 
 .movement-node-wrapper {
