@@ -20,7 +20,10 @@
       <app-movement-node />
     </div>
 
-    <div class="movement-node-wrapper arlan-node">
+    <div
+      class="movement-node-wrapper arlan-node"
+      (click)="movementNodeService.clickOnNode(arlanNodeInfo)"
+    >
       <app-movement-node />
     </div>
   </div>

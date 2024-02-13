@@ -13,6 +13,7 @@ export type Player = {
   name: string;
   position: Position;
   beingControlledOnClient: boolean; // False if not your turn and pass and play
+  movementSpeed: number;
 };
 @Component({
   selector: 'app-game',
@@ -27,12 +28,18 @@ export class GameComponent implements OnInit, OnDestroy {
       name: 'Player 1',
       position: { xPosition: 0, yPosition: 0 },
       beingControlledOnClient: true,
+      movementSpeed: 4,
     },
   ];
 
   protected enoachDesertNodeInfo: MovementNodeInfo = {
     name: 'Enoach Desert',
     position: { xPosition: 400, yPosition: 400 },
+  };
+
+  protected arlanNodeInfo: MovementNodeInfo = {
+    name: 'arlan',
+    position: { xPosition: 600, yPosition: 550 },
   };
 
   protected playerBeingControlled: Player = this.players[0];
@@ -56,6 +63,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private movePlayerToNode(movementNodeInfo: MovementNodeInfo) {
+    // TODO Take into account the user's movement speed on this turn
     this.playerBeingControlled.position = movementNodeInfo.position;
   }
 }

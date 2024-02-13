@@ -10,6 +10,7 @@ export type Position = {
 export type MovementNodeInfo = {
   name: string;
   position: Position;
+  // TODO have a property that keeps track of the adjacent nodes
 };
 
 @Injectable({
@@ -22,8 +23,6 @@ export class MovementNodeService {
   constructor() {}
 
   public clickOnNode(MovementNodeInfo: MovementNodeInfo) {
-    console.log('clickOnNode');
-
     // Move the player to the node's coordinates
     this.playerPositionSubject.next(MovementNodeInfo);
   }
