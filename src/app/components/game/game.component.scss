@@ -2,8 +2,8 @@
 
 .game-board {
   border: 2px solid black;
-  width: 1600px;
-  height: 1131px;
+  width: $game-board-width;
+  height: $game-board-height;
   background-image: url("../../../assets/map.jpeg");
 }
 
@@ -12,4 +12,8 @@
   height: 100%;
   display: flex;
   justify-content: center;
+
+  @include game-board-width-and-smaller {
+    width: 100%;
+  }
 }
