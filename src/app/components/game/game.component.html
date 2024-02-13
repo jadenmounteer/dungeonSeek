@@ -4,7 +4,10 @@
       <app-player />
     </div>
 
-    <div class="movement-node-wrapper enoach-desert-node">
+    <div
+      class="movement-node-wrapper enoach-desert-node"
+      (click)="movementNodeService.clickOnNode()"
+    >
       <app-movement-node />
     </div>
 
