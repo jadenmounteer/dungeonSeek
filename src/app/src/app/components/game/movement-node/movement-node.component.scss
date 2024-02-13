@@ -28,6 +28,7 @@ body {
   border-radius: 50px;
   box-shadow: 0 0 8px $node-color, inset 0 0 8px $node-color;
   -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
 }
 .inner p {
   display: block;
