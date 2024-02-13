@@ -16,6 +16,10 @@
     <div
       class="movement-node-wrapper enoach-desert-node"
       (click)="movementNodeService.clickOnNode(enoachDesertNodeInfo)"
+      [ngStyle]="{
+        'left.px': enoachDesertNodeInfo.position.xPosition,
+        'top.px': enoachDesertNodeInfo.position.yPosition
+      }"
     >
       <app-movement-node />
     </div>
@@ -23,6 +27,10 @@
     <div
       class="movement-node-wrapper arlan-node"
       (click)="movementNodeService.clickOnNode(arlanNodeInfo)"
+      [ngStyle]="{
+        'left.px': arlanNodeInfo.position.xPosition,
+        'top.px': arlanNodeInfo.position.yPosition
+      }"
     >
       <app-movement-node />
     </div>
