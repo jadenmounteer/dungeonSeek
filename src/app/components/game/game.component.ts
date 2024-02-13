@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PlayerComponent } from '../../src/app/components/characters/player/player.component';
 import { MovementNodeComponent } from '../../src/app/components/game/movement-node/movement-node.component';
 import {
-  MovementInfo,
   MovementNodeInfo,
   MovementNodeService,
   Position,
@@ -44,8 +43,8 @@ export class GameComponent implements OnInit, OnDestroy {
     // Subscribe to the player's position
     this.playerPositionSub =
       this.movementNodeService.playerPositionSubject.subscribe(
-        (movementInfo: MovementInfo) => {
-          this.movePlayerToNode(movementInfo);
+        (MovementNodeInfo: MovementNodeInfo) => {
+          this.movePlayerToNode(MovementNodeInfo);
         }
       );
   }
@@ -56,8 +55,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub.unsubscribe();
   }
 
-  private movePlayerToNode(movementNodeInfo: MovementInfo) {
-    movementNodeInfo.player.position =
-      movementNodeInfo.movementNodeInfo.position;
+  private movePlayerToNode(movementNodeInfo: MovementNodeInfo) {
+    this.playerBeingControlled.position = movementNodeInfo.position;
   }
 }

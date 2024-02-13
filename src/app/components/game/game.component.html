@@ -15,12 +15,7 @@
     <!-- TODO Find a way to get the player currently being controlled -->
     <div
       class="movement-node-wrapper enoach-desert-node"
-      (click)="
-        movementNodeService.clickOnNode({
-          player: playerBeingControlled,
-          movementNodeInfo: enoachDesertNodeInfo
-        })
-      "
+      (click)="movementNodeService.clickOnNode(enoachDesertNodeInfo)"
     >
       <app-movement-node />
     </div>

@@ -12,24 +12,19 @@ export type MovementNodeInfo = {
   position: Position;
 };
 
-export type MovementInfo = {
-  player: Player;
-  movementNodeInfo: MovementNodeInfo;
-};
-
 @Injectable({
   providedIn: 'root',
 })
 export class MovementNodeService {
-  public playerPositionSubject: Subject<MovementInfo> =
-    new Subject<MovementInfo>();
+  public playerPositionSubject: Subject<MovementNodeInfo> =
+    new Subject<MovementNodeInfo>();
 
   constructor() {}
 
-  public clickOnNode(movementInfo: MovementInfo) {
+  public clickOnNode(MovementNodeInfo: MovementNodeInfo) {
     console.log('clickOnNode');
 
     // Move the player to the node's coordinates
-    this.playerPositionSubject.next(movementInfo);
+    this.playerPositionSubject.next(MovementNodeInfo);
   }
 }
