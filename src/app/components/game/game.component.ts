@@ -76,7 +76,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private initializePlayerStartingNode() {
     this.playerBeingControlled.currentNode = this.enoachDesertNodeInfo;
-    this.movePlayerToNode(this.enoachDesertNodeInfo);
+    this.movePlayerToNode(this.enoachDesertNodeInfo, true);
   }
 
   private initializeAdjacentNodes() {
@@ -86,8 +86,25 @@ export class GameComponent implements OnInit, OnDestroy {
     this.draebarNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
   }
 
-  private movePlayerToNode(movementNodeInfo: MovementNodeInfo) {
-    // TODO Take into account the user's movement speed on this turn
-    this.playerBeingControlled.position = movementNodeInfo.position;
+  private movePlayerToNode(
+    movementNodeInfo: MovementNodeInfo,
+    initializing: boolean = false
+  ) {
+    if (!this.playerBeingControlled.currentNode) {
+      return;
+    }
+
+    if (initializing) {
+      this.playerBeingControlled.position = movementNodeInfo.position;
+      return;
+    }
+
+    this.playerBeingControlled.currentNode.adjacentNodes.forEach((node) => {
+      if (node.name === movementNodeInfo.name) {
+        // TODO Take into account the user's movement speed on this turn
+        this.playerBeingControlled.position = movementNodeInfo.position;
+        this.playerBeingControlled.currentNode = movementNodeInfo;
+      }
+    });
   }
 }
