@@ -1,15 +1,17 @@
 // I took this original code from here: https://codepen.io/laverboy/pen/ngwMdw
 // So, I can put other things within the node if I want
 
+@import "../../../../../../styles.scss";
+
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 8px #ea4c89, inset 0 0 8px #ea4c89;
+    box-shadow: 0 0 8px $node-color, inset 0 0 8px $node-color;
   }
   50% {
-    box-shadow: 0 0 16px #ea4c89, inset 0 0 14px #ea4c89;
+    box-shadow: 0 0 16px $node-color, inset 0 0 14px $node-color;
   }
   100% {
-    box-shadow: 0 0 8px #ea4c89, inset 0 0 8px #ea4c89;
+    box-shadow: 0 0 8px $node-color, inset 0 0 8px $node-color;
   }
 }
 
@@ -24,7 +26,7 @@ body {
   width: 100px;
   height: 100px;
   border-radius: 50px;
-  box-shadow: 0 0 8px #ea4c89, inset 0 0 8px #ea4c89;
+  box-shadow: 0 0 8px $node-color, inset 0 0 8px $node-color;
   -webkit-animation: pulse 2s linear 1s infinite;
 }
 .inner p {
@@ -34,6 +36,6 @@ body {
   font-family: sans-serif;
   font-weight: 100;
   font-size: 24px;
-  color: #ea4c89;
-  text-shadow: 0 0 4px #ea4c89;
+  color: $node-color;
+  text-shadow: 0 0 4px $node-color;
 }
