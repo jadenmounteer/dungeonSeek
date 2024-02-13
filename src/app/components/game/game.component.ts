@@ -36,6 +36,8 @@ export class GameComponent implements OnInit, OnDestroy {
     position: { xPosition: 400, yPosition: 400 },
   };
 
+  protected playerBeingControlled: Player = this.players[0];
+
   private playerPositionSub: Subscription;
 
   constructor(protected movementNodeService: MovementNodeService) {

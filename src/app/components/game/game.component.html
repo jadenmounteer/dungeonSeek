@@ -17,7 +17,7 @@
       class="movement-node-wrapper enoach-desert-node"
       (click)="
         movementNodeService.clickOnNode({
-          player: players[0],
+          player: playerBeingControlled,
           movementNodeInfo: enoachDesertNodeInfo
         })
       "
