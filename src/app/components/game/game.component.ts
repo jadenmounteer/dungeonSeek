@@ -6,6 +6,7 @@ import {
   Position,
 } from '../../services/movement-node.service';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 export type Player = {
   name: string;
@@ -14,7 +15,7 @@ export type Player = {
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [PlayerComponent, MovementNodeComponent],
+  imports: [PlayerComponent, MovementNodeComponent, CommonModule],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })
@@ -22,11 +23,12 @@ export class GameComponent implements OnInit, OnDestroy {
   protected players: Player[] = [
     {
       name: 'Player 1',
-      position: { top: 0, left: 0 },
+      position: { xPosition: 0, yPosition: 0 },
     },
   ];
 
   private playerPositionSub: Subscription;
+
   constructor(protected movementNodeService: MovementNodeService) {
     // Subscribe to the player's position
     this.playerPositionSub =

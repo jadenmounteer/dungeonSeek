@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export type Position = {
-  top: number;
-  left: number;
+  xPosition: number;
+  yPosition: number;
 };
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,6 @@ export class MovementNodeService {
     console.log('clickOnNode');
 
     // Move the player to the node's coordinates
-    this.playerPositionSubject.next({ top: 100, left: 100 });
+    this.playerPositionSubject.next({ xPosition: 100, yPosition: 100 });
   }
 }

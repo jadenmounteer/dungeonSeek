@@ -1,7 +1,15 @@
 <div class="table">
   <div class="game-board">
-    <div class="player-wrapper">
-      <app-player />
+    <div *ngFor="let player of players" class="player-wrapper">
+      <div
+        class="player-wrapper"
+        [ngStyle]="{
+          'left.px': player.position.xPosition,
+          'top.px': player.position.yPosition
+        }"
+      >
+        <app-player />
+      </div>
     </div>
 
     <div
