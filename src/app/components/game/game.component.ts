@@ -42,6 +42,11 @@ export class GameComponent implements OnInit, OnDestroy {
     position: { xPosition: 600, yPosition: 550 },
   };
 
+  protected draebarNodeInfo: MovementNodeInfo = {
+    name: 'draebar',
+    position: { xPosition: 830, yPosition: 660 },
+  };
+
   protected playerBeingControlled: Player = this.players[0];
 
   private playerPositionSub: Subscription;
