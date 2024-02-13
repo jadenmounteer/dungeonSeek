@@ -14,6 +14,9 @@
   justify-content: center;
 
   @include game-board-width-and-smaller {
-    width: 100%;
+    width: $game-board-width;
+  }
+  @include game-board-height-and-smaller {
+    height: $game-board-height;
   }
 }
