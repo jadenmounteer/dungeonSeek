@@ -1,1 +1,10 @@
-<img class="player" src="../../../../../../assets/wizard-right.png" />
+<img
+  class="player"
+  *ngIf="directionFacing === 'Right'"
+  src="../../../../../../assets/wizard-right.png"
+/>
+<img
+  class="player"
+  *ngIf="directionFacing === 'Left'"
+  src="../../../../../../assets/wizard-left.png"
+/>
