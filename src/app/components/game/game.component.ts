@@ -15,6 +15,7 @@ export type Player = {
   beingControlledOnClient: boolean; // False if not your turn and pass and play
   movementSpeed: number;
   currentNode: MovementNodeInfo | null;
+  directionFacing: 'Right' | 'Left';
 };
 @Component({
   selector: 'app-game',
@@ -31,6 +32,7 @@ export class GameComponent implements OnInit, OnDestroy {
       beingControlledOnClient: true,
       movementSpeed: 4,
       currentNode: null,
+      directionFacing: 'Right',
     },
   ];
 
