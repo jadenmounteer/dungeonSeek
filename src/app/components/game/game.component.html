@@ -1,6 +1,6 @@
 <div class="table">
   <div class="game-board">
-    <div *ngFor="let player of players" class="player-wrapper">
+    <span *ngFor="let player of players">
       <div
         class="player-wrapper"
         [ngStyle]="{
@@ -10,7 +10,7 @@
       >
         <app-player [directionFacing]="player.directionFacing" />
       </div>
-    </div>
+    </span>
 
     <!-- TODO Find a way to get the player currently being controlled -->
     <div

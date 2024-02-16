@@ -2,4 +2,5 @@
 
 .player {
   width: $game-board-width / 20; // This is my attempt to make the player's width and height 10% of the game board's width and height
+  border: 2px solid red;
 }
