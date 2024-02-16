@@ -108,16 +108,30 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     if (initializing) {
+      this.changePlayerDirection(movementNodeInfo);
+
       this.playerBeingControlled.position = movementNodeInfo.position;
       return;
     }
 
     this.playerBeingControlled.currentNode.adjacentNodes.forEach((node) => {
       if (node.name === movementNodeInfo.name) {
+        this.changePlayerDirection(movementNodeInfo);
         // TODO Take into account the user's movement speed on this turn
         this.playerBeingControlled.position = movementNodeInfo.position;
         this.playerBeingControlled.currentNode = movementNodeInfo;
       }
     });
+  }
+
+  private changePlayerDirection(movementNodeInfo: MovementNodeInfo) {
+    if (
+      movementNodeInfo.position.xPosition <
+      this.playerBeingControlled.position.xPosition
+    ) {
+      this.playerBeingControlled.directionFacing = 'Left';
+    } else {
+      this.playerBeingControlled.directionFacing = 'Right';
+    }
   }
 }
