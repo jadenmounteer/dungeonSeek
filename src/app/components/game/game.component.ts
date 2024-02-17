@@ -14,7 +14,7 @@ export type Player = {
   position: Position;
   beingControlledOnClient: boolean; // False if not your turn and pass and play
   movementSpeed: number;
-  currentNode: Location | null;
+  currentLocation: Location | null;
   directionFacing: 'Right' | 'Left';
 };
 @Component({
@@ -32,7 +32,7 @@ export class GameComponent implements OnInit, OnDestroy {
       position: { xPosition: 0, yPosition: 0 },
       beingControlledOnClient: true,
       movementSpeed: 4,
-      currentNode: null,
+      currentLocation: null,
       directionFacing: 'Right',
     },
   ];
@@ -84,7 +84,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private initializePlayerStartingNode() {
-    this.playerBeingControlled.currentNode = this.enoachDesertNodeInfo;
+    this.playerBeingControlled.currentLocation = this.enoachDesertNodeInfo;
     this.movePlayerToNode(this.enoachDesertNodeInfo, true);
   }
 
@@ -100,7 +100,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private movePlayerToNode(location: Location, initializing: boolean = false) {
-    if (!this.playerBeingControlled.currentNode) {
+    if (!this.playerBeingControlled.currentLocation) {
       // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
       return;
     }
@@ -112,20 +112,25 @@ export class GameComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.playerBeingControlled.currentNode.adjacentLocations.forEach((node) => {
-      if (node.name === location.name) {
-        this.changePlayerDirection(location);
-        // TODO Take into account the user's movement speed on this turn
-        this.playerBeingControlled.position = location.position;
-        this.playerBeingControlled.currentNode = location;
+    this.playerBeingControlled.currentLocation.adjacentLocations.forEach(
+      (node) => {
+        if (node.name === location.name) {
+          this.changePlayerDirection(location);
+          // TODO Take into account the user's movement speed on this turn
+          this.playerBeingControlled.position = location.position;
+          this.playerBeingControlled.currentLocation = location;
+        }
       }
-    });
+    );
   }
 
   private changePlayerDirection(location: Location) {
+    if (this.playerBeingControlled.currentLocation === null) {
+      return;
+    }
     if (
       location.position.xPosition <
-      this.playerBeingControlled.position.xPosition
+      this.playerBeingControlled.currentLocation.position.xPosition
     ) {
       this.playerBeingControlled.directionFacing = 'Left';
     } else {
