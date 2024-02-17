@@ -15,7 +15,7 @@
     <!-- TODO Find a way to get the player currently being controlled -->
     <div
       class="movement-node-wrapper"
-      (click)="movementNodeService.clickOnNode(enoachDesertNodeInfo)"
+      (click)="locationService.clickOnNode(enoachDesertNodeInfo)"
       [ngStyle]="{
         'left.px': enoachDesertNodeInfo.position.xPosition,
         'top.px': enoachDesertNodeInfo.position.yPosition
@@ -26,7 +26,7 @@
 
     <div
       class="movement-node-wrapper"
-      (click)="movementNodeService.clickOnNode(arlanNodeInfo)"
+      (click)="locationService.clickOnNode(arlanNodeInfo)"
       [ngStyle]="{
         'left.px': arlanNodeInfo.position.xPosition,
         'top.px': arlanNodeInfo.position.yPosition
@@ -37,7 +37,7 @@
 
     <div
       class="movement-node-wrapper"
-      (click)="movementNodeService.clickOnNode(draebarNodeInfo)"
+      (click)="locationService.clickOnNode(draebarNodeInfo)"
       [ngStyle]="{
         'left.px': draebarNodeInfo.position.xPosition,
         'top.px': draebarNodeInfo.position.yPosition
@@ -48,7 +48,7 @@
 
     <div
       class="movement-node-wrapper"
-      (click)="movementNodeService.clickOnNode(elderForestNodeInfo)"
+      (click)="locationService.clickOnNode(elderForestNodeInfo)"
       [ngStyle]="{
         'left.px': elderForestNodeInfo.position.xPosition,
         'top.px': elderForestNodeInfo.position.yPosition

@@ -15,7 +15,7 @@ export type Location = {
 @Injectable({
   providedIn: 'root',
 })
-export class MovementNodeService {
+export class LocationService {
   public playerPositionSubject: Subject<Location> = new Subject<Location>();
 
   constructor() {}

@@ -3,7 +3,7 @@ import { PlayerComponent } from '../../src/app/components/characters/player/play
 import { MovementNodeComponent } from '../../src/app/components/game/movement-node/movement-node.component';
 import {
   Location,
-  MovementNodeService,
+  LocationService,
   Position,
 } from '../../services/location-service';
 import { Subscription } from 'rxjs';
@@ -65,12 +65,12 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private playerPositionSub: Subscription;
 
-  constructor(protected movementNodeService: MovementNodeService) {
+  constructor(protected locationService: LocationService) {
     this.initializeadjacentLocations();
     this.initializePlayerStartingNode();
 
     this.playerPositionSub =
-      this.movementNodeService.playerPositionSubject.subscribe(
+      this.locationService.playerPositionSubject.subscribe(
         (location: Location) => {
           this.movePlayerToNode(location);
         }
