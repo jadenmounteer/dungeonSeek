@@ -14,8 +14,19 @@ export type Player = {
   position: Position;
   beingControlledOnClient: boolean; // False if not your turn and pass and play
   movementSpeed: number;
+  inParty: boolean;
   currentLocation: Location | null;
   directionFacing: 'Right' | 'Left';
+  equipmentCards: []; // TODO type all these things
+  potionCards: [];
+  itemCards: [];
+  spellCards: [];
+  statusCards: [];
+  health: number;
+  mana: number;
+  experience: number;
+  level: number;
+  gold: number;
 };
 @Component({
   selector: 'app-game',
@@ -32,8 +43,19 @@ export class GameComponent implements OnInit, OnDestroy {
       position: { xPosition: 0, yPosition: 0 },
       beingControlledOnClient: true,
       movementSpeed: 4,
+      inParty: false,
       currentLocation: null,
       directionFacing: 'Right',
+      equipmentCards: [],
+      potionCards: [],
+      itemCards: [],
+      spellCards: [],
+      statusCards: [],
+      health: 100,
+      mana: 100,
+      experience: 0,
+      level: 1,
+      gold: 0,
     },
   ];
 
