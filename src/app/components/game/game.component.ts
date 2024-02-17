@@ -72,7 +72,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub =
       this.locationService.playerPositionSubject.subscribe(
         (location: Location) => {
-          this.movePlayerToNode(location);
+          this.movePlayerToLocation(location);
         }
       );
   }
@@ -85,7 +85,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private initializePlayerStartingNode() {
     this.playerBeingControlled.currentLocation = this.enoachDesertNodeInfo;
-    this.movePlayerToNode(this.enoachDesertNodeInfo, true);
+    this.movePlayerToLocation(this.enoachDesertNodeInfo, true);
   }
 
   private initializeadjacentLocations() {
@@ -99,7 +99,10 @@ export class GameComponent implements OnInit, OnDestroy {
     this.elderForestNodeInfo.adjacentLocations.push(this.draebarNodeInfo);
   }
 
-  private movePlayerToNode(location: Location, initializing: boolean = false) {
+  private movePlayerToLocation(
+    location: Location,
+    initializing: boolean = false
+  ) {
     if (!this.playerBeingControlled.currentLocation) {
       // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
       return;
