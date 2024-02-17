@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Player } from '../components/game/game.component';
 
 export type Position = {
   xPosition: number;
   yPosition: number;
 };
 
-export type MovementNodeInfo = {
+export type Location = {
   name: string;
   position: Position;
-  adjacentNodes: MovementNodeInfo[];
+  adjacentNodes: Location[];
 };
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovementNodeService {
-  public playerPositionSubject: Subject<MovementNodeInfo> =
-    new Subject<MovementNodeInfo>();
+  public playerPositionSubject: Subject<Location> = new Subject<Location>();
 
   constructor() {}
 
-  public clickOnNode(MovementNodeInfo: MovementNodeInfo) {
+  public clickOnNode(location: Location) {
     // Move the player to the node's coordinates
-    this.playerPositionSubject.next(MovementNodeInfo);
+    this.playerPositionSubject.next(location);
   }
 }

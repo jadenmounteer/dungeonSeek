@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PlayerComponent } from '../../src/app/components/characters/player/player.component';
 import { MovementNodeComponent } from '../../src/app/components/game/movement-node/movement-node.component';
 import {
-  MovementNodeInfo,
+  Location,
   MovementNodeService,
   Position,
 } from '../../services/location-service';
@@ -14,7 +14,7 @@ export type Player = {
   position: Position;
   beingControlledOnClient: boolean; // False if not your turn and pass and play
   movementSpeed: number;
-  currentNode: MovementNodeInfo | null;
+  currentNode: Location | null;
   directionFacing: 'Right' | 'Left';
 };
 @Component({
@@ -37,25 +37,25 @@ export class GameComponent implements OnInit, OnDestroy {
     },
   ];
 
-  protected enoachDesertNodeInfo: MovementNodeInfo = {
+  protected enoachDesertNodeInfo: Location = {
     name: 'Enoach Desert',
     position: { xPosition: 400, yPosition: 400 },
     adjacentNodes: [],
   };
 
-  protected arlanNodeInfo: MovementNodeInfo = {
+  protected arlanNodeInfo: Location = {
     name: 'arlan',
     position: { xPosition: 600, yPosition: 550 },
     adjacentNodes: [],
   };
 
-  protected draebarNodeInfo: MovementNodeInfo = {
+  protected draebarNodeInfo: Location = {
     name: 'draebar',
     position: { xPosition: 830, yPosition: 660 },
     adjacentNodes: [],
   };
 
-  protected elderForestNodeInfo: MovementNodeInfo = {
+  protected elderForestNodeInfo: Location = {
     name: 'The Elder Forest',
     position: { xPosition: 730, yPosition: 470 },
     adjacentNodes: [],
@@ -71,8 +71,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.playerPositionSub =
       this.movementNodeService.playerPositionSubject.subscribe(
-        (MovementNodeInfo: MovementNodeInfo) => {
-          this.movePlayerToNode(MovementNodeInfo);
+        (location: Location) => {
+          this.movePlayerToNode(location);
         }
       );
   }
@@ -99,35 +99,32 @@ export class GameComponent implements OnInit, OnDestroy {
     this.elderForestNodeInfo.adjacentNodes.push(this.draebarNodeInfo);
   }
 
-  private movePlayerToNode(
-    movementNodeInfo: MovementNodeInfo,
-    initializing: boolean = false
-  ) {
+  private movePlayerToNode(location: Location, initializing: boolean = false) {
     if (!this.playerBeingControlled.currentNode) {
       // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
       return;
     }
 
     if (initializing) {
-      this.changePlayerDirection(movementNodeInfo);
+      this.changePlayerDirection(location);
 
-      this.playerBeingControlled.position = movementNodeInfo.position;
+      this.playerBeingControlled.position = location.position;
       return;
     }
 
     this.playerBeingControlled.currentNode.adjacentNodes.forEach((node) => {
-      if (node.name === movementNodeInfo.name) {
-        this.changePlayerDirection(movementNodeInfo);
+      if (node.name === location.name) {
+        this.changePlayerDirection(location);
         // TODO Take into account the user's movement speed on this turn
-        this.playerBeingControlled.position = movementNodeInfo.position;
-        this.playerBeingControlled.currentNode = movementNodeInfo;
+        this.playerBeingControlled.position = location.position;
+        this.playerBeingControlled.currentNode = location;
       }
     });
   }
 
-  private changePlayerDirection(movementNodeInfo: MovementNodeInfo) {
+  private changePlayerDirection(location: Location) {
     if (
-      movementNodeInfo.position.xPosition <
+      location.position.xPosition <
       this.playerBeingControlled.position.xPosition
     ) {
       this.playerBeingControlled.directionFacing = 'Left';
