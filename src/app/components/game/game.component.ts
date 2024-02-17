@@ -40,25 +40,25 @@ export class GameComponent implements OnInit, OnDestroy {
   protected enoachDesertNodeInfo: Location = {
     name: 'Enoach Desert',
     position: { xPosition: 400, yPosition: 400 },
-    adjacentNodes: [],
+    adjacentLocations: [],
   };
 
   protected arlanNodeInfo: Location = {
     name: 'arlan',
     position: { xPosition: 600, yPosition: 550 },
-    adjacentNodes: [],
+    adjacentLocations: [],
   };
 
   protected draebarNodeInfo: Location = {
     name: 'draebar',
     position: { xPosition: 830, yPosition: 660 },
-    adjacentNodes: [],
+    adjacentLocations: [],
   };
 
   protected elderForestNodeInfo: Location = {
     name: 'The Elder Forest',
     position: { xPosition: 730, yPosition: 470 },
-    adjacentNodes: [],
+    adjacentLocations: [],
   };
 
   protected playerBeingControlled: Player = this.players[0];
@@ -66,7 +66,7 @@ export class GameComponent implements OnInit, OnDestroy {
   private playerPositionSub: Subscription;
 
   constructor(protected movementNodeService: MovementNodeService) {
-    this.initializeAdjacentNodes();
+    this.initializeadjacentLocations();
     this.initializePlayerStartingNode();
 
     this.playerPositionSub =
@@ -88,15 +88,15 @@ export class GameComponent implements OnInit, OnDestroy {
     this.movePlayerToNode(this.enoachDesertNodeInfo, true);
   }
 
-  private initializeAdjacentNodes() {
-    this.enoachDesertNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
-    this.arlanNodeInfo.adjacentNodes.push(this.enoachDesertNodeInfo);
-    this.arlanNodeInfo.adjacentNodes.push(this.draebarNodeInfo);
-    this.arlanNodeInfo.adjacentNodes.push(this.elderForestNodeInfo);
-    this.draebarNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
-    this.draebarNodeInfo.adjacentNodes.push(this.elderForestNodeInfo);
-    this.elderForestNodeInfo.adjacentNodes.push(this.arlanNodeInfo);
-    this.elderForestNodeInfo.adjacentNodes.push(this.draebarNodeInfo);
+  private initializeadjacentLocations() {
+    this.enoachDesertNodeInfo.adjacentLocations.push(this.arlanNodeInfo);
+    this.arlanNodeInfo.adjacentLocations.push(this.enoachDesertNodeInfo);
+    this.arlanNodeInfo.adjacentLocations.push(this.draebarNodeInfo);
+    this.arlanNodeInfo.adjacentLocations.push(this.elderForestNodeInfo);
+    this.draebarNodeInfo.adjacentLocations.push(this.arlanNodeInfo);
+    this.draebarNodeInfo.adjacentLocations.push(this.elderForestNodeInfo);
+    this.elderForestNodeInfo.adjacentLocations.push(this.arlanNodeInfo);
+    this.elderForestNodeInfo.adjacentLocations.push(this.draebarNodeInfo);
   }
 
   private movePlayerToNode(location: Location, initializing: boolean = false) {
@@ -112,7 +112,7 @@ export class GameComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.playerBeingControlled.currentNode.adjacentNodes.forEach((node) => {
+    this.playerBeingControlled.currentNode.adjacentLocations.forEach((node) => {
       if (node.name === location.name) {
         this.changePlayerDirection(location);
         // TODO Take into account the user's movement speed on this turn

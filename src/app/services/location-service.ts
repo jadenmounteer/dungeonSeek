@@ -9,7 +9,7 @@ export type Position = {
 export type Location = {
   name: string;
   position: Position;
-  adjacentNodes: Location[];
+  adjacentLocations: Location[];
 };
 
 @Injectable({
