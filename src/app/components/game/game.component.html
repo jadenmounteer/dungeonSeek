@@ -2,10 +2,11 @@
   <div class="game-board">
     <span *ngFor="let player of players">
       <div
+        *ngIf="player.currentLocation"
         class="player-wrapper"
         [ngStyle]="{
-          'left.px': player.position.xPosition,
-          'top.px': player.position.yPosition
+          'left.px': player.currentLocation.position.xPosition,
+          'top.px': player.currentLocation.position.yPosition
         }"
       >
         <app-player [directionFacing]="player.directionFacing" />
@@ -13,12 +14,21 @@
     </span>
 
     <!-- TODO Find a way to get the player currently being controlled -->
+
     <div
       class="movement-node-wrapper"
-      (click)="locationService.clickOnNode(enoachDesertNodeInfo)"
+      (click)="
+        locationService.clickOnNode(
+          this.locationService.locationsMap.get('Enoach Desert')!
+        )
+      "
       [ngStyle]="{
-        'left.px': enoachDesertNodeInfo.position.xPosition,
-        'top.px': enoachDesertNodeInfo.position.yPosition
+        'left.px':
+          this.locationService.locationsMap.get('Enoach Desert')!.position
+            .xPosition,
+        'top.px':
+          this.locationService.locationsMap.get('Enoach Desert')!.position
+            .yPosition
       }"
     >
       <app-movement-node />
@@ -26,10 +36,16 @@
 
     <div
       class="movement-node-wrapper"
-      (click)="locationService.clickOnNode(arlanNodeInfo)"
+      (click)="
+        locationService.clickOnNode(
+          this.locationService.locationsMap.get('arlan')!
+        )
+      "
       [ngStyle]="{
-        'left.px': arlanNodeInfo.position.xPosition,
-        'top.px': arlanNodeInfo.position.yPosition
+        'left.px':
+          this.locationService.locationsMap.get('arlan')!.position.xPosition,
+        'top.px':
+          this.locationService.locationsMap.get('arlan')!.position.yPosition
       }"
     >
       <app-movement-node />
@@ -37,10 +53,16 @@
 
     <div
       class="movement-node-wrapper"
-      (click)="locationService.clickOnNode(draebarNodeInfo)"
+      (click)="
+        locationService.clickOnNode(
+          this.locationService.locationsMap.get('draebar')!
+        )
+      "
       [ngStyle]="{
-        'left.px': draebarNodeInfo.position.xPosition,
-        'top.px': draebarNodeInfo.position.yPosition
+        'left.px':
+          this.locationService.locationsMap.get('draebar')!.position.xPosition,
+        'top.px':
+          this.locationService.locationsMap.get('draebar')!.position.yPosition
       }"
     >
       <app-movement-node />
@@ -48,10 +70,18 @@
 
     <div
       class="movement-node-wrapper"
-      (click)="locationService.clickOnNode(elderForestNodeInfo)"
+      (click)="
+        locationService.clickOnNode(
+          this.locationService.locationsMap.get('The Elder Forest')!
+        )
+      "
       [ngStyle]="{
-        'left.px': elderForestNodeInfo.position.xPosition,
-        'top.px': elderForestNodeInfo.position.yPosition
+        'left.px':
+          this.locationService.locationsMap.get('The Elder Forest')!.position
+            .xPosition,
+        'top.px':
+          this.locationService.locationsMap.get('The Elder Forest')!.position
+            .yPosition
       }"
     >
       <app-movement-node />

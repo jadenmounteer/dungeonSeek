@@ -37,36 +37,11 @@ export class GameComponent implements OnInit, OnDestroy {
     },
   ];
 
-  protected enoachDesertNodeInfo: Location = {
-    name: 'Enoach Desert',
-    position: { xPosition: 400, yPosition: 400 },
-    adjacentLocations: [],
-  };
-
-  protected arlanNodeInfo: Location = {
-    name: 'arlan',
-    position: { xPosition: 600, yPosition: 550 },
-    adjacentLocations: [],
-  };
-
-  protected draebarNodeInfo: Location = {
-    name: 'draebar',
-    position: { xPosition: 830, yPosition: 660 },
-    adjacentLocations: [],
-  };
-
-  protected elderForestNodeInfo: Location = {
-    name: 'The Elder Forest',
-    position: { xPosition: 730, yPosition: 470 },
-    adjacentLocations: [],
-  };
-
   protected playerBeingControlled: Player = this.players[0];
 
   private playerPositionSub: Subscription;
 
   constructor(protected locationService: LocationService) {
-    this.initializeadjacentLocations();
     this.initializePlayerStartingNode();
 
     this.playerPositionSub =
@@ -84,19 +59,9 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private initializePlayerStartingNode() {
-    this.playerBeingControlled.currentLocation = this.enoachDesertNodeInfo;
-    this.movePlayerToLocation(this.enoachDesertNodeInfo, true);
-  }
-
-  private initializeadjacentLocations() {
-    this.enoachDesertNodeInfo.adjacentLocations.push(this.arlanNodeInfo);
-    this.arlanNodeInfo.adjacentLocations.push(this.enoachDesertNodeInfo);
-    this.arlanNodeInfo.adjacentLocations.push(this.draebarNodeInfo);
-    this.arlanNodeInfo.adjacentLocations.push(this.elderForestNodeInfo);
-    this.draebarNodeInfo.adjacentLocations.push(this.arlanNodeInfo);
-    this.draebarNodeInfo.adjacentLocations.push(this.elderForestNodeInfo);
-    this.elderForestNodeInfo.adjacentLocations.push(this.arlanNodeInfo);
-    this.elderForestNodeInfo.adjacentLocations.push(this.draebarNodeInfo);
+    const location = this.locationService.locationsMap.get('Enoach Desert')!;
+    this.playerBeingControlled.currentLocation = location;
+    this.movePlayerToLocation(location, true);
   }
 
   private movePlayerToLocation(
@@ -116,8 +81,8 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     this.playerBeingControlled.currentLocation.adjacentLocations.forEach(
-      (node) => {
-        if (node.name === location.name) {
+      (locationKey) => {
+        if (locationKey === location.name) {
           this.changePlayerDirection(location);
           // TODO Take into account the user's movement speed on this turn
           this.playerBeingControlled.position = location.position;
