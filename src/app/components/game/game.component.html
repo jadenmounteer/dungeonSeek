@@ -15,76 +15,17 @@
 
     <!-- TODO Find a way to get the player currently being controlled -->
 
-    <div
-      class="movement-node-wrapper"
-      (click)="
-        locationService.clickOnNode(
-          this.locationService.locationsMap.get('Enoach Desert')!
-        )
-      "
-      [ngStyle]="{
-        'left.px':
-          this.locationService.locationsMap.get('Enoach Desert')!.position
-            .xPosition,
-        'top.px':
-          this.locationService.locationsMap.get('Enoach Desert')!.position
-            .yPosition
-      }"
-    >
-      <app-movement-node />
-    </div>
-
-    <div
-      class="movement-node-wrapper"
-      (click)="
-        locationService.clickOnNode(
-          this.locationService.locationsMap.get('arlan')!
-        )
-      "
-      [ngStyle]="{
-        'left.px':
-          this.locationService.locationsMap.get('arlan')!.position.xPosition,
-        'top.px':
-          this.locationService.locationsMap.get('arlan')!.position.yPosition
-      }"
-    >
-      <app-movement-node />
-    </div>
-
-    <div
-      class="movement-node-wrapper"
-      (click)="
-        locationService.clickOnNode(
-          this.locationService.locationsMap.get('draebar')!
-        )
-      "
-      [ngStyle]="{
-        'left.px':
-          this.locationService.locationsMap.get('draebar')!.position.xPosition,
-        'top.px':
-          this.locationService.locationsMap.get('draebar')!.position.yPosition
-      }"
-    >
-      <app-movement-node />
-    </div>
-
-    <div
-      class="movement-node-wrapper"
-      (click)="
-        locationService.clickOnNode(
-          this.locationService.locationsMap.get('The Elder Forest')!
-        )
-      "
-      [ngStyle]="{
-        'left.px':
-          this.locationService.locationsMap.get('The Elder Forest')!.position
-            .xPosition,
-        'top.px':
-          this.locationService.locationsMap.get('The Elder Forest')!.position
-            .yPosition
-      }"
-    >
-      <app-movement-node />
-    </div>
+    <span *ngFor="let location of this.locationService.locationsMap | keyvalue">
+      <div
+        class="movement-node-wrapper"
+        (click)="locationService.clickOnNode(location.value)"
+        [ngStyle]="{
+          'left.px': location.value.position.xPosition,
+          'top.px': location.value.position.yPosition
+        }"
+      >
+        <app-movement-node />
+      </div>
+    </span>
   </div>
 </div>
