@@ -5,7 +5,7 @@ import {
   MovementNodeInfo,
   MovementNodeService,
   Position,
-} from '../../services/movement-node.service';
+} from '../../services/location-service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
@@ -25,6 +25,7 @@ export type Player = {
   styleUrl: './game.component.scss',
 })
 export class GameComponent implements OnInit, OnDestroy {
+  // TODO rather than having a position, the player should have a location property that is a reference to the node they are on
   protected players: Player[] = [
     {
       name: 'Player 1',
