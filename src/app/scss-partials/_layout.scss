@@ -1,6 +1,6 @@
 // The width and height of the game board image
-$game-board-width: 1600px;
-$game-board-height: 1131px;
+$game-board-width: 2048px;
+$game-board-height: 1536px;
 
 @mixin game-board-width-and-smaller {
   @media (max-width: $game-board-width) {
