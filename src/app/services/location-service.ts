@@ -25,25 +25,25 @@ export class LocationService {
   public playerPositionSubject: Subject<Location> = new Subject<Location>();
   private enoach: Location = {
     name: 'Enoach Desert',
-    position: { xPosition: 400, yPosition: 400 },
+    position: { xPosition: 400, yPosition: 1100 },
     adjacentLocations: ['arlan'],
   };
 
   private arlan: Location = {
     name: 'arlan',
-    position: { xPosition: 600, yPosition: 550 },
+    position: { xPosition: 800, yPosition: 1100 },
     adjacentLocations: ['Enoach Desert', 'draebar', 'The Elder Forest'],
   };
 
   private draebar: Location = {
     name: 'draebar',
-    position: { xPosition: 830, yPosition: 660 },
+    position: { xPosition: 730, yPosition: 900 },
     adjacentLocations: ['arlan', 'The Elder Forest'],
   };
 
   private elderForest: Location = {
     name: 'The Elder Forest',
-    position: { xPosition: 730, yPosition: 470 },
+    position: { xPosition: 930, yPosition: 800 },
     adjacentLocations: ['The Elder Forest', 'draebar', 'arlan'],
   };
 
