@@ -11,5 +11,5 @@ import { GameComponent } from './components/game/game.component';
   imports: [CommonModule, RouterOutlet, GameComponent],
 })
 export class AppComponent {
-  title = 'tabletop-rpg';
+  title = 'dungeon-seek';
 }
