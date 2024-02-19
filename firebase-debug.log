@@ -1,0 +1,154 @@
+[debug] [2024-02-19T15:38:26.520Z] ----------------------------------------------------------------------
+[debug] [2024-02-19T15:38:26.521Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2024-02-19T15:38:26.521Z] CLI Version:   13.0.2
+[debug] [2024-02-19T15:38:26.522Z] Platform:      darwin
+[debug] [2024-02-19T15:38:26.522Z] Node Version:  v18.14.2
+[debug] [2024-02-19T15:38:26.522Z] Time:          Mon Feb 19 2024 08:38:26 GMT-0700 (Mountain Standard Time)
+[debug] [2024-02-19T15:38:26.522Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-19T15:38:26.555Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-19T15:38:26.555Z] > authorizing via signed-in user (mounteerjaden@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/jadenmounteer/git/dungeon-seek
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-02-19T15:38:35.736Z] Using project from CLI flag: dungeon-seek-prod
+[debug] [2024-02-19T15:38:35.737Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod [none]
+[debug] [2024-02-19T15:38:35.773Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
+[debug] [2024-02-19T15:38:35.773Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod (original: request to https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
+[debug] [2024-02-19T15:38:35.777Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod
+    at RetryOperation._fn (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:246:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project dungeon-seek-prod. Please make sure the project exists and your account has permission to access it.
+[debug] [2024-02-19T15:38:42.977Z] ----------------------------------------------------------------------
+[debug] [2024-02-19T15:38:42.978Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2024-02-19T15:38:42.978Z] CLI Version:   13.0.2
+[debug] [2024-02-19T15:38:42.979Z] Platform:      darwin
+[debug] [2024-02-19T15:38:42.979Z] Node Version:  v18.14.2
+[debug] [2024-02-19T15:38:42.980Z] Time:          Mon Feb 19 2024 08:38:42 GMT-0700 (Mountain Standard Time)
+[debug] [2024-02-19T15:38:42.980Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-19T15:38:43.013Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-19T15:38:43.013Z] > authorizing via signed-in user (mounteerjaden@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/jadenmounteer/git/dungeon-seek
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-02-19T15:38:52.029Z] Using project from CLI flag: dungeon-seek-prod
+[debug] [2024-02-19T15:38:52.032Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod [none]
+[debug] [2024-02-19T15:38:52.065Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
+[debug] [2024-02-19T15:38:52.065Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod (original: request to https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
+[debug] [2024-02-19T15:38:52.069Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/dungeon-seek-prod
+    at RetryOperation._fn (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:246:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project dungeon-seek-prod. Please make sure the project exists and your account has permission to access it.
+[debug] [2024-02-19T15:39:15.842Z] ----------------------------------------------------------------------
+[debug] [2024-02-19T15:39:15.843Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2024-02-19T15:39:15.843Z] CLI Version:   13.0.2
+[debug] [2024-02-19T15:39:15.844Z] Platform:      darwin
+[debug] [2024-02-19T15:39:15.844Z] Node Version:  v18.14.2
+[debug] [2024-02-19T15:39:15.845Z] Time:          Mon Feb 19 2024 08:39:15 GMT-0700 (Mountain Standard Time)
+[debug] [2024-02-19T15:39:15.845Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-19T15:39:15.848Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-19T15:39:15.848Z] > authorizing via signed-in user (mounteerjaden@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/jadenmounteer/git/dungeon-seek
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-02-19T15:39:20.895Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2024-02-19T15:39:20.927Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects?pageSize=100, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100 failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
+[debug] [2024-02-19T15:39:20.927Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100
+[debug] [2024-02-19T15:39:20.933Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100
+    at RetryOperation._fn (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:246:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.
+[debug] [2024-02-19T15:39:27.970Z] ----------------------------------------------------------------------
+[debug] [2024-02-19T15:39:27.971Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2024-02-19T15:39:27.971Z] CLI Version:   13.0.2
+[debug] [2024-02-19T15:39:27.971Z] Platform:      darwin
+[debug] [2024-02-19T15:39:27.971Z] Node Version:  v18.14.2
+[debug] [2024-02-19T15:39:27.972Z] Time:          Mon Feb 19 2024 08:39:27 GMT-0700 (Mountain Standard Time)
+[debug] [2024-02-19T15:39:27.972Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-19T15:39:27.976Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-19T15:39:27.976Z] > authorizing via signed-in user (mounteerjaden@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/jadenmounteer/git/dungeon-seek
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-02-19T15:39:39.304Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2024-02-19T15:39:39.345Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects?pageSize=100, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100 failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
+[debug] [2024-02-19T15:39:39.345Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100
+[debug] [2024-02-19T15:39:39.349Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100
+    at RetryOperation._fn (/usr/local/lib/node_modules/firebase-tools/lib/apiv2.js:246:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.
