@@ -19,8 +19,8 @@
   background-color: transparent;
   // width: 100px;
   // height: 100px;
-  width: $game-board-width / 40;
-  height: $game-board-height / 30;
+  width: calc($game-board-width / 40);
+  height: calc($game-board-height / 30);
   border-radius: 50px;
   box-shadow: 0 0 8px $node-color, inset 0 0 8px $node-color;
   -webkit-animation: pulse 2s linear 1s infinite;

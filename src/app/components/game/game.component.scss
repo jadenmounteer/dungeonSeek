@@ -41,6 +41,6 @@
   justify-content: center;
   align-items: center;
   z-index: 0;
-  width: $game-board-width / 40;
-  height: $game-board-height / 30;
+  width: calc($game-board-width / 40);
+  height: calc($game-board-height / 30);
 }
