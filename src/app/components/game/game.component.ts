@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 export type Player = {
-  name: string;
+  name: string; // test
   position: Position;
   beingControlledOnClient: boolean; // False if not your turn and pass and play
   movementSpeed: number;
