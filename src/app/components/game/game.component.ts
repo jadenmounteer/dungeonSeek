@@ -22,7 +22,7 @@ export type Player = {
   itemCards: [];
   spellCards: [];
   statusCards: [];
-  health: number; // test
+  health: number;
   mana: number;
   experience: number;
   level: number;
