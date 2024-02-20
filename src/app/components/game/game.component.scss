@@ -1,11 +1,27 @@
 @import "../../../styles.scss";
 
 .game-board {
-  border: 2px solid black;
+  // border: 2px solid black;
   width: $game-board-width;
   height: $game-board-height;
-  background-image: url("../../../assets/Tesslandia\ 3rd\ try.jpg");
   position: relative;
+}
+
+.board-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.board-1 {
+  background-image: url("../../../assets/Tesslandia\ 3rd\ try.jpg");
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
+}
+
+.board-2 {
+  background-image: url("../../../assets/Tesslandia\ right\ side.jpg"); //
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
 }
 
 .table {

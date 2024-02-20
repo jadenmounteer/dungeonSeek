@@ -1,5 +1,10 @@
 <div class="table">
   <div class="game-board">
+    <span class="board-wrapper">
+      <div class="board-1"></div>
+      <div class="board-2"></div>
+    </span>
+
     <span *ngFor="let player of players">
       <div
         *ngIf="player.currentLocation"

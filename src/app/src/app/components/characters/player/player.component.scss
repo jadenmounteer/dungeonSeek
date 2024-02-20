@@ -2,6 +2,6 @@
 
 .player {
   width: calc(
-    $game-board-width / 20
+    $game-board-width / 40
   ); // This is my attempt to make the player's width and height 10% of the game board's width and height
 }

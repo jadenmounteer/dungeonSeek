@@ -1,5 +1,7 @@
 // The width and height of the game board image
-$game-board-width: 2048px;
+$game-board-width: calc(
+  2048px * 2
+); // Multiplied by 2 because we have the two boards
 $game-board-height: 1536px;
 
 @mixin game-board-width-and-smaller {
