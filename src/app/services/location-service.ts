@@ -16,7 +16,8 @@ export type LocationKey =
   | 'Enoach Desert'
   | 'arlan'
   | 'draebar'
-  | 'The Elder Forest';
+  | 'The Elder Forest'
+  | 'draebar cave';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,7 @@ export class LocationService {
   private draebar: Location = {
     name: 'draebar',
     position: { xPosition: 2820, yPosition: 1100 },
-    adjacentLocations: ['arlan', 'The Elder Forest'],
+    adjacentLocations: ['arlan', 'The Elder Forest', 'draebar cave'],
   };
 
   private elderForest: Location = {
@@ -47,11 +48,18 @@ export class LocationService {
     adjacentLocations: ['The Elder Forest', 'draebar', 'arlan'],
   };
 
+  private draebarCave: Location = {
+    name: 'draebar cave',
+    position: { xPosition: 2900, yPosition: 1150 },
+    adjacentLocations: ['draebar'],
+  };
+
   public locationsMap: Map<LocationKey, Location> = new Map([
     ['Enoach Desert', this.enoach],
     ['arlan', this.arlan],
     ['draebar', this.draebar],
     ['The Elder Forest', this.elderForest],
+    ['draebar cave', this.draebarCave],
   ]);
 
   constructor() {}
