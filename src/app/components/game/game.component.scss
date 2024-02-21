@@ -19,6 +19,12 @@
 }
 
 .board-2 {
+  background-image: url("../../../assets/Tesslandia\ 3rd\ try.jpg");
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
+}
+
+.board-3 {
   background-image: url("../../../assets/Tesslandia\ right\ side.jpg"); //
   width: calc($game-board-width / 2);
   height: $game-board-height;
