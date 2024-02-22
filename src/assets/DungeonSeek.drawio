@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-02-14T04:44:58.382Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="DCqMXuuLH1_h-DOfWnQr" version="23.1.4" type="device" pages="2">
+<mxfile host="app.diagrams.net" modified="2024-02-22T22:44:45.025Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="PC8Co9xFwzzFqQQgIkSJ" version="23.1.4" type="device" pages="6">
   <diagram name="Main game view" id="cMHpMG-8lIFeQuoC4nmq">
-    <mxGraphModel dx="1259" dy="676" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1026" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -100,20 +100,20 @@
         <mxCell id="LW2-0-F8LLNrjgYoxX6B-12" value="Movement: 4" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="215.75" y="225.5" width="80" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gusiKfoyjgTQbRUm2Ed8-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="gusiKfoyjgTQbRUm2Ed8-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="264.32" y="510" width="318.62" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="LTxXwtxuEU9EpSZ4fsBw-1" value="Please turn your device to landscape mode to play" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="LTxXwtxuEU9EpSZ4fsBw-1" value="Please turn your device to landscape mode to play" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="329.32" y="670" width="188.62" height="93" as="geometry" />
         </mxCell>
-        <mxCell id="QCva4aZZ-jwsrreA5Zf0-1" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://png.pngtree.com/png-clipart/20191120/original/pngtree-chat-icon-png-image_5065642.jpg;" vertex="1" parent="1">
+        <mxCell id="QCva4aZZ-jwsrreA5Zf0-1" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://png.pngtree.com/png-clipart/20191120/original/pngtree-chat-icon-png-image_5065642.jpg;" parent="1" vertex="1">
           <mxGeometry x="631.44" y="180" width="33" height="33" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="Event Card" id="pwuLGsjRJF8cXqo-pn7s">
-    <mxGraphModel dx="1259" dy="676" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1026" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="hMlmEKj_3yhxPFM7VjrK-0" />
         <mxCell id="hMlmEKj_3yhxPFM7VjrK-1" parent="hMlmEKj_3yhxPFM7VjrK-0" />
@@ -318,11 +318,121 @@
         <mxCell id="O5WoJfx3VGQhrBQJbKjQ-40" value="" style="shape=stencil(fZbdcgIhDIWfZm8zQAg/17Z9j85U606tdqz9e/tmZ0c0uJ47xP0I5JwEBl59bp8/1kNwn6fj4W39M76ctgM/DCGM++36OJ50NPDjwKvN4bh+PR6+9i/z74/n6ctp9H74nlb4nbmSKZeJCu5vngmZ6jzzNAO7cX8FVKEsBuBKrgKg9oAE8gkCbLeUhEoEQKSUDZDLeWYRKIl8MEDRmHwfyBrBG6Amyu4+kDxxMoB3jhwgYu7TVAsVkFcWCs4CTBEoF4RctKeOxHIf8IXYpikHikAIf+MNUW94AGSSaoAoFIE3AlOyeWU+p2E5S9yfQZcQILVuQOwZdJNoS9Ls3wA5u2XZTIHECqeJ9kDpSaauRiNVcAY1QhdBzeLBli5WazpkSsBLV25uRaqWRyFawTQzRRIQYirJzq5atkBqLfouwqUxLBepthWb10vrWZY6UOAeyKCCtDV625mm9gmUC4Wc3VLJMMIE1BsA2FW9JraVlQB7n3c9oMKhCLEvIM1zBPZ25/umNQ1tVEC2G+fFCC8g398O2hNQuQlVu752DBfA+q0ptnqO5JFmeuIuo9DY7KjY71UxdJV4EntifPWorW++R/dC4t7V3DlIB5cHx2bc7eb3yvX//QNFp+bHDT/+Aw==);lineShape=1;strokeColor=default;" parent="hMlmEKj_3yhxPFM7VjrK-1" vertex="1">
           <mxGeometry x="655.242976101265" y="840.4235683789295" width="4.672539772115215" height="4.665236216357243" as="geometry" />
         </mxCell>
-        <mxCell id="4a1kFjb-ZMjkGI6jErRC-0" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://png.pngtree.com/png-clipart/20191120/original/pngtree-chat-icon-png-image_5065642.jpg;" vertex="1" parent="hMlmEKj_3yhxPFM7VjrK-1">
+        <mxCell id="4a1kFjb-ZMjkGI6jErRC-0" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://png.pngtree.com/png-clipart/20191120/original/pngtree-chat-icon-png-image_5065642.jpg;" parent="hMlmEKj_3yhxPFM7VjrK-1" vertex="1">
           <mxGeometry x="635.71" y="180" width="33" height="33" as="geometry" />
         </mxCell>
-        <mxCell id="4a1kFjb-ZMjkGI6jErRC-2" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://png.pngtree.com/png-clipart/20191120/original/pngtree-chat-icon-png-image_5065642.jpg;" vertex="1" parent="hMlmEKj_3yhxPFM7VjrK-1">
+        <mxCell id="4a1kFjb-ZMjkGI6jErRC-2" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://png.pngtree.com/png-clipart/20191120/original/pngtree-chat-icon-png-image_5065642.jpg;" parent="hMlmEKj_3yhxPFM7VjrK-1" vertex="1">
           <mxGeometry x="641.88" y="490" width="33" height="33" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="a7sRP4wXlXgsvcpFGtwh" name="Landing page">
+    <mxGraphModel dx="1026" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v0zHMPo8ulLU4CLO4feq-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="266" y="460" width="318.62" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="v0zHMPo8ulLU4CLO4feq-2" value="Cool video shoiwng the game" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="266" y="510" width="324" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="v0zHMPo8ulLU4CLO4feq-3" value="Login or sign up" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="368" y="675" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OlKDw9TSH1tStKocN9i5-2" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;DungeonSeek&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="310" y="520" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Home page" id="Cx1CpubYjS48RZEwhhzj">
+    <mxGraphModel dx="1026" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="z03WShCQwhYM_lRJvBSH-0" />
+        <mxCell id="z03WShCQwhYM_lRJvBSH-1" parent="z03WShCQwhYM_lRJvBSH-0" />
+        <mxCell id="z03WShCQwhYM_lRJvBSH-2" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="250" y="460" width="318.62" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-0" value="Character name" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="430" y="540" width="90" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-1" value="&lt;u&gt;Current Session&lt;/u&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="260" y="560" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-2" value="Welcome Jaden!" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="280" y="490" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-3" value="Campaign: A cool adventure name" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="270" y="590" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-5" value="Level 3 Wizard" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="430" y="720" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-6" value="Players: Jaden, Jorey" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="270" y="620" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-7" value="Session Code: 2262" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="270" y="690" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-8" value="Enter Game" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="348.96" y="760" width="120.69" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-9" value="Start new session" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="348.96" y="810" width="120.69" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-10" value="Join another session" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="290" y="850" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hhxYftzjoNgspInmnWt1-11" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="410" y="850" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-2ip7e8J5BKW4VPGQaSh-0" value="Add pass n play player" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="z03WShCQwhYM_lRJvBSH-1">
+          <mxGeometry x="270" y="650" width="110" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="rrrU0FHpcp6nI2jZRRj4" name="Create session">
+    <mxGraphModel dx="1026" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HTpyki2Hy_9LQd4WrJLN-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="266" y="440" width="318.62" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="ZYA6kZAVUl5S5MJMiOD_-1" value="Choose Campaign" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="347.96" y="600" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZYA6kZAVUl5S5MJMiOD_-2" value="&lt;b&gt;Create New Session&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340.60999999999996" y="520" width="154.69" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FQJ0pSdgtB48mEbx5RLf-1" value="Jaden&#39;s Session" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="347.96" y="550" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="EEyYdsf976mRRjQy96mi-1" value="Create" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="357.61999999999995" y="670" width="120.69" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="TkzFWZQ-pSxoQYU8ltHb" name="Character Creation">
+    <mxGraphModel dx="1026" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Vwjf9M3zB_wFSnXTZNnT-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="266" y="430" width="318.62" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="Vwjf9M3zB_wFSnXTZNnT-2" value="&lt;b&gt;Create a character&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="290" y="460" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Vwjf9M3zB_wFSnXTZNnT-3" value="Character name" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="520" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Vwjf9M3zB_wFSnXTZNnT-4" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="390" y="610" width="60" height="100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
