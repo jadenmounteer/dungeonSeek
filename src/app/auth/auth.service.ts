@@ -28,4 +28,8 @@ export class AuthService {
   //   const res = () => signInWithPopup(this.auth, provider);
   //   return defer(res);
   // }
+
+  public authReady(): Promise<void> {
+    return this.auth.authStateReady();
+  }
 }
