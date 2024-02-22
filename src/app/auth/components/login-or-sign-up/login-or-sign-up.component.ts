@@ -44,7 +44,7 @@ export class LoginOrSignUpComponent {
         next: (user) => {
           localStorage.setItem('isAuth', JSON.stringify(false));
           // redirect to the game page for now
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('landing-page');
         },
       });
   }
