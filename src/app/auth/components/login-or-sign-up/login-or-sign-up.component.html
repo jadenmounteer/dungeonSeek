@@ -1,39 +1,79 @@
-<button mat-raised-button color="primary" (click)="signUp()">Sign Up</button>
-<!-- <button mat-raised-button color="primary" (click)="login()">Login</button> -->
+<mat-tab-group>
+  <mat-tab label="Sign In">
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submitLogin()">
+          <p>
+            <mat-form-field>
+              <input
+                type="email"
+                matInput
+                placeholder="email"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </p>
 
-<mat-card>
-  <mat-card-title>Login</mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="submitLogin()">
-      <p>
-        <mat-form-field>
-          <input
-            type="text"
-            matInput
-            placeholder="Username"
-            formControlName="username"
-          />
-        </mat-form-field>
-      </p>
+          <p>
+            <mat-form-field>
+              <input
+                type="password"
+                matInput
+                placeholder="Password"
+                formControlName="password"
+              />
+            </mat-form-field>
+          </p>
 
-      <p>
-        <mat-form-field>
-          <input
-            type="password"
-            matInput
-            placeholder="Password"
-            formControlName="password"
-          />
-        </mat-form-field>
-      </p>
+          <p *ngIf="error" class="error">
+            {{ error }}
+          </p>
 
-      <p *ngIf="error" class="error">
-        {{ error }}
-      </p>
+          <div class="button">
+            <button type="submit" mat-button>Login</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
 
-      <div class="button">
-        <button type="submit" mat-button>Login</button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+  <mat-tab label="Sign Up">
+    <mat-card>
+      <mat-card-title>Create Account</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submitSignUp()">
+          <p>
+            <mat-form-field>
+              <input
+                type="email"
+                matInput
+                placeholder="email"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </p>
+
+          <p>
+            <mat-form-field>
+              <input
+                type="password"
+                matInput
+                placeholder="Password"
+                formControlName="password"
+              />
+            </mat-form-field>
+          </p>
+
+          <p *ngIf="error" class="error">
+            {{ error }}
+          </p>
+
+          <div class="button">
+            <button type="submit" mat-button>Login</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card></mat-tab
+  >
+</mat-tab-group>

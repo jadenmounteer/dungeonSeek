@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-or-sign-up',
@@ -16,13 +18,15 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatTabsModule,
+    CommonModule,
   ],
   templateUrl: './login-or-sign-up.component.html',
   styleUrl: './login-or-sign-up.component.scss',
 })
 export class LoginOrSignUpComponent {
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl(''),
   });
 
@@ -33,14 +37,20 @@ export class LoginOrSignUpComponent {
 
   protected submitLogin() {
     if (this.form.valid) {
-      this.login(this.form.value.username, this.form.value.password);
+      this.login(this.form.value.email, this.form.value.password);
+    }
+  }
+
+  protected submitSignUp() {
+    if (this.form.valid) {
+      this.signUp(this.form.value.email, this.form.value.password);
     }
   }
 
   // 'mounteerjaden@gmail.com', 'valid_firebase_password'
-  protected login(username: string, password: string) {
+  protected login(email: string, password: string) {
     this.authService
-      .login('mounteerjaden@gmail.com', 'valid_firebase_password')
+      .login(email, password)
       .pipe(
         catchError((err) => {
           // handle the error
@@ -57,17 +67,15 @@ export class LoginOrSignUpComponent {
   }
 
   // example register with email
-  protected signUp() {
+  protected signUp(email: string, password: string) {
     const rnd = Math.floor(Math.random() * 1000);
 
     this.authService
-      .signup(`mounteerjaden@gmail.com`, 'valid_firebase_password', {
-        bloodType: 'B+',
-      })
+      .signup(email, password, {})
       .pipe(
         catchError((err) => {
           // handle the error
-          return throwError(() => new Error('test'));
+          return throwError(() => new Error(err));
         })
       )
       .subscribe({
