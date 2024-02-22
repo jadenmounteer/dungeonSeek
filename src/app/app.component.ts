@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { GameComponent } from './components/game/game.component';
 import { PromptUpdateService } from './services/prompt-update.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,12 @@ import { PromptUpdateService } from './services/prompt-update.service';
 })
 export class AppComponent {
   constructor(
-    updateService: PromptUpdateService // This is necessary so the code in its constructor runs.
+    private authService: AuthService,
+    private updateService: PromptUpdateService // This is necessary so the code in its constructor runs.
   ) {}
   title = 'dungeon-seek';
+
+  ngOnInit(): void {
+    this.authService.iniAuthListener();
+  }
 }
