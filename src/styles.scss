@@ -38,10 +38,6 @@ $dungeon-seek-theme: mat.define-light-theme(
 // import the main.scss file
 @import "../src/app/scss-partials/main.scss";
 
-html {
-  background-color: #a1662f;
-}
-
 html,
 body {
   height: 100%;
