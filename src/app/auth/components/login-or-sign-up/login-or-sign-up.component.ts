@@ -13,9 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class LoginOrSignUpComponent {
   constructor(private authService: AuthService, private router: Router) {}
-  login() {
+  protected login() {
     this.authService
-      .Login('mounteerjaden@gmail.com', 'valid_firebase_password')
+      .login('mounteerjaden@gmail.com', 'valid_firebase_password')
       .pipe(
         catchError((err) => {
           // handle the error
@@ -30,12 +30,29 @@ export class LoginOrSignUpComponent {
       });
   }
 
+  protected logout() {
+    this.authService
+      .logout()
+      .pipe(
+        catchError((err) => {
+          // handle the error
+          return throwError(() => new Error('test'));
+        })
+      )
+      .subscribe({
+        next: (user) => {
+          // redirect to the game page for now
+          this.router.navigateByUrl('');
+        },
+      });
+  }
+
   // example register with email
-  signUp() {
+  protected signUp() {
     const rnd = Math.floor(Math.random() * 1000);
 
     this.authService
-      .Signup(`mounteerjaden@gmail.com`, 'valid_firebase_password', {
+      .signup(`mounteerjaden@gmail.com`, 'valid_firebase_password', {
         bloodType: 'B+',
       })
       .pipe(
