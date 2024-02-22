@@ -3,12 +3,12 @@ import { LoginOrSignUpComponent } from '../../auth/components/login-or-sign-up/l
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-landing-page',
   standalone: true,
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
   imports: [LoginOrSignUpComponent],
+  templateUrl: './landing-page.component.html',
+  styleUrl: './landing-page.component.scss',
 })
-export class HomePageComponent {
+export class LandingPageComponent {
   constructor(protected authService: AuthService) {}
 }

@@ -4,11 +4,17 @@ import { GameComponent } from './components/game/game.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { inject } from '@angular/core';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 export const routes: Routes = [
   {
+    path: 'landing-page',
+    component: LandingPageComponent,
+  },
+  {
     path: 'home',
     component: HomePageComponent,
+    canActivate: [() => inject(AuthGuard).navigateSecurely()],
   },
   {
     path: 'game',
