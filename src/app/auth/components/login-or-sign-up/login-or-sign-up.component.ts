@@ -1,19 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-login-or-sign-up',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatInputModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './login-or-sign-up.component.html',
   styleUrl: './login-or-sign-up.component.scss',
 })
 export class LoginOrSignUpComponent {
+  form: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
+  @Input() error: string | null = null;
+
+  @Output() submitEM = new EventEmitter();
   constructor(private authService: AuthService, private router: Router) {}
-  protected login() {
+
+  protected submitLogin() {
+    if (this.form.valid) {
+      this.login(this.form.value.username, this.form.value.password);
+    }
+  }
+
+  // 'mounteerjaden@gmail.com', 'valid_firebase_password'
+  protected login(username: string, password: string) {
     this.authService
       .login('mounteerjaden@gmail.com', 'valid_firebase_password')
       .pipe(
