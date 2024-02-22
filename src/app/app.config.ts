@@ -10,17 +10,14 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-  getAuth,
-  indexedDBLocalPersistence,
-  initializeAuth,
-  provideAuth,
-} from '@angular/fire/auth';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 // I used this video to figure out how to use the config
+
+// This video might also be useful: https://www.youtube.com/watch?v=5npUxKPLT6c
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
