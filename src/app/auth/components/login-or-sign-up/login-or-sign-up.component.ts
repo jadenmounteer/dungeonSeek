@@ -68,6 +68,17 @@ export class LoginOrSignUpComponent {
         },
       });
   }
+
+  protected forgotPassword() {
+    // This has already been implemented in auth service
+    throw new Error('Not implemented');
+  }
+
+  protected updateEmail() {
+    // This has already been implemented in auth service
+    throw new Error('Not implemented');
+  }
+
   // example login with google, later we need to figure out the new user
   // loginGoogle() {
   //   this.authService

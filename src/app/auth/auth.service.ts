@@ -4,6 +4,8 @@ import {
   User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  updateEmail,
 } from '@angular/fire/auth';
 import { Observable, defer } from 'rxjs';
 
@@ -23,6 +25,19 @@ export class AuthService {
   public login(email: string, password: string): Observable<any> {
     const res = () => signInWithEmailAndPassword(this.auth, email, password);
     // build up a cold observable
+    return defer(res);
+  }
+
+  public forgotPassword(email: string): Observable<any> {
+    const res = () => sendPasswordResetEmail(this.auth, email);
+    return defer(res);
+  }
+
+  public updateEmail(newEmail: string): Observable<any> {
+    if (!this.activeUser) {
+      throw new Error('No active user');
+    }
+    const res = () => updateEmail(this.activeUser!, newEmail);
     return defer(res);
   }
 
