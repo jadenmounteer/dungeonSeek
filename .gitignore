@@ -44,3 +44,8 @@ Thumbs.db
 # dotenv environment variables file
 .env
 .env.test
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
