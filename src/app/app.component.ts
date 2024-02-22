@@ -11,15 +11,11 @@ import { AuthService } from './auth/auth.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   imports: [CommonModule, RouterOutlet, GameComponent],
+  providers: [AuthService, PromptUpdateService],
 })
 export class AppComponent {
   constructor(
-    private authService: AuthService,
     private updateService: PromptUpdateService // This is necessary so the code in its constructor runs.
   ) {}
   title = 'dungeon-seek';
-
-  ngOnInit(): void {
-    this.authService.iniAuthListener();
-  }
 }
