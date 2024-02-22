@@ -31,24 +31,6 @@ export class LoginOrSignUpComponent {
       });
   }
 
-  protected logout() {
-    this.authService
-      .logout()
-      .pipe(
-        catchError((err) => {
-          // handle the error
-          return throwError(() => new Error('test'));
-        })
-      )
-      .subscribe({
-        next: (user) => {
-          localStorage.setItem('isAuth', JSON.stringify(false));
-          // redirect to the game page for now
-          this.router.navigateByUrl('landing-page');
-        },
-      });
-  }
-
   // example register with email
   protected signUp() {
     const rnd = Math.floor(Math.random() * 1000);

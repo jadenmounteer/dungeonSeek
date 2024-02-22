@@ -15,7 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
 export class HomePageComponent {
   constructor(protected authService: AuthService, private router: Router) {}
 
-  // This method was duplicated from the login component. We can make this more dry somehow
   protected logout() {
     this.authService
       .logout()

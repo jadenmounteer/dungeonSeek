@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { GameComponent } from './components/game/game.component';
 import { PromptUpdateService } from './services/prompt-update.service';
 import { AuthService } from './auth/auth.service';
@@ -16,7 +16,13 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   constructor(
     private authService: AuthService,
-    private updateService: PromptUpdateService // This is necessary so the code in its constructor runs.
-  ) {}
+    private updateService: PromptUpdateService, // This is necessary so the code in its constructor runs.
+    private router: Router
+  ) {
+    if (this.authService.isAuth) {
+      // navigate to the home page
+      this.router.navigate(['/home']);
+    }
+  }
   title = 'dungeon-seek';
 }
