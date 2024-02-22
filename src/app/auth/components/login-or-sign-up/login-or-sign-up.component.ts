@@ -24,6 +24,7 @@ export class LoginOrSignUpComponent {
       )
       .subscribe({
         next: (user) => {
+          localStorage.setItem('isAuth', JSON.stringify(true));
           // redirect to the game page for now
           this.router.navigateByUrl('/game');
         },
@@ -41,6 +42,7 @@ export class LoginOrSignUpComponent {
       )
       .subscribe({
         next: (user) => {
+          localStorage.setItem('isAuth', JSON.stringify(false));
           // redirect to the game page for now
           this.router.navigateByUrl('');
         },
@@ -63,6 +65,8 @@ export class LoginOrSignUpComponent {
       )
       .subscribe({
         next: (user) => {
+          localStorage.setItem('isAuth', JSON.stringify(true));
+
           // redirect to the game page for now
           this.router.navigateByUrl('/game');
         },
