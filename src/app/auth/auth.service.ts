@@ -11,13 +11,13 @@ import { Observable, defer } from 'rxjs';
 export class AuthService {
   constructor(private auth: Auth) {}
 
-  Login(email: string, password: string): Observable<any> {
+  public Login(email: string, password: string): Observable<any> {
     const res = () => signInWithEmailAndPassword(this.auth, email, password);
     // build up a cold observable
     return defer(res);
   }
   // the sign up uses createUserWithEmailAndPassword
-  Signup(email: string, password: string, custom: any): Observable<any> {
+  public Signup(email: string, password: string, custom: any): Observable<any> {
     const res = () =>
       createUserWithEmailAndPassword(this.auth, email, password);
     // it also accepts an extra attributes, we will handle later
