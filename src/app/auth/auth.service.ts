@@ -7,18 +7,20 @@ import {
   sendPasswordResetEmail,
   updateEmail,
 } from '@angular/fire/auth';
-import { Observable, defer } from 'rxjs';
+import { Observable, Subject, defer } from 'rxjs';
 
 // This auth service inspired by: https://garage.sekrab.com/posts/i-setting-up-angularfire-with-auth
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   public isAuth: boolean = false;
   public activeUser: User | null = null;
+  public userLoggedIn: Subject<boolean> = new Subject<boolean>();
 
   constructor(private auth: Auth) {
     this.auth.onAuthStateChanged((user) => {
       this.activeUser = user;
       this.isAuth = !!user;
+      this.userLoggedIn.next(this.isAuth);
     });
   }
 

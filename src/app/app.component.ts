@@ -19,10 +19,12 @@ export class AppComponent {
     private updateService: PromptUpdateService, // This is necessary so the code in its constructor runs.
     private router: Router
   ) {
-    if (this.authService.isAuth) {
-      // navigate to the home page
-      this.router.navigate(['/landing-page']);
-    }
+    this.authService.userLoggedIn.subscribe((isAuth) => {
+      if (isAuth) {
+        // navigate to the home page
+        this.router.navigate(['/home']);
+      }
+    });
   }
   title = 'dungeon-seek';
 }
