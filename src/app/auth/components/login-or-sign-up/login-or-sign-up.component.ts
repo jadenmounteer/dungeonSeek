@@ -1,7 +1,13 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { Subscription, catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import {
   FormGroup,
@@ -29,7 +35,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login-or-sign-up.component.html',
   styleUrl: './login-or-sign-up.component.scss',
 })
-export class LoginOrSignUpComponent {
+export class LoginOrSignUpComponent implements OnDestroy {
   form: FormGroup = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -42,9 +48,16 @@ export class LoginOrSignUpComponent {
     ]),
   });
 
+  private forgotPasswordSub: Subscription | null = null;
+
   protected error = '';
+  protected message = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnDestroy(): void {
+    this.forgotPasswordSub?.unsubscribe();
+  }
 
   protected submitLogin() {
     if (this.form.valid) {
@@ -104,8 +117,18 @@ export class LoginOrSignUpComponent {
   }
 
   protected forgotPassword() {
-    // This has already been implemented in auth service
-    throw new Error('Not implemented');
+    if (this.form.value.email) {
+      this.forgotPasswordSub = this.authService
+        .forgotPassword(this.form.value.email)
+        .subscribe({
+          next: () => {
+            // show a message to the user
+            this.message = `Password reset email sent to ${this.form.value.email}`;
+          },
+        });
+    } else {
+      this.error = 'Please provide an email to send the reset link to.';
+    }
   }
 
   protected updateEmail() {

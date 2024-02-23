@@ -28,12 +28,24 @@
             <sub>*Passwords must be at least 6 characters long.</sub>
           </p>
 
-          <p *ngIf="error" class="error">
-            {{ error }}
-          </p>
+          <div class="button-section">
+            <div class="button">
+              <button mat-button color="primary" (click)="forgotPassword()">
+                I forgot my password
+              </button>
+            </div>
 
-          <div class="button">
-            <button type="submit" mat-raised-button>Login</button>
+            <div class="button">
+              <button type="submit" mat-raised-button>Login</button>
+            </div>
+
+            <p *ngIf="error" class="error">
+              {{ error }}
+            </p>
+
+            <p *ngIf="message" class="message">
+              {{ message }}
+            </p>
           </div>
         </form>
       </mat-card-content>
@@ -70,13 +82,12 @@
             <sub>*Passwords must be at least 6 characters long.</sub>
           </p>
 
-          <p *ngIf="error" class="error">
-            {{ error }}
-          </p>
-
           <div class="button">
             <button type="submit" mat-raised-button>Sign up</button>
           </div>
+          <p *ngIf="error" class="error">
+            {{ error }}
+          </p>
         </form>
       </mat-card-content>
     </mat-card></mat-tab

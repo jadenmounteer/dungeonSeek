@@ -15,13 +15,17 @@ mat-card-content {
   justify-content: center;
 }
 
-.error {
+.error,
+.message {
   padding: 16px;
 
   color: white;
   background-color: red;
 }
 
+.message {
+  background-color: green;
+}
 .button {
   display: flex;
   justify-content: flex-start;
@@ -31,4 +35,10 @@ mat-card-content {
   display: flex;
   flex-direction: column;
   gap: 0px;
+}
+
+.button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
