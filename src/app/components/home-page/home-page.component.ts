@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [LoginOrSignUpComponent, MatButtonModule],
 })
 export class HomePageComponent {
-  constructor(protected authService: AuthService, private router: Router) {}
+  constructor(protected authService: AuthService, protected router: Router) {}
 
   protected logout() {
     this.authService
