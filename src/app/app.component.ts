@@ -21,7 +21,7 @@ export class AppComponent {
   ) {
     if (this.authService.isAuth) {
       // navigate to the home page
-      this.router.navigate(['/home']);
+      this.router.navigate(['/landing-page']);
     }
   }
   title = 'dungeon-seek';
