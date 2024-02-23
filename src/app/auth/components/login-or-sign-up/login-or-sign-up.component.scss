@@ -4,7 +4,7 @@
   margin: 100px 0px;
 }
 
-.mat-form-field {
+mat-form-field {
   width: 100%;
   min-width: 300px;
 }
@@ -17,12 +17,18 @@ mat-card-content {
 
 .error {
   padding: 16px;
-  width: 300px;
+
   color: white;
   background-color: red;
 }
 
 .button {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
 }

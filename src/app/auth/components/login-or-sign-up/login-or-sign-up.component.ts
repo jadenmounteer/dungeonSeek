@@ -3,7 +3,12 @@ import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -26,24 +31,34 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginOrSignUpComponent {
   form: FormGroup = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.email,
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
 
-  @Input() error: string | null = null;
+  protected error = '';
 
-  @Output() submitEM = new EventEmitter();
   constructor(private authService: AuthService, private router: Router) {}
 
   protected submitLogin() {
     if (this.form.valid) {
       this.login(this.form.value.email, this.form.value.password);
+    } else {
+      this.error = 'Invalid email or password';
     }
   }
 
   protected submitSignUp() {
     if (this.form.valid) {
       this.signUp(this.form.value.email, this.form.value.password);
+    } else {
+      this.error = 'Invalid email or password';
     }
   }
 

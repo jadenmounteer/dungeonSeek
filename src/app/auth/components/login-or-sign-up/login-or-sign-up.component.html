@@ -16,7 +16,7 @@
             </mat-form-field>
           </p>
 
-          <p>
+          <p class="form-section">
             <mat-form-field>
               <input
                 type="password"
@@ -25,6 +25,7 @@
                 formControlName="password"
               />
             </mat-form-field>
+            <sub>*Passwords must be at least 6 characters long.</sub>
           </p>
 
           <p *ngIf="error" class="error">
@@ -32,7 +33,7 @@
           </p>
 
           <div class="button">
-            <button type="submit" mat-button>Login</button>
+            <button type="submit" mat-raised-button>Login</button>
           </div>
         </form>
       </mat-card-content>
@@ -57,7 +58,7 @@
             </mat-form-field>
           </p>
 
-          <p>
+          <p class="form-section">
             <mat-form-field>
               <input
                 type="password"
@@ -66,6 +67,7 @@
                 formControlName="password"
               />
             </mat-form-field>
+            <sub>*Passwords must be at least 6 characters long.</sub>
           </p>
 
           <p *ngIf="error" class="error">
@@ -73,7 +75,7 @@
           </p>
 
           <div class="button">
-            <button type="submit" mat-button>Sign up</button>
+            <button type="submit" mat-raised-button>Sign up</button>
           </div>
         </form>
       </mat-card-content>
