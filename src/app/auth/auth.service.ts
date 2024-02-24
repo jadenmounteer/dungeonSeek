@@ -15,6 +15,7 @@ import {
   addDoc,
   collection,
   doc,
+  setDoc,
 } from '@angular/fire/firestore';
 
 // This auth service inspired by: https://garage.sekrab.com/posts/i-setting-up-angularfire-with-auth
@@ -33,21 +34,13 @@ export class AuthService {
   }
 
   public createUserData(user: User, displayName: string): void {
-    // Sets user data to firestore on login
-    // const userRef: AngularFirestoreDocument<Partial<User>> = this.afs.doc(
-    //   `users/${user?.uid}`
-    // );
-
-    const usersCollection = collection(this.firestore, `users`);
     const data = {
-      // uid: user!.uid,
-      // email: user!.email,
-      // displayName: displayName,
-      // photoURL: user?.photoURL,
-      test: 'test',
+      uid: user!.uid,
+      email: user!.email,
+      displayName: displayName,
+      photoURL: user?.photoURL,
     };
-
-    addDoc(usersCollection, data);
+    setDoc(doc(this.firestore, 'users', user.uid), data);
   }
 
   public login(email: string, password: string): Observable<any> {

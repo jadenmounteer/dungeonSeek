@@ -124,8 +124,8 @@ export class LoginOrSignUpComponent implements OnDestroy {
         })
       )
       .subscribe({
-        next: (user) => {
-          this.authService.createUserData(user, displayName);
+        next: (userDetails) => {
+          this.authService.createUserData(userDetails.user, displayName);
           localStorage.setItem('isAuth', JSON.stringify(true));
 
           // redirect to the game page for now
