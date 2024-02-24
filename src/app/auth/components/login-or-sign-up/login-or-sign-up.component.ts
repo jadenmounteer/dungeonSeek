@@ -36,7 +36,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login-or-sign-up.component.scss',
 })
 export class LoginOrSignUpComponent implements OnDestroy {
-  form: FormGroup = new FormGroup({
+  signUpForm: FormGroup = new FormGroup({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.email,
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+    displayName: new FormControl('', [Validators.required]),
+  });
+
+  loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
@@ -60,16 +73,20 @@ export class LoginOrSignUpComponent implements OnDestroy {
   }
 
   protected submitLogin() {
-    if (this.form.valid) {
-      this.login(this.form.value.email, this.form.value.password);
+    if (this.loginForm.valid) {
+      this.login(this.loginForm.value.email, this.loginForm.value.password);
     } else {
       this.error = 'Invalid email or password';
     }
   }
 
   protected submitSignUp() {
-    if (this.form.valid) {
-      this.signUp(this.form.value.email, this.form.value.password);
+    if (this.signUpForm.valid) {
+      this.signUp(
+        this.signUpForm.value.email,
+        this.signUpForm.value.password,
+        this.signUpForm.value.displayName
+      );
     } else {
       this.error = 'Invalid email or password';
     }
@@ -95,7 +112,7 @@ export class LoginOrSignUpComponent implements OnDestroy {
   }
 
   // example register with email
-  protected signUp(email: string, password: string) {
+  protected signUp(email: string, password: string, displayName: string) {
     const rnd = Math.floor(Math.random() * 1000);
 
     this.authService
@@ -108,22 +125,23 @@ export class LoginOrSignUpComponent implements OnDestroy {
       )
       .subscribe({
         next: (user) => {
+          this.authService.createUserData(user, displayName);
           localStorage.setItem('isAuth', JSON.stringify(true));
 
           // redirect to the game page for now
-          this.router.navigateByUrl('/game');
+          // this.router.navigateByUrl('/home');
         },
       });
   }
 
   protected forgotPassword() {
-    if (this.form.value.email) {
+    if (this.loginForm.value.email) {
       this.forgotPasswordSub = this.authService
-        .forgotPassword(this.form.value.email)
+        .forgotPassword(this.loginForm.value.email)
         .subscribe({
           next: () => {
             // show a message to the user
-            this.message = `Password reset email sent to ${this.form.value.email}`;
+            this.message = `Password reset email sent to ${this.loginForm.value.email}`;
           },
         });
     } else {

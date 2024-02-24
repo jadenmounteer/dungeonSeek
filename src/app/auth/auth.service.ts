@@ -8,6 +8,14 @@ import {
   updateEmail,
 } from '@angular/fire/auth';
 import { Observable, Subject, defer } from 'rxjs';
+import {
+  DocumentData,
+  DocumentReference,
+  Firestore,
+  addDoc,
+  collection,
+  doc,
+} from '@angular/fire/firestore';
 
 // This auth service inspired by: https://garage.sekrab.com/posts/i-setting-up-angularfire-with-auth
 @Injectable({ providedIn: 'root' })
@@ -16,12 +24,30 @@ export class AuthService {
   public activeUser: User | null = null;
   public userLoggedIn: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth, private firestore: Firestore) {
     this.auth.onAuthStateChanged((user) => {
       this.activeUser = user;
       this.isAuth = !!user;
-      this.userLoggedIn.next(this.isAuth);
+      // this.userLoggedIn.next(this.isAuth);
     });
+  }
+
+  public createUserData(user: User, displayName: string): void {
+    // Sets user data to firestore on login
+    // const userRef: AngularFirestoreDocument<Partial<User>> = this.afs.doc(
+    //   `users/${user?.uid}`
+    // );
+
+    const usersCollection = collection(this.firestore, `users`);
+    const data = {
+      // uid: user!.uid,
+      // email: user!.email,
+      // displayName: displayName,
+      // photoURL: user?.photoURL,
+      test: 'test',
+    };
+
+    addDoc(usersCollection, data);
   }
 
   public login(email: string, password: string): Observable<any> {
