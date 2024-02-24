@@ -129,7 +129,7 @@ export class LoginOrSignUpComponent implements OnDestroy {
           localStorage.setItem('isAuth', JSON.stringify(true));
 
           // redirect to the game page for now
-          // this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/home');
         },
       });
   }
