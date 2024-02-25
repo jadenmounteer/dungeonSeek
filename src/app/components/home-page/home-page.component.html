@@ -1,5 +1,16 @@
 <h1>Welcome {{ authService.activeUser?.displayName }}</h1>
 <button mat-raised-button color="primary" (click)="logout()">Sign Out</button>
+
+<ng-template *ngIf="currentGame; else createGame">
+  <!-- TODO show the session here -->
+</ng-template>
+
+<ng-template #createGame>
+  <button mat-raised-button color="primary" (click)="createNewGameSession()">
+    Create game
+  </button>
+</ng-template>
+
 <button mat-raised-button color="primary" (click)="router.navigate(['game'])">
   Play game
 </button>
