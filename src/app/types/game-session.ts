@@ -4,5 +4,5 @@ export interface GameSession {
   gameName: string;
   campaign: string;
   playerIDs: string[];
-  activePlayerIDs: string[];
+  playersCurrentlyInGame: string[];
 }
