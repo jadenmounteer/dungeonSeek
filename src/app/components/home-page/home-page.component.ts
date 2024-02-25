@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateOrEditGameSessionDialogueComponent } from '../create-or-edit-game-session-dialogue/create-or-edit-game-session-dialogue.component';
+import { GameSession } from '../../types/game-session';
 
 @Component({
   selector: 'app-home-page',
@@ -28,7 +29,7 @@ import { CreateOrEditGameSessionDialogueComponent } from '../create-or-edit-game
   ],
 })
 export class HomePageComponent implements OnInit {
-  protected currentGame = null;
+  protected currentGameSession: GameSession | null = null;
   constructor(
     protected authService: AuthService,
     protected router: Router,
@@ -53,7 +54,7 @@ export class HomePageComponent implements OnInit {
       this.gameSessionService
         .createNewGameSession(newGameSession)
         .then((result) => {
-          console.log('Game session created:', result);
+          this.currentGameSession = newGameSession;
         })
         .catch((err) => {
           console.error('Error creating game session:', err);

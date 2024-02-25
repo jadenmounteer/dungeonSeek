@@ -17,4 +17,6 @@ export class GameSessionService {
 
     return result;
   }
+
+  private fetchGameSessions(): void {}
 }
