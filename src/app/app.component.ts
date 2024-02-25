@@ -14,6 +14,7 @@ import { AuthService } from './auth/auth.service';
   providers: [PromptUpdateService],
 })
 export class AppComponent {
+  protected appInitializing: boolean = true;
   constructor(
     private authService: AuthService,
     private updateService: PromptUpdateService, // This is necessary so the code in its constructor runs.
@@ -21,6 +22,7 @@ export class AppComponent {
   ) {
     this.authService.userLoggedIn.subscribe((isAuth) => {
       if (isAuth) {
+        this.appInitializing = false;
         // navigate to the home page
         this.router.navigate(['/home']);
       }
