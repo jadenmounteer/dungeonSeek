@@ -5,10 +5,7 @@ import { enableProdMode } from '@angular/core';
 import { environment } from './environments/environment';
 
 if (environment.production) {
-  alert('Production mode is enabled');
   enableProdMode();
-} else {
-  alert('Production mode is disabled');
 }
 
 bootstrapApplication(AppComponent, appConfig).catch((err) =>
