@@ -16,6 +16,9 @@ import {
   collection,
   doc,
   setDoc,
+  where,
+  getDocs,
+  query,
 } from '@angular/fire/firestore';
 
 // This auth service inspired by: https://garage.sekrab.com/posts/i-setting-up-angularfire-with-auth
@@ -29,7 +32,19 @@ export class AuthService {
     this.auth.onAuthStateChanged((user) => {
       this.activeUser = user;
       this.isAuth = !!user;
-      // this.userLoggedIn.next(this.isAuth);
+      this.userLoggedIn.next(this.isAuth);
+    });
+  }
+
+  public async FetchUserDetails(userID: string): Promise<void> {
+    const q = query(
+      collection(this.firestore, 'users'),
+      where('uid', '==', userID)
+    );
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      return doc.data();
     });
   }
 

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginOrSignUpComponent } from '../../auth/components/login-or-sign-up/login-or-sign-up.component';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home-page',
@@ -12,8 +13,20 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './home-page.component.scss',
   imports: [LoginOrSignUpComponent, MatButtonModule],
 })
-export class HomePageComponent {
-  constructor(protected authService: AuthService, protected router: Router) {}
+export class HomePageComponent implements OnInit {
+  constructor(
+    protected authService: AuthService,
+    protected router: Router,
+    private auth: Auth
+  ) {}
+
+  public async ngOnInit() {
+    const userDetails = await this.authService.FetchUserDetails(
+      this.authService.activeUser!.uid
+    );
+
+    console.log(userDetails);
+  }
 
   protected logout() {
     this.authService
