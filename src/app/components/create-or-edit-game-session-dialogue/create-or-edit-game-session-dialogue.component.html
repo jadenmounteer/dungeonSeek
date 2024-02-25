@@ -1,1 +1,14 @@
-<p>create-or-edit-game-session-dialogue works!</p>
+<h2 mat-dialog-title *ngIf="!data?.gameName">Create New Game Session</h2>
+<h2 mat-dialog-title *ngIf="data?.gameName">Edit {{ data?.gameName }}</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Game Name</mat-label>
+    <input matInput [(ngModel)]="newGameSession.gameName" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="newGameSession" cdkFocusInitial>
+    Create
+  </button>
+</mat-dialog-actions>

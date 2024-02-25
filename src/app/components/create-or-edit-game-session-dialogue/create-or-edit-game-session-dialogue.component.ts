@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GameSession } from '../../types/game-session';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-create-or-edit-game-session-dialogue',
   standalone: true,
@@ -24,6 +25,7 @@ import { GameSession } from '../../types/game-session';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    CommonModule,
   ],
   templateUrl: './create-or-edit-game-session-dialogue.component.html',
   styleUrl: './create-or-edit-game-session-dialogue.component.scss',
@@ -46,5 +48,9 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
       // This means we are editing an existing game session
       this.newGameSession = this.data;
     }
+  }
+
+  protected onNoClick(): void {
+    this.dialogRef.close();
   }
 }
