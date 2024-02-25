@@ -6,6 +6,7 @@ import { catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { Auth } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
+import { GameSessionService } from '../../services/game-session/game-session.service';
 
 @Component({
   selector: 'app-home-page',
@@ -16,11 +17,24 @@ import { CommonModule } from '@angular/common';
 })
 export class HomePageComponent implements OnInit {
   protected currentGame = null;
-  constructor(protected authService: AuthService, protected router: Router) {}
+  constructor(
+    protected authService: AuthService,
+    protected router: Router,
+    private gameSessionService: GameSessionService
+  ) {}
 
   public async ngOnInit() {}
 
-  protected createNewGameSession() {}
+  protected createNewGameSession() {
+    this.gameSessionService
+      .createNewGameSession('userID', 'gameName', 'AN AWESOME CAMPAIGN NAME!')
+      .then((result) => {
+        console.log('Game session created:', result);
+      })
+      .catch((err) => {
+        console.error('Error creating game session:', err);
+      });
+  }
 
   protected logout() {
     this.authService
