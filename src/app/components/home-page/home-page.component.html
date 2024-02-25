@@ -1,16 +1,16 @@
 <h1>Welcome {{ authService.activeUser?.displayName }}</h1>
 <button mat-raised-button color="primary" (click)="logout()">Sign Out</button>
 
-<div *ngIf="currentGameSession != null">
-  <h1>Current Game Session: {{ currentGameSession.gameName }}</h1>
+<div *ngFor="let game of gameSessionsParticipating">
+  <h1>{{ game.gameName }}</h1>
   <button mat-raised-button color="primary" (click)="router.navigate(['game'])">
-    Continue game
+    Enter Lobby
   </button>
 </div>
 
-<div *ngIf="!currentGameSession">
+<div>
   <button mat-raised-button color="primary" (click)="createNewGameSession()">
-    Create game
+    Create New game
   </button>
 </div>
 

@@ -29,7 +29,7 @@ import { GameSession } from '../../types/game-session';
   ],
 })
 export class HomePageComponent implements OnInit {
-  protected currentGameSession: GameSession | null = null;
+  protected gameSessionsParticipating: GameSession[] = [];
   constructor(
     protected authService: AuthService,
     protected router: Router,
@@ -50,11 +50,13 @@ export class HomePageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       const newGameSession = result;
+      newGameSession.userID = this.authService.activeUser?.uid;
+      newGameSession.playerIDs = [this.authService.activeUser?.uid];
 
       this.gameSessionService
         .createNewGameSession(newGameSession)
         .then((result) => {
-          this.currentGameSession = newGameSession;
+          this.gameSessionsParticipating.push(newGameSession);
         })
         .catch((err) => {
           console.error('Error creating game session:', err);

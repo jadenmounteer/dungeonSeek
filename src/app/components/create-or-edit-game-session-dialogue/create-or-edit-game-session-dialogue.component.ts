@@ -36,6 +36,8 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
     userID: '',
     gameName: '',
     campaign: '',
+    playerIDs: [],
+    activePlayerIDs: [],
   };
 
   constructor(
