@@ -4,6 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { GameComponent } from './components/game/game.component';
 import { PromptUpdateService } from './services/prompt-update.service';
 import { AuthService } from './auth/auth.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -18,13 +19,15 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private updateService: PromptUpdateService, // This is necessary so the code in its constructor runs.
-    private router: Router
+    private router: Router,
+    private auth: Auth
   ) {
-    this.authService.userLoggedIn.subscribe((isAuth) => {
-      if (isAuth) {
-        this.appInitializing = false;
-        // navigate to the home page
-        this.router.navigate(['/home']);
+    this.auth.onAuthStateChanged((user) => {
+      this.authService.activeUser = user;
+      this.authService.isLoggedIn = !!user;
+      this.appInitializing = false;
+      if (this.authService.isLoggedIn) {
+        this.router.navigateByUrl('home');
       }
     });
   }

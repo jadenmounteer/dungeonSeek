@@ -14,11 +14,7 @@ import { Auth } from '@angular/fire/auth';
   imports: [LoginOrSignUpComponent, MatButtonModule],
 })
 export class HomePageComponent implements OnInit {
-  constructor(
-    protected authService: AuthService,
-    protected router: Router,
-    private auth: Auth
-  ) {}
+  constructor(protected authService: AuthService, protected router: Router) {}
 
   public async ngOnInit() {
     const userDetails = await this.authService.FetchUserDetails(

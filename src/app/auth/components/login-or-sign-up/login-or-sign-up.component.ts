@@ -105,8 +105,6 @@ export class LoginOrSignUpComponent implements OnDestroy {
       .subscribe({
         next: (user) => {
           localStorage.setItem('isAuth', JSON.stringify(true));
-          // redirect to the game page for now
-          this.router.navigateByUrl('/home');
         },
       });
   }
@@ -127,9 +125,6 @@ export class LoginOrSignUpComponent implements OnDestroy {
         next: (userDetails) => {
           this.authService.createUserData(userDetails.user, displayName);
           localStorage.setItem('isAuth', JSON.stringify(true));
-
-          // redirect to the game page for now
-          this.router.navigateByUrl('/home');
         },
       });
   }

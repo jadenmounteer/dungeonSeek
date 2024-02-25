@@ -24,15 +24,13 @@ import {
 // This auth service inspired by: https://garage.sekrab.com/posts/i-setting-up-angularfire-with-auth
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  public isAuth: boolean = false;
+  public isLoggedIn: boolean = false;
   public activeUser: User | null = null;
-  public userLoggedIn: Subject<boolean> = new Subject<boolean>();
 
   constructor(private auth: Auth, private firestore: Firestore) {
     this.auth.onAuthStateChanged((user) => {
       this.activeUser = user;
-      this.isAuth = !!user;
-      this.userLoggedIn.next(this.isAuth);
+      this.isLoggedIn = !!user;
     });
   }
 
@@ -55,7 +53,7 @@ export class AuthService {
       displayName: displayName,
       photoURL: user?.photoURL,
     };
-    setDoc(doc(this.firestore, 'users', user.uid), data);
+    addDoc(collection(this.firestore, 'users'), data);
   }
 
   public login(email: string, password: string): Observable<any> {
