@@ -50,14 +50,14 @@ export class HomePageComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       const newGameSession = result;
 
-      // this.gameSessionService
-      //   .createNewGameSession(newGameSession)
-      //   .then((result) => {
-      //     console.log('Game session created:', result);
-      //   })
-      //   .catch((err) => {
-      //     console.error('Error creating game session:', err);
-      //   });
+      this.gameSessionService
+        .createNewGameSession(newGameSession)
+        .then((result) => {
+          console.log('Game session created:', result);
+        })
+        .catch((err) => {
+          console.error('Error creating game session:', err);
+        });
     });
   }
 
