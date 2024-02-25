@@ -6,20 +6,10 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updateEmail,
+  updateProfile,
 } from '@angular/fire/auth';
 import { Observable, Subject, defer } from 'rxjs';
-import {
-  DocumentData,
-  DocumentReference,
-  Firestore,
-  addDoc,
-  collection,
-  doc,
-  setDoc,
-  where,
-  getDocs,
-  query,
-} from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 
 // This auth service inspired by: https://garage.sekrab.com/posts/i-setting-up-angularfire-with-auth
 @Injectable({ providedIn: 'root' })
@@ -34,26 +24,8 @@ export class AuthService {
     });
   }
 
-  public async FetchUserDetails(userID: string): Promise<void> {
-    const q = query(
-      collection(this.firestore, 'users'),
-      where('uid', '==', userID)
-    );
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      return doc.data();
-    });
-  }
-
   public createUserData(user: User, displayName: string): void {
-    const data = {
-      uid: user!.uid,
-      email: user!.email,
-      displayName: displayName,
-      photoURL: user?.photoURL,
-    };
-    addDoc(collection(this.firestore, 'users'), data);
+    updateProfile(user, { displayName: displayName });
   }
 
   public login(email: string, password: string): Observable<any> {

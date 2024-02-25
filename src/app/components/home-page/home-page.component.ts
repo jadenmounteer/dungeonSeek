@@ -16,13 +16,7 @@ import { Auth } from '@angular/fire/auth';
 export class HomePageComponent implements OnInit {
   constructor(protected authService: AuthService, protected router: Router) {}
 
-  public async ngOnInit() {
-    const userDetails = await this.authService.FetchUserDetails(
-      this.authService.activeUser!.uid
-    );
-
-    console.log(userDetails);
-  }
+  public async ngOnInit() {}
 
   protected logout() {
     this.authService
