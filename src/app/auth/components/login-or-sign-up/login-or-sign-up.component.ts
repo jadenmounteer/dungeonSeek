@@ -98,6 +98,10 @@ export class LoginOrSignUpComponent implements OnDestroy {
       .login(email, password)
       .pipe(
         catchError((err) => {
+          // TODO I can do this better
+          alert(
+            "An error occurred. Please try again. This email likely doesn't exist."
+          );
           // handle the error
           return throwError(() => new Error('test'));
         })
@@ -118,6 +122,7 @@ export class LoginOrSignUpComponent implements OnDestroy {
       .pipe(
         catchError((err) => {
           // handle the error
+          alert('An error occurred. This email is likely already in use.');
           return throwError(() => new Error(err));
         })
       )
