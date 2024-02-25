@@ -37,7 +37,20 @@ export class HomePageComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  public async ngOnInit() {}
+  public async ngOnInit() {
+    this.grabGameSessions();
+  }
+
+  private grabGameSessions(): void {
+    this.gameSessionService
+      .fetchGameSessions(this.authService.activeUser!.uid)
+      .then((gameSessions) => {
+        this.gameSessionsParticipating = gameSessions;
+      })
+      .catch((err) => {
+        console.error('Error fetching game sessions:', err);
+      });
+  }
 
   protected createNewGameSession(): void {
     const dialogRef = this.dialog.open(
