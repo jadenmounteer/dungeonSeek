@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { GameComponent } from './components/game/game.component';
@@ -20,14 +20,19 @@ export class AppComponent {
     private authService: AuthService,
     private updateService: PromptUpdateService, // This is necessary so the code in its constructor runs.
     private router: Router,
-    private auth: Auth
+    private auth: Auth,
+    private ngZone: NgZone
   ) {
     this.auth.onAuthStateChanged((user) => {
       this.authService.activeUser = user;
       this.authService.isLoggedIn = !!user;
       this.appInitializing = false;
       if (this.authService.isLoggedIn) {
-        this.router.navigateByUrl('home');
+        // Not sure why I need ngZone in this situation, but it's necessary so the home page doesn't appear on top of the game.
+        // Something to do with navigating to a new route. Probably because it's called in a callback.
+        this.ngZone.run(() => {
+          this.router.navigateByUrl('home');
+        });
       }
     });
   }
