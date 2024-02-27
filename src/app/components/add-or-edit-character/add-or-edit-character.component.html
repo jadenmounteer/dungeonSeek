@@ -1,22 +1,22 @@
 <h2 mat-dialog-title *ngIf="!data?.name">Create New Character</h2>
 <h2 mat-dialog-title *ngIf="data?.name">Edit {{ data?.name }}</h2>
-<!-- <mat-dialog-content>
+<mat-dialog-content>
   <mat-form-field>
     <mat-label>Character Name</mat-label>
-    <input matInput [(ngModel)]="newGameSession.gameName" />
+    <input matInput [(ngModel)]="character.name" />
   </mat-form-field>
-  <mat-form-field>
-    <mat-label>Campaign</mat-label>
-    <select matNativeControl required (change)="setCampaignName($event)">
-      <option *ngFor="let type of campaigns | keyvalue" [value]="type.key">
-        {{ type.value }}
-      </option>
-    </select>
-  </mat-form-field>
-</mat-dialog-content> -->
+
+  <mat-label>Select Your Class</mat-label>
+  <mat-tab-group>
+    <mat-tab label="Sorcerer" (click)="changeCharacterClass('Sorcerer')">
+    </mat-tab>
+    <!-- <mat-tab label="Rouge"> Coming soon... </mat-tab>
+    <mat-tab label="Warrior">Coming soon...</mat-tab> -->
+  </mat-tab-group>
+</mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <!-- <button mat-button [mat-dialog-close]="newGameSession" cdkFocusInitial>
+  <button mat-button [mat-dialog-close]="character" cdkFocusInitial>
     Create
-  </button> -->
+  </button>
 </mat-dialog-actions>

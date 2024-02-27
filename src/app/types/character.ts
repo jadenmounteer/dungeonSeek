@@ -5,6 +5,7 @@ export interface Character {
   class: CharacterClass;
   sex: 'Male' | 'Female';
   passAndPlay: boolean;
+  level: number;
 }
 
 export type CharacterClass = 'Sorcerer';
