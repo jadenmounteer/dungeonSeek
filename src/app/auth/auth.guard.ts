@@ -13,6 +13,6 @@ export class AuthGuard {
     const isLoggedInString = localStorage.getItem('isAuth');
     const isLoggedIn = isLoggedInString ? JSON.parse(isLoggedInString) : false;
 
-    return isLoggedIn || this.router.navigateByUrl('home');
+    return isLoggedIn || this.router.navigate(['home']);
   }
 }

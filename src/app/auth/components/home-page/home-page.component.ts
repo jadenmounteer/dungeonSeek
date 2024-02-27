@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginOrSignUpComponent } from '../login-or-sign-up/login-or-sign-up.component';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { Subscription, catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { GameSessionService } from '../../../services/game-session/game-session.service';
@@ -28,28 +28,27 @@ import { GameSession } from '../../../types/game-session';
     FormsModule,
   ],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
   protected gameSessionsParticipating: GameSession[] = [];
+  private gameSessionsSub: Subscription;
+
   constructor(
     protected authService: AuthService,
     protected router: Router,
     private gameSessionService: GameSessionService,
     public dialog: MatDialog
-  ) {}
-
-  public async ngOnInit() {
-    this.grabGameSessions();
+  ) {
+    this.gameSessionsSub = this.gameSessionService.usersGameSessions$.subscribe(
+      (gameSessions) => {
+        this.gameSessionsParticipating = gameSessions;
+      }
+    );
   }
 
-  private grabGameSessions(): void {
-    this.gameSessionService
-      .fetchGameSessions(this.authService.activeUser!.uid)
-      .then((gameSessions) => {
-        this.gameSessionsParticipating = gameSessions;
-      })
-      .catch((err) => {
-        console.error('Error fetching game sessions:', err);
-      });
+  public async ngOnInit() {}
+
+  ngOnDestroy(): void {
+    this.gameSessionsSub.unsubscribe();
   }
 
   protected createNewGameSession(): void {
@@ -80,6 +79,10 @@ export class HomePageComponent implements OnInit {
           console.error('Error creating game session:', err);
         });
     });
+  }
+
+  protected goToGameLobby(gameSessionId: string) {
+    this.router.navigate([`game-session-lobby/${gameSessionId}`]);
   }
 
   protected logout() {

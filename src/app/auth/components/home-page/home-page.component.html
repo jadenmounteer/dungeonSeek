@@ -13,11 +13,7 @@
 
   <div *ngFor="let game of gameSessionsParticipating">
     <h2>{{ game.gameName }}</h2>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="router.navigate(['game'])"
-    >
+    <button mat-raised-button color="primary" (click)="goToGameLobby(game.id)">
       Enter Lobby
     </button>
   </div>
