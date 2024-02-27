@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GameSession } from '../../../types/game-session';
 import { CommonModule } from '@angular/common';
-import { CampaignServiceService } from '../../../services/campaign-service.service';
+import { CampaignServiceService } from '../../../services/game-session/campaign-service/campaign-service.service';
 @Component({
   selector: 'app-create-or-edit-game-session-dialogue',
   standalone: true,
