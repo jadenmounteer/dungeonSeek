@@ -22,6 +22,7 @@ export class GameSessionLobbyComponent implements OnDestroy {
   protected gameSession!: GameSession;
   private gameSessionSub: Subscription;
   protected characters: Character[] = [];
+  protected charactersSub!: Subscription;
 
   constructor(
     private gameSessionService: GameSessionService,
@@ -36,11 +37,26 @@ export class GameSessionLobbyComponent implements OnDestroy {
       .getGameSession(gameSessionID)
       .subscribe((gameSession) => {
         this.gameSession = gameSession;
+
+        // TODO I can probable do this in a cleaner way with RXJS.
+        // I know there's an operator where you can subscribe to multiple observables at once.
+        this.setCharactersSub();
+      });
+  }
+
+  private setCharactersSub(): void {
+    this.charactersSub = this.characterService
+      .getCharactersInGameSession(this.gameSession.characterIDs)
+      .subscribe((characters) => {
+        console.log(this.gameSession.characterIDs);
+        console.log(characters);
+        this.characters = characters;
         this.loading = false;
       });
   }
   ngOnDestroy(): void {
     this.gameSessionSub.unsubscribe();
+    this.charactersSub.unsubscribe();
   }
 
   protected enterGame(): void {
