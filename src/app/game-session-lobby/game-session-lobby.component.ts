@@ -16,15 +16,14 @@ export class GameSessionLobbyComponent implements OnDestroy {
   protected loading = true;
   protected gameSession!: GameSession;
   // private gameSessionSub: Subscription;
-  private gameSessionID: string;
 
   constructor(
     private gameSessionService: GameSessionService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
+    const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
     this.gameSessionService
-      .fetchGameSession(this.gameSessionID)
+      .fetchGameSession(gameSessionID)
       .then((gameSession) => {
         this.gameSession = gameSession;
         this.loading = false;
