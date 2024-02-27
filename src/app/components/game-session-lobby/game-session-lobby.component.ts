@@ -56,7 +56,9 @@ export class GameSessionLobbyComponent implements OnDestroy {
       this.characterService
         .createNewCharacter(newCharacter)
         .then((result) => {
-          this.characters.push(newCharacter);
+          this.characters.push(newCharacter); // This may be unnecessary
+          this.gameSession.characterIDs.push(result.id);
+          this.gameSessionService.updateGameSession(this.gameSession);
         })
         .catch((err) => {
           console.error('Error creating game session:', err);

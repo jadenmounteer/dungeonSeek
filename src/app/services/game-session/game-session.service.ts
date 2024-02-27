@@ -6,6 +6,7 @@ import {
   doc,
   onSnapshot,
   query,
+  updateDoc,
   where,
 } from '@angular/fire/firestore';
 import { Firestore } from '@angular/fire/firestore';
@@ -39,6 +40,11 @@ export class GameSessionService {
     const result = await addDoc(collectionRef, gameSession);
 
     return result;
+  }
+
+  public async updateGameSession(gameSession: GameSession): Promise<any> {
+    const docRef = doc(this.firestore, 'game-sessions', gameSession.id);
+    await updateDoc(docRef, { ...gameSession } as { [x: string]: any });
   }
 
   public getGameSession(gameSessionID: string): Observable<GameSession> {

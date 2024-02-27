@@ -67,8 +67,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
       const newGameSession = result;
       newGameSession.userID = this.authService.activeUser?.uid;
       newGameSession.playerIDs = [this.authService.activeUser?.uid];
-      console.log(result);
-      console.log(newGameSession);
 
       this.gameSessionService
         .createNewGameSession(newGameSession)
