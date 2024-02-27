@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { GameSessionService } from '../services/game-session/game-session.service';
 import { ActivatedRoute } from '@angular/router';
 import { GameSession } from '../types/game-session';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,21 +15,22 @@ import { CommonModule } from '@angular/common';
 export class GameSessionLobbyComponent implements OnDestroy {
   protected loading = true;
   protected gameSession!: GameSession;
-  // private gameSessionSub: Subscription;
+  private gameSessionSub: Subscription;
 
   constructor(
     private gameSessionService: GameSessionService,
     private activatedRoute: ActivatedRoute
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
-    this.gameSessionService
-      .fetchGameSession(gameSessionID)
-      .then((gameSession) => {
+
+    this.gameSessionSub = this.gameSessionService
+      .getGameSession(gameSessionID)
+      .subscribe((gameSession) => {
         this.gameSession = gameSession;
         this.loading = false;
       });
   }
   ngOnDestroy(): void {
-    // this.gameSessionSub.unsubscribe();
+    this.gameSessionSub.unsubscribe();
   }
 }

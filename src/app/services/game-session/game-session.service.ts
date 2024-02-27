@@ -6,12 +6,13 @@ import {
   doc,
   getDoc,
   getDocs,
+  onSnapshot,
   query,
   where,
 } from '@angular/fire/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { GameSession } from '../../types/game-session';
-import { Observable, lastValueFrom, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 
 @Injectable({
@@ -42,14 +43,13 @@ export class GameSessionService {
     return result;
   }
 
-  // I watched this video to learn how to do this: https://www.youtube.com/watch?v=sw3b8bVY2UQ
-  public async fetchGameSession(gameSessionID: string): Promise<GameSession> {
+  public getGameSession(gameSessionID: string): Observable<GameSession> {
     const docRef = doc(this.firestore, 'game-sessions', gameSessionID);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      return docSnap.data() as GameSession;
-    } else {
-      return {} as GameSession;
-    }
+    return new Observable((observer) => {
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        observer.next(doc.data() as GameSession);
+      });
+      return () => unsubscribe();
+    });
   }
 }
