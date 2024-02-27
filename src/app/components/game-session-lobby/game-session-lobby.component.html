@@ -2,6 +2,10 @@
   <h1>{{ gameSession.gameName }}</h1>
 
   <h2>Players</h2>
+  <button mat-raised-button color="primary" (click)="addCharacter()">
+    Add New Character
+  </button>
+
   <!-- <div *ngFor="let player of gameSession.players">
     <p>{{ player.displayName }}</p>
   </div> -->

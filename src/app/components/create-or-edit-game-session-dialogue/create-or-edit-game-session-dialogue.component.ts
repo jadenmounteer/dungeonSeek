@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   MatDialogTitle,
   MatDialogContent,
@@ -17,7 +17,6 @@ import {
   CampaignNames,
   CampaignServiceService,
 } from '../../services/game-session/campaign-service/campaign-service.service';
-import { Campaign } from '../../types/campaign';
 import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-create-or-edit-game-session-dialogue',

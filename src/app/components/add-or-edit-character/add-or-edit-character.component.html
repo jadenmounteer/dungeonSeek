@@ -1,0 +1,22 @@
+<h2 mat-dialog-title *ngIf="!data?.name">Create New Character</h2>
+<h2 mat-dialog-title *ngIf="data?.name">Edit {{ data?.name }}</h2>
+<!-- <mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Character Name</mat-label>
+    <input matInput [(ngModel)]="newGameSession.gameName" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Campaign</mat-label>
+    <select matNativeControl required (change)="setCampaignName($event)">
+      <option *ngFor="let type of campaigns | keyvalue" [value]="type.key">
+        {{ type.value }}
+      </option>
+    </select>
+  </mat-form-field>
+</mat-dialog-content> -->
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <!-- <button mat-button [mat-dialog-close]="newGameSession" cdkFocusInitial>
+    Create
+  </button> -->
+</mat-dialog-actions>

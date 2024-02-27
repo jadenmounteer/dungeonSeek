@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Character } from '../../types/character';
+import { MatDialog } from '@angular/material/dialog';
+import { AddOrEditCharacterComponent } from '../add-or-edit-character/add-or-edit-character.component';
 
 @Component({
   selector: 'app-game-session-lobby',
@@ -23,7 +25,8 @@ export class GameSessionLobbyComponent implements OnDestroy {
   constructor(
     private gameSessionService: GameSessionService,
     private activatedRoute: ActivatedRoute,
-    protected router: Router
+    protected router: Router,
+    private dialog: MatDialog
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -40,5 +43,11 @@ export class GameSessionLobbyComponent implements OnDestroy {
 
   protected enterGame(): void {
     this.router.navigate([`game-view/${this.gameSession.id}`]);
+  }
+
+  protected addCharacter(): void {
+    const dialogRef = this.dialog.open(AddOrEditCharacterComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }
