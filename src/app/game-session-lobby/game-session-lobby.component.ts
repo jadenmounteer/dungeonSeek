@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { GameSessionService } from '../services/game-session/game-session.service';
 import { ActivatedRoute } from '@angular/router';
 import { GameSession } from '../types/game-session';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
