@@ -1,0 +1,19 @@
+{
+  "campaigns": [
+    {
+      "id": 1,
+      "name": "Age of the Necromancer",
+      "description": "A powerful necromancer plots to rule over Tesslandia. You and your friends must stop him before it's too late."
+    },
+    {
+      "id": 2,
+      "name": "The Lost City of Z",
+      "description": "A lost city has been discovered in the Amazon. You and your friends must explore it and uncover its secrets."
+    },
+    {
+      "id": 3,
+      "name": "The Curse of the Mummy",
+      "description": "A mummy has been unleashed upon the world. You and your friends must find a way to stop it before it's too late."
+    }
+  ]
+}

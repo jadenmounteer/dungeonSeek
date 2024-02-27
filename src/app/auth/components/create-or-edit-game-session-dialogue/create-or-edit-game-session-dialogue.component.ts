@@ -13,7 +13,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GameSession } from '../../../types/game-session';
 import { CommonModule } from '@angular/common';
-import { CampaignServiceService } from '../../../services/game-session/campaign-service/campaign-service.service';
+import {
+  CampaignNames,
+  CampaignServiceService,
+} from '../../../services/game-session/campaign-service/campaign-service.service';
+import { Campaign } from '../../../types/campaign';
+import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-create-or-edit-game-session-dialogue',
   standalone: true,
@@ -27,11 +32,16 @@ import { CampaignServiceService } from '../../../services/game-session/campaign-
     MatDialogActions,
     MatDialogClose,
     CommonModule,
+    MatSelectModule,
   ],
   templateUrl: './create-or-edit-game-session-dialogue.component.html',
   styleUrl: './create-or-edit-game-session-dialogue.component.scss',
 })
 export class CreateOrEditGameSessionDialogueComponent implements OnInit {
+  protected campaigns = CampaignNames;
+
+  // TODO https://dev.to/shane/working-with-enums-in-angular-html-templates-2io9
+
   protected newGameSession: GameSession = {
     id: '',
     userID: '',
@@ -54,7 +64,17 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
     }
 
     // Fetch the campaigns
-    await this.campaignService.fetchCampaigns();
+    // TODO if we wanted to get JSON data...
+    // const response = await this.campaignService.fetchCampaigns();
+
+    // // catch error
+    // if (!response.ok) {
+    //   throw new Error('Failed to fetch campaigns');
+    // }
+
+    // const data = await response.json();
+
+    // this.listOfCampaigns.push(data);
   }
 
   protected onNoClick(): void {

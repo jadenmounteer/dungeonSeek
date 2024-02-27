@@ -5,6 +5,14 @@
     <mat-label>Game Name</mat-label>
     <input matInput [(ngModel)]="newGameSession.gameName" />
   </mat-form-field>
+  <mat-form-field>
+    <mat-label>Campaign</mat-label>
+    <select matNativeControl required>
+      <option *ngFor="let type of campaigns | keyvalue" [value]="type">
+        {{ type.value }}
+      </option>
+    </select>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>

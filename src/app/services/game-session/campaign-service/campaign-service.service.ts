@@ -1,29 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Campaign } from '../../../types/campaign';
 
+export enum CampaignNames {
+  AGE_OF_THE_NECROMANCER = 'Age of the Necromancer',
+}
 @Injectable({
   providedIn: 'root',
 })
 export class CampaignServiceService {
   constructor() {}
 
-  public fetchCampaigns(): Campaign[] {
-    const url: string = 'assets/data/campaigns/age-of-the-necromancer.json';
-    let campaigns: Campaign[] = [];
-    fetch(url)
-      .then((response: Response) => {
-        let responseData;
-        try {
-          responseData = response.json();
-        } catch (err) {
-          console.error('Error fetching campaigns:', err);
-        }
-        return responseData;
-      })
-      .then((data: any[]) => {
-        campaigns = data;
-        console.log(campaigns);
-      });
-    return campaigns;
+  // TODO in the future we can fetch campaign data from json files
+  public async fetchCampaigns(): Promise<Response> {
+    const url: string = 'assets/data/campaigns.json';
+
+    return fetch(url);
   }
 }
