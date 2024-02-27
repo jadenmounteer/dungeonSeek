@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Character, CharacterClass } from '../../types/character';
 import { AuthService } from '../../auth/auth.service';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-add-or-edit-character',
@@ -32,6 +33,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     CommonModule,
     MatSelectModule,
     MatTabsModule,
+    MatRadioModule,
   ],
   templateUrl: './add-or-edit-character.component.html',
   styleUrl: './add-or-edit-character.component.scss',

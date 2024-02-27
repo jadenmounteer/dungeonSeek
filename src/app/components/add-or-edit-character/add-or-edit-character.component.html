@@ -9,6 +9,26 @@
   <mat-label>Select Your Class</mat-label>
   <mat-tab-group>
     <mat-tab label="Sorcerer" (click)="changeCharacterClass('Sorcerer')">
+      <div class="character-preview">
+        <img
+          src="../../../assets/game-pieces/wizard/wizard-right.png"
+          *ngIf="character.sex === 'Male'"
+        />
+        <img
+          src="../../../assets/game-pieces/wizard/sorceress-right.png"
+          *ngIf="character.sex === 'Female'"
+        />
+      </div>
+
+      <div class="sex-selector">
+        <mat-radio-group
+          aria-label="Select an option"
+          [(ngModel)]="character.sex"
+        >
+          <mat-radio-button value="Male">Male</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
+        </mat-radio-group>
+      </div>
     </mat-tab>
     <!-- <mat-tab label="Rouge"> Coming soon... </mat-tab>
     <mat-tab label="Warrior">Coming soon...</mat-tab> -->
