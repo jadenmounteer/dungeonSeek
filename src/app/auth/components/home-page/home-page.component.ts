@@ -62,6 +62,9 @@ export class HomePageComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe((result) => {
+      if (!result) {
+        return;
+      }
       const newGameSession = result;
       newGameSession.userID = this.authService.activeUser?.uid;
       newGameSession.playerIDs = [this.authService.activeUser?.uid];
