@@ -7,8 +7,8 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Campaign</mat-label>
-    <select matNativeControl required>
-      <option *ngFor="let type of campaigns | keyvalue" [value]="type">
+    <select matNativeControl required (change)="setCampaignName($event)">
+      <option *ngFor="let type of campaigns | keyvalue" [value]="type.key">
         {{ type.value }}
       </option>
     </select>

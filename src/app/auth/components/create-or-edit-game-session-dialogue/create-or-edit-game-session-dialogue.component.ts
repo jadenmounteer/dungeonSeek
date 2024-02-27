@@ -46,7 +46,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
     id: '',
     userID: '',
     gameName: '',
-    campaign: '',
+    campaignName: 'Age_of_the_Necromancer' as CampaignNames,
     playerIDs: [],
     playersCurrentlyInGame: [],
   };
@@ -63,7 +63,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
       this.newGameSession = this.data;
     }
 
-    // Fetch the campaigns
+    // Fetch the campaign data
     // TODO if we wanted to get JSON data...
     // const response = await this.campaignService.fetchCampaigns();
 
@@ -79,5 +79,10 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
 
   protected onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  protected setCampaignName(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.newGameSession.campaignName = target.value as CampaignNames;
   }
 }

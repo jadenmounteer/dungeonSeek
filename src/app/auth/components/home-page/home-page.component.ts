@@ -57,7 +57,7 @@ export class HomePageComponent implements OnInit {
       CreateOrEditGameSessionDialogueComponent,
       {
         // pass in a game session to edit if we want to edit it
-        data: {},
+        // data: {},
       }
     );
 
@@ -68,6 +68,8 @@ export class HomePageComponent implements OnInit {
       const newGameSession = result;
       newGameSession.userID = this.authService.activeUser?.uid;
       newGameSession.playerIDs = [this.authService.activeUser?.uid];
+      console.log(result);
+      console.log(newGameSession);
 
       this.gameSessionService
         .createNewGameSession(newGameSession)
