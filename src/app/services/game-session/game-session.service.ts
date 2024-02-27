@@ -47,7 +47,9 @@ export class GameSessionService {
     const docRef = doc(this.firestore, 'game-sessions', gameSessionID);
     return new Observable((observer) => {
       const unsubscribe = onSnapshot(docRef, (doc) => {
-        observer.next(doc.data() as GameSession);
+        const gameSession = doc.data() as GameSession;
+        gameSession.id = doc.id;
+        observer.next(gameSession);
       });
       return () => unsubscribe();
     });

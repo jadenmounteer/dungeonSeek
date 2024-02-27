@@ -1,5 +1,10 @@
 <div *ngIf="!loading">
   <h1>{{ gameSession.gameName }}</h1>
+
+  <h2>Players</h2>
+  <!-- <div *ngFor="let player of gameSession.players">
+    <p>{{ player.displayName }}</p>
+  </div> -->
   <button mat-raised-button color="primary" (click)="enterGame()">
     Enter Game
   </button>

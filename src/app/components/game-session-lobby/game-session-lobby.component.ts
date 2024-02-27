@@ -17,17 +17,17 @@ export class GameSessionLobbyComponent implements OnDestroy {
   protected loading = true;
   protected gameSession!: GameSession;
   private gameSessionSub: Subscription;
-  private gameSessionID: string;
+  protected players: string[] = [];
 
   constructor(
     private gameSessionService: GameSessionService,
     private activatedRoute: ActivatedRoute,
     protected router: Router
   ) {
-    this.gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
+    const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
     this.gameSessionSub = this.gameSessionService
-      .getGameSession(this.gameSessionID)
+      .getGameSession(gameSessionID)
       .subscribe((gameSession) => {
         this.gameSession = gameSession;
         this.loading = false;
@@ -38,6 +38,6 @@ export class GameSessionLobbyComponent implements OnDestroy {
   }
 
   protected enterGame(): void {
-    this.router.navigate([`game-view/${this.gameSessionID}`]);
+    this.router.navigate([`game-view/${this.gameSession.id}`]);
   }
 }
