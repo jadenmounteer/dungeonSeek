@@ -15,24 +15,22 @@ import { CommonModule } from '@angular/common';
 export class GameSessionLobbyComponent implements OnDestroy {
   protected loading = true;
   protected gameSession!: GameSession;
-  private gameSessionSub: Subscription;
+  // private gameSessionSub: Subscription;
+  private gameSessionID: string;
 
   constructor(
     private gameSessionService: GameSessionService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.gameSessionService.setGameSessionID(
-      this.activatedRoute.snapshot.params['gameSessionId']
-    );
-
-    this.gameSessionSub = this.gameSessionService.gameSessionById$.subscribe(
-      (gameSession) => {
-        this.gameSession = gameSession[0];
+    this.gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
+    this.gameSessionService
+      .fetchGameSession(this.gameSessionID)
+      .then((gameSession) => {
+        this.gameSession = gameSession;
         this.loading = false;
-      }
-    );
+      });
   }
   ngOnDestroy(): void {
-    this.gameSessionSub.unsubscribe();
+    // this.gameSessionSub.unsubscribe();
   }
 }
