@@ -8,7 +8,7 @@ export class CampaignServiceService {
   constructor() {}
 
   public fetchCampaigns(): Campaign[] {
-    const url: string = '../data/campaigns.json';
+    const url: string = 'assets/data/campaigns.json';
     let campaigns: Campaign[] = [];
     fetch(url)
       .then((response: Response) => {
