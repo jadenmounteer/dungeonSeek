@@ -5,6 +5,7 @@ import { GameSession } from '../../types/game-session';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { Character } from '../../types/character';
 
 @Component({
   selector: 'app-game-session-lobby',
@@ -17,7 +18,7 @@ export class GameSessionLobbyComponent implements OnDestroy {
   protected loading = true;
   protected gameSession!: GameSession;
   private gameSessionSub: Subscription;
-  protected players: string[] = [];
+  protected players: Character[] = [];
 
   constructor(
     private gameSessionService: GameSessionService,
