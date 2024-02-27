@@ -23,8 +23,9 @@ export const routes: Routes = [
     canActivate: [() => inject(AuthGuard).navigateSecurely()],
   },
   {
-    path: 'game',
+    path: 'game-view/:gameSessionId',
     canActivate: [() => inject(AuthGuard).navigateSecurely()],
+
     loadComponent: () =>
       import('./components/game-component/game.component').then(
         (m) => m.GameComponent
@@ -33,6 +34,7 @@ export const routes: Routes = [
   {
     path: 'game-session-lobby/:gameSessionId',
     canActivate: [() => inject(AuthGuard).navigateSecurely()],
+
     loadComponent: () =>
       import(
         './components/game-session-lobby/game-session-lobby.component'
