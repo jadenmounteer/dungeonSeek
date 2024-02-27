@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Character } from '../../types/character';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditCharacterComponent } from '../add-or-edit-character/add-or-edit-character.component';
+import { CharacterService } from '../../services/character/character.service';
 
 @Component({
   selector: 'app-game-session-lobby',
@@ -20,13 +21,14 @@ export class GameSessionLobbyComponent implements OnDestroy {
   protected loading = true;
   protected gameSession!: GameSession;
   private gameSessionSub: Subscription;
-  protected players: Character[] = [];
+  protected characters: Character[] = [];
 
   constructor(
     private gameSessionService: GameSessionService,
     private activatedRoute: ActivatedRoute,
     protected router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private characterService: CharacterService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -48,6 +50,17 @@ export class GameSessionLobbyComponent implements OnDestroy {
   protected addCharacter(): void {
     const dialogRef = this.dialog.open(AddOrEditCharacterComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((newCharacter) => {
+      if (!newCharacter) return;
+
+      this.characterService
+        .createNewCharacter(newCharacter)
+        .then((result) => {
+          this.characters.push(newCharacter);
+        })
+        .catch((err) => {
+          console.error('Error creating game session:', err);
+        });
+    });
   }
 }

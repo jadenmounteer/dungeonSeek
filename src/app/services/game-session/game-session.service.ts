@@ -4,8 +4,6 @@ import {
   collection,
   collectionData,
   doc,
-  getDoc,
-  getDocs,
   onSnapshot,
   query,
   where,
@@ -54,4 +52,19 @@ export class GameSessionService {
       return () => unsubscribe();
     });
   }
+
+  // We probably don't want to do this. I want characters to be a parent collection, not a child of game-sessions
+  // public addCharacterToGameSession(
+  //   gameSessionId: string,
+  //   newCharacter: Character
+  // ): Promise<any> {
+  //   const collectionRef = collection(
+  //     this.firestore,
+  //     'game-sessions',
+  //     gameSessionId,
+  //     'characters'
+  //   );
+
+  //   return addDoc(collectionRef, newCharacter);
+  // }
 }
