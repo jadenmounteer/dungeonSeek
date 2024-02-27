@@ -36,7 +36,12 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="character" cdkFocusInitial>
+  <button
+    mat-button
+    [mat-dialog-close]="character"
+    cdkFocusInitial
+    [disabled]="character.name === ''"
+  >
     Create
   </button>
 </mat-dialog-actions>

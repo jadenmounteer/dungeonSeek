@@ -16,7 +16,12 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="newGameSession" cdkFocusInitial>
+  <button
+    mat-button
+    [mat-dialog-close]="newGameSession"
+    cdkFocusInitial
+    [disabled]="newGameSession.gameName === ''"
+  >
     Create
   </button>
 </mat-dialog-actions>
