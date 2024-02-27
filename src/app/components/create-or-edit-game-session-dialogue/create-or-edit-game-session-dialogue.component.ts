@@ -11,13 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { GameSession } from '../../../types/game-session';
+import { GameSession } from '../../types/game-session';
 import { CommonModule } from '@angular/common';
 import {
   CampaignNames,
   CampaignServiceService,
-} from '../../../services/game-session/campaign-service/campaign-service.service';
-import { Campaign } from '../../../types/campaign';
+} from '../../services/game-session/campaign-service/campaign-service.service';
+import { Campaign } from '../../types/campaign';
 import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-create-or-edit-game-session-dialogue',

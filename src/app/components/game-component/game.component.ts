@@ -5,7 +5,7 @@ import {
   Location,
   LocationService,
   Position,
-} from '../../../services/location-service';
+} from '../../services/location-service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 

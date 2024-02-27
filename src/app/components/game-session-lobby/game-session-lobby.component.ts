@@ -1,14 +1,15 @@
 import { Component, OnDestroy } from '@angular/core';
-import { GameSessionService } from '../services/game-session/game-session.service';
-import { ActivatedRoute } from '@angular/router';
-import { GameSession } from '../types/game-session';
+import { GameSessionService } from '../../services/game-session/game-session.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GameSession } from '../../types/game-session';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-game-session-lobby',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './game-session-lobby.component.html',
   styleUrl: './game-session-lobby.component.scss',
 })
@@ -19,7 +20,8 @@ export class GameSessionLobbyComponent implements OnDestroy {
 
   constructor(
     private gameSessionService: GameSessionService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    protected router: Router
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -32,5 +34,9 @@ export class GameSessionLobbyComponent implements OnDestroy {
   }
   ngOnDestroy(): void {
     this.gameSessionSub.unsubscribe();
+  }
+
+  protected enterGame(): void {
+    this.router.navigate([`game`]);
   }
 }

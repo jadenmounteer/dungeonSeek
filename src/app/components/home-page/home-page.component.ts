@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginOrSignUpComponent } from '../login-or-sign-up/login-or-sign-up.component';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { Subscription, catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { GameSessionService } from '../../../services/game-session/game-session.service';
+import { GameSessionService } from '../../services/game-session/game-session.service';
 
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateOrEditGameSessionDialogueComponent } from '../create-or-edit-game-session-dialogue/create-or-edit-game-session-dialogue.component';
-import { GameSession } from '../../../types/game-session';
+import { GameSession } from '../../types/game-session';
 
 @Component({
   selector: 'app-home-page',

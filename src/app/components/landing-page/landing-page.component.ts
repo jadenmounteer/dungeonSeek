@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginOrSignUpComponent } from '../login-or-sign-up/login-or-sign-up.component';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 

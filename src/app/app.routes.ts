@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './auth/components/home-page/home-page.component';
-import { GameComponent } from './auth/components/game-component/game.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { GameComponent } from './components/game-component/game.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { inject } from '@angular/core';
-import { LandingPageComponent } from './auth/components/landing-page/landing-page.component';
-import { LoginOrSignUpComponent } from './auth/components/login-or-sign-up/login-or-sign-up.component';
-import { GameSessionLobbyComponent } from './game-session-lobby/game-session-lobby.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { LoginOrSignUpComponent } from './components/login-or-sign-up/login-or-sign-up.component';
+import { GameSessionLobbyComponent } from './components/game-session-lobby/game-session-lobby.component';
 
 export const routes: Routes = [
   {
@@ -24,19 +24,19 @@ export const routes: Routes = [
   },
   {
     path: 'game',
-    component: GameComponent,
     canActivate: [() => inject(AuthGuard).navigateSecurely()],
+    loadComponent: () =>
+      import('./components/game-component/game.component').then(
+        (m) => m.GameComponent
+      ),
   },
   {
     path: 'game-session-lobby/:gameSessionId',
     canActivate: [() => inject(AuthGuard).navigateSecurely()],
     loadComponent: () =>
-      import('./game-session-lobby/game-session-lobby.component').then(
-        (m) => m.GameSessionLobbyComponent
-      ),
-    data: {
-      title: 'Game Session Lobby',
-    },
+      import(
+        './components/game-session-lobby/game-session-lobby.component'
+      ).then((m) => m.GameSessionLobbyComponent),
   },
   {
     path: '',

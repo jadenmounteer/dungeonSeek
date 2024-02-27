@@ -5,7 +5,7 @@ import {
   EventEmitter,
   OnDestroy,
 } from '@angular/core';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { Subscription, catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
