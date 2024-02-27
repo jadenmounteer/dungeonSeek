@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { PlayerComponent } from '../../src/app/components/characters/player/player.component';
-import { MovementNodeComponent } from '../../src/app/components/game/movement-node/movement-node.component';
+import { PlayerComponent } from '../characters/player/player.component';
+import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
 import {
   Location,
   LocationService,
   Position,
-} from '../../services/location-service';
+} from '../../../services/location-service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 

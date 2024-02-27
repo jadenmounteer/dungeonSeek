@@ -11,8 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { GameSession } from '../../types/game-session';
+import { GameSession } from '../../../types/game-session';
 import { CommonModule } from '@angular/common';
+import { CampaignServiceService } from '../../../services/campaign-service.service';
 @Component({
   selector: 'app-create-or-edit-game-session-dialogue',
   standalone: true,
@@ -42,14 +43,18 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CreateOrEditGameSessionDialogueComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: GameSession | null
+    @Inject(MAT_DIALOG_DATA) public data: GameSession | null,
+    protected campaignService: CampaignServiceService
   ) {}
 
-  public ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
     if (this.data) {
       // This means we are editing an existing game session
       this.newGameSession = this.data;
     }
+
+    // Fetch the campaigns
+    await this.campaignService.fetchCampaigns();
   }
 
   protected onNoClick(): void {

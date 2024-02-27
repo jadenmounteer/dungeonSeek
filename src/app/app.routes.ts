@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { GameComponent } from './components/game/game.component';
+import { HomePageComponent } from './auth/components/home-page/home-page.component';
+import { GameComponent } from './auth/components/game-component/game.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { inject } from '@angular/core';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { LandingPageComponent } from './auth/components/landing-page/landing-page.component';
 import { LoginOrSignUpComponent } from './auth/components/login-or-sign-up/login-or-sign-up.component';
 
 export const routes: Routes = [

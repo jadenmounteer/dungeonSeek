@@ -1,7 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
-import { GameComponent } from './components/game/game.component';
+import { GameComponent } from './auth/components/game-component/game.component';
 import { PromptUpdateService } from './services/prompt-update.service';
 import { AuthService } from './auth/auth.service';
 import { Auth } from '@angular/fire/auth';
