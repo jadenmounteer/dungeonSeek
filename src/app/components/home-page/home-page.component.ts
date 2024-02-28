@@ -75,6 +75,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         .createNewGameSession(newGameSession)
         .then((result) => {
           this.gameSessionsParticipating.push(newGameSession);
+          this.goToGameLobby(result.id);
         })
         .catch((err) => {
           console.error('Error creating game session:', err);
@@ -115,6 +116,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       .joinGameSession(gameSessionID)
       .then((gameSession) => {
         this.gameSessionsParticipating.push(gameSession);
+        this.goToGameLobby(gameSessionID);
       })
       .catch((err) => {
         console.error('Error joining game session:', err);
