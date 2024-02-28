@@ -85,7 +85,7 @@ export class GameSessionService {
     }
 
     // Add a random 3 digit number to the code
-    code += Math.floor(Math.random() * 1000);
+    code += Math.floor(Math.random() * 3000);
 
     return code;
   }
