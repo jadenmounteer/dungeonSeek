@@ -11,10 +11,12 @@
     <mat-tab label="Sorcerer" (click)="changeCharacterClass('Sorcerer')">
       <div class="character-preview">
         <img
+          class="character-image"
           src="../../../assets/game-pieces/wizard/wizard-right.png"
           *ngIf="character.sex === 'Male'"
         />
         <img
+          class="character-image"
           src="../../../assets/game-pieces/wizard/sorceress-right.png"
           *ngIf="character.sex === 'Female'"
         />

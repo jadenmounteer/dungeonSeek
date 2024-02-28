@@ -1,0 +1,11 @@
+.character-image {
+  width: 20%;
+}
+
+.character-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
