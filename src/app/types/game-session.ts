@@ -7,4 +7,5 @@ export interface GameSession {
   campaignName: CampaignNames;
   playerIDs: string[];
   playersCurrentlyInGame: string[];
+  entranceCode: string;
 }

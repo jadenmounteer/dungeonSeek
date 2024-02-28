@@ -1,27 +1,30 @@
 <div *ngIf="!loading">
   <h1>{{ gameSession.gameName }}</h1>
+  <h2>Entrance Code: {{ gameSession.entranceCode }}</h2>
 
-  <h2>Players</h2>
   <button mat-raised-button color="primary" (click)="addCharacter()">
     Add New Character
   </button>
+  <h2>Players</h2>
 
-  <div *ngFor="let character of characters" class="character-wrapper">
-    <p>{{ character.name }}</p>
-
-    <img
-      class="character-image"
-      *ngIf="character.class === 'Sorcerer' && character.sex === 'Male'"
-      src="../../../assets/game-pieces/wizard/wizard-right.png"
-      alt="{{ character.name }}"
-    />
-    <img
-      class="character-image"
-      *ngIf="character.class === 'Sorcerer' && character.sex === 'Female'"
-      src="../../../assets/game-pieces/wizard/sorceress-right.png"
-      alt="{{ character.name }}"
-    />
+  <div class="characters-section">
+    <div *ngFor="let character of characters" class="character-wrapper">
+      <p>{{ character.name }}</p>
+      <img
+        class="character-image"
+        *ngIf="character.class === 'Sorcerer' && character.sex === 'Male'"
+        src="../../../assets/game-pieces/wizard/wizard-right.png"
+        alt="{{ character.name }}"
+      />
+      <img
+        class="character-image"
+        *ngIf="character.class === 'Sorcerer' && character.sex === 'Female'"
+        src="../../../assets/game-pieces/wizard/sorceress-right.png"
+        alt="{{ character.name }}"
+      />
+    </div>
   </div>
+
   <button mat-raised-button color="primary" (click)="enterGame()">
     Enter Game
   </button>

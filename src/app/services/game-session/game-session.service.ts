@@ -73,4 +73,19 @@ export class GameSessionService {
 
     return addDoc(collectionRef, newCharacter);
   }
+
+  public generateEntranceCode(): string {
+    let code = '';
+
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    for (let i = 0; i < 2; i++) {
+      const randomIndex = Math.floor(Math.random() * alphabet.length);
+      code += alphabet[randomIndex];
+    }
+
+    // Add a random 3 digit number to the code
+    code += Math.floor(Math.random() * 1000);
+
+    return code;
+  }
 }

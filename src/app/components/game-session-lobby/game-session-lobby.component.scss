@@ -3,9 +3,12 @@
 }
 
 .character-wrapper {
+  width: 300px;
+  text-align: center;
+}
+
+.characters-section {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
+  flex-direction: row;
 }
