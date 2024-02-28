@@ -18,6 +18,25 @@
     </button>
   </div>
 
+  <div class="join-game-section">
+    <mat-form-field class="join-game-form">
+      <mat-label>Join Existing Game</mat-label>
+      <input
+        matInput
+        placeholder="Type game code here..."
+        [(ngModel)]="gameCode"
+      />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="secondary"
+      [disabled]="gameCode === ''"
+      (click)="joinGameSession()"
+    >
+      Join Game
+    </button>
+  </div>
+
   <div>
     <button mat-raised-button color="primary" (click)="createNewGameSession()">
       Create New game

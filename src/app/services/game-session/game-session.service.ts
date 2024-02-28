@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   addDoc,
+  arrayUnion,
   collection,
   collectionData,
   doc,
@@ -87,5 +88,29 @@ export class GameSessionService {
     code += Math.floor(Math.random() * 1000);
 
     return code;
+  }
+
+  public joinGameSession(gameSessionId: string): Promise<any> {
+    const docRef = doc(this.firestore, 'game-sessions', gameSessionId);
+    return updateDoc(docRef, {
+      playerIDs: arrayUnion(this.authService.activeUser!.uid),
+    });
+  }
+
+  public findGameSessionIDByEntranceCode(entranceCode: string): Promise<any> {
+    const gameSessionsRef = collection(this.firestore, 'game-sessions');
+    const queryRef = query(
+      gameSessionsRef,
+      where('entranceCode', '==', entranceCode)
+    );
+    return new Promise((resolve, reject) => {
+      onSnapshot(queryRef, (querySnapshot) => {
+        if (querySnapshot.docs.length === 0) {
+          reject('No game xwsession found with that entrance code');
+        } else {
+          resolve(querySnapshot.docs[0].id);
+        }
+      });
+    });
   }
 }

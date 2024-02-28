@@ -31,6 +31,7 @@ import { GameSession } from '../../types/game-session';
 export class HomePageComponent implements OnInit, OnDestroy {
   protected gameSessionsParticipating: GameSession[] = [];
   private gameSessionsSub: Subscription;
+  protected gameCode = '';
 
   constructor(
     protected authService: AuthService,
@@ -100,6 +101,23 @@ export class HomePageComponent implements OnInit, OnDestroy {
           // redirect to the game page for now
           this.router.navigateByUrl('landing-page');
         },
+      });
+  }
+
+  protected async joinGameSession(): Promise<void> {
+    // Find a game Session based on the game code
+    const gameSessionID =
+      await this.gameSessionService.findGameSessionIDByEntranceCode(
+        this.gameCode
+      );
+
+    this.gameSessionService
+      .joinGameSession(gameSessionID)
+      .then((gameSession) => {
+        this.gameSessionsParticipating.push(gameSession);
+      })
+      .catch((err) => {
+        console.error('Error joining game session:', err);
       });
   }
 }
