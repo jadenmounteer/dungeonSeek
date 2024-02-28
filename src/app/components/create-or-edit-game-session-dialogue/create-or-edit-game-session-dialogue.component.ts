@@ -47,7 +47,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
     gameName: '',
     campaignName: 'Age_of_the_Necromancer' as CampaignNames,
     playerIDs: [],
-    characterIDs: [],
+
     playersCurrentlyInGame: [],
   };
 

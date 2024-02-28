@@ -6,6 +6,5 @@ export interface GameSession {
   gameName: string;
   campaignName: CampaignNames;
   playerIDs: string[];
-  characterIDs: string[];
   playersCurrentlyInGame: string[];
 }

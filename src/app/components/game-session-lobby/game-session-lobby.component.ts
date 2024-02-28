@@ -46,10 +46,8 @@ export class GameSessionLobbyComponent implements OnDestroy {
 
   private setCharactersSub(): void {
     this.charactersSub = this.characterService
-      .getCharactersInGameSession(this.gameSession.characterIDs)
+      .getCharactersInGameSession(this.gameSession.id)
       .subscribe((characters) => {
-        console.log(this.gameSession.characterIDs);
-        console.log(characters);
         this.characters = characters;
         this.loading = false;
       });
@@ -69,13 +67,8 @@ export class GameSessionLobbyComponent implements OnDestroy {
     dialogRef.afterClosed().subscribe((newCharacter) => {
       if (!newCharacter) return;
 
-      this.characterService
-        .createNewCharacter(newCharacter)
-        .then((result) => {
-          this.characters.push(newCharacter); // This may be unnecessary
-          this.gameSession.characterIDs.push(result.id);
-          this.gameSessionService.updateGameSession(this.gameSession);
-        })
+      this.gameSessionService
+        .addCharacterToGameSession(this.gameSession.id, newCharacter)
         .catch((err) => {
           console.error('Error creating game session:', err);
         });

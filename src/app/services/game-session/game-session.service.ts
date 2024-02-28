@@ -13,6 +13,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { GameSession } from '../../types/game-session';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
+import { Character } from '../../types/character';
 
 @Injectable({
   providedIn: 'root',
@@ -59,18 +60,17 @@ export class GameSessionService {
     });
   }
 
-  // We probably don't want to do this. I want characters to be a parent collection, not a child of game-sessions
-  // public addCharacterToGameSession(
-  //   gameSessionId: string,
-  //   newCharacter: Character
-  // ): Promise<any> {
-  //   const collectionRef = collection(
-  //     this.firestore,
-  //     'game-sessions',
-  //     gameSessionId,
-  //     'characters'
-  //   );
+  public addCharacterToGameSession(
+    gameSessionId: string,
+    newCharacter: Character
+  ): Promise<any> {
+    const collectionRef = collection(
+      this.firestore,
+      'game-sessions',
+      gameSessionId,
+      'characters'
+    );
 
-  //   return addDoc(collectionRef, newCharacter);
-  // }
+    return addDoc(collectionRef, newCharacter);
+  }
 }
