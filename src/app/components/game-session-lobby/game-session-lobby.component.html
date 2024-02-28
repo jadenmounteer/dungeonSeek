@@ -8,6 +8,17 @@
 
   <div *ngFor="let character of characters">
     <p>{{ character.name }}</p>
+
+    <img
+      *ngIf="character.class === 'Sorcerer' && character.sex === 'Male'"
+      src="../../../assets/game-pieces/wizard/wizard-right.png"
+      alt="{{ character.name }}"
+    />
+    <img
+      *ngIf="character.class === 'Sorcerer' && character.sex === 'Female'"
+      src="../../../assets/game-pieces/wizard/sorceress-right.png"
+      alt="{{ character.name }}"
+    />
   </div>
   <button mat-raised-button color="primary" (click)="enterGame()">
     Enter Game
