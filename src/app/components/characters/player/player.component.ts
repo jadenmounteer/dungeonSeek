@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Character } from '../../../types/character';
 
 @Component({
   selector: 'app-player',
@@ -8,6 +9,14 @@ import { Component, Input } from '@angular/core';
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
-export class PlayerComponent {
+export class PlayerComponent implements OnInit {
   @Input() directionFacing: 'Right' | 'Left' = 'Right';
+  @Input() character!: Character;
+
+  constructor() {}
+  ngOnInit(): void {
+    if (!this.character) {
+      throw new Error('Character is required');
+    }
+  }
 }

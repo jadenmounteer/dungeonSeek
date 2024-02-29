@@ -1,3 +1,5 @@
+import { Position, Location } from '../services/location-service';
+
 export interface Character {
   id: string;
   userId: string;
@@ -5,6 +7,20 @@ export interface Character {
   class: CharacterClass;
   sex: 'Male' | 'Female';
   level: number;
+  position: Position;
+  movementSpeed: number;
+  inParty: boolean;
+  currentLocation: Location | null;
+  directionFacing: 'Right' | 'Left';
+  equipmentCards: []; // TODO type all these things
+  potionCards: [];
+  itemCards: [];
+  spellCards: [];
+  statusCards: [];
+  health: number;
+  mana: number;
+  experience: number;
+  gold: number;
 }
 
 export type CharacterClass = 'Sorcerer';

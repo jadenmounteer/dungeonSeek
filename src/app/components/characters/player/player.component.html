@@ -1,10 +1,25 @@
-<img
-  class="player"
-  *ngIf="directionFacing === 'Right'"
-  src="../../../../../../assets/game-pieces/wizard/sorceress-right.png"
-/>
-<img
-  class="player"
-  *ngIf="directionFacing === 'Left'"
-  src="../../../../../../assets/game-pieces/wizard/sorceress-left.png"
-/>
+<div *ngIf="character.class === 'Sorcerer' && character.sex === 'Female'">
+  <img
+    class="player"
+    *ngIf="directionFacing === 'Right'"
+    src="../../../../../../assets/game-pieces/wizard/sorceress-right.png"
+  />
+  <img
+    class="player"
+    *ngIf="directionFacing === 'Left'"
+    src="../../../../../../assets/game-pieces/wizard/sorceress-left.png"
+  />
+</div>
+
+<div *ngIf="character.class === 'Sorcerer' && character.sex === 'Male'">
+  <img
+    class="player"
+    *ngIf="directionFacing === 'Right'"
+    src="../../../../../../assets/game-pieces/wizard/wizard-right.png"
+  />
+  <img
+    class="player"
+    *ngIf="directionFacing === 'Left'"
+    src="../../../../../../assets/game-pieces/wizard/wizard-left.png"
+  />
+</div>

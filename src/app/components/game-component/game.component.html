@@ -13,7 +13,17 @@
       <div class="board-6"></div>
     </span> -->
 
-    <span *ngFor="let player of players">
+    <span *ngFor="let character of characters">
+      <div class="player-wrapper">
+        <app-player
+          [directionFacing]="'Right'"
+          [character]="character"
+        ></app-player>
+      </div>
+    </span>
+
+    <!-- TODO Deprecated -->
+    <!-- <span *ngFor="let player of players">
       <div
         *ngIf="player.currentLocation"
         class="player-wrapper"
@@ -24,7 +34,7 @@
       >
         <app-player [directionFacing]="player.directionFacing" />
       </div>
-    </span>
+    </span> -->
 
     <!-- TODO Find a way to get the player currently being controlled -->
 

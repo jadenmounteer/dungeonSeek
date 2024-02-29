@@ -47,6 +47,23 @@ export class AddOrEditCharacterComponent implements OnInit {
     level: 1,
 
     sex: 'Male',
+    position: {
+      xPosition: 0,
+      yPosition: 0,
+    },
+    movementSpeed: 0,
+    inParty: false,
+    currentLocation: null,
+    directionFacing: 'Right',
+    equipmentCards: [],
+    potionCards: [],
+    itemCards: [],
+    spellCards: [],
+    statusCards: [],
+    health: 0,
+    mana: 0,
+    experience: 0,
+    gold: 0,
   };
 
   constructor(

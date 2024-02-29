@@ -13,26 +13,8 @@ import { GameSessionService } from '../../services/game-session/game-session.ser
 import { GameSession } from '../../types/game-session';
 import { Character } from '../../types/character';
 import { CharacterService } from '../../services/character/character.service';
+import { AuthService } from '../../auth/auth.service';
 
-export type Player = {
-  name: string;
-  position: Position;
-  beingControlledOnClient: boolean; // False if not your turn and pass and play
-  movementSpeed: number;
-  inParty: boolean;
-  currentLocation: Location | null;
-  directionFacing: 'Right' | 'Left';
-  equipmentCards: []; // TODO type all these things
-  potionCards: [];
-  itemCards: [];
-  spellCards: [];
-  statusCards: [];
-  health: number;
-  mana: number;
-  experience: number;
-  level: number;
-  gold: number;
-};
 @Component({
   selector: 'app-game',
   standalone: true,
@@ -42,29 +24,8 @@ export type Player = {
 })
 export class GameComponent implements OnInit, OnDestroy {
   // TODO rather than having a position, the player should have a location property that is a reference to the node they are on
-  protected players: Player[] = [
-    {
-      name: 'Player 1',
-      position: { xPosition: 0, yPosition: 0 },
-      beingControlledOnClient: true,
-      movementSpeed: 4,
-      inParty: false,
-      currentLocation: null,
-      directionFacing: 'Right',
-      equipmentCards: [],
-      potionCards: [],
-      itemCards: [],
-      spellCards: [],
-      statusCards: [],
-      health: 100,
-      mana: 100,
-      experience: 0,
-      level: 1,
-      gold: 0,
-    },
-  ];
 
-  protected playerBeingControlled: Player = this.players[0];
+  protected charactersBeingControlledByClient!: Character[];
 
   private playerPositionSub: Subscription;
 
@@ -79,7 +40,8 @@ export class GameComponent implements OnInit, OnDestroy {
     protected locationService: LocationService,
     private activatedRoute: ActivatedRoute,
     private gameSessionService: GameSessionService,
-    private characterService: CharacterService
+    private characterService: CharacterService,
+    private authService: AuthService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -93,14 +55,20 @@ export class GameComponent implements OnInit, OnDestroy {
         this.setCharactersSub();
       });
 
-    this.initializePlayerStartingNode();
+    // this.initializePlayerStartingNode();
 
     this.playerPositionSub =
       this.locationService.playerPositionSubject.subscribe(
         (location: Location) => {
-          this.movePlayerToLocation(location);
+          // this.movePlayerToLocation(location);
         }
       );
+  }
+
+  private setCharactersBeingControlledByClient(): void {
+    this.charactersBeingControlledByClient = this.characters
+      .filter((character) => character !== undefined) // Filter out undefined values
+      .map((character) => character!); // Use non-null assertion operator to convert from Character | undefined to Character
   }
 
   ngOnInit(): void {}
@@ -116,55 +84,59 @@ export class GameComponent implements OnInit, OnDestroy {
       .getCharactersInGameSession(this.gameSession.id)
       .subscribe((characters) => {
         this.characters = characters;
+        this.setCharactersBeingControlledByClient();
         this.loading = false;
       });
   }
 
-  private initializePlayerStartingNode() {
-    const location = this.locationService.locationsMap.get('Enoach Desert')!;
-    this.playerBeingControlled.currentLocation = location;
-    this.movePlayerToLocation(location, true);
-  }
+  // TODO implement this method
+  // private initializePlayerStartingNode() {
+  //   const location = this.locationService.locationsMap.get('Enoach Desert')!;
+  //   this.charactersBeingControlledByClient.currentLocation = location;
+  //   this.movePlayerToLocation(location, true);
+  // }
 
-  private movePlayerToLocation(
-    location: Location,
-    initializing: boolean = false
-  ) {
-    if (!this.playerBeingControlled.currentLocation) {
-      // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
-      return;
-    }
+  // TODO implement this method
+  // private movePlayerToLocation(
+  //   location: Location,
+  //   initializing: boolean = false
+  // ) {
+  //   if (!this.charactersBeingControlledByClient.currentLocation) {
+  //     // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
+  //     return;
+  //   }
 
-    if (initializing) {
-      this.changePlayerDirection(location);
+  //   if (initializing) {
+  //     this.changePlayerDirection(location);
 
-      this.playerBeingControlled.position = location.position;
-      return;
-    }
+  //     this.charactersBeingControlledByClient.position = location.position;
+  //     return;
+  //   }
 
-    this.playerBeingControlled.currentLocation.adjacentLocations.forEach(
-      (locationKey) => {
-        if (locationKey === location.name) {
-          this.changePlayerDirection(location);
-          // TODO Take into account the user's movement speed on this turn
-          this.playerBeingControlled.position = location.position;
-          this.playerBeingControlled.currentLocation = location;
-        }
-      }
-    );
-  }
+  //   this.charactersBeingControlledByClient.currentLocation.adjacentLocations.forEach(
+  //     (locationKey) => {
+  //       if (locationKey === location.name) {
+  //         this.changePlayerDirection(location);
+  //         // TODO Take into account the user's movement speed on this turn
+  //         this.charactersBeingControlledByClient.position = location.position;
+  //         this.charactersBeingControlledByClient.currentLocation = location;
+  //       }
+  //     }
+  //   );
+  // }
 
-  private changePlayerDirection(location: Location) {
-    if (this.playerBeingControlled.currentLocation === null) {
-      return;
-    }
-    if (
-      location.position.xPosition <
-      this.playerBeingControlled.currentLocation.position.xPosition
-    ) {
-      this.playerBeingControlled.directionFacing = 'Left';
-    } else {
-      this.playerBeingControlled.directionFacing = 'Right';
-    }
-  }
+  // TODO implement this method
+  // private changePlayerDirection(location: Location) {
+  //   if (this.charactersBeingControlledByClient.currentLocation === null) {
+  //     return;
+  //   }
+  //   if (
+  //     location.position.xPosition <
+  //     this.charactersBeingControlledByClient.currentLocation.position.xPosition
+  //   ) {
+  //     this.charactersBeingControlledByClient.directionFacing = 'Left';
+  //   } else {
+  //     this.charactersBeingControlledByClient.directionFacing = 'Right';
+  //   }
+  // }
 }
