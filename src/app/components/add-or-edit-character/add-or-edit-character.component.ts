@@ -45,7 +45,7 @@ export class AddOrEditCharacterComponent implements OnInit {
     name: '',
     class: 'Sorcerer',
     level: 1,
-    passAndPlay: true,
+
     sex: 'Male',
   };
 
