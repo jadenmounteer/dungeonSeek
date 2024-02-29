@@ -17,6 +17,7 @@ import { Character, CharacterClass } from '../../types/character';
 import { AuthService } from '../../auth/auth.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
+import { LocationService } from '../../services/location-service';
 
 @Component({
   selector: 'app-add-or-edit-character',
@@ -39,7 +40,7 @@ import { MatRadioModule } from '@angular/material/radio';
   styleUrl: './add-or-edit-character.component.scss',
 })
 export class AddOrEditCharacterComponent implements OnInit {
-  protected character: Character = {
+  protected character: Partial<Character> = {
     id: '',
     userId: this.authService.activeUser?.uid || '',
     name: '',
@@ -53,7 +54,6 @@ export class AddOrEditCharacterComponent implements OnInit {
     },
     movementSpeed: 0,
     inParty: false,
-    currentLocation: null,
     directionFacing: 'Right',
     equipmentCards: [],
     potionCards: [],
@@ -69,12 +69,15 @@ export class AddOrEditCharacterComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddOrEditCharacterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Character | null,
-    private authService: AuthService
+    private authService: AuthService,
+    protected locationService: LocationService
   ) {}
 
   ngOnInit(): void {
     if (this.data) {
       this.character = this.data;
+    } else {
+      this.initializeTheCharactersStartingLocation();
     }
 
     if (this.character.userId === '') {
@@ -82,6 +85,12 @@ export class AddOrEditCharacterComponent implements OnInit {
         "Sorry for the trouble, but we can't find your user ID. Please reach out to Jaden for help."
       );
     }
+  }
+
+  private initializeTheCharactersStartingLocation() {
+    const startingLocation =
+      this.locationService.locationsMap.get('Enoach Desert')!;
+    this.character.currentLocation = startingLocation;
   }
 
   protected onNoClick(): void {

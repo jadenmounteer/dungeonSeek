@@ -1,11 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PlayerComponent } from '../characters/player/player.component';
 import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
-import {
-  Location,
-  LocationService,
-  Position,
-} from '../../services/location-service';
+import { LocationNode, LocationService } from '../../services/location-service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -57,7 +53,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.playerPositionSub =
       this.locationService.playerPositionSubject.subscribe(
-        (location: Location) => {
+        (location: LocationNode) => {
           // this.movePlayerToLocation(location);
         }
       );
@@ -84,20 +80,19 @@ export class GameComponent implements OnInit, OnDestroy {
       .subscribe((characters) => {
         this.characters = characters;
         this.setCharactersBeingControlledByClient();
-        console.log(this.charactersBeingControlledByClient);
+        this.movePlayersToNodesOnInit();
         this.loading = false;
       });
   }
 
-  // TODO implement this method
-  // private initializePlayerStartingNode() {
-  //   const location = this.locationService.locationsMap.get('Enoach Desert')!;
-  //   this.charactersBeingControlledByClient.currentLocation = location;
-  //   this.movePlayerToLocation(location, true);
-  // }
+  private movePlayersToNodesOnInit() {
+    this.characters.forEach((character) => {
+      character.position = character.currentLocation.position;
+    });
+  }
 
   // TODO implement this method
-  // private movePlayerToLocation(
+  // private moveCharacterToLocation(
   //   location: Location,
   //   initializing: boolean = false
   // ) {
@@ -126,7 +121,7 @@ export class GameComponent implements OnInit, OnDestroy {
   // }
 
   // TODO implement this method
-  // private changePlayerDirection(location: Location) {
+  // private changePlayerDirection(location: LocationNode) {
   //   if (this.charactersBeingControlledByClient.currentLocation === null) {
   //     return;
   //   }

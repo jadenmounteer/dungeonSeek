@@ -1,4 +1,4 @@
-import { Position, Location } from '../services/location-service';
+import { Position, LocationNode } from '../services/location-service';
 
 export interface Character {
   id: string;
@@ -10,7 +10,7 @@ export interface Character {
   position: Position;
   movementSpeed: number;
   inParty: boolean;
-  currentLocation: Location | null;
+  currentLocation: LocationNode;
   directionFacing: 'Right' | 'Left';
   equipmentCards: []; // TODO type all these things
   potionCards: [];
