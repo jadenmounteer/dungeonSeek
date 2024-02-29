@@ -13,7 +13,7 @@ export type LocationNode = {
 };
 
 export type LocationKey =
-  | 'Enoach Desert'
+  | 'Goeth'
   | 'arlan'
   | 'draebar'
   | 'The Elder Forest'
@@ -25,16 +25,16 @@ export type LocationKey =
 export class LocationService {
   public playerPositionSubject: Subject<LocationNode> =
     new Subject<LocationNode>();
-  private enoach: LocationNode = {
-    name: 'Enoach Desert',
-    position: { xPosition: 2400, yPosition: 1150 },
+  private goeth: LocationNode = {
+    name: 'Goeth',
+    position: { xPosition: 2500, yPosition: 1300 },
     adjacentLocations: ['arlan'],
   };
 
   private arlan: LocationNode = {
     name: 'arlan',
     position: { xPosition: 2600, yPosition: 1160 },
-    adjacentLocations: ['Enoach Desert', 'draebar', 'The Elder Forest'],
+    adjacentLocations: ['Goeth', 'draebar', 'The Elder Forest'],
   };
 
   private draebar: LocationNode = {
@@ -56,7 +56,7 @@ export class LocationService {
   };
 
   public locationsMap: Map<LocationKey, LocationNode> = new Map([
-    ['Enoach Desert', this.enoach],
+    ['Goeth', this.goeth],
     ['arlan', this.arlan],
     ['draebar', this.draebar],
     ['The Elder Forest', this.elderForest],

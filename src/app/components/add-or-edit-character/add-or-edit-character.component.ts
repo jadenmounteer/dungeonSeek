@@ -85,8 +85,7 @@ export class AddOrEditCharacterComponent implements OnInit {
   }
 
   private initializeTheCharactersStartingLocation() {
-    const startingLocation =
-      this.locationService.locationsMap.get('Enoach Desert')!;
+    const startingLocation = this.locationService.locationsMap.get('Goeth')!;
     this.character.currentLocation = startingLocation;
   }
 
