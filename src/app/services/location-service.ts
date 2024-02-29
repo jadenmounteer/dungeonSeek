@@ -14,10 +14,11 @@ export type LocationNode = {
 
 export type LocationKey =
   | 'Goeth'
-  | 'arlan'
-  | 'draebar'
-  | 'The Elder Forest'
-  | 'draebar cave';
+  | 'East Goeth Road'
+  | 'Unf'
+  | 'East Unf Road'
+  | 'West Hillmire Road'
+  | 'Hillmire';
 
 @Injectable({
   providedIn: 'root',
@@ -28,39 +29,46 @@ export class LocationService {
   private goeth: LocationNode = {
     name: 'Goeth',
     position: { xPosition: 2500, yPosition: 1300 },
-    adjacentLocations: ['arlan'],
+    adjacentLocations: ['East Goeth Road'],
   };
 
-  private arlan: LocationNode = {
-    name: 'arlan',
-    position: { xPosition: 2600, yPosition: 1160 },
-    adjacentLocations: ['Goeth', 'draebar', 'The Elder Forest'],
+  private eastGoethRoad: LocationNode = {
+    name: 'East Goeth Road',
+    position: { xPosition: 2850, yPosition: 1200 },
+    adjacentLocations: ['Goeth', 'Unf'],
   };
 
-  private draebar: LocationNode = {
-    name: 'draebar',
-    position: { xPosition: 2820, yPosition: 1100 },
-    adjacentLocations: ['arlan', 'The Elder Forest', 'draebar cave'],
+  private unf: LocationNode = {
+    name: 'Unf',
+    position: { xPosition: 3110, yPosition: 1120 },
+    adjacentLocations: ['East Goeth Road', 'East Unf Road'],
   };
 
-  private elderForest: LocationNode = {
-    name: 'The Elder Forest',
-    position: { xPosition: 2600, yPosition: 980 },
-    adjacentLocations: ['The Elder Forest', 'draebar', 'arlan'],
+  private eastUnfRoad: LocationNode = {
+    name: 'East Unf Road',
+    position: { xPosition: 3420, yPosition: 1110 },
+    adjacentLocations: ['Unf', 'West Hillmire Road'],
   };
 
-  private draebarCave: LocationNode = {
-    name: 'draebar cave',
-    position: { xPosition: 2900, yPosition: 1150 },
-    adjacentLocations: ['draebar'],
+  private westHillmireRoad: LocationNode = {
+    name: 'West Hillmire Road',
+    position: { xPosition: 3460, yPosition: 850 },
+    adjacentLocations: ['East Unf Road', 'Hillmire'],
+  };
+
+  private hillmire: LocationNode = {
+    name: 'Hillmire',
+    position: { xPosition: 3680, yPosition: 700 },
+    adjacentLocations: ['East Unf Road', 'West Hillmire Road'],
   };
 
   public locationsMap: Map<LocationKey, LocationNode> = new Map([
     ['Goeth', this.goeth],
-    ['arlan', this.arlan],
-    ['draebar', this.draebar],
-    ['The Elder Forest', this.elderForest],
-    ['draebar cave', this.draebarCave],
+    ['East Goeth Road', this.eastGoethRoad],
+    ['Unf', this.unf],
+    ['East Unf Road', this.eastUnfRoad],
+    ['West Hillmire Road', this.westHillmireRoad],
+    ['Hillmire', this.hillmire],
   ]);
 
   constructor() {}
