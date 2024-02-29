@@ -23,9 +23,7 @@ import { AuthService } from '../../auth/auth.service';
   styleUrl: './game.component.scss',
 })
 export class GameComponent implements OnInit, OnDestroy {
-  // TODO rather than having a position, the player should have a location property that is a reference to the node they are on
-
-  protected charactersBeingControlledByClient!: Character[];
+  protected charactersBeingControlledByClient: Character[] = [];
 
   private playerPositionSub: Subscription;
 
@@ -66,9 +64,10 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private setCharactersBeingControlledByClient(): void {
-    this.charactersBeingControlledByClient = this.characters
-      .filter((character) => character !== undefined) // Filter out undefined values
-      .map((character) => character!); // Use non-null assertion operator to convert from Character | undefined to Character
+    // set this.charactersBeingControlledByClient to the characters that share the same userID as the client
+    this.charactersBeingControlledByClient = this.characters.filter(
+      (character) => character.userId === this.authService.activeUser?.uid
+    );
   }
 
   ngOnInit(): void {}
@@ -85,6 +84,7 @@ export class GameComponent implements OnInit, OnDestroy {
       .subscribe((characters) => {
         this.characters = characters;
         this.setCharactersBeingControlledByClient();
+        console.log(this.charactersBeingControlledByClient);
         this.loading = false;
       });
   }
