@@ -48,10 +48,7 @@ export class AddOrEditCharacterComponent implements OnInit {
     level: 1,
 
     sex: 'Male',
-    position: {
-      xPosition: 0,
-      yPosition: 0,
-    },
+
     movementSpeed: 0,
     inParty: false,
     directionFacing: 'Right',

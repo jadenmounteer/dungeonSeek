@@ -7,7 +7,6 @@ export interface Character {
   class: CharacterClass;
   sex: 'Male' | 'Female';
   level: number;
-  position: Position;
   movementSpeed: number;
   inParty: boolean;
   currentLocation: LocationNode;
