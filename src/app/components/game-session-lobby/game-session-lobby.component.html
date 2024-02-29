@@ -10,6 +10,9 @@
   <div class="characters-section">
     <div *ngFor="let character of characters" class="character-wrapper">
       <p>{{ character.name }}</p>
+      <span *ngIf="character.userId === authService.activeUser?.uid"
+        >This character will be controlled on this device</span
+      >
       <img
         class="character-image"
         *ngIf="character.class === 'Sorcerer' && character.sex === 'Male'"

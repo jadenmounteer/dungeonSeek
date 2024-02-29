@@ -9,6 +9,7 @@ import { Character } from '../../types/character';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditCharacterComponent } from '../add-or-edit-character/add-or-edit-character.component';
 import { CharacterService } from '../../services/character/character.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-game-session-lobby',
@@ -29,7 +30,8 @@ export class GameSessionLobbyComponent implements OnDestroy {
     private activatedRoute: ActivatedRoute,
     protected router: Router,
     private dialog: MatDialog,
-    private characterService: CharacterService
+    private characterService: CharacterService,
+    protected authService: AuthService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
