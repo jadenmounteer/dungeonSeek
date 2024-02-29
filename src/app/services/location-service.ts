@@ -18,7 +18,14 @@ export type LocationKey =
   | 'Unf'
   | 'East Unf Road'
   | 'West Hillmire Road'
-  | 'Hillmire';
+  | 'Hillmire'
+  | 'Hillmire North Road'
+  | 'Dunal East Road'
+  | 'Dunal'
+  | 'Dunal West Road'
+  | 'Mullin Forest'
+  | 'Mullin'
+  | 'Bayrom';
 
 @Injectable({
   providedIn: 'root',
@@ -62,6 +69,48 @@ export class LocationService {
     adjacentLocations: ['East Unf Road', 'West Hillmire Road'],
   };
 
+  private hillmireNorthRoad: LocationNode = {
+    name: 'Hillmire North Road',
+    position: { xPosition: 3600, yPosition: 450 },
+    adjacentLocations: ['Hillmire', 'Dunal East Road'],
+  };
+
+  private dunalEastRoad: LocationNode = {
+    name: 'Dunal East Road',
+    position: { xPosition: 3500, yPosition: 260 },
+    adjacentLocations: ['Hillmire North Road', 'Dunal'],
+  };
+
+  private dunal: LocationNode = {
+    name: 'Dunal',
+    position: { xPosition: 3120, yPosition: 320 },
+    adjacentLocations: ['Dunal East Road', 'Dunal West Road'],
+  };
+
+  private dunalWestRoad: LocationNode = {
+    name: 'Dunal West Road',
+    position: { xPosition: 2891, yPosition: 287 },
+    adjacentLocations: ['Dunal'],
+  };
+
+  private mullinForest: LocationNode = {
+    name: 'Mullin Forest',
+    position: { xPosition: 2600, yPosition: 319 },
+    adjacentLocations: ['Dunal West Road', 'Mullin', 'Bayrom'],
+  };
+
+  private mullin: LocationNode = {
+    name: 'Mullin',
+    position: { xPosition: 2185, yPosition: 334 },
+    adjacentLocations: ['Mullin Forest', 'Bayrom'],
+  };
+
+  private bayrom: LocationNode = {
+    name: 'Bayrom',
+    position: { xPosition: 2413, yPosition: 540 },
+    adjacentLocations: ['Mullin Forest', 'Mullin'],
+  };
+
   public locationsMap: Map<LocationKey, LocationNode> = new Map([
     ['Goeth', this.goeth],
     ['East Goeth Road', this.eastGoethRoad],
@@ -69,6 +118,13 @@ export class LocationService {
     ['East Unf Road', this.eastUnfRoad],
     ['West Hillmire Road', this.westHillmireRoad],
     ['Hillmire', this.hillmire],
+    ['Hillmire North Road', this.hillmireNorthRoad],
+    ['Dunal East Road', this.dunalEastRoad],
+    ['Dunal', this.dunal],
+    ['Dunal West Road', this.dunalWestRoad],
+    ['Mullin Forest', this.mullinForest],
+    ['Mullin', this.mullin],
+    ['Bayrom', this.bayrom],
   ]);
 
   constructor() {}
