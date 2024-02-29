@@ -80,15 +80,9 @@ export class GameComponent implements OnInit, OnDestroy {
       .subscribe((characters) => {
         this.characters = characters;
         this.setCharactersBeingControlledByClient();
-        this.movePlayersToNodesOnInit();
+
         this.loading = false;
       });
-  }
-
-  private movePlayersToNodesOnInit() {
-    this.characters.forEach((character) => {
-      character.position = character.currentLocation.position;
-    });
   }
 
   // TODO implement this method

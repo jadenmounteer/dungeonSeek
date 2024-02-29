@@ -14,10 +14,15 @@
     </span> -->
 
     <span *ngFor="let character of characters">
-      <div class="player-wrapper">
+      <div>
         <app-player
           [directionFacing]="'Right'"
+          class="player-wrapper"
           [character]="character"
+          [ngStyle]="{
+            'left.px': character.currentLocation.position.xPosition,
+            'top.px': character.currentLocation.position.yPosition
+          }"
         ></app-player>
       </div>
     </span>
