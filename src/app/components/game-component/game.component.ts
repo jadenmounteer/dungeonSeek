@@ -8,6 +8,11 @@ import {
 } from '../../services/location-service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { GameSessionService } from '../../services/game-session/game-session.service';
+import { GameSession } from '../../types/game-session';
+import { Character } from '../../types/character';
+import { CharacterService } from '../../services/character/character.service';
 
 export type Player = {
   name: string;
@@ -63,7 +68,31 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private playerPositionSub: Subscription;
 
-  constructor(protected locationService: LocationService) {
+  private gameSessionSub: Subscription;
+  protected gameSession!: GameSession;
+
+  protected characters: Character[] = [];
+  protected charactersSub!: Subscription;
+  protected loading = true;
+
+  constructor(
+    protected locationService: LocationService,
+    private activatedRoute: ActivatedRoute,
+    private gameSessionService: GameSessionService,
+    private characterService: CharacterService
+  ) {
+    const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
+
+    this.gameSessionSub = this.gameSessionService
+      .getGameSession(gameSessionID)
+      .subscribe((gameSession) => {
+        this.gameSession = gameSession;
+
+        // TODO I can probable do this in a cleaner way with RXJS.
+        // I know there's an operator where you can subscribe to multiple observables at once.
+        this.setCharactersSub();
+      });
+
     this.initializePlayerStartingNode();
 
     this.playerPositionSub =
@@ -78,6 +107,17 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.playerPositionSub.unsubscribe();
+    this.gameSessionSub.unsubscribe();
+    this.charactersSub.unsubscribe();
+  }
+
+  private setCharactersSub(): void {
+    this.charactersSub = this.characterService
+      .getCharactersInGameSession(this.gameSession.id)
+      .subscribe((characters) => {
+        this.characters = characters;
+        this.loading = false;
+      });
   }
 
   private initializePlayerStartingNode() {
