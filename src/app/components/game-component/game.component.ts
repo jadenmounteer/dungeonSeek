@@ -86,9 +86,12 @@ export class GameComponent implements OnInit, OnDestroy {
       return;
     }
 
+    const offset = 500;
     scrollTo(
-      this.characterBeingControlledByClient.currentLocation.position.xPosition,
-      this.characterBeingControlledByClient.currentLocation.position.yPosition
+      this.characterBeingControlledByClient.currentLocation.position.xPosition -
+        offset,
+      this.characterBeingControlledByClient.currentLocation.position.yPosition +
+        offset
     );
   }
 
