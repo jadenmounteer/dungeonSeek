@@ -32,22 +32,6 @@
       </div>
     </span>
 
-    <!-- TODO Deprecated -->
-    <!-- <span *ngFor="let player of players">
-      <div
-        *ngIf="player.currentLocation"
-        class="player-wrapper"
-        [ngStyle]="{
-          'left.px': player.currentLocation.position.xPosition,
-          'top.px': player.currentLocation.position.yPosition
-        }"
-      >
-        <app-player [directionFacing]="player.directionFacing" />
-      </div>
-    </span> -->
-
-    <!-- TODO Find a way to get the player currently being controlled -->
-
     <span *ngFor="let location of this.locationService.locationsMap | keyvalue">
       <div
         class="movement-node-wrapper"
