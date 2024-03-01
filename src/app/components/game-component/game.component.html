@@ -24,6 +24,7 @@
         <app-turn-arrow
           *ngIf="characterBeingControlledByClient === character"
         ></app-turn-arrow>
+        <span class="character-name">{{ character.name }}</span>
         <app-player
           [directionFacing]="character.directionFacing"
           [character]="character"
