@@ -3,7 +3,7 @@ import { PlayerComponent } from '../characters/player/player.component';
 import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
 import { LocationNode, LocationService } from '../../services/location-service';
 import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GameSessionService } from '../../services/game-session/game-session.service';
 import { GameSession } from '../../types/game-session';
@@ -39,7 +39,8 @@ export class GameComponent implements OnInit, OnDestroy {
     private gameSessionService: GameSessionService,
     private characterService: CharacterService,
     private authService: AuthService,
-    private turnService: TurnService
+    private turnService: TurnService,
+    private scroller: ViewportScroller
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -80,6 +81,17 @@ export class GameComponent implements OnInit, OnDestroy {
     );
   }
 
+  private scrollToCharacterBeingControlledByClient(): void {
+    if (!this.characterBeingControlledByClient) {
+      return;
+    }
+
+    scrollTo(
+      this.characterBeingControlledByClient.currentLocation.position.xPosition,
+      this.characterBeingControlledByClient.currentLocation.position.yPosition
+    );
+  }
+
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
@@ -102,6 +114,7 @@ export class GameComponent implements OnInit, OnDestroy {
         if (this.charactersBeingControlledByClient.length === 0) {
           this.setCharactersBeingControlledByClient();
           this.determineWhosNextToBeControlled();
+          this.scrollToCharacterBeingControlledByClient();
 
           this.loading = false;
         }
