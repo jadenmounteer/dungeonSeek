@@ -49,7 +49,10 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
     playerIDs: [],
     entranceCode: '',
     playersCurrentlyInGame: [],
-    currentTurn: 1,
+    currentTurn: {
+      turnNumber: 1,
+      characterIDsWhoHaveTakenTurn: [],
+    },
   };
 
   constructor(

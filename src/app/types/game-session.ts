@@ -8,5 +8,10 @@ export interface GameSession {
   playerIDs: string[];
   playersCurrentlyInGame: string[];
   entranceCode: string;
-  currentTurn: number;
+  currentTurn: Turn;
+}
+
+export interface Turn {
+  turnNumber: number;
+  characterIDsWhoHaveTakenTurn: string[]; // A list of ids of characters who have taken the turn already. Will be reset every turn
 }
