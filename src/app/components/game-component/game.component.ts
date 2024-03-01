@@ -108,28 +108,10 @@ export class GameComponent implements OnInit, OnDestroy {
       });
   }
 
-  // TODO implement this method
-  private moveCharacterToLocation(
-    location: LocationNode,
-    initializing: boolean = false
-  ) {
-    if (!this.characterBeingControlledByClient) {
-      throw new Error('No character being controlled by client');
-    }
-    if (!this.characterBeingControlledByClient.currentLocation) {
-      // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
-      return;
-    }
+  private moveCharacterToLocation(location: LocationNode) {
+    // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
 
-    if (initializing) {
-      this.changePlayerDirection(location);
-
-      this.characterBeingControlledByClient.currentLocation.position =
-        location.position;
-      return;
-    }
-
-    this.characterBeingControlledByClient.currentLocation.adjacentLocations.forEach(
+    this.characterBeingControlledByClient?.currentLocation.adjacentLocations.forEach(
       (locationKey) => {
         if (locationKey === location.name) {
           if (!this.characterBeingControlledByClient) {
@@ -139,7 +121,13 @@ export class GameComponent implements OnInit, OnDestroy {
           // TODO Take into account the user's movement speed on this turn
           this.characterBeingControlledByClient.currentLocation.position =
             location.position;
-          this.characterBeingControlledByClient.currentLocation = location;
+
+          // I use the spread operator here so we don't store the actual location in the character object.
+          // If we don't do this the character object will be storing the actual location object
+          // and the character will bring the location with them. :)
+          this.characterBeingControlledByClient.currentLocation = {
+            ...location,
+          };
         }
       }
     );
