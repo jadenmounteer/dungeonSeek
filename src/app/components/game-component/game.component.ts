@@ -128,6 +128,12 @@ export class GameComponent implements OnInit, OnDestroy {
           this.characterBeingControlledByClient.currentLocation = {
             ...location,
           };
+
+          // Update the character's location in the database
+          this.characterService.updateCharacter(
+            this.characterBeingControlledByClient,
+            this.gameSession.id
+          );
         }
       }
     );
