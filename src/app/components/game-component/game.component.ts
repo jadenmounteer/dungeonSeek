@@ -12,6 +12,7 @@ import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
 import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
+import { GameFooterComponent } from '../game-footer/game-footer.component';
 
 @Component({
   selector: 'app-game',
@@ -21,6 +22,7 @@ import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
     MovementNodeComponent,
     CommonModule,
     TurnArrowComponent,
+    GameFooterComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
