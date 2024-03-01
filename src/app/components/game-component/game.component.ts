@@ -151,8 +151,6 @@ export class GameComponent implements OnInit, OnDestroy {
             ...location,
           };
 
-          this.scrollToCharacterBeingControlledByClient();
-
           // Update the character's location in the database
           this.characterService.updateCharacter(
             this.characterBeingControlledByClient,
