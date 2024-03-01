@@ -10,22 +10,19 @@ export class TurnService {
 
   // Everyone, including monsters go at the same time.
   // However, the players on the current client must move together.
-  determineWhosTurnItIsForClient(
+  isItMyTurnOnClientSide(
     gameSession: GameSession,
-    charactersBeingControlledByClient: Character[]
-  ): string {
+    characterID: string
+  ): boolean {
     const currentTurn = gameSession.currentTurn;
+    console.log(currentTurn);
     const characterIDsWhoHaveTakenTurn =
       currentTurn.characterIDsWhoHaveTakenTurn;
 
-    let characterIDOfNextPlayer = '';
-    charactersBeingControlledByClient.forEach((character) => {
-      if (!characterIDsWhoHaveTakenTurn.includes(character.id)) {
-        characterIDOfNextPlayer = character.id;
-        return;
-      }
-    });
+    if (characterIDsWhoHaveTakenTurn.includes(characterID)) {
+      return false;
+    }
 
-    return characterIDOfNextPlayer;
+    return true;
   }
 }

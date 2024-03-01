@@ -31,7 +31,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected charactersSub!: Subscription;
   protected loading = true;
 
-  protected characterBeingControlledByClient: Character | null = null;
+  protected characterBeingControlledByClient: Character | undefined;
 
   constructor(
     protected locationService: LocationService,
@@ -58,9 +58,20 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub =
       this.locationService.playerPositionSubject.subscribe(
         (location: LocationNode) => {
-          // this.movePlayerToLocation(location);
+          this.moveCharacterToLocation(location);
         }
       );
+  }
+
+  private determineWhosNextToBeControlled(): void {
+    this.characterBeingControlledByClient =
+      this.charactersBeingControlledByClient.find((character) => {
+        console.log(character);
+        return this.turnService.isItMyTurnOnClientSide(
+          this.gameSession,
+          character.id
+        );
+      });
   }
 
   private setCharactersBeingControlledByClient(): void {
@@ -83,53 +94,74 @@ export class GameComponent implements OnInit, OnDestroy {
       .getCharactersInGameSession(this.gameSession.id)
       .subscribe((characters) => {
         this.characters = characters;
-        this.setCharactersBeingControlledByClient();
 
-        this.loading = false;
+        // TODO I probably don't need to do these things every time the characters change.
+        // There probably a way to do this after the first time the characters are set.
+        // I can probably use RXJS for this.
+        // Or I can do something hacky and just check if the charactersBeingControlledByClient is empty.
+        // If so, do this
+        if (this.charactersBeingControlledByClient.length === 0) {
+          this.setCharactersBeingControlledByClient();
+          this.determineWhosNextToBeControlled();
+          console.log(this.characterBeingControlledByClient);
+
+          this.loading = false;
+        }
       });
   }
 
   // TODO implement this method
-  // private moveCharacterToLocation(
-  //   location: Location,
-  //   initializing: boolean = false
-  // ) {
-  //   if (!this.charactersBeingControlledByClient.currentLocation) {
-  //     // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
-  //     return;
-  //   }
+  private moveCharacterToLocation(
+    location: LocationNode,
+    initializing: boolean = false
+  ) {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client');
+    }
+    if (!this.characterBeingControlledByClient.currentLocation) {
+      // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
+      return;
+    }
 
-  //   if (initializing) {
-  //     this.changePlayerDirection(location);
+    if (initializing) {
+      this.changePlayerDirection(location);
 
-  //     this.charactersBeingControlledByClient.position = location.position;
-  //     return;
-  //   }
+      this.characterBeingControlledByClient.currentLocation.position =
+        location.position;
+      return;
+    }
 
-  //   this.charactersBeingControlledByClient.currentLocation.adjacentLocations.forEach(
-  //     (locationKey) => {
-  //       if (locationKey === location.name) {
-  //         this.changePlayerDirection(location);
-  //         // TODO Take into account the user's movement speed on this turn
-  //         this.charactersBeingControlledByClient.position = location.position;
-  //         this.charactersBeingControlledByClient.currentLocation = location;
-  //       }
-  //     }
-  //   );
-  // }
+    this.characterBeingControlledByClient.currentLocation.adjacentLocations.forEach(
+      (locationKey) => {
+        if (locationKey === location.name) {
+          if (!this.characterBeingControlledByClient) {
+            throw new Error('No character being controlled by client');
+          }
+          this.changePlayerDirection(location);
+          // TODO Take into account the user's movement speed on this turn
+          this.characterBeingControlledByClient.currentLocation.position =
+            location.position;
+          this.characterBeingControlledByClient.currentLocation = location;
+        }
+      }
+    );
+  }
 
   // TODO implement this method
-  // private changePlayerDirection(location: LocationNode) {
-  //   if (this.charactersBeingControlledByClient.currentLocation === null) {
-  //     return;
-  //   }
-  //   if (
-  //     location.position.xPosition <
-  //     this.charactersBeingControlledByClient.currentLocation.position.xPosition
-  //   ) {
-  //     this.charactersBeingControlledByClient.directionFacing = 'Left';
-  //   } else {
-  //     this.charactersBeingControlledByClient.directionFacing = 'Right';
-  //   }
-  // }
+  private changePlayerDirection(location: LocationNode) {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client');
+    }
+    if (this.characterBeingControlledByClient.currentLocation === null) {
+      return;
+    }
+    if (
+      location.position.xPosition <
+      this.characterBeingControlledByClient.currentLocation.position.xPosition
+    ) {
+      this.characterBeingControlledByClient.directionFacing = 'Left';
+    } else {
+      this.characterBeingControlledByClient.directionFacing = 'Right';
+    }
+  }
 }

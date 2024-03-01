@@ -16,7 +16,7 @@
     <span *ngFor="let character of characters">
       <div>
         <app-player
-          [directionFacing]="'Right'"
+          [directionFacing]="character.directionFacing"
           class="player-wrapper"
           [character]="character"
           [ngStyle]="{

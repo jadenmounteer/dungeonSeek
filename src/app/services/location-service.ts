@@ -66,7 +66,7 @@ export class LocationService {
   private hillmire: LocationNode = {
     name: 'Hillmire',
     position: { xPosition: 3680, yPosition: 700 },
-    adjacentLocations: ['East Unf Road', 'West Hillmire Road'],
+    adjacentLocations: ['Hillmire North Road', 'West Hillmire Road'],
   };
 
   private hillmireNorthRoad: LocationNode = {
@@ -90,7 +90,7 @@ export class LocationService {
   private dunalWestRoad: LocationNode = {
     name: 'Dunal West Road',
     position: { xPosition: 2891, yPosition: 287 },
-    adjacentLocations: ['Dunal'],
+    adjacentLocations: ['Dunal', 'Mullin Forest'],
   };
 
   private mullinForest: LocationNode = {
