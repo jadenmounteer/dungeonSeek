@@ -17,8 +17,8 @@
       <div
         class="player-wrapper"
         [ngStyle]="{
-          'left.px': character.currentLocation.position.xPosition,
-          'top.px': character.currentLocation.position.yPosition
+          'left.px': character.currentLocation.position.xPosition + 25,
+          'top.px': character.currentLocation.position.yPosition - 120
         }"
       >
         <app-turn-arrow

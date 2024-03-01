@@ -49,7 +49,7 @@ export class AddOrEditCharacterComponent implements OnInit {
 
     sex: 'Male',
 
-    movementSpeed: 0,
+    movementSpeed: 4,
     inParty: false,
     directionFacing: 'Right',
     equipmentCards: [],
