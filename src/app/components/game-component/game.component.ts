@@ -11,11 +11,17 @@ import { Character } from '../../types/character';
 import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
 import { TurnService } from '../../services/turn.service';
+import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [PlayerComponent, MovementNodeComponent, CommonModule],
+  imports: [
+    PlayerComponent,
+    MovementNodeComponent,
+    CommonModule,
+    TurnArrowComponent,
+  ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
 })

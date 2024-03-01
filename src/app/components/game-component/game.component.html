@@ -14,15 +14,19 @@
     </span> -->
 
     <span *ngFor="let character of characters">
-      <div>
+      <div
+        class="player-wrapper"
+        [ngStyle]="{
+          'left.px': character.currentLocation.position.xPosition,
+          'top.px': character.currentLocation.position.yPosition
+        }"
+      >
+        <app-turn-arrow
+          *ngIf="characterBeingControlledByClient === character"
+        ></app-turn-arrow>
         <app-player
           [directionFacing]="character.directionFacing"
-          class="player-wrapper"
           [character]="character"
-          [ngStyle]="{
-            'left.px': character.currentLocation.position.xPosition,
-            'top.px': character.currentLocation.position.yPosition
-          }"
         ></app-player>
       </div>
     </span>
