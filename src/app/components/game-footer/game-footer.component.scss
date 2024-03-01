@@ -1,0 +1,11 @@
+.footer-wrapper {
+  border: 2px solid red;
+  position: absolute;
+  bottom: 0;
+  // right: 100;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
