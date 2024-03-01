@@ -10,6 +10,7 @@ import { GameSession } from '../../types/game-session';
 import { Character } from '../../types/character';
 import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
+import { TurnService } from '../../services/turn.service';
 
 @Component({
   selector: 'app-game',
@@ -30,12 +31,15 @@ export class GameComponent implements OnInit, OnDestroy {
   protected charactersSub!: Subscription;
   protected loading = true;
 
+  protected characterBeingControlledByClient: Character | null = null;
+
   constructor(
     protected locationService: LocationService,
     private activatedRoute: ActivatedRoute,
     private gameSessionService: GameSessionService,
     private characterService: CharacterService,
-    private authService: AuthService
+    private authService: AuthService,
+    private turnService: TurnService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
