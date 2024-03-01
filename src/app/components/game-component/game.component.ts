@@ -66,7 +66,6 @@ export class GameComponent implements OnInit, OnDestroy {
   private determineWhosNextToBeControlled(): void {
     this.characterBeingControlledByClient =
       this.charactersBeingControlledByClient.find((character) => {
-        console.log(character);
         return this.turnService.isItMyTurnOnClientSide(
           this.gameSession,
           character.id
@@ -103,7 +102,6 @@ export class GameComponent implements OnInit, OnDestroy {
         if (this.charactersBeingControlledByClient.length === 0) {
           this.setCharactersBeingControlledByClient();
           this.determineWhosNextToBeControlled();
-          console.log(this.characterBeingControlledByClient);
 
           this.loading = false;
         }

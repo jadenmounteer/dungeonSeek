@@ -15,7 +15,7 @@ export class TurnService {
     characterID: string
   ): boolean {
     const currentTurn = gameSession.currentTurn;
-    console.log(currentTurn);
+
     const characterIDsWhoHaveTakenTurn =
       currentTurn.characterIDsWhoHaveTakenTurn;
 
