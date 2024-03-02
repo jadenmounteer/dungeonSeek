@@ -1,11 +1,9 @@
-.footer-wrapper {
+.right-side {
   border: 2px solid red;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  // right: 100;
-  width: 100%;
+  right: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
+  flex-direction: column;
+  padding: 50px;
 }
