@@ -94,7 +94,8 @@ export class GameComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const offset = 0;
+    // Offset to center the element in the screen
+    const offset = 100;
     scrollTo(
       this.characterBeingControlledByClient.currentLocation.position.xPosition -
         offset,

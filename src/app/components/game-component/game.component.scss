@@ -79,8 +79,9 @@
   justify-content: center;
   align-items: center;
   z-index: 0;
-
-  // One of these lines disabled highlighting
+  width: calc($game-board-width / 40);
+  height: calc($game-board-height / 30);
+  // One of these lines disabled highlighting on mobile
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
