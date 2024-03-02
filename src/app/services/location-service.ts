@@ -35,79 +35,79 @@ export class LocationService {
     new Subject<LocationNode>();
   private goeth: LocationNode = {
     name: 'Goeth',
-    position: { xPosition: 2500, yPosition: 1300 },
+    position: { xPosition: 2489, yPosition: 2803 },
     adjacentLocations: ['East Goeth Road'],
   };
 
   private eastGoethRoad: LocationNode = {
     name: 'East Goeth Road',
-    position: { xPosition: 2850, yPosition: 1200 },
+    position: { xPosition: 2838, yPosition: 2700 },
     adjacentLocations: ['Goeth', 'Unf'],
   };
 
   private unf: LocationNode = {
     name: 'Unf',
-    position: { xPosition: 3110, yPosition: 1120 },
+    position: { xPosition: 3113, yPosition: 2608 },
     adjacentLocations: ['East Goeth Road', 'East Unf Road'],
   };
 
   private eastUnfRoad: LocationNode = {
     name: 'East Unf Road',
-    position: { xPosition: 3420, yPosition: 1110 },
+    position: { xPosition: 3436, yPosition: 2585 },
     adjacentLocations: ['Unf', 'West Hillmire Road'],
   };
 
   private westHillmireRoad: LocationNode = {
     name: 'West Hillmire Road',
-    position: { xPosition: 3460, yPosition: 850 },
+    position: { xPosition: 3467, yPosition: 2326 },
     adjacentLocations: ['East Unf Road', 'Hillmire'],
   };
 
   private hillmire: LocationNode = {
     name: 'Hillmire',
-    position: { xPosition: 3680, yPosition: 700 },
+    position: { xPosition: 3677, yPosition: 2180 },
     adjacentLocations: ['Hillmire North Road', 'West Hillmire Road'],
   };
 
   private hillmireNorthRoad: LocationNode = {
     name: 'Hillmire North Road',
-    position: { xPosition: 3600, yPosition: 450 },
+    position: { xPosition: 3602, yPosition: 1939 },
     adjacentLocations: ['Hillmire', 'Dunal East Road'],
   };
 
   private dunalEastRoad: LocationNode = {
     name: 'Dunal East Road',
-    position: { xPosition: 3500, yPosition: 260 },
+    position: { xPosition: 3500, yPosition: 1742 },
     adjacentLocations: ['Hillmire North Road', 'Dunal'],
   };
 
   private dunal: LocationNode = {
     name: 'Dunal',
-    position: { xPosition: 3120, yPosition: 320 },
+    position: { xPosition: 3120, yPosition: 1807 },
     adjacentLocations: ['Dunal East Road', 'Dunal West Road'],
   };
 
   private dunalWestRoad: LocationNode = {
     name: 'Dunal West Road',
-    position: { xPosition: 2891, yPosition: 287 },
+    position: { xPosition: 2901, yPosition: 1765 },
     adjacentLocations: ['Dunal', 'Mullin Forest'],
   };
 
   private mullinForest: LocationNode = {
     name: 'Mullin Forest',
-    position: { xPosition: 2600, yPosition: 319 },
+    position: { xPosition: 2600, yPosition: 1809 },
     adjacentLocations: ['Dunal West Road', 'Mullin', 'Bayrom'],
   };
 
   private mullin: LocationNode = {
     name: 'Mullin',
-    position: { xPosition: 2185, yPosition: 334 },
+    position: { xPosition: 2185, yPosition: 1822 },
     adjacentLocations: ['Mullin Forest', 'Bayrom'],
   };
 
   private bayrom: LocationNode = {
     name: 'Bayrom',
-    position: { xPosition: 2413, yPosition: 540 },
+    position: { xPosition: 2413, yPosition: 2034 },
     adjacentLocations: ['Mullin Forest', 'Mullin'],
   };
 
