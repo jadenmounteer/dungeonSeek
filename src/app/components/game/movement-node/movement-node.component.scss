@@ -20,7 +20,7 @@
   // width: 100px;
   // height: 100px;
   width: calc($game-board-width / 120);
-  height: calc($game-board-height / 30);
+  height: calc($game-board-height / 90);
   border-radius: 50px;
   box-shadow: 0 0 8px $node-color, inset 0 0 8px $node-color;
   -webkit-animation: pulse 2s linear 1s infinite;

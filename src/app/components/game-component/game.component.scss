@@ -15,73 +15,56 @@
 .board-1 {
   background-image: url("../../../assets/game-board/Placeholder.jpg");
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
 
 .board-2 {
   background-image: url("../../../assets/game-board/Tesslandia\ Top\ Center.jpg");
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
 
 .board-3 {
   background-image: url("../../../assets/game-board/Placeholder.jpg");
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
 
 .board-4 {
   background-image: url("../../../assets/game-board/Tesslandia\ Left\ New.jpg");
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
 
 .board-5 {
   background-image: url("../../../assets/game-board/Tesslandia\ Center\ New.jpg");
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
 
 .board-6 {
   background-image: url("../../../assets/game-board/Tesslandia\ Right\ New.jpg"); //
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
 
 .board-7 {
   background-image: url("../../../assets/game-board/Placeholder.jpg");
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
 
 .board-8 {
   background-image: url("../../../assets/game-board/Placeholder.jpg");
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
 
 .board-9 {
   background-image: url("../../../assets/game-board/Placeholder.jpg");
   width: calc($game-board-width / 2);
-  height: $game-board-height;
+  height: calc($game-board-height / 3);
 }
-
-// When we want to add more to the map...
-// .board-4 {
-//   background-image: url("../../../assets/Tesslandia\ right\ side.jpg"); //
-//   width: calc($game-board-width / 2);
-//   height: $game-board-height;
-// }
-// .board-5 {
-//   background-image: url("../../../assets/Tesslandia\ right\ side.jpg"); //
-//   width: calc($game-board-width / 2);
-//   height: $game-board-height;
-// }
-// .board-6 {
-//   background-image: url("../../../assets/Tesslandia\ right\ side.jpg"); //
-//   width: calc($game-board-width / 2);
-//   height: $game-board-height;
-// }
 
 .table {
   width: 100%;
