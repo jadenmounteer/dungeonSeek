@@ -13,19 +13,55 @@
 }
 
 .board-1 {
-  background-image: url("../../../assets/game-board/Tesslandia\ Left\ New.jpg");
+  background-image: url("../../../assets/game-board/Placeholder.jpg");
   width: calc($game-board-width / 2);
   height: $game-board-height;
 }
 
 .board-2 {
-  background-image: url("../../../assets/game-board/Tesslandia\ Center\ New.jpg");
+  background-image: url("../../../assets/game-board/Tesslandia\ Top\ Center.jpg");
   width: calc($game-board-width / 2);
   height: $game-board-height;
 }
 
 .board-3 {
+  background-image: url("../../../assets/game-board/Placeholder.jpg");
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
+}
+
+.board-4 {
+  background-image: url("../../../assets/game-board/Tesslandia\ Left\ New.jpg");
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
+}
+
+.board-5 {
+  background-image: url("../../../assets/game-board/Tesslandia\ Center\ New.jpg");
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
+}
+
+.board-6 {
   background-image: url("../../../assets/game-board/Tesslandia\ Right\ New.jpg"); //
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
+}
+
+.board-7 {
+  background-image: url("../../../assets/game-board/Placeholder.jpg");
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
+}
+
+.board-8 {
+  background-image: url("../../../assets/game-board/Placeholder.jpg");
+  width: calc($game-board-width / 2);
+  height: $game-board-height;
+}
+
+.board-9 {
+  background-image: url("../../../assets/game-board/Placeholder.jpg");
   width: calc($game-board-width / 2);
   height: $game-board-height;
 }
