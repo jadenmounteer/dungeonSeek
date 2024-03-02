@@ -1,3 +1,13 @@
+.left-side {
+  border: 2px solid red;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
 .right-side {
   border: 2px solid red;
   position: fixed;
