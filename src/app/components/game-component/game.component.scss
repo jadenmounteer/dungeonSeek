@@ -1,10 +1,19 @@
 @import "../../../styles.scss";
 
+@mixin unselectable() {
+  // One of these lines disabled highlighting on mobile
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-tap-highlight-color: transparent;
+}
+
 .game-board {
   // border: 2px solid black;
   width: $game-board-width;
   height: $game-board-height;
   position: relative;
+  @include unselectable();
 }
 
 .board-wrapper {
@@ -88,6 +97,7 @@
 
   pointer-events: none;
   flex-direction: column;
+  @include unselectable();
 }
 
 .movement-node-wrapper {
@@ -100,11 +110,7 @@
   z-index: 0;
   width: calc($game-board-width / 40);
   height: calc($game-board-height / 30);
-  // One of these lines disabled highlighting on mobile
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-  -webkit-tap-highlight-color: transparent;
+  @include unselectable();
 }
 
 .character-name {
