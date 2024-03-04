@@ -1,18 +1,21 @@
-.left-side {
-  border: 2px solid red;
+.footer {
+  border: 2px solid blue;
   position: fixed;
   bottom: 0;
-  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-instructions {
+  border: 2px solid red;
   display: flex;
   flex-direction: column;
   padding: 50px;
 }
 
-.right-side {
+.action-button {
   border: 2px solid red;
-  position: fixed;
-  bottom: 0;
-  right: 0;
   display: flex;
   flex-direction: column;
   padding: 50px;

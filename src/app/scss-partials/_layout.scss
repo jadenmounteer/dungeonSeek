@@ -14,3 +14,43 @@ $game-board-height: calc(1536px * 3);
     @content;
   }
 }
+
+/*
+* Screen size mixins
+* Usage: @include layout.for-tablet-portrait-up {margin-left: -0.1em;}
+*/
+@mixin for-phone-only {
+  @media (max-width: 649px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait-up {
+  @media (min-width: 650px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape-up {
+  @media (min-width: 908px) {
+    @content;
+  }
+}
+
+@mixin for-desktop-up {
+  @media (min-width: 1170px) {
+    @content;
+  }
+}
+
+@mixin for-little-bigger-desktop-up {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
