@@ -178,7 +178,8 @@ export class GameComponent implements OnInit, OnDestroy {
             ...location,
           };
 
-          this.characterBeingControlledByClient.movementSpeed -= 1;
+          this.characterBeingControlledByClient.movementSpeed -=
+            location.distanceFromPlayer ?? 1;
 
           // Update the character's location in the database
           this.characterService.updateCharacter(
