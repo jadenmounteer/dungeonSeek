@@ -18,6 +18,7 @@ export type LocationKey =
   | 'East Goeth Road'
   | 'Unf'
   | 'East Unf Road'
+  | 'Lake View Cavern'
   | 'West Hillmire Road'
   | 'Hillmire'
   | 'Hillmire North Road'
@@ -58,7 +59,14 @@ export class LocationService {
   private eastUnfRoad: LocationNode = {
     name: 'East Unf Road',
     position: { xPosition: 3436, yPosition: 2585 },
-    adjacentLocations: ['Unf', 'West Hillmire Road'],
+    adjacentLocations: ['Unf', 'West Hillmire Road', 'Lake View Cavern'],
+    distanceFromPlayer: null,
+  };
+
+  private lakeViewCavern: LocationNode = {
+    name: 'Lake View Cavern',
+    position: { xPosition: 3574, yPosition: 2694 },
+    adjacentLocations: ['East Unf Road'],
     distanceFromPlayer: null,
   };
 
@@ -130,6 +138,7 @@ export class LocationService {
     ['East Goeth Road', this.eastGoethRoad],
     ['Unf', this.unf],
     ['East Unf Road', this.eastUnfRoad],
+    ['Lake View Cavern', this.lakeViewCavern],
     ['West Hillmire Road', this.westHillmireRoad],
     ['Hillmire', this.hillmire],
     ['Hillmire North Road', this.hillmireNorthRoad],
