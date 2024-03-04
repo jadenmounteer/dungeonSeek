@@ -52,7 +52,7 @@
           *ngIf="!locationsLoading"
           [distanceFromCharacter]="location.value.distanceFromPlayer"
           [characterMovementSpeed]="
-            characterBeingControlledByClient?.movementSpeed
+            characterBeingControlledByClient?.movementSpeed ?? 0
           "
         />
       </div>

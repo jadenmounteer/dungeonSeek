@@ -154,7 +154,6 @@ export class LocationService {
     playerMovementSpeed: number,
     playerCurrentLocation: LocationNode
   ) {
-    console.log('distanceFromCharacter', distanceFromCharacter);
     if (playerMovementSpeed < distanceFromCharacter) {
       return;
     }

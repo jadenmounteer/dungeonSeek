@@ -10,7 +10,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class MovementNodeComponent implements OnChanges {
   @Input() public distanceFromCharacter: number | null = null;
-  @Input() public characterMovementSpeed: number | undefined;
+  @Input() public characterMovementSpeed: number = 0;
   protected withinReach: boolean = false;
 
   constructor() {}
@@ -19,9 +19,10 @@ export class MovementNodeComponent implements OnChanges {
   }
 
   private setWithinReach(): void {
-    if (!this.characterMovementSpeed) {
-      return;
-    }
+    console.log(this.characterMovementSpeed);
+
+    console.log(this.distanceFromCharacter);
+
     if (this.distanceFromCharacter === null) {
       this.withinReach = false;
     } else {
