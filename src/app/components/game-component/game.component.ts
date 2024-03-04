@@ -93,8 +93,6 @@ export class GameComponent implements OnInit, OnDestroy {
       this.characterBeingControlledByClient.currentLocation
     );
 
-    console.log('finished loading');
-
     this.locationsLoading = false;
   }
 
