@@ -87,7 +87,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.characterBeingControlledByClient.currentLocation;
 
     this.locationService.setDistanceFromPlayerForAdjacentLocations(
-      locationToCheck,
+      locationToCheck.adjacentLocations,
       distanceFromCharacter,
       playersMovementSpeedValue,
       this.characterBeingControlledByClient.currentLocation

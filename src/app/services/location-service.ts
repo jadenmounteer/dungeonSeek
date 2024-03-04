@@ -149,7 +149,7 @@ export class LocationService {
   }
 
   public setDistanceFromPlayerForAdjacentLocations(
-    locationToCheck: LocationNode,
+    locationsToCheck: LocationKey[],
     distanceFromCharacter: number,
     playerMovementSpeed: number,
     playerCurrentLocation: LocationNode
@@ -159,21 +159,29 @@ export class LocationService {
       return;
     }
 
-    locationToCheck.adjacentLocations.forEach((adjacentLocation) => {
-      const location = this.locationsMap.get(adjacentLocation);
+    let newLocationsToCheck: LocationKey[] = [];
+
+    locationsToCheck.forEach((adjacentLocationKey) => {
+      const adjacentLocation = this.locationsMap.get(adjacentLocationKey);
       if (
-        location &&
-        location.distanceFromPlayer === null &&
-        location.name != playerCurrentLocation.name
+        adjacentLocation &&
+        adjacentLocation.distanceFromPlayer === null &&
+        adjacentLocation.name != playerCurrentLocation.name
       ) {
-        location.distanceFromPlayer = distanceFromCharacter;
-        this.setDistanceFromPlayerForAdjacentLocations(
-          location,
-          (distanceFromCharacter += 1),
-          playerMovementSpeed,
-          playerCurrentLocation
-        );
+        adjacentLocation.distanceFromPlayer = distanceFromCharacter;
+        adjacentLocation.adjacentLocations.forEach((adjacentLocationKey) => {
+          newLocationsToCheck.push(adjacentLocationKey);
+        });
       }
     });
+
+    distanceFromCharacter++;
+
+    this.setDistanceFromPlayerForAdjacentLocations(
+      newLocationsToCheck,
+      distanceFromCharacter,
+      playerMovementSpeed,
+      playerCurrentLocation
+    );
   }
 }
