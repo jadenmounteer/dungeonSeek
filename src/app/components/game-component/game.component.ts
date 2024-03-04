@@ -135,6 +135,9 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private moveCharacterToLocation(location: LocationNode) {
+    if (this.characterBeingControlledByClient?.movementSpeed === 0) {
+      return;
+    }
     // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
 
     this.characterBeingControlledByClient?.currentLocation.adjacentLocations.forEach(
@@ -154,6 +157,8 @@ export class GameComponent implements OnInit, OnDestroy {
           this.characterBeingControlledByClient.currentLocation = {
             ...location,
           };
+
+          this.characterBeingControlledByClient.movementSpeed -= 1;
 
           // Update the character's location in the database
           this.characterService.updateCharacter(

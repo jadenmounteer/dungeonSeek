@@ -52,6 +52,8 @@
       </div>
     </span>
 
-    <app-game-footer></app-game-footer>
+    <app-game-footer
+      [characterMovementSpeed]="characterBeingControlledByClient?.movementSpeed"
+    ></app-game-footer>
   </div>
 </div>
