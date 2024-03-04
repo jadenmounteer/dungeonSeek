@@ -48,7 +48,13 @@
       >
         <!-- For Testing Purposes -->
         <!-- <h1>{{ location.key }}</h1> -->
-        <app-movement-node />
+        <app-movement-node
+          *ngIf="!locationsLoading"
+          [distanceFromCharacter]="location.value.distanceFromPlayer"
+          [characterMovementSpeed]="
+            characterBeingControlledByClient?.movementSpeed
+          "
+        />
       </div>
     </span>
 

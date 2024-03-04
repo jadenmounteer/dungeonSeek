@@ -38,6 +38,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected characters: Character[] = [];
   protected charactersSub!: Subscription;
   protected loading = true;
+  protected locationsLoading = true;
 
   protected characterBeingControlledByClient: Character | undefined;
 
@@ -70,6 +71,24 @@ export class GameComponent implements OnInit, OnDestroy {
           this.moveCharacterToLocation(location);
         }
       );
+  }
+
+  private updateLocationNodeDataRelativeToPlayer(): void {
+    if (!this.characterBeingControlledByClient) {
+      throw Error('No character being controlled by client');
+    }
+
+    // First, loop through the adjacent locations and turn them green
+    this.characterBeingControlledByClient.currentLocation.adjacentLocations.forEach(
+      (locationKey) => {
+        const locationNode = this.locationService.locationsMap.get(locationKey);
+        if (locationNode) {
+          locationNode.distanceFromPlayer = 1;
+        }
+      }
+    );
+
+    this.locationsLoading = false;
   }
 
   private determineWhosNextToBeControlled(): void {
@@ -128,6 +147,7 @@ export class GameComponent implements OnInit, OnDestroy {
           this.setCharactersBeingControlledByClient();
           this.determineWhosNextToBeControlled();
           this.scrollToCharacterBeingControlledByClient();
+          this.updateLocationNodeDataRelativeToPlayer();
 
           this.loading = false;
         }

@@ -10,6 +10,7 @@ export type LocationNode = {
   name: string;
   position: Position;
   adjacentLocations: LocationKey[];
+  distanceFromPlayer: number | null;
 };
 
 export type LocationKey =
@@ -37,78 +38,91 @@ export class LocationService {
     name: 'Goeth',
     position: { xPosition: 2489, yPosition: 2803 },
     adjacentLocations: ['East Goeth Road'],
+    distanceFromPlayer: null,
   };
 
   private eastGoethRoad: LocationNode = {
     name: 'East Goeth Road',
     position: { xPosition: 2838, yPosition: 2700 },
     adjacentLocations: ['Goeth', 'Unf'],
+    distanceFromPlayer: null,
   };
 
   private unf: LocationNode = {
     name: 'Unf',
     position: { xPosition: 3113, yPosition: 2608 },
     adjacentLocations: ['East Goeth Road', 'East Unf Road'],
+    distanceFromPlayer: null,
   };
 
   private eastUnfRoad: LocationNode = {
     name: 'East Unf Road',
     position: { xPosition: 3436, yPosition: 2585 },
     adjacentLocations: ['Unf', 'West Hillmire Road'],
+    distanceFromPlayer: null,
   };
 
   private westHillmireRoad: LocationNode = {
     name: 'West Hillmire Road',
     position: { xPosition: 3467, yPosition: 2326 },
     adjacentLocations: ['East Unf Road', 'Hillmire'],
+    distanceFromPlayer: null,
   };
 
   private hillmire: LocationNode = {
     name: 'Hillmire',
     position: { xPosition: 3677, yPosition: 2180 },
     adjacentLocations: ['Hillmire North Road', 'West Hillmire Road'],
+    distanceFromPlayer: null,
   };
 
   private hillmireNorthRoad: LocationNode = {
     name: 'Hillmire North Road',
     position: { xPosition: 3602, yPosition: 1939 },
     adjacentLocations: ['Hillmire', 'Dunal East Road'],
+    distanceFromPlayer: null,
   };
 
   private dunalEastRoad: LocationNode = {
     name: 'Dunal East Road',
     position: { xPosition: 3500, yPosition: 1742 },
     adjacentLocations: ['Hillmire North Road', 'Dunal'],
+    distanceFromPlayer: null,
   };
 
   private dunal: LocationNode = {
     name: 'Dunal',
     position: { xPosition: 3120, yPosition: 1807 },
     adjacentLocations: ['Dunal East Road', 'Dunal West Road'],
+    distanceFromPlayer: null,
   };
 
   private dunalWestRoad: LocationNode = {
     name: 'Dunal West Road',
     position: { xPosition: 2901, yPosition: 1765 },
     adjacentLocations: ['Dunal', 'Mullin Forest'],
+    distanceFromPlayer: null,
   };
 
   private mullinForest: LocationNode = {
     name: 'Mullin Forest',
     position: { xPosition: 2600, yPosition: 1809 },
     adjacentLocations: ['Dunal West Road', 'Mullin', 'Bayrom'],
+    distanceFromPlayer: null,
   };
 
   private mullin: LocationNode = {
     name: 'Mullin',
     position: { xPosition: 2185, yPosition: 1822 },
     adjacentLocations: ['Mullin Forest', 'Bayrom'],
+    distanceFromPlayer: null,
   };
 
   private bayrom: LocationNode = {
     name: 'Bayrom',
     position: { xPosition: 2413, yPosition: 2034 },
     adjacentLocations: ['Mullin Forest', 'Mullin'],
+    distanceFromPlayer: null,
   };
 
   public locationsMap: Map<LocationKey, LocationNode> = new Map([

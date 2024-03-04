@@ -3,6 +3,8 @@
 
 @import "../../../../styles.scss";
 
+$within-reach-color: rgb(67, 255, 4);
+
 @keyframes pulse {
   0% {
     box-shadow: 0 0 8px $node-color, inset 0 0 8px $node-color;
@@ -39,3 +41,20 @@
 //   color: $node-color;
 //   text-shadow: 0 0 4px $node-color;
 // }
+
+.within-reach {
+  box-shadow: 0 0 8px $within-reach-color, inset 0 0 8px $within-reach-color;
+  -webkit-animation: pulse-within-reach 2s linear 1s infinite;
+}
+
+@keyframes pulse-within-reach {
+  0% {
+    box-shadow: 0 0 8px $within-reach-color, inset 0 0 8px $within-reach-color;
+  }
+  50% {
+    box-shadow: 0 0 18px $within-reach-color, inset 0 0 14px $within-reach-color;
+  }
+  100% {
+    box-shadow: 0 0 8px $within-reach-color, inset 0 0 8px $within-reach-color;
+  }
+}
