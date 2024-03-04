@@ -74,6 +74,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private updateLocationNodeDataRelativeToPlayer(): void {
+    this.locationsLoading = true;
     if (!this.characterBeingControlledByClient) {
       throw Error('No character being controlled by client');
     }
@@ -161,40 +162,51 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private moveCharacterToLocation(location: LocationNode) {
-    if (this.characterBeingControlledByClient?.movementSpeed === 0) {
+    if (!this.characterBeingControlledByClient) {
       return;
     }
-    // TODO Account for the player's movement here. Somehow track how many nodes the node is from the other.
 
-    this.characterBeingControlledByClient?.currentLocation.adjacentLocations.forEach(
-      (locationKey) => {
-        if (locationKey === location.name) {
-          if (!this.characterBeingControlledByClient) {
-            throw new Error('No character being controlled by client');
-          }
-          this.changePlayerDirection(location);
-          // TODO Take into account the user's movement speed on this turn
-          this.characterBeingControlledByClient.currentLocation.position =
-            location.position;
+    if (this.characterBeingControlledByClient.movementSpeed === 0) {
+      return;
+    }
 
-          // I use the spread operator here so we don't store the actual location in the character object.
-          // If we don't do this the character object will be storing the actual location object
-          // and the character will bring the location with them. :)
-          this.characterBeingControlledByClient.currentLocation = {
-            ...location,
-          };
+    // If the location is not within reach, don't move the character
+    if (location.distanceFromPlayer === null) {
+      return;
+    }
 
-          this.characterBeingControlledByClient.movementSpeed -=
-            location.distanceFromPlayer ?? 1;
+    if (
+      location.distanceFromPlayer >
+      this.characterBeingControlledByClient.movementSpeed
+    ) {
+      return;
+    }
 
-          // Update the character's location in the database
-          this.characterService.updateCharacter(
-            this.characterBeingControlledByClient,
-            this.gameSession.id
-          );
-        }
-      }
+    if (!this.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client');
+    }
+    this.changePlayerDirection(location);
+    // TODO Take into account the user's movement speed on this turn
+    this.characterBeingControlledByClient.currentLocation.position =
+      location.position;
+
+    // I use the spread operator here so we don't store the actual location in the character object.
+    // If we don't do this the character object will be storing the actual location object
+    // and the character will bring the location with them. :)
+    this.characterBeingControlledByClient.currentLocation = {
+      ...location,
+    };
+
+    this.characterBeingControlledByClient.movementSpeed -=
+      location.distanceFromPlayer ?? 1;
+
+    // Update the character's location in the database
+    this.characterService.updateCharacter(
+      this.characterBeingControlledByClient,
+      this.gameSession.id
     );
+
+    this.updateLocationNodeDataRelativeToPlayer();
   }
 
   // TODO implement this method
