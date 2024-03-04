@@ -1,3 +1,5 @@
+@import "../../../styles.scss";
+
 .footer {
   border: 2px solid blue;
   position: fixed;
@@ -5,6 +7,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @include for-tablet-landscape-up {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .user-instructions {
