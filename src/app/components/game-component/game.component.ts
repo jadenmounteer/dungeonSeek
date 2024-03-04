@@ -206,6 +206,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameSession.id
     );
 
+    this.locationService.resetLocationDistances();
     this.updateLocationNodeDataRelativeToPlayer();
   }
 

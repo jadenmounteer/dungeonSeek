@@ -184,4 +184,10 @@ export class LocationService {
       playerCurrentLocation
     );
   }
+
+  public resetLocationDistances() {
+    this.locationsMap.forEach((location) => {
+      location.distanceFromPlayer = null;
+    });
+  }
 }
