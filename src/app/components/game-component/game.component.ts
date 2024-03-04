@@ -78,15 +78,21 @@ export class GameComponent implements OnInit, OnDestroy {
       throw Error('No character being controlled by client');
     }
 
-    // First, loop through the adjacent locations and turn them green
-    this.characterBeingControlledByClient.currentLocation.adjacentLocations.forEach(
-      (locationKey) => {
-        const locationNode = this.locationService.locationsMap.get(locationKey);
-        if (locationNode) {
-          locationNode.distanceFromPlayer = 1;
-        }
-      }
+    let playersMovementSpeedValue =
+      this.characterBeingControlledByClient.movementSpeed;
+
+    let distanceFromCharacter = 1;
+    let locationToCheck: LocationNode =
+      this.characterBeingControlledByClient.currentLocation;
+
+    this.locationService.setDistanceFromPlayerForAdjacentLocations(
+      locationToCheck,
+      distanceFromCharacter,
+      playersMovementSpeedValue,
+      this.characterBeingControlledByClient.currentLocation
     );
+
+    console.log('finished loading');
 
     this.locationsLoading = false;
   }

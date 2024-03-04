@@ -147,4 +147,33 @@ export class LocationService {
     // Move the player to the node's coordinates
     this.playerPositionSubject.next(location);
   }
+
+  public setDistanceFromPlayerForAdjacentLocations(
+    locationToCheck: LocationNode,
+    distanceFromCharacter: number,
+    playerMovementSpeed: number,
+    playerCurrentLocation: LocationNode
+  ) {
+    console.log('distanceFromCharacter', distanceFromCharacter);
+    if (playerMovementSpeed < distanceFromCharacter) {
+      return;
+    }
+
+    locationToCheck.adjacentLocations.forEach((adjacentLocation) => {
+      const location = this.locationsMap.get(adjacentLocation);
+      if (
+        location &&
+        location.distanceFromPlayer === null &&
+        location.name != playerCurrentLocation.name
+      ) {
+        location.distanceFromPlayer = distanceFromCharacter;
+        this.setDistanceFromPlayerForAdjacentLocations(
+          location,
+          (distanceFromCharacter += 1),
+          playerMovementSpeed,
+          playerCurrentLocation
+        );
+      }
+    });
+  }
 }
