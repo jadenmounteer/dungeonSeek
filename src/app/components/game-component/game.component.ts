@@ -266,6 +266,7 @@ export class GameComponent implements OnInit, OnDestroy {
           this.characters.map((character) => character.id)
         );
 
+        // TODO this logic needs to trigger every time a new turn is created
         await this.turnService.resetCharacterMovementSpeeds(
           this.charactersBeingControlledByClient,
           this.gameSession.id
