@@ -19,6 +19,13 @@ $game-board-height: calc(1536px * 3);
 * Screen size mixins
 * Usage: @include layout.for-tablet-portrait-up {margin-left: -0.1em;}
 */
+
+@mixin for-zoomed-in-screen {
+  @media (max-width: 400px) {
+    @content;
+  }
+}
+
 @mixin for-phone-only {
   @media (max-width: 649px) {
     @content;

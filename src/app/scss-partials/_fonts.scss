@@ -1,4 +1,5 @@
 $sticky-text-font-size: 2em;
+$sticky-text-font-size-for-zoomed-in-screen: 1em;
 
 .big-text {
   font-size: 1.5rem;
@@ -10,6 +11,9 @@ $sticky-text-font-size: 2em;
 
 // text that is sticky to the top and bottom of the screen
 .sticky-text {
-  font-size: $sticky-text-font-size; // Makes it look good when the user zooms in or out
-  // TODO may need to put a breakpoint in here for smaller screens
+  font-size: $sticky-text-font-size;
+
+  @include for-zoomed-in-screen {
+    font-size: $sticky-text-font-size-for-zoomed-in-screen;
+  }
 }

@@ -20,6 +20,10 @@
     width: 200px;
   }
 
+  @include for-zoomed-in-screen {
+    font-size: $sticky-text-font-size-for-zoomed-in-screen;
+  }
+
   // transition the background-color on hover
   transition: background-color 0.5s;
   &:hover {
