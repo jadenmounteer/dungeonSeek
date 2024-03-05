@@ -8,5 +8,6 @@
 
 // text that is sticky to the top and bottom of the screen
 .sticky-text {
-  font-size: 2vw; // Makes it look good when the user zooms in or out
+  font-size: 2em; // Makes it look good when the user zooms in or out
+  // TODO may need to put a breakpoint in here for smaller screens
 }
