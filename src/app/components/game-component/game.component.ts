@@ -227,6 +227,20 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected currentCharacterFinishedTurn(): void {
-    console.log('Finished turn!');
+    if (!this.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client');
+    }
+
+    this.turnService.endTurn(
+      this.gameSession,
+      this.characterBeingControlledByClient.id
+    );
+    this.determineWhosNextToBeControlled();
+    if (this.characterBeingControlledByClient) {
+      this.scrollToCharacterBeingControlledByClient();
+    } else {
+      alert('Everyone has taken their turn');
+      // everyone has taken their turn. Start from scratch
+    }
   }
 }
