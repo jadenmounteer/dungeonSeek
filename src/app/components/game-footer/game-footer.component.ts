@@ -10,4 +10,5 @@ import { Component, Input } from '@angular/core';
 })
 export class GameFooterComponent {
   @Input() public characterMovementSpeed: number | undefined;
+  @Input() public turnNumber!: number;
 }

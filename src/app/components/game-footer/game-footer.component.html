@@ -1,6 +1,8 @@
 <div class="footer">
   <div class="user-instructions">
-    <h1 class="big-text sticky-text"><u>Turn 1</u></h1>
+    <h1 class="big-text sticky-text">
+      <u>Turn {{ turnNumber }}</u>
+    </h1>
     <p
       class="player-movement big-text sticky-text"
       *ngIf="characterMovementSpeed && characterMovementSpeed > 0"
