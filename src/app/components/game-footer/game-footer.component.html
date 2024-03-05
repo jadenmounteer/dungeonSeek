@@ -1,6 +1,17 @@
 <div class="footer">
   <div class="user-instructions">
-    <div class="player-movement">Movement: {{ characterMovementSpeed }}</div>
+    <p
+      class="player-movement big-text sticky-text"
+      *ngIf="characterMovementSpeed && characterMovementSpeed > 0"
+    >
+      You can move {{ characterMovementSpeed }} more spaces or take an action!
+    </p>
+    <p
+      class="player-movement big-text sticky-text"
+      *ngIf="characterMovementSpeed! <= 0"
+    >
+      You can't move any more this turn. But you can take an action!
+    </p>
   </div>
 
   <div class="action-button">

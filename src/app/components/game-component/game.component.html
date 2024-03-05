@@ -29,7 +29,7 @@
         <app-turn-arrow
           *ngIf="characterBeingControlledByClient?.id === character.id"
         ></app-turn-arrow>
-        <span class="character-name">{{ character.name }}</span>
+        <span class="character-name big-text">{{ character.name }}</span>
         <app-player
           [directionFacing]="character.directionFacing"
           [character]="character"

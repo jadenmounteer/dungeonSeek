@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-game-footer',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './game-footer.component.html',
   styleUrl: './game-footer.component.scss',
 })
