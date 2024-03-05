@@ -243,6 +243,9 @@ export class GameComponent implements OnInit, OnDestroy {
       this.scrollToCharacterBeingControlledByClient();
       this.updateLocationNodeDataRelativeToPlayer();
     } else {
+      // TODO wait for online players to be done
+
+      // then start the next turn
       await this.turnService.createNewTurn(
         this.gameSession,
         this.characters.map((character) => character.id)

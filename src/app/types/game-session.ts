@@ -6,7 +6,6 @@ export interface GameSession {
   gameName: string;
   campaignName: CampaignNames;
   playerIDs: string[];
-  playersCurrentlyInGame: string[];
   entranceCode: string;
   currentTurn: Turn;
 }
