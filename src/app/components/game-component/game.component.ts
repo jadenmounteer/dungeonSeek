@@ -149,10 +149,7 @@ export class GameComponent implements OnInit, OnDestroy {
         // Or I can do something hacky and just check if the charactersBeingControlledByClient is empty.
         // If so, do this
         if (this.charactersBeingControlledByClient.length === 0) {
-          this.setCharactersBeingControlledByClient();
-          this.determineWhosNextToBeControlled();
-          this.scrollToCharacterBeingControlledByClient();
-          this.updateLocationNodeDataRelativeToPlayer();
+          this.initializeNewCharacterTurn();
 
           this.loading = false;
         }
@@ -235,9 +232,16 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameSession,
       this.characterBeingControlledByClient.id
     );
+
+    this.initializeNewCharacterTurn();
+  }
+
+  private initializeNewCharacterTurn() {
+    this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlled();
     if (this.characterBeingControlledByClient) {
       this.scrollToCharacterBeingControlledByClient();
+      this.updateLocationNodeDataRelativeToPlayer();
     } else {
       alert('Everyone has taken their turn');
       // everyone has taken their turn. Start from scratch
