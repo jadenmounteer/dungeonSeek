@@ -5,17 +5,35 @@
     </h1>
     <p
       class="player-movement big-text sticky-text"
-      *ngIf="characterMovementSpeed && characterMovementSpeed > 0"
+      *ngIf="
+        characterMovementSpeed &&
+        characterMovementSpeed > 0 &&
+        !waitingForOnlinePlayersToFinishTurn
+      "
     >
       You can move {{ characterMovementSpeed }} more spaces or take an action!
     </p>
     <p
       class="player-movement big-text sticky-text"
-      *ngIf="characterMovementSpeed! <= 0"
+      *ngIf="
+        characterMovementSpeed! <= 0 && !waitingForOnlinePlayersToFinishTurn
+      "
     >
       You can't move any more this turn. But you can take an action!
     </p>
+    <p
+      class="player-movement big-text sticky-text"
+      *ngIf="waitingForOnlinePlayersToFinishTurn"
+    >
+      Waiting for other players to finish their turns...
+    </p>
   </div>
 
-  <div class="game-button" (click)="onEndTurn()">End Turn</div>
+  <div
+    class="game-button"
+    (click)="onEndTurn()"
+    [ngClass]="{ 'disabled-button': waitingForOnlinePlayersToFinishTurn }"
+  >
+    End Turn
+  </div>
 </div>

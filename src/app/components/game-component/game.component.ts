@@ -42,6 +42,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected characterBeingControlledByClient: Character | undefined;
 
+  protected waitingForOnlinePlayersToFinishTurn = false;
+
   constructor(
     protected locationService: LocationService,
     private activatedRoute: ActivatedRoute,
@@ -243,8 +245,6 @@ export class GameComponent implements OnInit, OnDestroy {
       this.scrollToCharacterBeingControlledByClient();
       this.updateLocationNodeDataRelativeToPlayer();
     } else {
-      // TODO wait for online players to be done
-
       if (
         !this.gameSession.currentTurn.playerIDsWhoHaveFinishedTurn.includes(
           this.authService.activeUser!.uid
@@ -257,7 +257,9 @@ export class GameComponent implements OnInit, OnDestroy {
       }
 
       if (this.allPlayersHaveFinishedTheirTurn()) {
+        this.waitingForOnlinePlayersToFinishTurn = false;
         // then start the next turn
+        // TODO Make sure the last player to finish their turn is the one who starts the next turn
         await this.turnService.createNewTurn(
           this.gameSession,
           this.characters.map((character) => character.id)
@@ -269,6 +271,8 @@ export class GameComponent implements OnInit, OnDestroy {
         );
 
         this.initializeNewCharacterTurn();
+      } else {
+        this.waitingForOnlinePlayersToFinishTurn = true;
       }
     }
   }

@@ -30,3 +30,12 @@
     background-color: rgb(57, 110, 64, 0.5);
   }
 }
+
+.disabled-button {
+  background-color: grey;
+  border: 2px solid grey;
+  cursor: not-allowed;
+  &:hover {
+    background-color: grey;
+  }
+}

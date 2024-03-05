@@ -11,9 +11,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class GameFooterComponent {
   @Input() public characterMovementSpeed: number | undefined;
   @Input() public turnNumber!: number;
+  @Input() public waitingForOnlinePlayersToFinishTurn: boolean = false;
   @Output() protected endTurn: EventEmitter<any> = new EventEmitter();
 
   protected onEndTurn() {
-    this.endTurn.emit();
+    if (!this.waitingForOnlinePlayersToFinishTurn) {
+      this.endTurn.emit();
+    }
   }
 }
