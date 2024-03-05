@@ -19,10 +19,6 @@ export class MovementNodeComponent implements OnChanges {
   }
 
   private setWithinReach(): void {
-    console.log(this.characterMovementSpeed);
-
-    console.log(this.distanceFromCharacter);
-
     if (this.distanceFromCharacter === null) {
       this.withinReach = false;
     } else {

@@ -61,6 +61,7 @@
     <app-game-footer
       [characterMovementSpeed]="characterBeingControlledByClient?.movementSpeed"
       [turnNumber]="gameSession.currentTurn.turnNumber"
+      (endTurn)="currentCharacterFinishedTurn()"
     ></app-game-footer>
   </div>
 </div>

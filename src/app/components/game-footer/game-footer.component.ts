@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-game-footer',
@@ -11,4 +11,9 @@ import { Component, Input } from '@angular/core';
 export class GameFooterComponent {
   @Input() public characterMovementSpeed: number | undefined;
   @Input() public turnNumber!: number;
+  @Output() protected endTurn: EventEmitter<any> = new EventEmitter();
+
+  protected onEndTurn() {
+    this.endTurn.emit();
+  }
 }

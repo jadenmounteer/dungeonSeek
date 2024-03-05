@@ -225,4 +225,8 @@ export class GameComponent implements OnInit, OnDestroy {
       this.characterBeingControlledByClient.directionFacing = 'Right';
     }
   }
+
+  protected currentCharacterFinishedTurn(): void {
+    console.log('Finished turn!');
+  }
 }
