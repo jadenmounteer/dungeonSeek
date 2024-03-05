@@ -7,10 +7,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   @include for-tablet-portrait-up {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 }
 
