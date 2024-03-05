@@ -245,18 +245,47 @@ export class GameComponent implements OnInit, OnDestroy {
     } else {
       // TODO wait for online players to be done
 
-      // then start the next turn
-      await this.turnService.createNewTurn(
-        this.gameSession,
-        this.characters.map((character) => character.id)
-      );
+      if (
+        !this.gameSession.currentTurn.playerIDsWhoHaveFinishedTurn.includes(
+          this.authService.activeUser!.uid
+        )
+      ) {
+        await this.turnService.signalToServerThatPlayerIsDone(
+          this.authService.activeUser!.uid,
+          this.gameSession
+        );
+      }
 
-      await this.turnService.resetCharacterMovementSpeeds(
-        this.charactersBeingControlledByClient,
-        this.gameSession.id
-      );
+      if (this.allPlayersHaveFinishedTheirTurn()) {
+        // then start the next turn
+        await this.turnService.createNewTurn(
+          this.gameSession,
+          this.characters.map((character) => character.id)
+        );
 
-      this.initializeNewCharacterTurn();
+        await this.turnService.resetCharacterMovementSpeeds(
+          this.charactersBeingControlledByClient,
+          this.gameSession.id
+        );
+
+        this.initializeNewCharacterTurn();
+      }
     }
+  }
+
+  private allPlayersHaveFinishedTheirTurn(): boolean {
+    let allPlayersHaveFinishedTurn = true;
+
+    this.gameSession.playerIDs.forEach((playerID) => {
+      if (
+        !this.gameSession.currentTurn.playerIDsWhoHaveFinishedTurn.includes(
+          playerID
+        )
+      ) {
+        allPlayersHaveFinishedTurn = false;
+      }
+    });
+
+    return allPlayersHaveFinishedTurn;
   }
 }

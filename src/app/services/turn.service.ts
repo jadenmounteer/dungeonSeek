@@ -48,6 +48,7 @@ export class TurnService {
       characterIDsWhoHaveTakenTurn: [],
       characterIDs,
       turnNumber: newTurnNumber,
+      playerIDsWhoHaveFinishedTurn: [],
     };
 
     gameSession.currentTurn = newTurn;
@@ -66,5 +67,14 @@ export class TurnService {
     charactersBeingControlledByClient.forEach((character) => {
       this.characterService.updateCharacter(character, gameSessionID);
     });
+  }
+
+  public async signalToServerThatPlayerIsDone(
+    playerID: string,
+    gameSession: GameSession
+  ) {
+    gameSession.currentTurn.playerIDsWhoHaveFinishedTurn.push(playerID);
+
+    return this.gameSessionservice.updateGameSession(gameSession);
   }
 }
