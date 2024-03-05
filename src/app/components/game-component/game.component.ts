@@ -228,7 +228,7 @@ export class GameComponent implements OnInit, OnDestroy {
       throw new Error('No character being controlled by client');
     }
 
-    this.turnService.endTurn(
+    this.turnService.endCharacterTurn(
       this.gameSession,
       this.characterBeingControlledByClient.id
     );
@@ -236,15 +236,31 @@ export class GameComponent implements OnInit, OnDestroy {
     this.initializeNewCharacterTurn();
   }
 
-  private initializeNewCharacterTurn() {
+  private async initializeNewCharacterTurn() {
     this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlled();
     if (this.characterBeingControlledByClient) {
       this.scrollToCharacterBeingControlledByClient();
       this.updateLocationNodeDataRelativeToPlayer();
     } else {
-      alert('Everyone has taken their turn');
-      // everyone has taken their turn. Start from scratch
+      await this.turnService.createNewTurn(
+        this.gameSession,
+        this.characters.map((character) => character.id)
+      );
+
+      await this.resetCharacterMovementSpeeds();
+
+      this.initializeNewCharacterTurn();
     }
+  }
+
+  private async resetCharacterMovementSpeeds(): Promise<void> {
+    this.charactersBeingControlledByClient.forEach((character) => {
+      character.movementSpeed = 4;
+    });
+
+    this.charactersBeingControlledByClient.forEach((character) => {
+      this.characterService.updateCharacter(character, this.gameSession.id);
+    });
   }
 }

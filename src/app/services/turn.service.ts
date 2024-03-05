@@ -27,11 +27,27 @@ export class TurnService {
     return true;
   }
 
-  public endTurn(gameSession: GameSession, characterID: string) {
+  public endCharacterTurn(gameSession: GameSession, characterID: string) {
     const currentTurn = gameSession.currentTurn;
 
     currentTurn.characterIDsWhoHaveTakenTurn.push(characterID);
 
     this.gameSessionservice.updateGameSession(gameSession);
+  }
+
+  public async createNewTurn(
+    gameSession: GameSession,
+    characterIDs: string[]
+  ): Promise<void> {
+    const newTurnNumber = gameSession.currentTurn.turnNumber + 1;
+    const newTurn = {
+      characterIDsWhoHaveTakenTurn: [],
+      characterIDs,
+      turnNumber: newTurnNumber,
+    };
+
+    gameSession.currentTurn = newTurn;
+
+    return this.gameSessionservice.updateGameSession(gameSession);
   }
 }
