@@ -256,10 +256,11 @@ export class GameComponent implements OnInit, OnDestroy {
         );
       }
 
+      // This logic should ensure the last player to finish their turn is the one who starts the next turn
       if (this.allPlayersHaveFinishedTheirTurn()) {
         this.waitingForOnlinePlayersToFinishTurn = false;
         // then start the next turn
-        // TODO Make sure the last player to finish their turn is the one who starts the next turn
+
         await this.turnService.createNewTurn(
           this.gameSession,
           this.characters.map((character) => character.id)

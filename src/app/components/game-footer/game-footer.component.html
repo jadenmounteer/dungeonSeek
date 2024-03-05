@@ -32,7 +32,7 @@
   <div
     class="game-button"
     (click)="onEndTurn()"
-    [ngClass]="{ 'disabled-button': waitingForOnlinePlayersToFinishTurn }"
+    *ngIf="!waitingForOnlinePlayersToFinishTurn"
   >
     End Turn
   </div>
