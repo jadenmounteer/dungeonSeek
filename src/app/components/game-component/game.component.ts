@@ -248,19 +248,12 @@ export class GameComponent implements OnInit, OnDestroy {
         this.characters.map((character) => character.id)
       );
 
-      await this.resetCharacterMovementSpeeds();
+      await this.turnService.resetCharacterMovementSpeeds(
+        this.charactersBeingControlledByClient,
+        this.gameSession.id
+      );
 
       this.initializeNewCharacterTurn();
     }
-  }
-
-  private async resetCharacterMovementSpeeds(): Promise<void> {
-    this.charactersBeingControlledByClient.forEach((character) => {
-      character.movementSpeed = 4;
-    });
-
-    this.charactersBeingControlledByClient.forEach((character) => {
-      this.characterService.updateCharacter(character, this.gameSession.id);
-    });
   }
 }

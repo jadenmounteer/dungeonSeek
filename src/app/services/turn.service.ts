@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { GameSession } from '../types/game-session';
 import { Character } from '../types/character';
 import { GameSessionService } from './game-session/game-session.service';
+import { CharacterService } from './character/character.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TurnService {
-  constructor(private gameSessionservice: GameSessionService) {}
+  constructor(
+    private gameSessionservice: GameSessionService,
+    private characterService: CharacterService
+  ) {}
 
   // Everyone, including monsters go at the same time.
   // However, the players on the current client must move together.
@@ -49,5 +53,18 @@ export class TurnService {
     gameSession.currentTurn = newTurn;
 
     return this.gameSessionservice.updateGameSession(gameSession);
+  }
+
+  public async resetCharacterMovementSpeeds(
+    charactersBeingControlledByClient: Character[],
+    gameSessionID: string
+  ): Promise<void> {
+    charactersBeingControlledByClient.forEach((character) => {
+      character.movementSpeed = 4;
+    });
+
+    charactersBeingControlledByClient.forEach((character) => {
+      this.characterService.updateCharacter(character, gameSessionID);
+    });
   }
 }
