@@ -76,7 +76,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private updateLocationNodeDataRelativeToPlayer(): void {
-    console.log('Updating location node data relative to player');
     this.locationsLoading = true;
     if (!this.characterBeingControlledByClient) {
       throw Error('No character being controlled by client');
@@ -84,10 +83,6 @@ export class GameComponent implements OnInit, OnDestroy {
 
     let playersMovementSpeedValue =
       this.characterBeingControlledByClient.movementSpeed;
-
-    console.log(
-      `The character's movement speed is: ${playersMovementSpeedValue}`
-    );
 
     let distanceFromCharacter = 1;
     let locationToCheck: LocationNode =
@@ -104,8 +99,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private determineWhosNextToBeControlledByClient(): void {
-    console.log('Determining whos next to be controlled by client');
-
     this.charactersBeingControlledByClient.forEach((character) => {
       if (
         this.turnService.isItMyTurnOnClientSide(this.gameSession, character.id)
@@ -113,11 +106,10 @@ export class GameComponent implements OnInit, OnDestroy {
         this.characterBeingControlledByClient = character;
       }
     });
-
-    console.log(this.characterBeingControlledByClient);
   }
 
   private setCharactersBeingControlledByClient(): void {
+    // TODO This might be where the movement speed issue is
     // set this.charactersBeingControlledByClient to the characters that share the same userID as the client
     this.charactersBeingControlledByClient = this.characters.filter(
       (character) => character.userId === this.authService.activeUser?.uid
@@ -160,6 +152,7 @@ export class GameComponent implements OnInit, OnDestroy {
         // Or I can do something hacky and just check if the charactersBeingControlledByClient is empty.
         // If so, do this
         if (this.charactersBeingControlledByClient.length === 0) {
+          console.log('in if statement');
           this.onEnterGameSession();
 
           this.loading = false;
@@ -249,9 +242,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
   // Called when a character navigates back to the game session
   private onEnterGameSession() {
-    console.log('A character entered the game sessions!');
     this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlledByClient();
+    console.log(this.characterBeingControlledByClient);
+
     if (this.characterBeingControlledByClient) {
       this.scrollToCharacterBeingControlledByClient();
       this.updateLocationNodeDataRelativeToPlayer();
