@@ -1,1 +1,17 @@
-<p>toggle-menu-button works!</p>
+<mat-icon
+  class="toggle-menu-button"
+  *ngIf="menuOpen"
+  aria-hidden="false"
+  aria-label="toggle icon"
+  fontIcon="keyboard_arrow_down"
+  (click)="onToggleMenu()"
+></mat-icon>
+
+<mat-icon
+  class="toggle-menu-button"
+  *ngIf="!menuOpen"
+  aria-hidden="false"
+  aria-label="toggle icon"
+  fontIcon="keyboard_arrow_up"
+  (click)="onToggleMenu()"
+></mat-icon>
