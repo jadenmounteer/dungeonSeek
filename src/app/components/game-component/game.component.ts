@@ -249,9 +249,7 @@ export class GameComponent implements OnInit, OnDestroy {
     });
 
     if (playerIsFinished) {
-      console.log(
-        `Signalling to server that ${this.authService.activeUser?.email} is done moving all their characters this turn`
-      );
+      this.characterBeingControlledByClient = undefined;
       await this.turnService.signalToServerThatPlayerIsDone(
         this.authService.activeUser!.uid,
         this.gameSession
@@ -274,7 +272,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async initializeNewCharacterTurn() {
-    console.log('Initializing new character turn!');
     this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlledByClient();
     if (this.characterBeingControlledByClient) {
@@ -283,7 +280,6 @@ export class GameComponent implements OnInit, OnDestroy {
     } else {
       // This logic should ensure the last player to finish their turn is the one who starts the next turn
       if (this.turnService.allPlayersHaveFinishedTheirTurn(this.gameSession)) {
-        console.log('All players have finished their turns');
         this.waitingForOnlinePlayersToFinishTurn = false;
         // then start the next turn
 
@@ -292,18 +288,10 @@ export class GameComponent implements OnInit, OnDestroy {
           this.characters.map((character) => character.id)
         );
 
-        console.log('Created new turn');
-
-        console.log(this.gameSession);
-
-        console.log('Before', this.charactersBeingControlledByClient);
-        // TODO this logic needs to trigger every time a new turn is created
         await this.turnService.resetCharacterMovementSpeeds(
           this.charactersBeingControlledByClient,
           this.gameSession.id
         );
-
-        console.log('After', this.charactersBeingControlledByClient);
 
         this.initializeNewCharacterTurn();
       } else {
