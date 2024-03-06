@@ -31,10 +31,11 @@ export class TurnService {
     return true;
   }
 
-  public endCharacterTurn(gameSession: GameSession, characterID: string) {
-    const currentTurn = gameSession.currentTurn;
-
-    currentTurn.characterIDsWhoHaveTakenTurn.push(characterID);
+  public async endCharacterTurn(
+    gameSession: GameSession,
+    characterID: string
+  ): Promise<void> {
+    gameSession.currentTurn.characterIDsWhoHaveTakenTurn.push(characterID);
 
     this.gameSessionservice.updateGameSession(gameSession);
   }

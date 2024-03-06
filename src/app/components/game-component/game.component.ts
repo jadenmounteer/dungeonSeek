@@ -152,7 +152,6 @@ export class GameComponent implements OnInit, OnDestroy {
         // Or I can do something hacky and just check if the charactersBeingControlledByClient is empty.
         // If so, do this
         if (this.charactersBeingControlledByClient.length === 0) {
-          console.log('in if statement');
           this.onEnterGameSession();
 
           this.loading = false;
@@ -227,15 +226,37 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected currentCharacterFinishedTurn(): void {
+  protected async currentCharacterFinishedTurn(): Promise<void> {
     if (!this.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
     }
 
-    this.turnService.endCharacterTurn(
+    await this.turnService.endCharacterTurn(
       this.gameSession,
       this.characterBeingControlledByClient.id
     );
+
+    // If all the characters on client side have finished their turn, add the playerID to the array
+    let playerIsFinished = true;
+    this.charactersBeingControlledByClient.forEach((character) => {
+      if (
+        !this.gameSession.currentTurn.characterIDsWhoHaveTakenTurn.includes(
+          character.id
+        )
+      ) {
+        playerIsFinished = false;
+      }
+    });
+
+    if (playerIsFinished) {
+      console.log(
+        `Signalling to server that ${this.authService.activeUser?.email} is done moving all their characters this turn`
+      );
+      await this.turnService.signalToServerThatPlayerIsDone(
+        this.authService.activeUser!.uid,
+        this.gameSession
+      );
+    }
 
     this.initializeNewCharacterTurn();
   }
@@ -260,20 +281,6 @@ export class GameComponent implements OnInit, OnDestroy {
       this.scrollToCharacterBeingControlledByClient();
       this.updateLocationNodeDataRelativeToPlayer();
     } else {
-      if (
-        !this.gameSession.currentTurn.playerIDsWhoHaveFinishedTurn.includes(
-          this.authService.activeUser!.uid
-        )
-      ) {
-        console.log(
-          `Signalling to server that ${this.authService.activeUser?.email} is done moving all their characters this turn`
-        );
-        await this.turnService.signalToServerThatPlayerIsDone(
-          this.authService.activeUser!.uid,
-          this.gameSession
-        );
-      }
-
       // This logic should ensure the last player to finish their turn is the one who starts the next turn
       if (this.turnService.allPlayersHaveFinishedTheirTurn(this.gameSession)) {
         console.log('All players have finished their turns');
