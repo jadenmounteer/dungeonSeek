@@ -3,22 +3,17 @@
     <h1 class="big-text sticky-text">
       <u>Turn {{ turnNumber }}</u>
     </h1>
-
-    <p
-      *ngIf="characterName && !waitingForOnlinePlayersToFinishTurn"
-      class="big-text sticky-text"
-    >
-      {{ characterName }}'s turn!
-    </p>
     <p
       class="player-movement big-text sticky-text"
       *ngIf="
         characterMovementSpeed &&
         characterMovementSpeed > 0 &&
+        characterName &&
         !waitingForOnlinePlayersToFinishTurn
       "
     >
-      You can move {{ characterMovementSpeed }} more space(s) or take an action!
+      {{ characterName }}, you can move {{ characterMovementSpeed }} more
+      space(s) or take an action!
     </p>
     <p
       class="player-movement big-text sticky-text"
