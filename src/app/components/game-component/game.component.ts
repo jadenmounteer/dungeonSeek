@@ -105,13 +105,15 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private determineWhosNextToBeControlledByClient(): void {
     console.log('Determining whos next to be controlled by client');
-    this.characterBeingControlledByClient =
-      this.charactersBeingControlledByClient.find((character) => {
-        return this.turnService.isItMyTurnOnClientSide(
-          this.gameSession,
-          character.id
-        );
-      });
+
+    this.charactersBeingControlledByClient.forEach((character) => {
+      if (
+        this.turnService.isItMyTurnOnClientSide(this.gameSession, character.id)
+      ) {
+        this.characterBeingControlledByClient = character;
+      }
+    });
+
     console.log(this.characterBeingControlledByClient);
   }
 
@@ -288,11 +290,14 @@ export class GameComponent implements OnInit, OnDestroy {
           this.characters.map((character) => character.id)
         );
 
+        console.log('Before', this.charactersBeingControlledByClient);
         // TODO this logic needs to trigger every time a new turn is created
         await this.turnService.resetCharacterMovementSpeeds(
           this.charactersBeingControlledByClient,
           this.gameSession.id
         );
+
+        console.log('After', this.charactersBeingControlledByClient);
 
         this.initializeNewCharacterTurn();
       } else {
