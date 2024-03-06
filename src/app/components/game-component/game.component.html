@@ -59,6 +59,8 @@
     </span>
 
     <app-game-footer
+      *ngIf="!loading"
+      [characterName]="characterBeingControlledByClient?.name"
       [characterMovementSpeed]="characterBeingControlledByClient?.movementSpeed"
       [turnNumber]="gameSession?.currentTurn?.turnNumber || 0"
       [waitingForOnlinePlayersToFinishTurn]="

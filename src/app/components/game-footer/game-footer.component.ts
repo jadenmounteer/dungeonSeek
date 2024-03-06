@@ -14,6 +14,8 @@ export class GameFooterComponent {
   @Input() public waitingForOnlinePlayersToFinishTurn: boolean = false;
   @Output() protected endTurn: EventEmitter<any> = new EventEmitter();
 
+  @Input() public characterName: string | undefined;
+
   protected onEndTurn() {
     if (!this.waitingForOnlinePlayersToFinishTurn) {
       this.endTurn.emit();
