@@ -1,10 +1,13 @@
 @import "../../../styles.scss";
 
-.footer {
+.footer-wrapper {
   // border: 2px solid blue;
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 1;
+}
+.footer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,4 +33,10 @@
 .footer {
   // TODO put a cool background image here
   background-color: black;
+}
+
+.toggle-footer-button-wrapper {
+  // border: 2px solid red;
+  display: flex;
+  justify-content: center;
 }

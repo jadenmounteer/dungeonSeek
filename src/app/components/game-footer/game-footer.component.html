@@ -1,41 +1,47 @@
-<div class="footer">
-  <div class="user-instructions">
-    <h1 class="big-text sticky-text">
-      <u>Turn {{ turnNumber }}</u>
-    </h1>
-    <p
-      class="player-movement big-text sticky-text"
-      *ngIf="
-        characterMovementSpeed &&
-        characterMovementSpeed > 0 &&
-        characterName &&
-        !waitingForOnlinePlayersToFinishTurn
-      "
-    >
-      {{ characterName }}, you can move {{ characterMovementSpeed }} more
-      space(s) or take an action!
-    </p>
-    <p
-      class="player-movement big-text sticky-text"
-      *ngIf="
-        characterMovementSpeed! <= 0 && !waitingForOnlinePlayersToFinishTurn
-      "
-    >
-      You can't move any more this turn. But you can take an action!
-    </p>
-    <p
-      class="player-movement big-text sticky-text"
-      *ngIf="waitingForOnlinePlayersToFinishTurn"
-    >
-      Waiting for other players to finish their turns...
-    </p>
+<div class="footer-wrapper">
+  <div class="toggle-footer-button-wrapper">
+    <app-toggle-menu-button></app-toggle-menu-button>
   </div>
 
-  <div
-    class="game-button"
-    (click)="onEndTurn()"
-    *ngIf="!waitingForOnlinePlayersToFinishTurn"
-  >
-    End Turn
+  <div class="footer">
+    <div class="user-instructions">
+      <h1 class="big-text sticky-text">
+        <u>Turn {{ turnNumber }}</u>
+      </h1>
+      <p
+        class="player-movement big-text sticky-text"
+        *ngIf="
+          characterMovementSpeed &&
+          characterMovementSpeed > 0 &&
+          characterName &&
+          !waitingForOnlinePlayersToFinishTurn
+        "
+      >
+        {{ characterName }}, you can move {{ characterMovementSpeed }} more
+        space(s) or take an action!
+      </p>
+      <p
+        class="player-movement big-text sticky-text"
+        *ngIf="
+          characterMovementSpeed! <= 0 && !waitingForOnlinePlayersToFinishTurn
+        "
+      >
+        You can't move any more this turn. But you can take an action!
+      </p>
+      <p
+        class="player-movement big-text sticky-text"
+        *ngIf="waitingForOnlinePlayersToFinishTurn"
+      >
+        Waiting for other players to finish their turns...
+      </p>
+    </div>
+
+    <div
+      class="game-button"
+      (click)="onEndTurn()"
+      *ngIf="!waitingForOnlinePlayersToFinishTurn"
+    >
+      End Turn
+    </div>
   </div>
 </div>

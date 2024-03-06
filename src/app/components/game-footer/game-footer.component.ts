@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ToggleMenuButtonComponent } from '../toggle-menu-button/toggle-menu-button.component';
 
 @Component({
   selector: 'app-game-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ToggleMenuButtonComponent],
   templateUrl: './game-footer.component.html',
   styleUrl: './game-footer.component.scss',
 })
