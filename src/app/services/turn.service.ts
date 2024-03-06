@@ -60,7 +60,10 @@ export class TurnService {
     charactersBeingControlledByClient: Character[],
     gameSessionID: string
   ): Promise<void> {
+    console.log('Resetting the characters movement speed on client');
+    console.log(charactersBeingControlledByClient);
     charactersBeingControlledByClient.forEach((character) => {
+      // TODO have a base movement speed that increases if they have a horse.
       character.movementSpeed = 4;
     });
 

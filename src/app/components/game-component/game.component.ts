@@ -76,6 +76,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private updateLocationNodeDataRelativeToPlayer(): void {
+    console.log('Updating location node data relative to player');
     this.locationsLoading = true;
     if (!this.characterBeingControlledByClient) {
       throw Error('No character being controlled by client');
@@ -83,6 +84,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
     let playersMovementSpeedValue =
       this.characterBeingControlledByClient.movementSpeed;
+
+    console.log(
+      `The character's movement speed is: ${playersMovementSpeedValue}`
+    );
 
     let distanceFromCharacter = 1;
     let locationToCheck: LocationNode =
@@ -99,6 +104,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private determineWhosNextToBeControlledByClient(): void {
+    console.log('Determining whos next to be controlled by client');
     this.characterBeingControlledByClient =
       this.charactersBeingControlledByClient.find((character) => {
         return this.turnService.isItMyTurnOnClientSide(
@@ -106,6 +112,7 @@ export class GameComponent implements OnInit, OnDestroy {
           character.id
         );
       });
+    console.log(this.characterBeingControlledByClient);
   }
 
   private setCharactersBeingControlledByClient(): void {
@@ -262,6 +269,9 @@ export class GameComponent implements OnInit, OnDestroy {
           this.authService.activeUser!.uid
         )
       ) {
+        console.log(
+          `Signalling to server that ${this.authService.activeUser?.email} is done moving all their characters this turn`
+        );
         await this.turnService.signalToServerThatPlayerIsDone(
           this.authService.activeUser!.uid,
           this.gameSession
