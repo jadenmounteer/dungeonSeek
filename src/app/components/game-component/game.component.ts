@@ -263,7 +263,6 @@ export class GameComponent implements OnInit, OnDestroy {
   private onEnterGameSession() {
     this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlledByClient();
-    console.log(this.characterBeingControlledByClient);
 
     if (this.characterBeingControlledByClient) {
       this.scrollToCharacterBeingControlledByClient();
@@ -272,7 +271,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async initializeNewCharacterTurn() {
-    this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlledByClient();
     if (this.characterBeingControlledByClient) {
       this.scrollToCharacterBeingControlledByClient();
