@@ -275,7 +275,8 @@ export class GameComponent implements OnInit, OnDestroy {
       }
 
       // This logic should ensure the last player to finish their turn is the one who starts the next turn
-      if (this.allPlayersHaveFinishedTheirTurn()) {
+      if (this.turnService.allPlayersHaveFinishedTheirTurn(this.gameSession)) {
+        console.log('All players have finished their turns');
         this.waitingForOnlinePlayersToFinishTurn = false;
         // then start the next turn
 
@@ -283,6 +284,10 @@ export class GameComponent implements OnInit, OnDestroy {
           this.gameSession,
           this.characters.map((character) => character.id)
         );
+
+        console.log('Created new turn');
+
+        console.log(this.gameSession);
 
         console.log('Before', this.charactersBeingControlledByClient);
         // TODO this logic needs to trigger every time a new turn is created
@@ -298,21 +303,5 @@ export class GameComponent implements OnInit, OnDestroy {
         this.waitingForOnlinePlayersToFinishTurn = true;
       }
     }
-  }
-
-  private allPlayersHaveFinishedTheirTurn(): boolean {
-    let allPlayersHaveFinishedTurn = true;
-
-    this.gameSession.playerIDs.forEach((playerID) => {
-      if (
-        !this.gameSession.currentTurn.playerIDsWhoHaveFinishedTurn.includes(
-          playerID
-        )
-      ) {
-        allPlayersHaveFinishedTurn = false;
-      }
-    });
-
-    return allPlayersHaveFinishedTurn;
   }
 }

@@ -80,4 +80,18 @@ export class TurnService {
 
     return this.gameSessionservice.updateGameSession(gameSession);
   }
+
+  public allPlayersHaveFinishedTheirTurn(gameSession: GameSession): boolean {
+    let allPlayersHaveFinishedTurn = true;
+
+    gameSession.playerIDs.forEach((playerID) => {
+      if (
+        !gameSession.currentTurn.playerIDsWhoHaveFinishedTurn.includes(playerID)
+      ) {
+        allPlayersHaveFinishedTurn = false;
+      }
+    });
+
+    return allPlayersHaveFinishedTurn;
+  }
 }
