@@ -13,9 +13,10 @@ export class GameFooterComponent {
   @Input() public characterMovementSpeed: number | undefined;
   @Input() public turnNumber!: number;
   @Input() public waitingForOnlinePlayersToFinishTurn: boolean = false;
+  @Input() public characterName: string | undefined;
   @Output() protected endTurn: EventEmitter<any> = new EventEmitter();
 
-  @Input() public characterName: string | undefined;
+  protected menuOpen: boolean = true;
 
   protected onEndTurn() {
     if (!this.waitingForOnlinePlayersToFinishTurn) {

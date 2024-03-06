@@ -1,9 +1,11 @@
 <div class="footer-wrapper">
   <div class="toggle-footer-button-wrapper">
-    <app-toggle-menu-button></app-toggle-menu-button>
+    <app-toggle-menu-button
+      (toggleMenu)="menuOpen = !menuOpen"
+    ></app-toggle-menu-button>
   </div>
 
-  <div class="footer">
+  <div class="footer" *ngIf="menuOpen">
     <div class="user-instructions">
       <h1 class="big-text sticky-text">
         <u>Turn {{ turnNumber }}</u>
