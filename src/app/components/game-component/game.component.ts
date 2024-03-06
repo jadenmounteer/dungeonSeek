@@ -76,6 +76,8 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private updateLocationNodeDataRelativeToPlayer(): void {
+    this.locationService.resetLocationDistances();
+
     this.locationsLoading = true;
     if (!this.characterBeingControlledByClient) {
       throw Error('No character being controlled by client');
@@ -84,13 +86,9 @@ export class GameComponent implements OnInit, OnDestroy {
     let playersMovementSpeedValue =
       this.characterBeingControlledByClient.movementSpeed;
 
-    console.log('playersMovementSpeedValue', playersMovementSpeedValue);
-
     let distanceFromCharacter = 1;
     let locationToCheck: LocationNode =
       this.characterBeingControlledByClient.currentLocation;
-
-    console.log('locationToCheck', locationToCheck);
 
     this.locationService.setDistanceFromPlayerForAdjacentLocations(
       locationToCheck.adjacentLocations,
@@ -208,7 +206,6 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameSession.id
     );
 
-    this.locationService.resetLocationDistances();
     this.updateLocationNodeDataRelativeToPlayer();
   }
 
