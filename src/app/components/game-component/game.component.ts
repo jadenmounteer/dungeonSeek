@@ -84,9 +84,13 @@ export class GameComponent implements OnInit, OnDestroy {
     let playersMovementSpeedValue =
       this.characterBeingControlledByClient.movementSpeed;
 
+    console.log('playersMovementSpeedValue', playersMovementSpeedValue);
+
     let distanceFromCharacter = 1;
     let locationToCheck: LocationNode =
       this.characterBeingControlledByClient.currentLocation;
+
+    console.log('locationToCheck', locationToCheck);
 
     this.locationService.setDistanceFromPlayerForAdjacentLocations(
       locationToCheck.adjacentLocations,
