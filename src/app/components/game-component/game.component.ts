@@ -98,7 +98,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.locationsLoading = false;
   }
 
-  private determineWhosNextToBeControlled(): void {
+  private determineWhosNextToBeControlledByClient(): void {
     this.characterBeingControlledByClient =
       this.charactersBeingControlledByClient.find((character) => {
         return this.turnService.isItMyTurnOnClientSide(
@@ -151,7 +151,7 @@ export class GameComponent implements OnInit, OnDestroy {
         // Or I can do something hacky and just check if the charactersBeingControlledByClient is empty.
         // If so, do this
         if (this.charactersBeingControlledByClient.length === 0) {
-          this.initializeNewCharacterTurn();
+          this.onEnterGameSession();
 
           this.loading = false;
         }
@@ -238,9 +238,21 @@ export class GameComponent implements OnInit, OnDestroy {
     this.initializeNewCharacterTurn();
   }
 
-  private async initializeNewCharacterTurn() {
+  // Called when a character navigates back to the game session
+  private onEnterGameSession() {
+    console.log('A character entered the game sessions!');
     this.setCharactersBeingControlledByClient();
-    this.determineWhosNextToBeControlled();
+    this.determineWhosNextToBeControlledByClient();
+    if (this.characterBeingControlledByClient) {
+      this.scrollToCharacterBeingControlledByClient();
+      this.updateLocationNodeDataRelativeToPlayer();
+    }
+  }
+
+  private async initializeNewCharacterTurn() {
+    console.log('Initializing new character turn!');
+    this.setCharactersBeingControlledByClient();
+    this.determineWhosNextToBeControlledByClient();
     if (this.characterBeingControlledByClient) {
       this.scrollToCharacterBeingControlledByClient();
       this.updateLocationNodeDataRelativeToPlayer();
