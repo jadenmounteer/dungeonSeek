@@ -58,11 +58,14 @@ export class GameComponent implements OnInit, OnDestroy {
     this.gameSessionSub = this.gameSessionService
       .getGameSession(gameSessionID)
       .subscribe((gameSession) => {
+        console.log('Game session has changed');
         this.gameSession = gameSession;
 
         // TODO I can probable do this in a cleaner way with RXJS.
         // I know there's an operator where you can subscribe to multiple observables at once.
-        this.setCharactersSub();
+        if (!this.charactersSub) {
+          this.setCharactersSub();
+        }
       });
 
     // this.initializePlayerStartingNode();
@@ -295,6 +298,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.initializeNewCharacterTurn();
       } else {
         this.waitingForOnlinePlayersToFinishTurn = true;
+        // TODO subscribe and listen to the gameSession to see if all players have finished their turn
       }
     }
   }
