@@ -61,6 +61,13 @@ export class GameComponent implements OnInit, OnDestroy {
         console.log('Game session has changed');
         this.gameSession = gameSession;
 
+        // If people were waiting for an online player to finish their turn
+        // and they just finished their turn, start the next turn
+        if (this.waitingForOnlinePlayersToFinishTurn) {
+          this.waitingForOnlinePlayersToFinishTurn = false;
+          this.onEnterGameSession();
+        }
+
         // TODO I can probable do this in a cleaner way with RXJS.
         // I know there's an operator where you can subscribe to multiple observables at once.
         if (!this.charactersSub) {
@@ -117,7 +124,9 @@ export class GameComponent implements OnInit, OnDestroy {
     // TODO This might be where the movement speed issue is
     // set this.charactersBeingControlledByClient to the characters that share the same userID as the client
     this.charactersBeingControlledByClient = this.characters.filter(
-      (character) => character.userId === this.authService.activeUser?.uid
+      (character) => {
+        return character.userId === this.authService.activeUser?.uid;
+      }
     );
   }
 
@@ -265,6 +274,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   // Called when a character navigates back to the game session
   private onEnterGameSession() {
+    console.log('Player enterred game session');
     this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlledByClient();
 
