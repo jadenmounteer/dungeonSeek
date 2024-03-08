@@ -144,10 +144,14 @@ export class GameSessionService {
     playersCharacters: Character[],
     gameSession: GameSession
   ): Promise<any> {
+    let charactersWhoJustJoined = playersCharacters.filter((character) => {
+      return !gameSession.characterIDsCurrentlyInGame.includes(character.id);
+    });
+
     // Add the characters to the existing characterIDsCurrentlyInGame array
     gameSession.characterIDsCurrentlyInGame = [
       ...gameSession.characterIDsCurrentlyInGame,
-      ...playersCharacters.map((c) => c.id),
+      ...charactersWhoJustJoined.map((c) => c.id),
     ];
 
     return this.updateGameSession(gameSession);
