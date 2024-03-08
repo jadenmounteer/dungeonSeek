@@ -32,11 +32,13 @@
 
 .footer {
   // TODO put a cool background image here
-  background-color: rgba(80, 77, 77, 0.373);
+  background-color: $menu-color;
 }
 
 .toggle-footer-button-wrapper {
   // border: 2px solid red;
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
+  height: 60px;
 }
