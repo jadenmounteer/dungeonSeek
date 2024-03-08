@@ -54,6 +54,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
       turnNumber: 1,
       characterIDsWhoHaveTakenTurn: [],
       playerIDsWhoHaveFinishedTurn: [],
+      npcIDsWhoHaveTakenTurn: [],
     },
   };
 
