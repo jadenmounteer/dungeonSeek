@@ -58,14 +58,14 @@ export class GameComponent implements OnInit, OnDestroy {
     this.gameSessionSub = this.gameSessionService
       .getGameSession(gameSessionID)
       .subscribe((gameSession) => {
-        console.log('Game session has changed');
         this.gameSession = gameSession;
 
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn
         if (this.waitingForOnlinePlayersToFinishTurn) {
           this.waitingForOnlinePlayersToFinishTurn = false;
-          this.onEnterGameSession();
+
+          this.startNewCharacterTurn();
         }
 
         // TODO I can probable do this in a cleaner way with RXJS.
@@ -95,6 +95,14 @@ export class GameComponent implements OnInit, OnDestroy {
 
     let playersMovementSpeedValue =
       this.characterBeingControlledByClient.movementSpeed;
+
+    console.log(
+      `Updating location nodes relative to ${this.characterBeingControlledByClient.name}`
+    );
+    console.log(
+      `${this.characterBeingControlledByClient.name}'s movement speed:`,
+      playersMovementSpeedValue
+    );
 
     let distanceFromCharacter = 1;
     let locationToCheck: LocationNode =
@@ -166,7 +174,7 @@ export class GameComponent implements OnInit, OnDestroy {
         // Or I can do something hacky and just check if the charactersBeingControlledByClient is empty.
         // If so, do this
         if (this.charactersBeingControlledByClient.length === 0) {
-          this.onEnterGameSession();
+          this.startNewCharacterTurn();
 
           this.loading = false;
         }
@@ -272,9 +280,12 @@ export class GameComponent implements OnInit, OnDestroy {
     this.initializeNewCharacterTurn();
   }
 
-  // Called when a character navigates back to the game session
-  private onEnterGameSession() {
-    console.log('Player enterred game session');
+  private async startNewCharacterTurn() {
+    await this.turnService.resetCharacterMovementSpeeds(
+      this.charactersBeingControlledByClient,
+      this.gameSession.id
+    );
+
     this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlledByClient();
 
@@ -308,6 +319,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.initializeNewCharacterTurn();
       } else {
         this.waitingForOnlinePlayersToFinishTurn = true;
+
         // TODO subscribe and listen to the gameSession to see if all players have finished their turn
       }
     }
