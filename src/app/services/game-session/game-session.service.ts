@@ -114,6 +114,26 @@ export class GameSessionService {
     });
   }
 
+  public getCharactersInCurrentGameSession(
+    allCharactersInGameLobby: Character[],
+    gameSession: GameSession
+  ): Character[] {
+    let clientsCharacters = allCharactersInGameLobby.filter((character) => {
+      return character.userId === this.authService.activeUser?.uid;
+    });
+
+    let onlineCharactersInCurrentGameSession = allCharactersInGameLobby.filter(
+      (character) => {
+        return (
+          character.userId !== this.authService.activeUser?.uid &&
+          gameSession.characterIDsCurrentlyInGame.includes(character.id)
+        );
+      }
+    );
+
+    return [...clientsCharacters, ...onlineCharactersInCurrentGameSession];
+  }
+
   public addPlayersCharactersToGameSession(
     playersCharacters: Character[],
     gameSession: GameSession

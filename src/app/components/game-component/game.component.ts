@@ -35,7 +35,7 @@ export class GameComponent implements OnInit, OnDestroy {
   private gameSessionSub: Subscription;
   protected gameSession!: GameSession;
 
-  protected allCharactersInGameLobby: Character[] = [];
+  protected allCharactersCurrentlyInGameSession: Character[] = [];
   protected charactersSub!: Subscription;
   protected loading = true;
   protected locationsLoading = true;
@@ -138,7 +138,7 @@ export class GameComponent implements OnInit, OnDestroy {
     // TODO This might be where the movement speed issue is
     // set this.charactersBeingControlledByClient to the characters that share the same userID as the client
     this.charactersBeingControlledByClient =
-      this.allCharactersInGameLobby.filter((character) => {
+      this.allCharactersCurrentlyInGameSession.filter((character) => {
         return character.userId === this.authService.activeUser?.uid;
       });
   }
@@ -177,8 +177,12 @@ export class GameComponent implements OnInit, OnDestroy {
   private setCharactersSub(): void {
     this.charactersSub = this.characterService
       .getCharactersInGameSession(this.gameSession.id)
-      .subscribe((characters) => {
-        this.allCharactersInGameLobby = characters;
+      .subscribe((allCharactersInGameLobby) => {
+        this.allCharactersCurrentlyInGameSession =
+          this.gameSessionService.getCharactersInCurrentGameSession(
+            allCharactersInGameLobby,
+            this.gameSession
+          );
 
         // TODO I probably don't need to do these things every time the characters change.
         // There probably a way to do this after the first time the characters are set.
@@ -295,7 +299,9 @@ export class GameComponent implements OnInit, OnDestroy {
 
         await this.turnService.createNewTurn(
           this.gameSession,
-          this.allCharactersInGameLobby.map((character) => character.id)
+          this.allCharactersCurrentlyInGameSession.map(
+            (character) => character.id
+          )
         );
         console.log('New turn started...');
       } else {
@@ -311,7 +317,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private async enterGameSession() {
     await this.gameSessionService.addPlayersCharactersToGameSession(
-      this.allCharactersInGameLobby,
+      this.allCharactersCurrentlyInGameSession,
       this.gameSession
     );
 
