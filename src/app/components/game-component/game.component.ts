@@ -166,6 +166,13 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub.unsubscribe();
     this.gameSessionSub.unsubscribe();
     this.charactersSub.unsubscribe();
+
+    // Remove all of the player's characters from the game session for now
+    // so the other players can take turns without needing to wait.
+    this.gameSessionService.temporarilyRemoveCharactersFromGameSession(
+      this.gameSession,
+      this.charactersBeingControlledByClient
+    );
   }
 
   private setCharactersSub(): void {

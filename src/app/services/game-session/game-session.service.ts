@@ -113,4 +113,18 @@ export class GameSessionService {
       });
     });
   }
+
+  // This means the player is leaving the game session.
+  // They may come back later.
+  public async temporarilyRemoveCharactersFromGameSession(
+    gameSession: GameSession,
+    playersCharacters: Character[]
+  ) {
+    // Remove the characters from the characterIDsCurrentlyInGame array
+    gameSession.characterIDsCurrentlyInGame =
+      gameSession.characterIDsCurrentlyInGame.filter(
+        (id) => !playersCharacters.map((c) => c.id).includes(id)
+      );
+    await this.updateGameSession(gameSession);
+  }
 }
