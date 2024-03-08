@@ -166,4 +166,55 @@ export class GameSessionService {
       );
     await this.updateGameSession(gameSession);
   }
+
+  public getXOffset(): number {
+    // To center the player on the screen, we need to know the width of the screen
+    return (window.innerWidth / 2) * -1;
+  }
+
+  public getYOffset(): number {
+    // To center the player on the screen, we need to know the width of the screen
+    return (window.innerHeight / 2) * -1;
+  }
+
+  public scrollToCharacterBeingControlledByClient(
+    characterBeingControlledByClient: Character | undefined
+  ) {
+    if (!characterBeingControlledByClient) {
+      return;
+    }
+
+    const xOffset = this.getXOffset();
+    const yOffset = this.getYOffset();
+    const characterXPosition =
+      characterBeingControlledByClient.currentLocation.position.xPosition +
+      xOffset;
+    const characterYPosition =
+      characterBeingControlledByClient.currentLocation.position.yPosition +
+      yOffset;
+    const duration = 600;
+
+    let startingY = window.scrollY;
+    let startingX = window.scrollX;
+    let xDif = characterXPosition - startingX;
+    let yDiff = characterYPosition - startingY;
+    let start: number | null = null;
+
+    // Bootstrap our animation - it will get called right before next frame shall be rendered.
+    // This method was inspired by this stack overflow post: https://stackoverflow.com/questions/17722497/scroll-smoothly-to-specific-element-on-page
+    window.requestAnimationFrame(function step(timestamp) {
+      if (!start) start = timestamp;
+      // Elapsed milliseconds since start of scrolling.
+      let time = timestamp - start;
+      // Get percent of completion in range [0, 1].
+      let percent = Math.min(time / duration, 1);
+
+      window.scrollTo(startingX + xDif * percent, startingY + yDiff * percent);
+
+      // Proceed with animation as long as we wanted it to.
+      if (time < duration) {
+        window.requestAnimationFrame(step);
+      }
+    });
+  }
 }
