@@ -155,7 +155,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     // Remove all of the player's characters from the game session for now
     // so the other players can take turns without needing to wait.
-    await this.gameSessionService.temporarilyRemoveCharactersFromGameSession(
+    await this.gameSessionService.temporarilyRemovePlayersAndCharactersFromGameSession(
       this.gameSession,
       this.charactersBeingControlledByClient
     );
@@ -306,7 +306,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async enterGameSession() {
-    await this.gameSessionService.addPlayersCharactersToGameSession(
+    await this.gameSessionService.addPlayersAndCharactersToGameSession(
       this.allCharactersCurrentlyInGameSession,
       this.gameSession
     );

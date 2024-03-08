@@ -8,6 +8,7 @@ export interface GameSession {
   playerIDs: string[];
   entranceCode: string;
   currentTurn: Turn;
+  playerIDsCurrentlyInGame: string[];
   characterIDsCurrentlyInGame: string[];
   npcIDs: string[];
 }

@@ -85,7 +85,7 @@ export class TurnService {
   public allPlayersHaveFinishedTheirTurn(gameSession: GameSession): boolean {
     let allPlayersHaveFinishedTurn = true;
 
-    gameSession.playerIDs.forEach((playerID) => {
+    gameSession.playerIDsCurrentlyInGame.forEach((playerID) => {
       if (
         !gameSession.currentTurn.playerIDsWhoHaveFinishedTurn.includes(playerID)
       ) {

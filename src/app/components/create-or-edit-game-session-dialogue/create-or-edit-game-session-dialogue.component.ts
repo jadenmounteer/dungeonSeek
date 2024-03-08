@@ -49,6 +49,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
     playerIDs: [],
     entranceCode: '',
     characterIDsCurrentlyInGame: [],
+    playerIDsCurrentlyInGame: [],
     npcIDs: [],
     currentTurn: {
       turnNumber: 1,

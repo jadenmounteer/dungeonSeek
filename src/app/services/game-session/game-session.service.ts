@@ -140,7 +140,7 @@ export class GameSessionService {
     return [...clientsCharacters, ...onlineCharactersInCurrentGameSession];
   }
 
-  public addPlayersCharactersToGameSession(
+  public addPlayersAndCharactersToGameSession(
     playersCharacters: Character[],
     gameSession: GameSession
   ): Promise<any> {
@@ -154,12 +154,22 @@ export class GameSessionService {
       ...charactersWhoJustJoined.map((c) => c.id),
     ];
 
+    let playersWhoJustJoined = playersCharacters.filter((character) => {
+      return !gameSession.playerIDsCurrentlyInGame.includes(character.userId);
+    });
+
+    // Add players to the game session
+    gameSession.playerIDsCurrentlyInGame = [
+      ...gameSession.playerIDsCurrentlyInGame,
+      ...playersWhoJustJoined.map((c) => c.userId),
+    ];
+
     return this.updateGameSession(gameSession);
   }
 
   // This means the player is leaving the game session.
   // They may come back later.
-  public async temporarilyRemoveCharactersFromGameSession(
+  public async temporarilyRemovePlayersAndCharactersFromGameSession(
     gameSession: GameSession,
     playersCharacters: Character[]
   ) {
@@ -168,6 +178,12 @@ export class GameSessionService {
       gameSession.characterIDsCurrentlyInGame.filter(
         (id) => !playersCharacters.map((c) => c.id).includes(id)
       );
+
+    gameSession.playerIDsCurrentlyInGame =
+      gameSession.playerIDsCurrentlyInGame.filter((id) => {
+        return !playersCharacters.map((c) => c.userId).includes(id);
+      });
+
     await this.updateGameSession(gameSession);
   }
 
