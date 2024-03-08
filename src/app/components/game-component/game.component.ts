@@ -50,8 +50,7 @@ export class GameComponent implements OnInit, OnDestroy {
     private gameSessionService: GameSessionService,
     private characterService: CharacterService,
     private authService: AuthService,
-    private turnService: TurnService,
-    private scroller: ViewportScroller
+    private turnService: TurnService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
