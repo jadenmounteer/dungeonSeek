@@ -230,6 +230,9 @@ export class GameComponent implements OnInit, OnDestroy {
     );
 
     this.updateLocationNodeDataRelativeToPlayer();
+    this.gameSessionService.scrollToCharacterBeingControlledByClient(
+      this.characterBeingControlledByClient
+    );
   }
 
   // TODO implement this method
