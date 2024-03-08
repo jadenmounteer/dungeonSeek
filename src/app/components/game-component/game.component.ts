@@ -276,8 +276,6 @@ export class GameComponent implements OnInit, OnDestroy {
       );
 
       if (this.turnService.allPlayersHaveFinishedTheirTurn(this.gameSession)) {
-        this.waitingForNextTurnToStart = false;
-        // then start the next turn
         this.waitingForNextTurnToStart = true;
 
         await this.turnService.createNewTurn(
