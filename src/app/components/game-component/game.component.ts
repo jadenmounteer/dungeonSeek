@@ -161,14 +161,19 @@ export class GameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  ngOnDestroy(): void {
+  async ngOnDestroy(): Promise<void> {
     this.playerPositionSub.unsubscribe();
     this.gameSessionSub.unsubscribe();
     this.charactersSub.unsubscribe();
 
+    // If there are multiple players, signal to the server that the player is done with their turn
+    if (this.gameSession.playerIDs.length > 1) {
+      await this.currentCharacterFinishedTurn();
+    }
+
     // Remove all of the player's characters from the game session for now
     // so the other players can take turns without needing to wait.
-    this.gameSessionService.temporarilyRemoveCharactersFromGameSession(
+    await this.gameSessionService.temporarilyRemoveCharactersFromGameSession(
       this.gameSession,
       this.charactersBeingControlledByClient
     );
