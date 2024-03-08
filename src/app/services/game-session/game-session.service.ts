@@ -15,6 +15,7 @@ import { GameSession } from '../../types/game-session';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { Character } from '../../types/character';
+import { CharacterService } from '../character/character.service';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +34,11 @@ export class GameSessionService {
     }
   ) as Observable<GameSession[]>;
 
-  constructor(private firestore: Firestore, private authService: AuthService) {}
+  constructor(
+    private firestore: Firestore,
+    private authService: AuthService,
+    private characterService: CharacterService
+  ) {}
 
   public async createNewGameSession(gameSession: GameSession): Promise<any> {
     // create a new game session
@@ -118,9 +123,10 @@ export class GameSessionService {
     allCharactersInGameLobby: Character[],
     gameSession: GameSession
   ): Character[] {
-    let clientsCharacters = allCharactersInGameLobby.filter((character) => {
-      return character.userId === this.authService.activeUser?.uid;
-    });
+    let clientsCharacters = this.characterService.getClientCharacters(
+      allCharactersInGameLobby,
+      this.authService.activeUser?.uid
+    );
 
     let onlineCharactersInCurrentGameSession = allCharactersInGameLobby.filter(
       (character) => {

@@ -95,4 +95,16 @@ export class TurnService {
 
     return allPlayersHaveFinishedTurn;
   }
+
+  public async clearClientCharacterIDsFromTurnArray(
+    gameSession: GameSession,
+    clientCharacters: Character[]
+  ): Promise<void> {
+    gameSession.currentTurn.characterIDsWhoHaveTakenTurn =
+      gameSession.currentTurn.characterIDsWhoHaveTakenTurn.filter(
+        (id) => !clientCharacters.map((c) => c.id).includes(id)
+      );
+
+    await this.gameSessionservice.updateGameSession(gameSession);
+  }
 }

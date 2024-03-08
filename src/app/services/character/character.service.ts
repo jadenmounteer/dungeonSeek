@@ -46,4 +46,13 @@ export class CharacterService {
 
     return updateDoc(docRef, { ...character });
   }
+
+  public getClientCharacters(
+    allCharacters: Character[],
+    userID: string | undefined
+  ): Character[] {
+    return allCharacters.filter((character) => {
+      return character.userId === userID;
+    });
+  }
 }

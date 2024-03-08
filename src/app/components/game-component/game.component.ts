@@ -135,7 +135,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private setCharactersBeingControlledByClient(): void {
-    // TODO This might be where the movement speed issue is
     // set this.charactersBeingControlledByClient to the characters that share the same userID as the client
     this.charactersBeingControlledByClient =
       this.allCharactersCurrentlyInGameSession.filter((character) => {
@@ -326,12 +325,23 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameSession
     );
 
+    this.setCharactersBeingControlledByClient();
+
+    // Since they just came back to the game session, clear their id from the array of characterIDsWhoHaveTakenTurn
+    // So they can go again
+    await this.turnService.clearClientCharacterIDsFromTurnArray(
+      this.gameSession,
+      this.characterService.getClientCharacters(
+        this.allCharactersCurrentlyInGameSession,
+        this.authService.activeUser?.uid
+      )
+    );
+
     await this.turnService.resetCharacterMovementSpeeds(
       this.charactersBeingControlledByClient,
       this.gameSession.id
     );
 
-    this.setCharactersBeingControlledByClient();
     this.determineWhosNextToBeControlledByClient();
 
     if (this.characterBeingControlledByClient) {
