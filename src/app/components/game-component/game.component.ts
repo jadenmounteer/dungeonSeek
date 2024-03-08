@@ -42,7 +42,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected characterBeingControlledByClient: Character | undefined;
 
-  protected waitingForOnlinePlayersToFinishTurn = false;
+  protected waitingForNextTurnToStart = false;
 
   constructor(
     protected locationService: LocationService,
@@ -62,8 +62,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn
-        if (this.waitingForOnlinePlayersToFinishTurn) {
-          this.waitingForOnlinePlayersToFinishTurn = false;
+        if (this.waitingForNextTurnToStart) {
+          this.waitingForNextTurnToStart = false;
 
           this.startNewCharacterTurn();
         }
@@ -174,8 +174,7 @@ export class GameComponent implements OnInit, OnDestroy {
         // Or I can do something hacky and just check if the charactersBeingControlledByClient is empty.
         // If so, do this
         if (this.charactersBeingControlledByClient.length === 0) {
-          this.startNewCharacterTurn();
-
+          this.enterGameSession();
           this.loading = false;
         }
       });
@@ -275,12 +274,25 @@ export class GameComponent implements OnInit, OnDestroy {
         this.authService.activeUser!.uid,
         this.gameSession
       );
-    }
 
-    this.initializeNewCharacterTurn();
+      if (this.turnService.allPlayersHaveFinishedTheirTurn(this.gameSession)) {
+        this.waitingForNextTurnToStart = false;
+        // then start the next turn
+        this.waitingForNextTurnToStart = true;
+
+        await this.turnService.createNewTurn(
+          this.gameSession,
+          this.characters.map((character) => character.id)
+        );
+      } else {
+        this.waitingForNextTurnToStart = true;
+      }
+    } else {
+      this.startNewCharacterTurn();
+    }
   }
 
-  private async startNewCharacterTurn() {
+  private async enterGameSession() {
     await this.turnService.resetCharacterMovementSpeeds(
       this.charactersBeingControlledByClient,
       this.gameSession.id
@@ -295,33 +307,18 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  private async initializeNewCharacterTurn() {
+  private async startNewCharacterTurn() {
+    // TODO I only need to reset the movement speed of the next player, not all of them.
+    await this.turnService.resetCharacterMovementSpeeds(
+      this.charactersBeingControlledByClient,
+      this.gameSession.id
+    );
+
     this.determineWhosNextToBeControlledByClient();
+
     if (this.characterBeingControlledByClient) {
       this.scrollToCharacterBeingControlledByClient();
       this.updateLocationNodeDataRelativeToPlayer();
-    } else {
-      // This logic should ensure the last player to finish their turn is the one who starts the next turn
-      if (this.turnService.allPlayersHaveFinishedTheirTurn(this.gameSession)) {
-        this.waitingForOnlinePlayersToFinishTurn = false;
-        // then start the next turn
-
-        await this.turnService.createNewTurn(
-          this.gameSession,
-          this.characters.map((character) => character.id)
-        );
-
-        await this.turnService.resetCharacterMovementSpeeds(
-          this.charactersBeingControlledByClient,
-          this.gameSession.id
-        );
-
-        this.initializeNewCharacterTurn();
-      } else {
-        this.waitingForOnlinePlayersToFinishTurn = true;
-
-        // TODO subscribe and listen to the gameSession to see if all players have finished their turn
-      }
     }
   }
 }

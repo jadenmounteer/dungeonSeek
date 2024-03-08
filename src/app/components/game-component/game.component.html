@@ -63,9 +63,7 @@
       [characterName]="characterBeingControlledByClient?.name"
       [characterMovementSpeed]="characterBeingControlledByClient?.movementSpeed"
       [turnNumber]="gameSession?.currentTurn?.turnNumber || 0"
-      [waitingForOnlinePlayersToFinishTurn]="
-        waitingForOnlinePlayersToFinishTurn
-      "
+      [waitingForOnlinePlayersToFinishTurn]="waitingForNextTurnToStart"
       (endTurn)="currentCharacterFinishedTurn()"
     ></app-game-footer>
   </div>
