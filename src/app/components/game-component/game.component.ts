@@ -58,11 +58,17 @@ export class GameComponent implements OnInit, OnDestroy {
     this.gameSessionSub = this.gameSessionService
       .getGameSession(gameSessionID)
       .subscribe((gameSession) => {
+        console.log(gameSession);
         this.gameSession = gameSession;
 
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn
-        if (this.waitingForNextTurnToStart) {
+        // We also check the characterIDsWhoHaveTakenTurn array because this gameSession subscription will
+        // fire multiple times while we are waiting for other players
+        if (
+          this.waitingForNextTurnToStart &&
+          this.gameSession.currentTurn.characterIDsWhoHaveTakenTurn.length === 0
+        ) {
           this.waitingForNextTurnToStart = false;
 
           this.startNewCharacterTurn();
@@ -276,13 +282,20 @@ export class GameComponent implements OnInit, OnDestroy {
       );
 
       if (this.turnService.allPlayersHaveFinishedTheirTurn(this.gameSession)) {
+        console.log(
+          'Looks like all players have finished their turns. Starting a new one.'
+        );
         this.waitingForNextTurnToStart = true;
 
         await this.turnService.createNewTurn(
           this.gameSession,
           this.characters.map((character) => character.id)
         );
+        console.log('New turn started...');
       } else {
+        console.log(
+          'Ok...we finished our turn and are waiting for the next player to start'
+        );
         this.waitingForNextTurnToStart = true;
       }
     } else {
@@ -306,6 +319,8 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async startNewCharacterTurn() {
+    console.log('Starting new character turn');
+    console.log(this.gameSession);
     // TODO I only need to reset the movement speed of the next player, not all of them.
     await this.turnService.resetCharacterMovementSpeeds(
       this.charactersBeingControlledByClient,
@@ -315,6 +330,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.determineWhosNextToBeControlledByClient();
 
     if (this.characterBeingControlledByClient) {
+      console.log(`Scrolling to ${this.characterBeingControlledByClient.name}`);
       this.scrollToCharacterBeingControlledByClient();
       this.updateLocationNodeDataRelativeToPlayer();
     }
