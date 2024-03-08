@@ -1,5 +1,8 @@
 <div class="footer-wrapper">
-  <div class="toggle-footer-button-wrapper">
+  <div
+    class="toggle-footer-button-wrapper"
+    [ngClass]="{ 'menu-closed': !menuOpen }"
+  >
     <app-toggle-menu-button
       (toggleMenu)="menuOpen = !menuOpen"
     ></app-toggle-menu-button>
