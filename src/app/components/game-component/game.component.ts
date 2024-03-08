@@ -142,20 +142,53 @@ export class GameComponent implements OnInit, OnDestroy {
       });
   }
 
-  private scrollToCharacterBeingControlledByClient(): void {
+  private getXOffset(): number {
+    // To center the player on the screen, we need to know the width of the screen
+    return (window.innerWidth / 2) * -1;
+  }
+
+  private getYOffset(): number {
+    // To center the player on the screen, we need to know the width of the screen
+    return (window.innerHeight / 2) * -1;
+  }
+
+  private scrollToCharacterBeingControlledByClient() {
     if (!this.characterBeingControlledByClient) {
       return;
     }
 
-    // Offset to center the element in the screen
-    const xOffset = -100;
-    const yOffset = -300;
-    scrollTo(
+    const xOffset = this.getXOffset();
+    const yOffset = this.getYOffset();
+    const characterXPosition =
       this.characterBeingControlledByClient.currentLocation.position.xPosition +
-        xOffset,
+      xOffset;
+    const characterYPosition =
       this.characterBeingControlledByClient.currentLocation.position.yPosition +
-        yOffset
-    );
+      yOffset;
+    const duration = 1000;
+
+    let startingY = window.scrollY;
+    let startingX = window.scrollX;
+    let xDif = characterXPosition - startingX;
+    let yDiff = characterYPosition - startingY;
+    let start: number | null = null;
+
+    // Bootstrap our animation - it will get called right before next frame shall be rendered.
+    // This method was inspired by this stack overflow post: https://stackoverflow.com/questions/17722497/scroll-smoothly-to-specific-element-on-page
+    window.requestAnimationFrame(function step(timestamp) {
+      if (!start) start = timestamp;
+      // Elapsed milliseconds since start of scrolling.
+      let time = timestamp - start;
+      // Get percent of completion in range [0, 1].
+      let percent = Math.min(time / duration, 1);
+
+      window.scrollTo(startingX + xDif * percent, startingY + yDiff * percent);
+
+      // Proceed with animation as long as we wanted it to.
+      if (time < duration) {
+        window.requestAnimationFrame(step);
+      }
+    });
   }
 
   ngOnInit(): void {}
