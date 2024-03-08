@@ -28,7 +28,12 @@
     </div>
   </div>
 
-  <button mat-raised-button color="primary" (click)="enterGame()">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="enterGame()"
+    [disabled]="characters.length <= 0 || !characters"
+  >
     Enter Game
   </button>
 </div>
