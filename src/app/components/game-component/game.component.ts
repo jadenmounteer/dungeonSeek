@@ -311,6 +311,11 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async enterGameSession() {
+    await this.gameSessionService.addPlayersCharactersToGameSession(
+      this.characters,
+      this.gameSession
+    );
+
     await this.turnService.resetCharacterMovementSpeeds(
       this.charactersBeingControlledByClient,
       this.gameSession.id

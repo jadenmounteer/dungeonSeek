@@ -114,6 +114,19 @@ export class GameSessionService {
     });
   }
 
+  public addPlayersCharactersToGameSession(
+    playersCharacters: Character[],
+    gameSession: GameSession
+  ): Promise<any> {
+    // Add the characters to the existing characterIDsCurrentlyInGame array
+    gameSession.characterIDsCurrentlyInGame = [
+      ...gameSession.characterIDsCurrentlyInGame,
+      ...playersCharacters.map((c) => c.id),
+    ];
+
+    return this.updateGameSession(gameSession);
+  }
+
   // This means the player is leaving the game session.
   // They may come back later.
   public async temporarilyRemoveCharactersFromGameSession(
