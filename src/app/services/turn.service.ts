@@ -50,6 +50,7 @@ export class TurnService {
       characterIDs,
       turnNumber: newTurnNumber,
       playerIDsWhoHaveFinishedTurn: [],
+      npcIDsWhoHaveTakenTurn: [],
     };
 
     gameSession.currentTurn = newTurn;
