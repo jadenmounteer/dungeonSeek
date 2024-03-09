@@ -1,8 +1,8 @@
-<div class="game-card" @fadeIn @fadeOut>
-  <div class="tp-box" [@flipState]="flip">
-    <div class="tp-box__side tp-box__front">
+<div class="game-card-wrapper" @fadeIn @fadeOut>
+  <div class="game-card" [@flipState]="flip">
+    <div class="game-card__side game-card__front">
       <span class="big-text">DungeonSeek</span>
     </div>
-    <div class="tp-box__side tp-box__back">Some info...</div>
+    <div class="game-card__side game-card__back">Some info...</div>
   </div>
 </div>
