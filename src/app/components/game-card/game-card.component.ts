@@ -52,6 +52,6 @@ export class GameCardComponent implements OnInit {
     setTimeout(() => {
       // flip the card
       this.toggleFlip();
-    }, 5000);
+    }, 1000);
   }
 }

@@ -23,7 +23,7 @@
     ></app-location-info>
 
     <!-- Only appears when you draw an event card -->
-    <app-game-card></app-game-card>
+    <app-game-card *ngIf="showEventCard"></app-game-card>
 
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">
       <div
@@ -72,6 +72,7 @@
       [turnNumber]="gameSession?.currentTurn?.turnNumber || 0"
       [waitingForOnlinePlayersToFinishTurn]="waitingForNextTurnToStart"
       (endTurn)="currentCharacterFinishedTurn()"
+      (drawEventCard)="drawEventCard()"
     ></app-game-footer>
   </div>
 </div>

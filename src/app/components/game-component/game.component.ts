@@ -47,6 +47,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected characterBeingControlledByClient: Character | undefined;
 
   protected waitingForNextTurnToStart = false;
+  protected showEventCard = false;
 
   constructor(
     protected locationService: LocationService,
@@ -360,5 +361,9 @@ export class GameComponent implements OnInit, OnDestroy {
       );
       this.updateLocationNodeDataRelativeToPlayer();
     }
+  }
+
+  protected drawEventCard() {
+    this.showEventCard = true;
   }
 }

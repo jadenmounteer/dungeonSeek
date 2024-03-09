@@ -15,12 +15,19 @@ export class GameFooterComponent {
   @Input() public waitingForOnlinePlayersToFinishTurn: boolean = false;
   @Input() public characterName: string | undefined;
   @Output() protected endTurn: EventEmitter<any> = new EventEmitter();
+  @Output() protected drawEventCard: EventEmitter<any> = new EventEmitter();
 
   protected menuOpen: boolean = true;
 
   protected onEndTurn() {
     if (!this.waitingForOnlinePlayersToFinishTurn) {
       this.endTurn.emit();
+    }
+  }
+
+  protected onDrawEventCard() {
+    if (!this.waitingForOnlinePlayersToFinishTurn) {
+      this.drawEventCard.emit();
     }
   }
 }

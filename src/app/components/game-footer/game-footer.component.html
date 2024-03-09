@@ -43,6 +43,14 @@
 
     <div
       class="game-button"
+      (click)="onDrawEventCard()"
+      *ngIf="!waitingForOnlinePlayersToFinishTurn"
+    >
+      Draw Event Card
+    </div>
+
+    <div
+      class="game-button"
       (click)="onEndTurn()"
       *ngIf="!waitingForOnlinePlayersToFinishTurn"
     >
