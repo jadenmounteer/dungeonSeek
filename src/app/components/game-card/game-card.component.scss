@@ -5,18 +5,20 @@
   perspective: 800px;
   position: fixed;
   top: 0;
-  left: 50;
+  left: 0;
   z-index: 9999;
   height: 100%;
   width: 100%;
-  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .game-card {
   position: relative;
   width: 100%;
   height: 100%;
-  margin: 3rem auto;
+  // margin: 3rem auto;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transform: transform 1s;
@@ -48,13 +50,18 @@
   user-select: none;
 }
 .game-card__front {
-  background: green;
+  background: #23262d;
   -webkit-transform: rotateY(0deg);
   -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .game-card__back {
-  background: #23262d;
+  background-image: url("../../../assets/parchment-texture.jpeg");
   -webkit-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
