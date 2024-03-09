@@ -1,10 +1,8 @@
-<div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front big-text">DungeonSeek</div>
-    <div class="flip-card-back">
-      <h1>John Doe</h1>
-      <p>Architect & Engineer</p>
-      <p>We love that guy</p>
+<div class="game-card">
+  <div class="tp-box" [@flipState]="flip">
+    <div class="tp-box__side tp-box__front">
+      <span class="big-text">DungeonSeek</span>
     </div>
+    <div class="tp-box__side tp-box__back">Some info...</div>
   </div>
 </div>
