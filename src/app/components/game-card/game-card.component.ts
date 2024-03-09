@@ -7,6 +7,8 @@ import {
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { fadeIn } from '../../animations/fade-in-animation';
+import { fadeOut } from '../../animations/fade-out-animation';
 @Component({
   selector: 'app-game-card',
   standalone: true,
@@ -30,6 +32,8 @@ import { Component, OnInit } from '@angular/core';
       transition('active => inactive', animate('500ms ease-out')),
       transition('inactive => active', animate('500ms ease-in')),
     ]),
+    fadeIn,
+    fadeOut,
   ],
 })
 export class GameCardComponent implements OnInit {

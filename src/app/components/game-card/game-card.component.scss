@@ -11,14 +11,15 @@
 
 .tp-box {
   position: relative;
-  width: 200px;
-  height: 100px;
+  width: 172px;
+  height: 240px;
   margin: 3rem auto;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transform: transform 1s;
   -ms-transform: transform 1s;
   transform: transform 1s;
+  border-radius: 4px;
 }
 .tp-box__side {
   width: 100%;
