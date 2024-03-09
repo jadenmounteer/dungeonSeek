@@ -14,6 +14,7 @@ import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
+import { GameCardComponent } from '../game-card/game-card.component';
 
 @Component({
   selector: 'app-game',
@@ -25,6 +26,7 @@ import { LocationInfoComponent } from '../location-info/location-info.component'
     TurnArrowComponent,
     GameFooterComponent,
     LocationInfoComponent,
+    GameCardComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',

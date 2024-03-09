@@ -22,6 +22,9 @@
       [location]="characterBeingControlledByClient?.currentLocation"
     ></app-location-info>
 
+    <!-- Only appears when you draw an event card -->
+    <app-game-card></app-game-card>
+
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">
       <div
         class="player-wrapper"
