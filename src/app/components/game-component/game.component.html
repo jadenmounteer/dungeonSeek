@@ -19,6 +19,7 @@
     </span>
 
     <app-location-info
+      *ngIf="!showEventCard"
       [location]="characterBeingControlledByClient?.currentLocation"
     ></app-location-info>
 
