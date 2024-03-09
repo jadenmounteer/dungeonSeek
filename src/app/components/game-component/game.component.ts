@@ -13,6 +13,7 @@ import { AuthService } from '../../auth/auth.service';
 import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer/game-footer.component';
+import { LocationInfoComponent } from '../location-info/location-info.component';
 
 @Component({
   selector: 'app-game',
@@ -23,6 +24,7 @@ import { GameFooterComponent } from '../game-footer/game-footer.component';
     CommonModule,
     TurnArrowComponent,
     GameFooterComponent,
+    LocationInfoComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
