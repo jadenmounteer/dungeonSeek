@@ -1,5 +1,7 @@
 @import "../../../styles.scss";
 
+$card-border-radius: 25px;
+
 .game-card-wrapper {
   -webkit-perspective: 800px;
   perspective: 800px;
@@ -24,7 +26,6 @@
   -webkit-transform: transform 1s;
   -ms-transform: transform 1s;
   transform: transform 1s;
-  border-radius: 4px;
 
   @include for-tablet-landscape-up {
     width: 50%;
@@ -48,9 +49,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  border-radius: $card-border-radius;
 }
 .game-card__front {
-  background: #23262d;
+  background-image: url("../../../assets/stone-texture.jpeg");
   -webkit-transform: rotateY(0deg);
   -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
@@ -62,6 +64,7 @@
 
 .game-card__back {
   background-image: url("../../../assets/parchment-texture.jpeg");
+  background-size: cover;
   -webkit-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
