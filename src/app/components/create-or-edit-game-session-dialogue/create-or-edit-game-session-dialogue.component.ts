@@ -18,6 +18,7 @@ import {
   CampaignServiceService,
 } from '../../services/game-session/campaign-service/campaign-service.service';
 import { MatSelectModule } from '@angular/material/select';
+import { CardService } from '../../services/card.service';
 @Component({
   selector: 'app-create-or-edit-game-session-dialogue',
   standalone: true,
@@ -41,7 +42,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
 
   // TODO https://dev.to/shane/working-with-enums-in-angular-html-templates-2io9
 
-  protected newGameSession: GameSession = {
+  protected newGameSession: Partial<GameSession> = {
     id: '',
     userID: '',
     gameName: '',
@@ -62,13 +63,16 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateOrEditGameSessionDialogueComponent>,
     @Inject(MAT_DIALOG_DATA) public data: GameSession | null,
-    protected campaignService: CampaignServiceService
+    protected campaignService: CampaignServiceService,
+    protected cardService: CardService
   ) {}
 
   public async ngOnInit(): Promise<void> {
     if (this.data) {
       // This means we are editing an existing game session
       this.newGameSession = this.data;
+    } else {
+      this.newGameSession.roadEventsDeck = this.cardService.getCardStack();
     }
 
     // Fetch the campaign data

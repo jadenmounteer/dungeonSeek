@@ -1,3 +1,5 @@
+import { CardStack } from './card-deck';
+import { CardName } from '../services/card.service';
 import { CampaignNames } from '../services/game-session/campaign-service/campaign-service.service';
 
 export interface GameSession {
@@ -11,6 +13,7 @@ export interface GameSession {
   playerIDsCurrentlyInGame: string[];
   characterIDsCurrentlyInGame: string[];
   npcIDs: string[];
+  roadEventsDeck: CardStack<CardName>;
 }
 
 export interface Turn {
