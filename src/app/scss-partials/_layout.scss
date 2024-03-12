@@ -61,3 +61,9 @@ $game-board-height: calc(1536px * 3);
     @content;
   }
 }
+
+@mixin for-landscape-phone {
+  @media (max-width: 1000px) and (orientation: landscape) {
+    @content;
+  }
+}

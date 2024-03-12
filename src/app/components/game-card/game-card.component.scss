@@ -35,6 +35,10 @@ $card-border-radius: 25px;
     width: 20%;
     min-width: 600px;
   }
+
+  @include for-landscape-phone {
+    height: 100%;
+  }
 }
 .game-card__side {
   position: absolute;
