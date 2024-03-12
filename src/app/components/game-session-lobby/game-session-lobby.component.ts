@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditCharacterComponent } from '../add-or-edit-character/add-or-edit-character.component';
 import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-game-session-lobby',
@@ -31,7 +32,8 @@ export class GameSessionLobbyComponent implements OnDestroy {
     protected router: Router,
     private dialog: MatDialog,
     private characterService: CharacterService,
-    protected authService: AuthService
+    protected authService: AuthService,
+    private cardService: CardService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -51,12 +53,17 @@ export class GameSessionLobbyComponent implements OnDestroy {
       .getCharactersInGameSession(this.gameSession.id)
       .subscribe((characters) => {
         this.characters = characters;
+        this.initializeGameCards();
         this.loading = false;
       });
   }
   ngOnDestroy(): void {
     this.gameSessionSub.unsubscribe();
     this.charactersSub.unsubscribe();
+  }
+
+  private async initializeGameCards() {
+    await this.cardService.fetchEventCards();
   }
 
   protected enterGame(): void {

@@ -73,6 +73,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
       // This means we are editing an existing game session
       this.newGameSession = this.data;
     } else {
+      await this.cardService.fetchEventCards();
       this.newGameSession.roadEventsDeck = this.cardService.createCardDeck();
     }
 

@@ -313,8 +313,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async enterGameSession() {
-    await this.cardService.fetchEventCards();
-
     await this.gameSessionService.addPlayersAndCharactersToGameSession(
       this.allCharactersCurrentlyInGameSession,
       this.gameSession
