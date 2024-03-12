@@ -42,7 +42,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
 
   // TODO https://dev.to/shane/working-with-enums-in-angular-html-templates-2io9
 
-  protected newGameSession: Partial<GameSession> = {
+  protected newGameSession: GameSession = {
     id: '',
     userID: '',
     gameName: '',
@@ -58,6 +58,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
       playerIDsWhoHaveFinishedTurn: [],
       npcIDsWhoHaveTakenTurn: [],
     },
+    roadEventsDeck: [],
   };
 
   constructor(
@@ -72,7 +73,7 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
       // This means we are editing an existing game session
       this.newGameSession = this.data;
     } else {
-      this.newGameSession.roadEventsDeck = this.cardService.getCardStack();
+      this.newGameSession.roadEventsDeck = this.cardService.createCardDeck();
     }
 
     // Fetch the campaign data

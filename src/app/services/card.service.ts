@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { LocationType } from './location-service';
-import { CardStack } from '../types/card-deck';
 
 export type CardName = 'Crazy Traveler';
 export type Card = {
@@ -46,32 +45,10 @@ export class CardService {
     return;
   }
 
-  public getCardStack(): CardStack<CardName> {
+  public createCardDeck(): CardName[] {
     // Shuffle all of the CardNames into an array
     const cardNames = Array.from(this.roadEvents.keys());
-    const shuffledNames = this.shuffle(cardNames);
-
-    return this.createCardDeck(shuffledNames);
-  }
-
-  private createCardDeck(cardNames: Array<CardName>): CardStack<CardName> {
-    // Create a stack of cards
-    const cardStack: CardStack<CardName> = {
-      push: (cardName: CardName) => {
-        cardNames.push(cardName);
-      },
-      pop: () => {
-        return cardNames.pop();
-      },
-      peek: () => {
-        return cardNames[cardNames.length - 1];
-      },
-      size: () => {
-        return cardNames.length;
-      },
-    };
-
-    return cardStack;
+    return this.shuffle(cardNames);
   }
 
   private shuffle(array: Array<CardName>): Array<CardName> {
