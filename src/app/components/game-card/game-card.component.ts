@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
-import { CardService, EventCard } from '../../services/card.service';
+import { CardService, Card } from '../../services/card.service';
 @Component({
   selector: 'app-game-card',
   standalone: true,
@@ -39,12 +39,12 @@ import { CardService, EventCard } from '../../services/card.service';
 })
 export class GameCardComponent implements OnInit {
   protected flip: string = 'inactive';
-  protected eventCard: EventCard;
+  protected card: Card;
 
   constructor(private cardService: CardService) {
-    const card = this.cardService.getEventCard('Crazy Traveler', 'Road');
+    const card = this.cardService.getCard('Crazy Traveler', 'Road');
     if (card) {
-      this.eventCard = card;
+      this.card = card;
     } else {
       throw new Error('Card not found');
     }

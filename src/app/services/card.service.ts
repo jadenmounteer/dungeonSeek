@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocationType } from './location-service';
 
 export type CardName = 'Crazy Traveler';
-export type EventCard = {
+export type Card = {
   name: CardName;
   description: string;
 };
@@ -13,7 +13,7 @@ export type EventCard = {
 export class CardService {
   // This map holds a all the road events.
   // It is used to get a specific event card when you don't want to get one off the top of the deck
-  private roadEvents: Map<CardName, EventCard> = new Map();
+  private roadEvents: Map<CardName, Card> = new Map();
   constructor() {}
 
   // Called when a user jumps into the game.
@@ -24,7 +24,7 @@ export class CardService {
     const jsonResponse = await response.json();
 
     // Create the road events map
-    jsonResponse.forEach((eventCard: EventCard) => {
+    jsonResponse.forEach((eventCard: Card) => {
       this.roadEvents.set(eventCard.name, eventCard);
     });
   }
@@ -35,10 +35,10 @@ export class CardService {
    * @param locationType
    * @returns
    */
-  public getEventCard(
+  public getCard(
     cardName: CardName,
     locationType: LocationType
-  ): EventCard | undefined {
+  ): Card | undefined {
     if (locationType === 'Road') {
       return this.roadEvents.get(cardName);
     }
