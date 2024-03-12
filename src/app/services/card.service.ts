@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { LocationType } from './location-service';
 
-export type CardName = 'Crazy Traveler' | 'The Lost' | 'The Bandit';
+export type CardName =
+  | 'Crazy Traveler'
+  | 'The Lost'
+  | 'The Bandit'
+  | 'The Merchant'
+  | 'The Caravan';
 export type Card = {
   name: CardName;
   description: string;
