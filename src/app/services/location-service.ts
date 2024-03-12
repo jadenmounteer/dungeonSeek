@@ -11,7 +11,10 @@ export type LocationNode = {
   position: Position;
   adjacentLocations: LocationKey[];
   distanceFromPlayer: number | null;
+  locationType: LocationType;
 };
+
+export type LocationType = 'Road' | 'Dungeon' | 'Wilderness' | 'Town' | 'City';
 
 export type LocationKey =
   | 'Goeth'
@@ -40,6 +43,7 @@ export class LocationService {
     position: { xPosition: 2489, yPosition: 2803 },
     adjacentLocations: ['East Goeth Road'],
     distanceFromPlayer: null,
+    locationType: 'City',
   };
 
   private eastGoethRoad: LocationNode = {
@@ -47,6 +51,7 @@ export class LocationService {
     position: { xPosition: 2838, yPosition: 2700 },
     adjacentLocations: ['Goeth', 'Unf'],
     distanceFromPlayer: null,
+    locationType: 'Road',
   };
 
   private unf: LocationNode = {
@@ -54,6 +59,7 @@ export class LocationService {
     position: { xPosition: 3113, yPosition: 2608 },
     adjacentLocations: ['East Goeth Road', 'East Unf Road'],
     distanceFromPlayer: null,
+    locationType: 'Town',
   };
 
   private eastUnfRoad: LocationNode = {
@@ -61,6 +67,7 @@ export class LocationService {
     position: { xPosition: 3436, yPosition: 2585 },
     adjacentLocations: ['Unf', 'West Hillmire Road', 'Lake View Cavern'],
     distanceFromPlayer: null,
+    locationType: 'Road',
   };
 
   private lakeViewCavern: LocationNode = {
@@ -68,6 +75,7 @@ export class LocationService {
     position: { xPosition: 3574, yPosition: 2694 },
     adjacentLocations: ['East Unf Road'],
     distanceFromPlayer: null,
+    locationType: 'Dungeon',
   };
 
   private westHillmireRoad: LocationNode = {
@@ -75,6 +83,7 @@ export class LocationService {
     position: { xPosition: 3467, yPosition: 2326 },
     adjacentLocations: ['East Unf Road', 'Hillmire'],
     distanceFromPlayer: null,
+    locationType: 'Road',
   };
 
   private hillmire: LocationNode = {
@@ -82,6 +91,7 @@ export class LocationService {
     position: { xPosition: 3677, yPosition: 2180 },
     adjacentLocations: ['Hillmire North Road', 'West Hillmire Road'],
     distanceFromPlayer: null,
+    locationType: 'Town',
   };
 
   private hillmireNorthRoad: LocationNode = {
@@ -89,6 +99,7 @@ export class LocationService {
     position: { xPosition: 3602, yPosition: 1939 },
     adjacentLocations: ['Hillmire', 'Dunal East Road'],
     distanceFromPlayer: null,
+    locationType: 'Road',
   };
 
   private dunalEastRoad: LocationNode = {
@@ -96,6 +107,7 @@ export class LocationService {
     position: { xPosition: 3500, yPosition: 1742 },
     adjacentLocations: ['Hillmire North Road', 'Dunal'],
     distanceFromPlayer: null,
+    locationType: 'Road',
   };
 
   private dunal: LocationNode = {
@@ -103,6 +115,7 @@ export class LocationService {
     position: { xPosition: 3120, yPosition: 1807 },
     adjacentLocations: ['Dunal East Road', 'Dunal West Road'],
     distanceFromPlayer: null,
+    locationType: 'Town',
   };
 
   private dunalWestRoad: LocationNode = {
@@ -110,6 +123,7 @@ export class LocationService {
     position: { xPosition: 2901, yPosition: 1765 },
     adjacentLocations: ['Dunal', 'Mullin Forest'],
     distanceFromPlayer: null,
+    locationType: 'Road',
   };
 
   private mullinForest: LocationNode = {
@@ -117,6 +131,7 @@ export class LocationService {
     position: { xPosition: 2600, yPosition: 1809 },
     adjacentLocations: ['Dunal West Road', 'Mullin', 'Bayrom'],
     distanceFromPlayer: null,
+    locationType: 'Road',
   };
 
   private mullin: LocationNode = {
@@ -124,6 +139,7 @@ export class LocationService {
     position: { xPosition: 2185, yPosition: 1822 },
     adjacentLocations: ['Mullin Forest', 'Bayrom'],
     distanceFromPlayer: null,
+    locationType: 'Town',
   };
 
   private bayrom: LocationNode = {
@@ -131,6 +147,7 @@ export class LocationService {
     position: { xPosition: 2413, yPosition: 2034 },
     adjacentLocations: ['Mullin Forest', 'Mullin'],
     distanceFromPlayer: null,
+    locationType: 'Town',
   };
 
   public locationsMap: Map<LocationKey, LocationNode> = new Map([
