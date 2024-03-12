@@ -15,6 +15,7 @@ import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { GameCardComponent } from '../game-card/game-card.component';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-game',
@@ -55,7 +56,8 @@ export class GameComponent implements OnInit, OnDestroy {
     private gameSessionService: GameSessionService,
     private characterService: CharacterService,
     private authService: AuthService,
-    private turnService: TurnService
+    private turnService: TurnService,
+    private cardService: CardService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -311,6 +313,8 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async enterGameSession() {
+    await this.cardService.fetchEventCards();
+
     await this.gameSessionService.addPlayersAndCharactersToGameSession(
       this.allCharactersCurrentlyInGameSession,
       this.gameSession
