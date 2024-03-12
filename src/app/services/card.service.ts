@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocationType } from './location-service';
 
-export type CardName = 'Crazy Traveler';
+export type CardName = 'Crazy Traveler' | 'The Lost' | 'The Bandit';
 export type Card = {
   name: CardName;
   description: string;
@@ -13,7 +13,7 @@ export type Card = {
 export class CardService {
   // This map holds a all the road events.
   // It is used to get a specific event card when you don't want to get one off the top of the deck
-  private roadEvents: Map<CardName, Card> = new Map();
+  private roadEventCards: Map<CardName, Card> = new Map();
   constructor() {}
 
   // Called when a user jumps into the game.
@@ -25,12 +25,12 @@ export class CardService {
 
     // Create the road events map
     jsonResponse.forEach((eventCard: Card) => {
-      this.roadEvents.set(eventCard.name, eventCard);
+      this.roadEventCards.set(eventCard.name, eventCard);
     });
   }
 
   /**
-   * Gets a specific event card when you don't want to get one off the top of the deck
+   * Gets a specific event card when you draw one off the top of the deck
    * @param cardName
    * @param locationType
    * @returns
@@ -40,14 +40,14 @@ export class CardService {
     locationType: LocationType
   ): Card | undefined {
     if (locationType === 'Road') {
-      return this.roadEvents.get(cardName);
+      return this.roadEventCards.get(cardName);
     }
     return;
   }
 
   public createCardDeck(): CardName[] {
     // Shuffle all of the CardNames into an array
-    const cardNames = Array.from(this.roadEvents.keys());
+    const cardNames = Array.from(this.roadEventCards.keys());
     return this.shuffle(cardNames);
   }
 

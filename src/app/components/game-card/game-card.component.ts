@@ -6,10 +6,11 @@ import {
   trigger,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
-import { CardService, Card } from '../../services/card.service';
+import { CardService, Card, CardName } from '../../services/card.service';
+import { LocationType } from '../../services/location-service';
 @Component({
   selector: 'app-game-card',
   standalone: true,
@@ -38,23 +39,30 @@ import { CardService, Card } from '../../services/card.service';
   ],
 })
 export class GameCardComponent implements OnInit {
-  protected flip: string = 'inactive';
-  protected card: Card;
+  @Input() public cardName: CardName | undefined;
+  @Input() public locationType: LocationType | undefined;
 
-  constructor(private cardService: CardService) {
-    const card = this.cardService.getCard('Crazy Traveler', 'Road');
-    if (card) {
-      this.card = card;
-    } else {
-      throw new Error('Card not found');
-    }
-  }
+  protected flip: string = 'inactive';
+  protected card: Card | undefined;
+
+  constructor(private cardService: CardService) {}
 
   toggleFlip() {
     this.flip = this.flip == 'inactive' ? 'active' : 'inactive';
   }
 
   ngOnInit(): void {
+    console.log(this.cardName);
+    console.log(this.locationType);
+    if (!this.cardName || !this.locationType) {
+      throw new Error('Card name or location type not provided');
+    }
+    const card = this.cardService.getCard(this.cardName, this.locationType);
+    if (card) {
+      this.card = card;
+    } else {
+      throw new Error('Card not found');
+    }
     this.flipCard();
   }
 
