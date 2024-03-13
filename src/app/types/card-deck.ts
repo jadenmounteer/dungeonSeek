@@ -10,6 +10,12 @@ export interface CardDeck {
   cardNames: string[];
 }
 
+/**
+ * Here's how you add a new card deck:
+ * 1. Add a new enum value to DeckName
+ * 2. Add a new JSON file with the same DeckName
+ * 3. Update the card.service.ts methods to account for this new deck name.
+ */
 export enum RoadEventCardNames {
   CRAZY_TRAVELER = 'Crazy Traveler',
   THE_LOST = 'The Lost',
