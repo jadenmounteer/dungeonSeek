@@ -17,6 +17,23 @@ export class CardService {
 
   constructor(private firestore: Firestore) {}
 
+  public setCardDecksMap(listOfCardDecks: CardDeck[]) {
+    listOfCardDecks.forEach((cardDeck) => {
+      const mapOfCardNames = new Map<CardName, Card>();
+
+      cardDeck.cardNames.forEach((cardName) => {
+        const card = this.getCard(cardName, cardDeck.deckName);
+        console.log(card);
+        if (card) {
+          mapOfCardNames.set(cardName, card);
+        }
+      });
+
+      this.cardDecks.set(cardDeck.deckName, mapOfCardNames);
+      console.log(this.cardDecks);
+    });
+  }
+
   public getCardDecks(gameSessionId: string): Observable<CardDeck[]> {
     const collectionRef = collection(
       this.firestore,
@@ -48,14 +65,12 @@ export class CardService {
    * @param locationType
    * @returns
    */
-  public getCard(
-    cardName: CardName,
-    locationType: LocationType
-  ): Card | undefined {
-    if (locationType === 'Road') {
-      return this.roadEventCards.get(cardName);
+  public getCard(cardName: CardName, DeckName: DeckName): Card | undefined {
+    const cardMap = this.cardDecks.get(DeckName);
+    if (!cardMap) {
+      throw new Error('No card deck found for ' + DeckName);
     }
-    return;
+    return cardMap.get(cardName);
   }
 
   public async createCardDecks(gameSessionID: string) {

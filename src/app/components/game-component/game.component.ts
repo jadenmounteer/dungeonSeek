@@ -106,7 +106,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.cardsSub = this.cardService
         .getCardDecks(this.gameSession.id)
         .subscribe((cards) => {
-          console.log('cards', cards);
+          this.cardService.setCardDecksMap(cards);
         });
     }
   }

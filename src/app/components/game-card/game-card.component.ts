@@ -59,12 +59,12 @@ export class GameCardComponent implements OnInit {
     if (!this.cardName || !this.locationType) {
       throw new Error('Card name or location type not provided');
     }
-    const card = this.cardService.getCard(this.cardName, this.locationType);
-    if (card) {
-      this.card = card;
-    } else {
-      throw new Error('Card not found');
-    }
+    // const card = this.cardService.getCard(this.cardName, this.locationType);
+    // if (card) {
+    //   this.card = card;
+    // } else {
+    //   throw new Error('Card not found');
+    // }
     this.flipCard();
   }
 
