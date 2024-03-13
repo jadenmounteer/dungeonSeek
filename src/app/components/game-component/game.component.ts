@@ -15,7 +15,7 @@ import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { GameCardComponent } from '../game-card/game-card.component';
-import { CardService } from '../../services/card.service';
+import { CardName, CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-game',
@@ -367,5 +367,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected drawEventCard() {
     this.showEventCard = true;
+  }
+
+  protected closeCard(event: CardName) {
+    console.log('Closing card', event);
+    this.showEventCard = false;
   }
 }

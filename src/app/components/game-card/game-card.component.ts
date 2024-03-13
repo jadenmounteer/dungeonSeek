@@ -6,7 +6,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { CardService, Card, CardName } from '../../services/card.service';
@@ -41,6 +41,7 @@ import { LocationType } from '../../services/location-service';
 export class GameCardComponent implements OnInit {
   @Input() public cardName: CardName | undefined;
   @Input() public locationType: LocationType | undefined;
+  @Output() public closeCard = new EventEmitter<CardName>();
 
   protected flip: string = 'inactive';
   protected card: Card | undefined;
@@ -72,5 +73,9 @@ export class GameCardComponent implements OnInit {
       // flip the card
       this.toggleFlip();
     }, 1000);
+  }
+
+  protected onCloseCard() {
+    this.closeCard.emit(this.cardName);
   }
 }

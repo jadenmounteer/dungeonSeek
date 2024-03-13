@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocationType } from './location-service';
+import { GameSession } from '../types/game-session';
 
 export type CardName =
   | 'Crazy Traveler'
@@ -74,5 +75,9 @@ export class CardService {
     }
 
     return array;
+  }
+
+  public removeCardFromDeck(cardName: CardName, gameSession: GameSession) {
+    console.log(gameSession);
   }
 }

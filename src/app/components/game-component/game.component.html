@@ -30,6 +30,7 @@
       [locationType]="
         characterBeingControlledByClient?.currentLocation?.locationType
       "
+      (closeCard)="closeCard($event)"
     ></app-game-card>
 
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">
