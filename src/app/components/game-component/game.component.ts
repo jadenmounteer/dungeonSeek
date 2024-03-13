@@ -389,7 +389,9 @@ export class GameComponent implements OnInit, OnDestroy {
       this.characterBeingControlledByClient?.currentLocation.locationType ===
       'Road'
     ) {
-      this.cardName = 'Crazy Traveler';
+      this.cardName = this.cardService.getCardNameAccordingToLocationType(
+        this.characterBeingControlledByClient.currentLocation.locationType
+      );
       this.deckName = DeckName.ROAD_EVENTS;
     }
 

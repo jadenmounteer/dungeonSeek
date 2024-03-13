@@ -154,4 +154,24 @@ export class CardService {
 
     return array;
   }
+
+  public getCardNameAccordingToLocationType(
+    locationType: LocationType
+  ): string | undefined {
+    if (locationType === 'Road') {
+      return this.getNextRoadEventCard();
+    }
+    return;
+  }
+
+  private getNextRoadEventCard(): string {
+    const roadDeck = this.cardDecks.find((deck) => {
+      return deck.deckName === DeckName.ROAD_EVENTS;
+    });
+
+    if (!roadDeck) {
+      throw new Error('Road deck not found');
+    }
+    return roadDeck.cardNames.pop() as string;
+  }
 }
