@@ -103,9 +103,9 @@ export class GameComponent implements OnInit, OnDestroy {
   private updateCards() {
     if (!this.cardsSub) {
       this.cardsSub = this.cardService
-        .getCardDecks(this.gameSession.id)
-        .subscribe((cards) => {
-          console.log(cards);
+        .fetchCardDecks(this.gameSession.id)
+        .subscribe((cardDecks) => {
+          this.cardService.cardDecks = cardDecks;
         });
     }
   }

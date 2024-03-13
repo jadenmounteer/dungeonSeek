@@ -21,11 +21,11 @@ export class CardService {
   private cityEventCardsInfo: Map<string, CardInfo> = new Map();
 
   // includes the names of the cards in the deck.
-  private cardDecks: CardDeck[] = [];
+  public cardDecks: CardDeck[] = [];
 
   constructor(private firestore: Firestore) {}
 
-  public getCardDecks(gameSessionId: string): Observable<CardDeck[]> {
+  public fetchCardDecks(gameSessionId: string): Observable<CardDeck[]> {
     const collectionRef = collection(
       this.firestore,
       'game-sessions',
