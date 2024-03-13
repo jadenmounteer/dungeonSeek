@@ -16,6 +16,7 @@ import { GameFooterComponent } from '../game-footer/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { CardService } from '../../services/card.service';
+import { CardInfo, DeckName } from '../../types/card-deck';
 
 @Component({
   selector: 'app-game',
@@ -50,6 +51,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected waitingForNextTurnToStart = false;
   protected showEventCard = false;
+  protected cardName: string | undefined;
+  protected deckName: DeckName | undefined;
 
   constructor(
     protected locationService: LocationService,
@@ -382,10 +385,18 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected drawEventCard() {
+    if (
+      this.characterBeingControlledByClient?.currentLocation.locationType ===
+      'Road'
+    ) {
+      this.cardName = 'Crazy Traveler';
+      this.deckName = DeckName.ROAD_EVENTS;
+    }
+
     this.showEventCard = true;
   }
 
-  protected closeCard(event: string) {
+  protected closeCard(event: CardInfo) {
     this.showEventCard = false;
     this.gameSessionService.updateGameSession(this.gameSession);
   }

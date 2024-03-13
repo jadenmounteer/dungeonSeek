@@ -24,14 +24,12 @@
     ></app-location-info>
 
     <!-- Only appears when you draw an event card -->
-    <!-- <app-game-card
+    <app-game-card
       *ngIf="showEventCard"
-      [cardName]="gameSession.roadEventsDeck.pop()"
-      [locationType]="
-        characterBeingControlledByClient?.currentLocation?.locationType
-      "
+      [cardName]="cardName"
+      [deckName]="deckName"
       (closeCard)="closeCard($event)"
-    ></app-game-card> -->
+    ></app-game-card>
 
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">
       <div

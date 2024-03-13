@@ -11,7 +11,7 @@ import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { CardService } from '../../services/card.service';
 import { LocationType } from '../../services/location-service';
-import { CardInfo } from '../../types/card-deck';
+import { CardInfo, DeckName } from '../../types/card-deck';
 @Component({
   selector: 'app-game-card',
   standalone: true,
@@ -40,9 +40,9 @@ import { CardInfo } from '../../types/card-deck';
   ],
 })
 export class GameCardComponent implements OnInit {
-  // @Input() public cardName: CardName | undefined;
-  // @Input() public locationType: LocationType | undefined;
-  // @Output() public closeCard = new EventEmitter<CardName>();
+  @Input() public cardName: string | undefined;
+  @Input() public deckName: DeckName | undefined;
+  @Output() public closeCard = new EventEmitter<CardInfo>();
 
   protected flip: string = 'inactive';
   protected card: CardInfo | undefined;
@@ -54,17 +54,15 @@ export class GameCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(this.cardName);
-    // console.log(this.locationType);
-    // if (!this.cardName || !this.locationType) {
-    //   throw new Error('Card name or location type not provided');
-    // }
-    // const card = this.cardService.getCard(this.cardName, this.locationType);
-    // if (card) {
-    //   this.card = card;
-    // } else {
-    //   throw new Error('Card not found');
-    // }
+    if (!this.cardName || !this.deckName) {
+      throw new Error('Card name or location type not provided');
+    }
+    const card = this.cardService.getCardInfo(this.cardName, this.deckName);
+    if (card) {
+      this.card = card;
+    } else {
+      throw new Error('Card not found');
+    }
     this.flipCard();
   }
 
