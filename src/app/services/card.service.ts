@@ -43,8 +43,12 @@ export class CardService {
   // This allows them to have access to the event cards.
   // Using JSON for the card info so I don't have to overload the db
   private async fetchEventCardsInfo(deckName: DeckName): Promise<CardInfo[]> {
+    // Get the deck key from the deck name
+    const deckKey = Object.keys(DeckName).find((key) => {
+      return DeckName[key as keyof typeof DeckName] === deckName;
+    });
     // fetch the JSON data using http
-    const response = await fetch(`assets/json/cards/${deckName}.json`);
+    const response = await fetch(`assets/json/cards/${deckKey}.json`);
     const jsonResponse = await response.json();
 
     return jsonResponse;
@@ -72,7 +76,6 @@ export class CardService {
   public async createCardDecks(gameSessionID: string) {
     // Create a new card deck for each option in the DeckName type
     Object.values(DeckName).forEach((deckName) => {
-      console.log(deckName);
       this.createCardDeck(gameSessionID, deckName as DeckName);
     });
   }
@@ -84,14 +87,10 @@ export class CardService {
   ): Promise<any> {
     // get the card names from the CardName enum
     let cardNames: string[] = [];
-    console.log(DeckName.ROAD_EVENTS);
     if (deckType === DeckName.ROAD_EVENTS) {
-      console.log(`deck name is ${deckType} so we are getting road events`);
       cardNames = Object.values(RoadEventCardNames);
     }
     if (deckType === DeckName.CITY_EVENTS) {
-      console.log(`deck name is ${deckType} so we are getting city events`);
-
       cardNames = Object.values(CityEventCardNames);
     }
 
@@ -116,20 +115,10 @@ export class CardService {
     return addDoc(collectionRef, { ...cardDeck });
   }
 
-  private getCardNameKeysAccordingToDeck(deckName: DeckName): String[] {
-    if (deckName === DeckName.ROAD_EVENTS) {
-      return Object.keys(this.roadEventCardsInfo);
-    }
-    if (deckName === DeckName.CITY_EVENTS) {
-      return Object.keys(this.cityEventCardsInfo);
-    }
-    return [];
-  }
-
   // This is necessary so I can keep all the card data in JSON and not overload the db
   public async fetchCardInfoFromJSON(): Promise<void> {
     await Promise.all(
-      Object.keys(DeckName).map(async (deckName) => {
+      Object.values(DeckName).map(async (deckName) => {
         const cards = await this.fetchEventCardsInfo(deckName as DeckName);
         const mapOfCardNames = new Map<string, CardInfo>();
         cards.forEach((card) => {
