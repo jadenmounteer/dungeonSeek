@@ -65,7 +65,7 @@ export class GameSessionLobbyComponent implements OnDestroy {
   private async initializeGameCards() {
     // This gets the card info for all cards in the game session and stores it in the service
     // so the client has access to any of the card info.
-    await this.cardService.initializeGameCardsOnFrontend();
+    await this.cardService.fetchCardInfoFromJSON();
   }
 
   protected enterGame(): void {

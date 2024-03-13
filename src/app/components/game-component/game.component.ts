@@ -16,7 +16,6 @@ import { GameFooterComponent } from '../game-footer/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { CardService } from '../../services/card.service';
-import { CardName } from '../../types/card-deck';
 
 @Component({
   selector: 'app-game',
@@ -106,7 +105,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.cardsSub = this.cardService
         .getCardDecks(this.gameSession.id)
         .subscribe((cards) => {
-          this.cardService.setCardDecksMap(cards);
+          console.log(cards);
         });
     }
   }
@@ -386,7 +385,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showEventCard = true;
   }
 
-  protected closeCard(event: CardName) {
+  protected closeCard(event: string) {
     this.showEventCard = false;
     this.gameSessionService.updateGameSession(this.gameSession);
   }
