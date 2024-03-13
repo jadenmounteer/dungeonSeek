@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateOrEditGameSessionDialogueComponent } from '../create-or-edit-game-session-dialogue/create-or-edit-game-session-dialogue.component';
 import { GameSession } from '../../types/game-session';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-home-page',
@@ -37,7 +38,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
     protected authService: AuthService,
     protected router: Router,
     private gameSessionService: GameSessionService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cardService: CardService
   ) {
     this.gameSessionsSub = this.gameSessionService.usersGameSessions$.subscribe(
       (gameSessions) => {
@@ -75,6 +77,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         .createNewGameSession(newGameSession)
         .then((result) => {
           this.gameSessionsParticipating.push(newGameSession);
+          this.cardService.createCardDecks(result.id);
           this.goToGameLobby(result.id);
         })
         .catch((err) => {

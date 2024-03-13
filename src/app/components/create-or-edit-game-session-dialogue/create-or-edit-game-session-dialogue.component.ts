@@ -18,7 +18,6 @@ import {
   CampaignServiceService,
 } from '../../services/game-session/campaign-service/campaign-service.service';
 import { MatSelectModule } from '@angular/material/select';
-import { CardService } from '../../services/card.service';
 @Component({
   selector: 'app-create-or-edit-game-session-dialogue',
   standalone: true,
@@ -58,23 +57,18 @@ export class CreateOrEditGameSessionDialogueComponent implements OnInit {
       playerIDsWhoHaveFinishedTurn: [],
       npcIDsWhoHaveTakenTurn: [],
     },
-    roadEventsDeck: [],
   };
 
   constructor(
     public dialogRef: MatDialogRef<CreateOrEditGameSessionDialogueComponent>,
     @Inject(MAT_DIALOG_DATA) public data: GameSession | null,
-    protected campaignService: CampaignServiceService,
-    protected cardService: CardService
+    protected campaignService: CampaignServiceService
   ) {}
 
   public async ngOnInit(): Promise<void> {
     if (this.data) {
       // This means we are editing an existing game session
       this.newGameSession = this.data;
-    } else {
-      await this.cardService.fetchEventCards();
-      this.newGameSession.roadEventsDeck = this.cardService.createCardDeck();
     }
 
     // Fetch the campaign data

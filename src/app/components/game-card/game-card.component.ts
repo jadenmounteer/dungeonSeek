@@ -9,8 +9,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
-import { CardService, Card, CardName } from '../../services/card.service';
+import { CardService } from '../../services/card.service';
 import { LocationType } from '../../services/location-service';
+import { Card, CardName } from '../../types/card-deck';
 @Component({
   selector: 'app-game-card',
   standalone: true,

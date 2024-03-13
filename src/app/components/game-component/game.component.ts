@@ -15,7 +15,8 @@ import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { GameCardComponent } from '../game-card/game-card.component';
-import { CardName, CardService } from '../../services/card.service';
+import { CardService } from '../../services/card.service';
+import { CardName } from '../../types/card-deck';
 
 @Component({
   selector: 'app-game',
@@ -36,6 +37,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected charactersBeingControlledByClient: Character[] = [];
 
   private playerPositionSub: Subscription;
+  private cardsSub: Subscription | undefined;
 
   private gameSessionSub: Subscription;
   protected gameSession!: GameSession;
@@ -67,6 +69,8 @@ export class GameComponent implements OnInit, OnDestroy {
         console.log(gameSession);
         this.gameSession = gameSession;
 
+        this.updateCards();
+
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn
         // We also check the characterIDsWhoHaveTakenTurn array because this gameSession subscription will
@@ -95,6 +99,16 @@ export class GameComponent implements OnInit, OnDestroy {
           this.moveCharacterToLocation(location);
         }
       );
+  }
+
+  private updateCards() {
+    if (!this.cardsSub) {
+      this.cardsSub = this.cardService
+        .getCardDecks(this.gameSession.id)
+        .subscribe((cards) => {
+          console.log('cards', cards);
+        });
+    }
   }
 
   private updateLocationNodeDataRelativeToPlayer(): void {
@@ -154,6 +168,9 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub.unsubscribe();
     this.gameSessionSub.unsubscribe();
     this.charactersSub.unsubscribe();
+    if (this.cardsSub) {
+      this.cardsSub.unsubscribe();
+    }
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameSession.playerIDs.length > 1) {
@@ -370,7 +387,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected closeCard(event: CardName) {
-    console.log('Closing card', event);
     this.showEventCard = false;
+    this.gameSessionService.updateGameSession(this.gameSession);
   }
 }
