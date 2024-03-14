@@ -398,8 +398,12 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showEventCard = true;
   }
 
-  protected closeCard(event: CardInfo) {
+  protected closeCard() {
     this.showEventCard = false;
-    this.gameSessionService.updateGameSession(this.gameSession);
+    this.cardService.discardCard(
+      this.cardName!,
+      this.deckName!,
+      this.gameSession.id
+    );
   }
 }

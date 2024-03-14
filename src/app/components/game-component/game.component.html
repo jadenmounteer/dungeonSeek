@@ -28,7 +28,7 @@
       *ngIf="showEventCard"
       [cardName]="cardName"
       [deckName]="deckName"
-      (closeCard)="closeCard($event)"
+      (closeCard)="closeCard()"
     ></app-game-card>
 
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">

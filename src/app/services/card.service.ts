@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { LocationType } from './location-service';
-import { addDoc, collection, collectionData } from '@angular/fire/firestore';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  doc,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import {
   CardInfo,
@@ -173,5 +179,36 @@ export class CardService {
       throw new Error('Road deck not found');
     }
     return roadDeck.cardNames.pop() as string;
+  }
+
+  public updateCardDeck(cardDeck: CardDeck, gameSessionID: string) {
+    // Update the db
+    const docRef = doc(
+      collection(this.firestore, 'game-sessions', gameSessionID, 'card-decks'),
+      cardDeck.id
+    );
+    // Update the card deck in the db
+    updateDoc(docRef, { ...cardDeck });
+  }
+
+  public discardCard(
+    cardName: string,
+    deckName: DeckName,
+    gameSessionID: string
+  ) {
+    // Remove the card from the cardDecks object
+    const deck = this.cardDecks.find((deck) => {
+      return deck.deckName === deckName;
+    });
+
+    if (!deck) {
+      throw new Error('Deck not found');
+    }
+    deck.cardNames = deck.cardNames.filter((name) => {
+      return name !== cardName;
+    });
+
+    // Update the db
+    this.updateCardDeck(deck, gameSessionID);
   }
 }

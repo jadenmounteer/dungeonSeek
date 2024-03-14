@@ -42,7 +42,7 @@ import { CardInfo, DeckName } from '../../types/card-deck';
 export class GameCardComponent implements OnInit {
   @Input() public cardName: string | undefined;
   @Input() public deckName: DeckName | undefined;
-  @Output() public closeCard = new EventEmitter<CardInfo>();
+  @Output() public closeCard = new EventEmitter<any>();
 
   protected flip: string = 'inactive';
   protected card: CardInfo | undefined;
@@ -75,6 +75,6 @@ export class GameCardComponent implements OnInit {
   }
 
   protected onCloseCard() {
-    // this.closeCard.emit(this.cardName);
+    this.closeCard.emit();
   }
 }
