@@ -3,6 +3,12 @@
     "name": "A Messenger",
     "description": "As you walk the city streets a messenger approaches.",
     "quantity": 4,
-    "discardAfterUse": true
+    "discardAfterUse": true,
+    "choices": [
+      {
+        "description": "You do something...",
+        "outcome": "SUBTRACT_GOLD"
+      }
+    ]
   }
 ]

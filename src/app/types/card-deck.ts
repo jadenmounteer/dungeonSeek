@@ -4,7 +4,23 @@ export type CardInfo = {
   description: string;
   quantity: number; // The number of times this card appears in the deck.
   discardAfterUse: boolean; // Whether or not to discard the card after use.
+  choices: Choice[];
 };
+
+// The choices the player can make when drawing this card.
+export interface Choice {
+  description: string;
+  outcome: Outcome;
+}
+
+// The outcome of the choice the player made.
+// This will be output and a service will handle the outcome.
+export enum Outcome {
+  SUBTRACT_GOLD = 1,
+  ADD_GOLD = 2,
+  ADD_ITEM = 3,
+  TRADE_WITH_MERCHANT = 4,
+}
 
 export interface CardDeck {
   id: string;
