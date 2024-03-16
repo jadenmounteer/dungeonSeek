@@ -77,7 +77,7 @@ export class GameComponent implements OnInit, OnDestroy {
       .subscribe((gameSession) => {
         this.gameSession = gameSession;
 
-        this.updateCards();
+        this.setDeckSubscriptions();
 
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn
@@ -109,7 +109,7 @@ export class GameComponent implements OnInit, OnDestroy {
       );
   }
 
-  private updateCards() {
+  private setDeckSubscriptions() {
     if (!this.cardsSub) {
       this.cardsSub = this.cardService
         .fetchCardDecks(this.gameSession.id)
@@ -117,17 +117,21 @@ export class GameComponent implements OnInit, OnDestroy {
           this.cardService.cardDecks = cardDecks;
         });
 
-      this.roadEventDeckSub = this.cardService
-        .getCardDeckForGameSession(this.gameSession.id, DeckName.ROAD_EVENTS)
-        .subscribe((roadEventCards) => {
-          this.roadEventDeck = roadEventCards;
-        });
+      if (!this.roadEventDeckSub) {
+        this.roadEventDeckSub = this.cardService
+          .getCardDeckForGameSession(this.gameSession.id, DeckName.ROAD_EVENTS)
+          .subscribe((roadEventCards) => {
+            this.roadEventDeck = roadEventCards;
+          });
+      }
 
-      this.cityEventDeckSub = this.cardService
-        .getCardDeckForGameSession(this.gameSession.id, DeckName.CITY_EVENTS)
-        .subscribe((cityEventCards) => {
-          this.cityEventDeck = cityEventCards;
-        });
+      if (!this.cityEventDeckSub) {
+        this.cityEventDeckSub = this.cardService
+          .getCardDeckForGameSession(this.gameSession.id, DeckName.CITY_EVENTS)
+          .subscribe((cityEventCards) => {
+            this.cityEventDeck = cityEventCards;
+          });
+      }
     }
   }
 
