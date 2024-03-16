@@ -75,3 +75,13 @@ $card-border-radius: 25px;
   -ms-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
 }
+
+@mixin background {
+  background: linear-gradient(45deg, #f3ec78, #af4261);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.card-title {
+  @include background;
+}

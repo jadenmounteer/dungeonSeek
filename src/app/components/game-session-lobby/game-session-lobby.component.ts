@@ -39,8 +39,12 @@ export class GameSessionLobbyComponent implements OnDestroy {
 
     this.gameSessionSub = this.gameSessionService
       .getGameSession(gameSessionID)
-      .subscribe((gameSession) => {
+      .subscribe(async (gameSession) => {
         this.gameSession = gameSession;
+
+        // This gets the card info for all cards in the game session and stores it in the service
+        // so the client has access to any of the card info.
+        await this.cardService.fetchCardInfoFromJSON();
 
         // TODO I can probable do this in a cleaner way with RXJS.
         // I know there's an operator where you can subscribe to multiple observables at once.
