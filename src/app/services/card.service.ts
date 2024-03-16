@@ -179,6 +179,8 @@ export class CardService {
     // If the card is not a one-time use, put it at the bottom of the deck to be drawn again
     if (!cardInfo?.discardAfterUse) {
       cardDeck.cardNames.unshift(nextCard);
+      // Since we inserted the card again, shuffle the deck so the order isn't predictable
+      cardDeck.cardNames = this.shuffle(cardDeck.cardNames);
     }
 
     await this.updateCardDeck(cardDeck, gameSessionID);
