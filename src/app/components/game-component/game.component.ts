@@ -16,7 +16,7 @@ import { GameFooterComponent } from '../game-footer/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { CardService } from '../../services/card.service';
-import { CardInfo, DeckName } from '../../types/card-deck';
+import { CardDeck, CardInfo, DeckName } from '../../types/card-deck';
 
 @Component({
   selector: 'app-game',
@@ -34,10 +34,17 @@ import { CardInfo, DeckName } from '../../types/card-deck';
   styleUrl: './game.component.scss',
 })
 export class GameComponent implements OnInit, OnDestroy {
+  protected roadEventDeckSub: Subscription | undefined;
+  protected cityEventDeckSub: Subscription | undefined;
+  protected roadEventDeck: CardDeck[] = [];
+  protected cityEventDeck: CardDeck[] = [];
+
+  // deprecated - replaced by the individual card subs
+  private cardsSub: Subscription | undefined;
+
   protected charactersBeingControlledByClient: Character[] = [];
 
   private playerPositionSub: Subscription;
-  private cardsSub: Subscription | undefined;
 
   private gameSessionSub: Subscription;
   protected gameSession!: GameSession;
@@ -110,6 +117,20 @@ export class GameComponent implements OnInit, OnDestroy {
         .subscribe((cardDecks) => {
           this.cardService.cardDecks = cardDecks;
         });
+
+      this.roadEventDeckSub = this.cardService
+        .getCardDeckForGameSession(this.gameSession.id, DeckName.ROAD_EVENTS)
+        .subscribe((roadEventCards) => {
+          console.log("Road event card deck changed and I'm updating it!");
+          this.roadEventDeck = roadEventCards;
+        });
+
+      this.cityEventDeckSub = this.cardService
+        .getCardDeckForGameSession(this.gameSession.id, DeckName.CITY_EVENTS)
+        .subscribe((cityEventCards) => {
+          console.log("City event card deck changed and I'm updating it!");
+          this.cityEventDeck = cityEventCards;
+        });
     }
   }
 
@@ -172,6 +193,12 @@ export class GameComponent implements OnInit, OnDestroy {
     this.charactersSub.unsubscribe();
     if (this.cardsSub) {
       this.cardsSub.unsubscribe();
+    }
+    if (this.roadEventDeckSub) {
+      this.roadEventDeckSub.unsubscribe();
+    }
+    if (this.cityEventDeckSub) {
+      this.cityEventDeckSub.unsubscribe();
     }
 
     // If there are multiple players, signal to the server that the player is done with their turn

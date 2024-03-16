@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Character } from '../../types/character';
 import {
-  addDoc,
   collection,
   collectionData,
   doc,
-  query,
   updateDoc,
-  where,
 } from '@angular/fire/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';

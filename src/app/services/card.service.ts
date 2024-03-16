@@ -5,7 +5,9 @@ import {
   collection,
   collectionData,
   doc,
+  query,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import {
@@ -21,8 +23,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CardService {
-  // This map holds a all the road events.
-  // It is used to get a specific event card when you don't want to get one off the top of the deck
+  // These maps hold all the JSON data for the event cards.
+  // They are used to get a specific event card when you don't want to get one off the top of the deck
+  // They are also used to display the card data in the UI
   private roadEventCardsInfo: Map<string, CardInfo> = new Map();
   private cityEventCardsInfo: Map<string, CardInfo> = new Map();
 
@@ -31,6 +34,28 @@ export class CardService {
 
   constructor(private firestore: Firestore) {}
 
+  // Observables to get the card decks from the db
+  // The card decks just hold the name of the deck and the card names and the order which they are drawn.
+  public getCardDeckForGameSession(
+    gameSessionId: string,
+    deckName: DeckName
+  ): Observable<CardDeck[]> {
+    // Get the road event card deck from this specific game session
+    const collectionRef = collection(
+      this.firestore,
+      'game-sessions',
+      gameSessionId,
+      'card-decks'
+    );
+    const queryRef = query(collectionRef, where('deckName', '==', deckName));
+
+    return collectionData(queryRef, {
+      // This sets the id to the id of the document
+      idField: 'id',
+    }) as Observable<CardDeck[]>;
+  }
+
+  // grabs all the card decks
   public fetchCardDecks(gameSessionId: string): Observable<CardDeck[]> {
     const collectionRef = collection(
       this.firestore,
