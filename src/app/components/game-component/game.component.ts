@@ -379,16 +379,12 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected async drawEventCard() {
-    if (
-      this.characterBeingControlledByClient?.currentLocation.locationType ===
-      'Road'
-    ) {
-      this.cardName = await this.cardService.getNextCardInDeck(
-        this.roadEventDeck[0],
-        this.gameSession.id
-      );
-      this.deckName = DeckName.ROAD_EVENTS;
-    }
+    this.cardName = await this.cardService.getNextCardInDeck(
+      this.roadEventDeck[0],
+      this.gameSession.id
+    );
+    this.deckName =
+      this.characterBeingControlledByClient?.currentLocation.eventDeckType;
 
     this.showEventCard = true;
   }

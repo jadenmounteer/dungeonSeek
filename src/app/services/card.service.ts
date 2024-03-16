@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LocationType } from './location-service';
 import {
   addDoc,
   collection,
@@ -70,7 +69,7 @@ export class CardService {
   /**
    * Gets a specific event card's information when you draw one off the top of the deck
    * @param cardName
-   * @param locationType
+   * @param deckName
    * @returns
    */
   public getCardInfo(

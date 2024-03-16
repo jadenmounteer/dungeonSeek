@@ -10,7 +10,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { CardService } from '../../services/card.service';
-import { LocationType } from '../../services/location-service';
 import { CardInfo, DeckName } from '../../types/card-deck';
 @Component({
   selector: 'app-game-card',
