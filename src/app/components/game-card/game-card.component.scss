@@ -71,7 +71,8 @@ $card-border-radius: 25px;
   transform: rotateY(-180deg);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+
   padding: 16px;
   text-align: center;
 }
