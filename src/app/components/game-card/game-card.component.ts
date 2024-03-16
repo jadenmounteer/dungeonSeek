@@ -10,7 +10,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { CardService } from '../../services/card.service';
-import { CardInfo, DeckName } from '../../types/card-deck';
+import { CardInfo, DeckName, Outcome } from '../../types/card-deck';
 @Component({
   selector: 'app-game-card',
   standalone: true,
@@ -42,6 +42,7 @@ export class GameCardComponent implements OnInit {
   @Input() public cardName: string | undefined;
   @Input() public deckName: DeckName | undefined;
   @Output() public closeCard = new EventEmitter<any>();
+  @Output() public makeChoice = new EventEmitter<Outcome>();
 
   protected flip: string = 'inactive';
   protected card: CardInfo | undefined;
@@ -75,5 +76,9 @@ export class GameCardComponent implements OnInit {
 
   protected onCloseCard() {
     this.closeCard.emit();
+  }
+
+  protected onMakeChoice(choice: Outcome) {
+    this.makeChoice.emit(choice);
   }
 }

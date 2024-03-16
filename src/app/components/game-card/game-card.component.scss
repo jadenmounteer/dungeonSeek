@@ -93,3 +93,8 @@ $card-border-radius: 25px;
 .card-description {
   @include background;
 }
+
+.choice,
+.game-button {
+  @include centered;
+}

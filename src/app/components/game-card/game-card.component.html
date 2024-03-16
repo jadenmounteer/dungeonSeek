@@ -12,12 +12,22 @@
       </div>
       <div class="card-choices">
         <div class="choice" *ngFor="let choice of card?.choices">
-          <p>{{ choice.description }}</p>
+          <div class="game-button" (click)="onMakeChoice(choice.outcome)">
+            {{ choice.description }}
+          </div>
         </div>
       </div>
 
       <!-- TODO this will be replaced by choosing an option-->
-      <div class="game-button" (click)="onCloseCard()">Close card</div>
+      <div
+        *ngIf="
+          (card?.choices && (card?.choices)!.length <= 0) || !card?.choices
+        "
+        class="game-button"
+        (click)="onCloseCard()"
+      >
+        Close card
+      </div>
     </div>
   </div>
 </div>
