@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { DeckName } from '../types/card-deck';
 
 export type Position = {
   xPosition: number;
@@ -12,6 +13,7 @@ export type LocationNode = {
   adjacentLocations: LocationKey[];
   distanceFromPlayer: number | null;
   locationType: LocationType;
+  eventDeckType: DeckName; // The type of deck from which you draw a card at this location when an event occurs.
 };
 
 export type LocationType = 'Road' | 'Dungeon' | 'Wilderness' | 'Town' | 'City';
@@ -44,6 +46,7 @@ export class LocationService {
     adjacentLocations: ['East Goeth Road'],
     distanceFromPlayer: null,
     locationType: 'City',
+    eventDeckType: DeckName.CITY_EVENTS,
   };
 
   private eastGoethRoad: LocationNode = {
@@ -52,6 +55,7 @@ export class LocationService {
     adjacentLocations: ['Goeth', 'Unf'],
     distanceFromPlayer: null,
     locationType: 'Road',
+    eventDeckType: DeckName.ROAD_EVENTS,
   };
 
   private unf: LocationNode = {
@@ -60,6 +64,7 @@ export class LocationService {
     adjacentLocations: ['East Goeth Road', 'East Unf Road'],
     distanceFromPlayer: null,
     locationType: 'Town',
+    eventDeckType: DeckName.CITY_EVENTS,
   };
 
   private eastUnfRoad: LocationNode = {
@@ -68,6 +73,7 @@ export class LocationService {
     adjacentLocations: ['Unf', 'West Hillmire Road', 'Lake View Cavern'],
     distanceFromPlayer: null,
     locationType: 'Road',
+    eventDeckType: DeckName.ROAD_EVENTS,
   };
 
   private lakeViewCavern: LocationNode = {
@@ -76,6 +82,7 @@ export class LocationService {
     adjacentLocations: ['East Unf Road'],
     distanceFromPlayer: null,
     locationType: 'Dungeon',
+    eventDeckType: DeckName.ROAD_EVENTS, // TODO change this to a dungeon deck. Architect how to do this
   };
 
   private westHillmireRoad: LocationNode = {
@@ -84,6 +91,7 @@ export class LocationService {
     adjacentLocations: ['East Unf Road', 'Hillmire'],
     distanceFromPlayer: null,
     locationType: 'Road',
+    eventDeckType: DeckName.ROAD_EVENTS,
   };
 
   private hillmire: LocationNode = {
@@ -92,6 +100,7 @@ export class LocationService {
     adjacentLocations: ['Hillmire North Road', 'West Hillmire Road'],
     distanceFromPlayer: null,
     locationType: 'Town',
+    eventDeckType: DeckName.CITY_EVENTS,
   };
 
   private hillmireNorthRoad: LocationNode = {
@@ -100,6 +109,7 @@ export class LocationService {
     adjacentLocations: ['Hillmire', 'Dunal East Road'],
     distanceFromPlayer: null,
     locationType: 'Road',
+    eventDeckType: DeckName.ROAD_EVENTS,
   };
 
   private dunalEastRoad: LocationNode = {
@@ -108,6 +118,7 @@ export class LocationService {
     adjacentLocations: ['Hillmire North Road', 'Dunal'],
     distanceFromPlayer: null,
     locationType: 'Road',
+    eventDeckType: DeckName.ROAD_EVENTS,
   };
 
   private dunal: LocationNode = {
@@ -116,6 +127,7 @@ export class LocationService {
     adjacentLocations: ['Dunal East Road', 'Dunal West Road'],
     distanceFromPlayer: null,
     locationType: 'Town',
+    eventDeckType: DeckName.CITY_EVENTS,
   };
 
   private dunalWestRoad: LocationNode = {
@@ -124,6 +136,7 @@ export class LocationService {
     adjacentLocations: ['Dunal', 'Mullin Forest'],
     distanceFromPlayer: null,
     locationType: 'Road',
+    eventDeckType: DeckName.ROAD_EVENTS,
   };
 
   private mullinForest: LocationNode = {
@@ -132,6 +145,7 @@ export class LocationService {
     adjacentLocations: ['Dunal West Road', 'Mullin', 'Bayrom'],
     distanceFromPlayer: null,
     locationType: 'Road',
+    eventDeckType: DeckName.ROAD_EVENTS,
   };
 
   private mullin: LocationNode = {
@@ -140,6 +154,7 @@ export class LocationService {
     adjacentLocations: ['Mullin Forest', 'Bayrom'],
     distanceFromPlayer: null,
     locationType: 'Town',
+    eventDeckType: DeckName.CITY_EVENTS,
   };
 
   private bayrom: LocationNode = {
@@ -148,6 +163,7 @@ export class LocationService {
     adjacentLocations: ['Mullin Forest', 'Mullin'],
     distanceFromPlayer: null,
     locationType: 'Town',
+    eventDeckType: DeckName.CITY_EVENTS,
   };
 
   public locationsMap: Map<LocationKey, LocationNode> = new Map([
