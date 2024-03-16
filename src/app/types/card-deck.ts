@@ -2,6 +2,8 @@
 export type CardInfo = {
   name: string;
   description: string;
+  quantity: number; // The number of times this card appears in the deck.
+  discardAfterUse: boolean; // Whether or not to discard the card after use.
 };
 
 export interface CardDeck {

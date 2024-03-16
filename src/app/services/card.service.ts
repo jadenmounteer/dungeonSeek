@@ -172,6 +172,15 @@ export class CardService {
     gameSessionID: string
   ): Promise<string> {
     let nextCard = cardDeck.cardNames.pop() as string; // We draw it and it is removed from the deck
+
+    // Get the card's info from the JSON
+    const cardInfo = this.getCardInfo(nextCard, cardDeck.deckName as DeckName);
+
+    // If the card is not a one-time use, put it at the bottom of the deck to be drawn again
+    if (!cardInfo?.discardAfterUse) {
+      cardDeck.cardNames.unshift(nextCard);
+    }
+
     await this.updateCardDeck(cardDeck, gameSessionID);
     return nextCard;
   }

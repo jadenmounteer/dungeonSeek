@@ -1,6 +1,8 @@
 [
   {
     "name": "A Messenger",
-    "description": "As you walk the city streets a messenger approaches."
+    "description": "As you walk the city streets a messenger approaches.",
+    "quantity": 4,
+    "discardAfterUse": true
   }
 ]
