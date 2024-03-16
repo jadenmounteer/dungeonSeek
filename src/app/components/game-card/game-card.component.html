@@ -7,7 +7,9 @@
       <div class="card-title">
         <p>{{ card?.name }}</p>
       </div>
-      <p>{{ card?.description }}</p>
+      <div class="card-description">
+        <p>{{ card?.description }}</p>
+      </div>
 
       <!-- TODO this will be replaced by choosing an option-->
       <div class="game-button" (click)="onCloseCard()">Close card</div>

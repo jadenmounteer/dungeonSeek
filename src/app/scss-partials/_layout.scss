@@ -15,6 +15,11 @@ $game-board-height: calc(1536px * 3);
   }
 }
 
+@mixin centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /*
 * Screen size mixins
 * Usage: @include layout.for-tablet-portrait-up {margin-left: -0.1em;}

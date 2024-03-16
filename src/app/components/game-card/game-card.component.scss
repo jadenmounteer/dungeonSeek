@@ -46,11 +46,6 @@ $card-border-radius: 25px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 
-  color: #fff;
-  text-align: center;
-  line-height: 100px;
-  font-size: 24px;
-  font-weight: 700;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -74,14 +69,26 @@ $card-border-radius: 25px;
   -webkit-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
 }
 
 @mixin background {
-  background: linear-gradient(45deg, #f3ec78, #af4261);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  // TODO I can make this look way cooler
+  background-color: gray;
+  border: 2px solid black;
+  border-radius: $card-border-radius;
+  width: 70%;
+  @include centered;
 }
 
 .card-title {
+  @include background;
+}
+
+.card-description {
   @include background;
 }
