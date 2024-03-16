@@ -86,6 +86,9 @@ export class CardService {
   }
 
   public async createCardDecks(gameSessionID: string) {
+    // This gets the card info for all cards in the game session and stores it in the service
+    // so the client has access to any of the card info.
+    await this.fetchCardInfoFromJSON();
     // Create a new card deck for each option in the DeckName type
     Object.values(DeckName).forEach((deckName) => {
       this.createCardDeck(gameSessionID, deckName as DeckName);
@@ -105,6 +108,22 @@ export class CardService {
     if (deckType === DeckName.CITY_EVENTS) {
       cardNames = Object.values(CityEventCardNames);
     }
+
+    // Loop through all of the card names and add the number of instances of that card to the array
+    cardNames.forEach((cardName) => {
+      const cardInfo = this.getCardInfo(cardName, deckType);
+
+      if (!cardInfo) {
+        throw new Error(
+          'Card info not found for ' +
+            cardName +
+            ' the string might be wrong in the card names type.'
+        );
+      }
+      for (let i = 1; i < cardInfo.quantity; i++) {
+        cardNames.push(cardName);
+      }
+    });
 
     // Shuffle all of the CardNames into an array
     const shuffledCardNames = this.shuffle(cardNames);

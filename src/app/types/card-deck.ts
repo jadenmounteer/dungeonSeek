@@ -27,7 +27,7 @@ export enum RoadEventCardNames {
 }
 
 export enum CityEventCardNames {
-  THE_MESSENGER = 'The Messenger',
+  THE_MESSENGER = 'A Messenger',
 }
 
 // When adding a new deck, add a new JSON file with the same name
