@@ -39,9 +39,6 @@ export class GameComponent implements OnInit, OnDestroy {
   protected roadEventDeck: CardDeck[] = [];
   protected cityEventDeck: CardDeck[] = [];
 
-  // deprecated - replaced by the individual card subs
-  private cardsSub: Subscription | undefined;
-
   protected charactersBeingControlledByClient: Character[] = [];
 
   private playerPositionSub: Subscription;
@@ -77,7 +74,7 @@ export class GameComponent implements OnInit, OnDestroy {
       .subscribe((gameSession) => {
         this.gameSession = gameSession;
 
-        this.setDeckSubscriptions();
+        this.setCardDeckSubscriptions();
 
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn
@@ -99,8 +96,6 @@ export class GameComponent implements OnInit, OnDestroy {
         }
       });
 
-    // this.initializePlayerStartingNode();
-
     this.playerPositionSub =
       this.locationService.playerPositionSubject.subscribe(
         (location: LocationNode) => {
@@ -109,29 +104,21 @@ export class GameComponent implements OnInit, OnDestroy {
       );
   }
 
-  private setDeckSubscriptions() {
-    if (!this.cardsSub) {
-      this.cardsSub = this.cardService
-        .fetchCardDecks(this.gameSession.id)
-        .subscribe((cardDecks) => {
-          this.cardService.cardDecks = cardDecks;
+  private setCardDeckSubscriptions() {
+    if (!this.roadEventDeckSub) {
+      this.roadEventDeckSub = this.cardService
+        .getCardDeckForGameSession(this.gameSession.id, DeckName.ROAD_EVENTS)
+        .subscribe((roadEventCards) => {
+          this.roadEventDeck = roadEventCards;
         });
+    }
 
-      if (!this.roadEventDeckSub) {
-        this.roadEventDeckSub = this.cardService
-          .getCardDeckForGameSession(this.gameSession.id, DeckName.ROAD_EVENTS)
-          .subscribe((roadEventCards) => {
-            this.roadEventDeck = roadEventCards;
-          });
-      }
-
-      if (!this.cityEventDeckSub) {
-        this.cityEventDeckSub = this.cardService
-          .getCardDeckForGameSession(this.gameSession.id, DeckName.CITY_EVENTS)
-          .subscribe((cityEventCards) => {
-            this.cityEventDeck = cityEventCards;
-          });
-      }
+    if (!this.cityEventDeckSub) {
+      this.cityEventDeckSub = this.cardService
+        .getCardDeckForGameSession(this.gameSession.id, DeckName.CITY_EVENTS)
+        .subscribe((cityEventCards) => {
+          this.cityEventDeck = cityEventCards;
+        });
     }
   }
 
@@ -184,9 +171,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub.unsubscribe();
     this.gameSessionSub.unsubscribe();
     this.charactersSub.unsubscribe();
-    if (this.cardsSub) {
-      this.cardsSub.unsubscribe();
-    }
     if (this.roadEventDeckSub) {
       this.roadEventDeckSub.unsubscribe();
     }
@@ -394,13 +378,14 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected drawEventCard() {
+  protected async drawEventCard() {
     if (
       this.characterBeingControlledByClient?.currentLocation.locationType ===
       'Road'
     ) {
-      this.cardName = this.cardService.getCardNameAccordingToLocationType(
-        this.characterBeingControlledByClient.currentLocation.locationType
+      this.cardName = await this.cardService.getNextCardInDeck(
+        this.roadEventDeck[0],
+        this.gameSession.id
       );
       this.deckName = DeckName.ROAD_EVENTS;
     }
@@ -410,10 +395,5 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected closeCard() {
     this.showEventCard = false;
-    this.cardService.discardCard(
-      this.cardName!,
-      this.deckName!,
-      this.gameSession.id
-    );
   }
 }

@@ -29,9 +29,6 @@ export class CardService {
   private roadEventCardsInfo: Map<string, CardInfo> = new Map();
   private cityEventCardsInfo: Map<string, CardInfo> = new Map();
 
-  // includes the names of the cards in the deck.
-  public cardDecks: CardDeck[] = [];
-
   constructor(private firestore: Firestore) {}
 
   // Observables to get the card decks from the db
@@ -50,21 +47,6 @@ export class CardService {
     const queryRef = query(collectionRef, where('deckName', '==', deckName));
 
     return collectionData(queryRef, {
-      // This sets the id to the id of the document
-      idField: 'id',
-    }) as Observable<CardDeck[]>;
-  }
-
-  // grabs all the card decks
-  public fetchCardDecks(gameSessionId: string): Observable<CardDeck[]> {
-    const collectionRef = collection(
-      this.firestore,
-      'game-sessions',
-      gameSessionId,
-      'card-decks'
-    );
-
-    return collectionData(collectionRef, {
       // This sets the id to the id of the document
       idField: 'id',
     }) as Observable<CardDeck[]>;
@@ -112,7 +94,7 @@ export class CardService {
   }
 
   // Creates a card deck in the db
-  public async createCardDeck(
+  private async createCardDeck(
     gameSessionID: string,
     deckType: DeckName
   ): Promise<any> {
@@ -186,24 +168,13 @@ export class CardService {
     return array;
   }
 
-  public getCardNameAccordingToLocationType(
-    locationType: LocationType
-  ): string | undefined {
-    if (locationType === 'Road') {
-      return this.getNextRoadEventCard();
-    }
-    return;
-  }
-
-  private getNextRoadEventCard(): string {
-    const roadDeck = this.cardDecks.find((deck) => {
-      return deck.deckName === DeckName.ROAD_EVENTS;
-    });
-
-    if (!roadDeck) {
-      throw new Error('Road deck not found');
-    }
-    return roadDeck.cardNames.pop() as string;
+  public async getNextCardInDeck(
+    cardDeck: CardDeck,
+    gameSessionID: string
+  ): Promise<string> {
+    let nextCard = cardDeck.cardNames.pop() as string; // We draw it and it is removed from the deck
+    await this.updateCardDeck(cardDeck, gameSessionID);
+    return nextCard;
   }
 
   public updateCardDeck(cardDeck: CardDeck, gameSessionID: string) {
@@ -214,26 +185,5 @@ export class CardService {
     );
     // Update the card deck in the db
     updateDoc(docRef, { ...cardDeck });
-  }
-
-  public discardCard(
-    cardName: string,
-    deckName: DeckName,
-    gameSessionID: string
-  ) {
-    // Remove the card from the cardDecks object
-    const deck = this.cardDecks.find((deck) => {
-      return deck.deckName === deckName;
-    });
-
-    if (!deck) {
-      throw new Error('Deck not found');
-    }
-    deck.cardNames = deck.cardNames.filter((name) => {
-      return name !== cardName;
-    });
-
-    // Update the db
-    this.updateCardDeck(deck, gameSessionID);
   }
 }
