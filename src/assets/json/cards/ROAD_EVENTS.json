@@ -20,6 +20,10 @@
       {
         "description": "You do something...",
         "outcome": "SUBTRACT_GOLD"
+      },
+      {
+        "description": "Or you could do this...",
+        "outcome": "SUBTRACT_GOLD"
       }
     ]
   },
@@ -43,6 +47,10 @@
     "choices": [
       {
         "description": "You do something...",
+        "outcome": "SUBTRACT_GOLD"
+      },
+      {
+        "description": "Or you could do this...",
         "outcome": "SUBTRACT_GOLD"
       }
     ]
