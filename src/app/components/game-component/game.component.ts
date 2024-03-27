@@ -441,7 +441,7 @@ export class GameComponent implements OnInit, OnDestroy {
     // This gives a 1 in 3 chance of drawing an event card.
     const data: DiceRollDialogData = {
       title: 'Roll for Event Card',
-      message: 'If you roll a 5 or less, draw an event card.',
+      message: 'If you roll a 2 or less, draw an event card.',
       closeButtonName: 'Draw Event Card',
       numberOfDice: 1,
       comparator: '<=',
