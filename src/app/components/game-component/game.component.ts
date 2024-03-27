@@ -50,6 +50,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected charactersSub!: Subscription;
   protected loading = true;
   protected locationsLoading = true;
+  protected currentCharacterRolledForEventCardThisTurn = false;
 
   protected characterBeingControlledByClient: Character | undefined;
 
@@ -283,6 +284,8 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected async currentCharacterFinishedTurn(): Promise<void> {
+    this.currentCharacterRolledForEventCardThisTurn = false;
+
     if (!this.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
     }
@@ -394,5 +397,15 @@ export class GameComponent implements OnInit, OnDestroy {
   }
   protected makeChoice(outcome: Outcome) {
     this.showEventCard = false;
+  }
+
+  /**
+   * Before ending their turn, a character must roll for an event card.
+   * They have a 1 in 4 chance of drawing an event card.
+   */
+  protected rollForEventCard() {
+    this.currentCharacterRolledForEventCardThisTurn = true;
+
+    // TODO show the dice roll animation and then draw the card or not, depending on the roll.
   }
 }

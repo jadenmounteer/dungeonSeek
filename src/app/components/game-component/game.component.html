@@ -98,17 +98,19 @@
       >
         <div
           class="game-button"
-          *ngIf="characterBeingControlledByClient!.movementSpeed > 0"
+          *ngIf="!currentCharacterRolledForEventCardThisTurn"
+          (click)="rollForEventCard()"
         >
-          End Movement
+          Roll for Event
         </div>
 
         <div
           class="game-button"
           *ngIf="
-            characterBeingControlledByClient!.movementSpeed <= 0 &&
+            currentCharacterRolledForEventCardThisTurn &&
             !waitingForNextTurnToStart
           "
+          (click)="currentCharacterFinishedTurn()"
         >
           End Turn
         </div>
