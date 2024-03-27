@@ -20,6 +20,10 @@ import { CardDeck, CardInfo, DeckName, Outcome } from '../../types/card-deck';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogueComponent } from '../confirmation-dialogue/confirmation-dialogue.component';
 import type { ConfirmationDialogData } from '../confirmation-dialogue/confirmation-dialogue.component';
+import {
+  DiceRollDialogComponent,
+  DiceRollDialogData,
+} from '../dice-roll-dialog/dice-roll-dialog.component';
 
 @Component({
   selector: 'app-game',
@@ -435,6 +439,18 @@ export class GameComponent implements OnInit, OnDestroy {
     // this.currentCharacterRolledForEventCardThisTurn = true;
     this.currentCharacterRollingDice = true;
     this.characterBeingControlledByClient!.movementSpeed = 0;
+
+    // This gives a 1 in 3.6 chance of drawing an event card.
+    const data: DiceRollDialogData = {
+      title: 'Roll for Event Card',
+      message: 'If you roll a 5 or less, draw an event card.',
+      numberOfDice: 1,
+      comparator: '<=',
+      targetNumber: 5,
+    };
+    const dialogRef = this.dialog.open(DiceRollDialogComponent, {
+      data,
+    });
 
     // TODO show the dice roll animation and then draw the card or not, depending on the roll.
   }
