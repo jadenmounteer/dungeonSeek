@@ -72,9 +72,16 @@
       </div>
     </span>
 
-    <div class="player-movement-section" *ngIf="!currentCharacterRollingDice">
+    <div
+      class="player-game-messages-section"
+      *ngIf="!currentCharacterRollingDice"
+    >
       <span
-        *ngIf="characterBeingControlledByClient?.movementSpeed != undefined"
+        class="player-movement-section"
+        *ngIf="
+          characterBeingControlledByClient?.movementSpeed != undefined &&
+          !currentCharacterRolledForEventCardThisTurn
+        "
       >
         <p
           class="big-text sticky-text"
@@ -88,6 +95,12 @@
           *ngIf="characterBeingControlledByClient!.movementSpeed <= 0"
         >
           You cannot move anymore this turn.
+        </p>
+      </span>
+
+      <span class="player-misc-message-section">
+        <p class="big-text sticky-text" *ngIf="waitingForNextTurnToStart">
+          Waiting for other players to finish their turns...
         </p>
       </span>
     </div>

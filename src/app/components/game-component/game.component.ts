@@ -407,6 +407,11 @@ export class GameComponent implements OnInit, OnDestroy {
       'City'
     ) {
       return this.cityEventDeck[0];
+    } else if (
+      this.characterBeingControlledByClient.currentLocation.locationType ===
+      'Dungeon'
+    ) {
+      return this.roadEventDeck[0];
     } else {
       throw new Error('No card deck corresponding to location type.');
     }
@@ -447,6 +452,10 @@ export class GameComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed().subscribe((result) => {
         if (result === 'yes') {
           this.rollForEventCard();
+        } else {
+          this.gameSessionService.scrollToCharacterBeingControlledByClient(
+            this.characterBeingControlledByClient
+          );
         }
       });
     } else {
@@ -459,7 +468,6 @@ export class GameComponent implements OnInit, OnDestroy {
    * They have a 1 in 4 chance of drawing an event card.
    */
   protected rollForEventCard() {
-    // this.currentCharacterRolledForEventCardThisTurn = true;
     this.currentCharacterRollingDice = true;
 
     // This gives a 1 in 3 chance of drawing an event card.
@@ -481,6 +489,9 @@ export class GameComponent implements OnInit, OnDestroy {
       }
       this.currentCharacterRollingDice = false;
       this.currentCharacterRolledForEventCardThisTurn = true;
+      this.gameSessionService.scrollToCharacterBeingControlledByClient(
+        this.characterBeingControlledByClient
+      );
 
       if (result === true) {
         this.drawEventCard();
