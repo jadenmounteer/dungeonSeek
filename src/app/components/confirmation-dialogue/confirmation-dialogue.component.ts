@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -23,6 +24,7 @@ export type ConfirmationDialogData = {
     MatDialogActions,
     MatDialogClose,
     MatButtonModule,
+    CommonModule,
   ],
   templateUrl: './confirmation-dialogue.component.html',
   styleUrl: './confirmation-dialogue.component.scss',

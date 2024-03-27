@@ -3,7 +3,16 @@
   <p>{{ data.message }}</p>
 
   <div class="dice-section">
-    <div class="die" *ngFor="let die of dice">{{ die }}</div>
+    <div class="die" *ngFor="let die of dice">
+      <!-- Show the number of dots according to the dice value -->
+
+      <div
+        *ngFor="let dot of die.dots"
+        class="die-dot"
+        [style.--top]="dot.topPosition + '%'"
+        [style.--left]="dot.leftPosition + '%'"
+      ></div>
+    </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
