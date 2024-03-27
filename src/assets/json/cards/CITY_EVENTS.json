@@ -10,5 +10,29 @@
         "outcome": "SUBTRACT_GOLD"
       }
     ]
+  },
+  {
+    "name": "Rumors of Giant Raids in Mullin",
+    "description": "You hear rumors of recent giant raids the city of Mullin.",
+    "quantity": 1,
+    "discardAfterUse": true,
+    "choices": [
+      {
+        "description": "You do something...",
+        "outcome": "SUBTRACT_GOLD"
+      }
+    ]
+  },
+  {
+    "name": "Pestered by Shopkeeper",
+    "description": "As you pass a shop burdened with trinkets, a shopkeeper beckons you in. \"Hello weary traveler! Come in! Come in! I have the best prices in all of Tesslandia.\"",
+    "quantity": 1,
+    "discardAfterUse": false,
+    "choices": [
+      {
+        "description": "You do something...",
+        "outcome": "SUBTRACT_GOLD"
+      }
+    ]
   }
 ]

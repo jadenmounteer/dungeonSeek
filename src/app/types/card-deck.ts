@@ -44,6 +44,8 @@ export enum RoadEventCardNames {
 
 export enum CityEventCardNames {
   THE_MESSENGER = 'A Messenger',
+  Rumors_OF_Giant_Raids_In_Mullin = 'Rumors of Giant Raids in Mullin',
+  Pestered_By_Shopkeeper = 'Pestered by Shopkeeper',
 }
 
 // When adding a new deck, add a new JSON file with the same name
