@@ -18,6 +18,8 @@ import { GameCardComponent } from '../game-card/game-card.component';
 import { CardService } from '../../services/card.service';
 import { CardDeck, CardInfo, DeckName, Outcome } from '../../types/card-deck';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogueComponent } from '../confirmation-dialogue/confirmation-dialogue.component';
+import type { ConfirmationDialogData } from '../confirmation-dialogue/confirmation-dialogue.component';
 
 @Component({
   selector: 'app-game',
@@ -402,16 +404,25 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected endMovement() {
-    // Set the character's movement to 0 so they can't move after rolling for an event card
     if (this.characterBeingControlledByClient!.movementSpeed ?? 0 > 0) {
       // TODO Show a confirmation dialog telling the user they won't be able to move anymore if they roll for an event card.
-      // const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      //   data: {name: this.name, animal: this.animal},
-      // });
-      // dialogRef.afterClosed().subscribe(result => {
-      //   console.log('The dialog was closed');
-      //   this.animal = result;
-      // });
+      const data: ConfirmationDialogData = {
+        title: undefined,
+        message: `You can still move ${
+          this.characterBeingControlledByClient!.movementSpeed
+        } spaces. Are you sure you want to stop moving?`,
+      };
+      const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
+        data,
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('The dialog was closed');
+        if (result === 'yes') {
+          this.rollForEventCard();
+        }
+      });
+    } else {
+      this.rollForEventCard();
     }
   }
 
