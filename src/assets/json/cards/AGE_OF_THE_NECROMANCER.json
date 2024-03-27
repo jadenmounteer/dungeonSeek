@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Rumors of Army Amassing in the East",
+    "description": "You hear rumors of a strange army amassing in the east near the ruins of Castle Greybear.",
+    "quantity": 1,
+    "discardAfterUse": true,
+    "choices": [
+      {
+        "description": "You do something...",
+        "outcome": "SUBTRACT_GOLD"
+      }
+    ]
+  },
+  {
+    "name": "The Army is on the Move",
+    "description": "You hear rumors that the strange army in the east is on the move.",
+    "quantity": 1,
+    "discardAfterUse": true,
+    "choices": [
+      {
+        "description": "You do something...",
+        "outcome": "SUBTRACT_GOLD"
+      }
+    ]
+  }
+]
