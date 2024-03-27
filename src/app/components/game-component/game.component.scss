@@ -120,3 +120,11 @@
   left: 16px;
   z-index: 999;
 }
+
+.game-buttons-section {
+  // put it in the bottom right corner of the screen
+  position: fixed;
+  bottom: 0;
+  right: 16px;
+  z-index: 999;
+}

@@ -92,6 +92,26 @@
       </span>
     </div>
 
+    <div class="game-buttons-section">
+      <span
+        *ngIf="characterBeingControlledByClient?.movementSpeed != undefined"
+      >
+        <div
+          class="game-button"
+          *ngIf="characterBeingControlledByClient!.movementSpeed > 0"
+        >
+          End Movement
+        </div>
+
+        <div
+          class="game-button"
+          *ngIf="characterBeingControlledByClient!.movementSpeed <= 0"
+        >
+          End Turn
+        </div>
+      </span>
+    </div>
+
     <!-- Legacy because it will be replaced with other components. -->
     <!-- <app-game-footer
       *ngIf="!loading"
