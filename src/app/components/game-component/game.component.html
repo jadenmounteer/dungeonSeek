@@ -105,7 +105,10 @@
 
         <div
           class="game-button"
-          *ngIf="characterBeingControlledByClient!.movementSpeed <= 0"
+          *ngIf="
+            characterBeingControlledByClient!.movementSpeed <= 0 &&
+            !waitingForNextTurnToStart
+          "
         >
           End Turn
         </div>
