@@ -452,12 +452,14 @@ export class GameComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'rolled') {
-        if (this.characterBeingControlledByClient?.movementSpeed) {
-          this.characterBeingControlledByClient!.movementSpeed = 0;
-        }
-      } else {
-        this.currentCharacterRollingDice = false;
+      if (this.characterBeingControlledByClient?.movementSpeed) {
+        this.characterBeingControlledByClient!.movementSpeed = 0;
+      }
+      this.currentCharacterRollingDice = false;
+      this.currentCharacterRolledForEventCardThisTurn = true;
+
+      if (result === true) {
+        this.drawEventCard();
       }
     });
 

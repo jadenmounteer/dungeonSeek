@@ -93,6 +93,7 @@ export class DiceRollDialogComponent {
     public dialogueRef: MatDialogRef<DiceRollDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DiceRollDialogData
   ) {
+    dialogueRef.disableClose = true;
     this.rollDice();
   }
 
@@ -147,5 +148,13 @@ export class DiceRollDialogComponent {
       case '=':
         return this.sum === this.data.targetNumber;
     }
+  }
+
+  protected close(): void {
+    this.dialogueRef.close();
+  }
+
+  protected successClose(): void {
+    this.dialogueRef.close(true);
   }
 }
