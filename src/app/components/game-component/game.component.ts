@@ -17,6 +17,7 @@ import { LocationInfoComponent } from '../location-info/location-info.component'
 import { GameCardComponent } from '../game-card/game-card.component';
 import { CardService } from '../../services/card.service';
 import { CardDeck, CardInfo, DeckName, Outcome } from '../../types/card-deck';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-game',
@@ -66,7 +67,8 @@ export class GameComponent implements OnInit, OnDestroy {
     private characterService: CharacterService,
     private authService: AuthService,
     private turnService: TurnService,
-    private cardService: CardService
+    private cardService: CardService,
+    public dialog: MatDialog
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -399,12 +401,27 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showEventCard = false;
   }
 
+  protected endMovement() {
+    // Set the character's movement to 0 so they can't move after rolling for an event card
+    if (this.characterBeingControlledByClient!.movementSpeed ?? 0 > 0) {
+      // TODO Show a confirmation dialog telling the user they won't be able to move anymore if they roll for an event card.
+      // const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      //   data: {name: this.name, animal: this.animal},
+      // });
+      // dialogRef.afterClosed().subscribe(result => {
+      //   console.log('The dialog was closed');
+      //   this.animal = result;
+      // });
+    }
+  }
+
   /**
    * Before ending their turn, a character must roll for an event card.
    * They have a 1 in 4 chance of drawing an event card.
    */
   protected rollForEventCard() {
     this.currentCharacterRolledForEventCardThisTurn = true;
+    this.characterBeingControlledByClient!.movementSpeed = 0;
 
     // TODO show the dice roll animation and then draw the card or not, depending on the roll.
   }
