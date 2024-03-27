@@ -30,8 +30,8 @@
   {
     "name": "The Bandit",
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a bandit! He's armed and dangerous. He demands you hand over all your gold.",
-    "quantity": 1,
-    "discardAfterUse": true,
+    "quantity": 2,
+    "discardAfterUse": false,
     "choices": [
       {
         "description": "You do something...",
@@ -42,7 +42,7 @@
   {
     "name": "The Merchant",
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a merchant! He's selling all sorts of goods. He offers to sell you some of his wares.",
-    "quantity": 4,
+    "quantity": 2,
     "discardAfterUse": false,
     "choices": [
       {
@@ -58,7 +58,7 @@
   {
     "name": "The Caravan",
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a caravan! They are traveling to the nearest town and offer to let you join them.",
-    "quantity": 4,
+    "quantity": 3,
     "discardAfterUse": false,
     "choices": [
       {
