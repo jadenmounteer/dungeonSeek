@@ -7,6 +7,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 export type DiceRollComparator = '>=' | '<=' | '=';
 
@@ -21,7 +22,13 @@ export type DiceRollDialogData = {
 @Component({
   selector: 'app-dice-roll-dialog',
   standalone: true,
-  imports: [],
+  imports: [
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
+    MatButtonModule,
+  ],
   templateUrl: './dice-roll-dialog.component.html',
   styleUrl: './dice-roll-dialog.component.scss',
 })
@@ -30,7 +37,7 @@ export class DiceRollDialogComponent {
 
   constructor(
     public dialogueRef: MatDialogRef<DiceRollDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DiceRollDialogComponent
+    @Inject(MAT_DIALOG_DATA) public data: DiceRollDialogData
   ) {}
 
   protected onNoClick(): void {

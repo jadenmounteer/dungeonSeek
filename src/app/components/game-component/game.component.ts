@@ -421,7 +421,6 @@ export class GameComponent implements OnInit, OnDestroy {
         data,
       });
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed');
         if (result === 'yes') {
           this.rollForEventCard();
         }
@@ -438,7 +437,6 @@ export class GameComponent implements OnInit, OnDestroy {
   protected rollForEventCard() {
     // this.currentCharacterRolledForEventCardThisTurn = true;
     this.currentCharacterRollingDice = true;
-    this.characterBeingControlledByClient!.movementSpeed = 0;
 
     // This gives a 1 in 3.6 chance of drawing an event card.
     const data: DiceRollDialogData = {
@@ -450,6 +448,16 @@ export class GameComponent implements OnInit, OnDestroy {
     };
     const dialogRef = this.dialog.open(DiceRollDialogComponent, {
       data,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'rolled') {
+        if (this.characterBeingControlledByClient?.movementSpeed) {
+          this.characterBeingControlledByClient!.movementSpeed = 0;
+        }
+      } else {
+        this.currentCharacterRollingDice = false;
+      }
     });
 
     // TODO show the dice roll animation and then draw the card or not, depending on the roll.
