@@ -58,7 +58,7 @@
   {
     "name": "The Caravan",
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a caravan! They are traveling to the nearest town and offer to let you join them.",
-    "quantity": 3,
+    "quantity": 2,
     "discardAfterUse": false,
     "choices": [
       {
