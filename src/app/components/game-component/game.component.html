@@ -72,7 +72,7 @@
       </div>
     </span>
 
-    <div class="player-movement-section">
+    <div class="player-movement-section" *ngIf="!currentCharacterRollingDice">
       <span
         *ngIf="characterBeingControlledByClient?.movementSpeed != undefined"
       >
@@ -92,7 +92,7 @@
       </span>
     </div>
 
-    <div class="game-buttons-section">
+    <div class="game-buttons-section" *ngIf="!currentCharacterRollingDice">
       <span
         *ngIf="characterBeingControlledByClient?.movementSpeed != undefined"
       >

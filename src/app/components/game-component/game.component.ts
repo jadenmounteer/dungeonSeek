@@ -54,6 +54,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected loading = true;
   protected locationsLoading = true;
   protected currentCharacterRolledForEventCardThisTurn = false;
+  protected currentCharacterRollingDice = false;
 
   protected characterBeingControlledByClient: Character | undefined;
 
@@ -431,7 +432,8 @@ export class GameComponent implements OnInit, OnDestroy {
    * They have a 1 in 4 chance of drawing an event card.
    */
   protected rollForEventCard() {
-    this.currentCharacterRolledForEventCardThisTurn = true;
+    // this.currentCharacterRolledForEventCardThisTurn = true;
+    this.currentCharacterRollingDice = true;
     this.characterBeingControlledByClient!.movementSpeed = 0;
 
     // TODO show the dice roll animation and then draw the card or not, depending on the roll.
