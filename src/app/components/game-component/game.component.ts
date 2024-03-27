@@ -12,7 +12,7 @@ import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
 import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
-import { GameFooterComponent } from '../game-footer/game-footer.component';
+import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { CardService } from '../../services/card.service';
