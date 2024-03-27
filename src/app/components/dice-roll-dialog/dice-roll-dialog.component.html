@@ -1,7 +1,11 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content>
   <p>{{ data.message }}</p>
+
+  <div class="dice-section">
+    <div class="die" *ngFor="let die of dice">{{ die }}</div>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onYesClick()" cdkFocusInitial>Roll</button>
+  <button mat-button (click)="onRoll()" cdkFocusInitial>Roll</button>
 </mat-dialog-actions>

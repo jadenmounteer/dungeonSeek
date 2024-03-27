@@ -8,6 +8,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 export type DiceRollComparator = '>=' | '<=' | '=';
 
@@ -19,6 +20,10 @@ export type DiceRollDialogData = {
   targetNumber: number;
 };
 
+export interface Die {
+  sides: number;
+}
+
 @Component({
   selector: 'app-dice-roll-dialog',
   standalone: true,
@@ -28,6 +33,7 @@ export type DiceRollDialogData = {
     MatDialogContent,
     MatDialogTitle,
     MatButtonModule,
+    CommonModule,
   ],
   templateUrl: './dice-roll-dialog.component.html',
   styleUrl: './dice-roll-dialog.component.scss',
@@ -35,16 +41,20 @@ export type DiceRollDialogData = {
 export class DiceRollDialogComponent {
   // This probability calculator helps in determining how many dice to use for a given probability: https://www.gigacalculator.com/calculators/dice-probability-calculator.php
 
+  protected dice: Die[] = [];
+
   constructor(
     public dialogueRef: MatDialogRef<DiceRollDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DiceRollDialogData
-  ) {}
-
-  protected onNoClick(): void {
-    this.dialogueRef.close();
+  ) {
+    this.createDice();
   }
 
-  protected onYesClick(): void {
-    this.dialogueRef.close('yes');
+  private createDice(): void {
+    for (let i = 0; i < this.data.numberOfDice; i++) {
+      this.dice.push({ sides: 6 });
+    }
   }
+
+  protected onRoll(): void {}
 }
