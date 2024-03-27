@@ -438,14 +438,14 @@ export class GameComponent implements OnInit, OnDestroy {
     // this.currentCharacterRolledForEventCardThisTurn = true;
     this.currentCharacterRollingDice = true;
 
-    // This gives a 1 in 3.6 chance of drawing an event card.
+    // This gives a 1 in 3 chance of drawing an event card.
     const data: DiceRollDialogData = {
       title: 'Roll for Event Card',
       message: 'If you roll a 5 or less, draw an event card.',
       closeButtonName: 'Draw Event Card',
-      numberOfDice: 2,
+      numberOfDice: 1,
       comparator: '<=',
-      targetNumber: 5,
+      targetNumber: 2,
     };
     const dialogRef = this.dialog.open(DiceRollDialogComponent, {
       data,
