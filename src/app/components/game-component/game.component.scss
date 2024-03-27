@@ -112,3 +112,11 @@
   height: calc($game-board-height / 30);
   @include unselectable();
 }
+
+.player-movement-section {
+  // put it in the bottom left corner of the screen
+  position: fixed;
+  bottom: 0;
+  left: 16px;
+  z-index: 999;
+}
