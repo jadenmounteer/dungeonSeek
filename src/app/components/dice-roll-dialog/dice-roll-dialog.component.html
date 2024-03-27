@@ -14,7 +14,29 @@
       ></div>
     </div>
   </div>
+
+  <div class="sum-section">
+    <p *ngIf="rolledDice">You rolled a sum of {{ sum }}</p>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onRoll()" cdkFocusInitial>Roll</button>
+  <button mat-button (click)="onRoll()" cdkFocusInitial *ngIf="!rolledDice">
+    Roll
+  </button>
+  <button
+    mat-button
+    (click)="onRoll()"
+    cdkFocusInitial
+    *ngIf="rolledDice && inTargetRange"
+  >
+    {{ data.closeButtonName }}
+  </button>
+  <button
+    mat-button
+    (click)="onRoll()"
+    cdkFocusInitial
+    *ngIf="rolledDice && !inTargetRange"
+  >
+    Close
+  </button>
 </mat-dialog-actions>

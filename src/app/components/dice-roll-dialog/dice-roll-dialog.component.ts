@@ -15,6 +15,7 @@ export type DiceRollComparator = '>=' | '<=' | '=';
 export type DiceRollDialogData = {
   title: string;
   message: string;
+  closeButtonName: string;
   numberOfDice: number;
   comparator: DiceRollComparator;
   targetNumber: number;
@@ -81,7 +82,12 @@ export class DiceRollDialogComponent {
     ],
   };
 
+  protected rolledDice: boolean = false;
+  protected inTargetRange: boolean = false;
+
   protected dice: Die[] = [];
+
+  protected sum: number = 0;
 
   constructor(
     public dialogueRef: MatDialogRef<DiceRollDialogComponent>,
@@ -91,10 +97,17 @@ export class DiceRollDialogComponent {
   }
 
   // Creates the face of the dice. Called when the dice is rolled as well.
-  private rollDice(): void {
+  private rollDice(): number {
+    this.dice = [];
+    let sum = 0;
     for (let i = 0; i < this.data.numberOfDice; i++) {
       this.dice.push(this.createDie());
     }
+
+    for (let die of this.dice) {
+      sum += die.value;
+    }
+    return sum;
   }
 
   private createDie(): Die {
@@ -119,5 +132,20 @@ export class DiceRollDialogComponent {
     return die;
   }
 
-  protected onRoll(): void {}
+  protected onRoll(): void {
+    this.rolledDice = true;
+    this.sum = this.rollDice();
+    this.inTargetRange = this.checkTargetRange();
+  }
+
+  private checkTargetRange(): boolean {
+    switch (this.data.comparator) {
+      case '>=':
+        return this.sum >= this.data.targetNumber;
+      case '<=':
+        return this.sum <= this.data.targetNumber;
+      case '=':
+        return this.sum === this.data.targetNumber;
+    }
+  }
 }

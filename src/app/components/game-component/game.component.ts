@@ -442,6 +442,7 @@ export class GameComponent implements OnInit, OnDestroy {
     const data: DiceRollDialogData = {
       title: 'Roll for Event Card',
       message: 'If you roll a 5 or less, draw an event card.',
+      closeButtonName: 'Draw Event Card',
       numberOfDice: 2,
       comparator: '<=',
       targetNumber: 5,
