@@ -82,7 +82,7 @@ export class LocationService {
     adjacentLocations: ['East Unf Road'],
     distanceFromPlayer: null,
     locationType: 'Dungeon',
-    eventDeckType: DeckName.ROAD_EVENTS, // TODO change this to a dungeon deck. Architect how to do this
+    eventDeckType: DeckName.ROAD_EVENTS, // TODO change this to a dungeon deck. Architect how to do this. // You can enter the dungeon but there are also wilderness cards and events that happen while outside of a dungeon.
   };
 
   private westHillmireRoad: LocationNode = {
