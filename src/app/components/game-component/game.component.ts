@@ -390,9 +390,33 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
+  private getCardDeckAccordingToLocationType(): CardDeck {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client');
+    }
+
+    // We use [0] because I'm lazy and that's how the observable works.
+    // I know it's messy but that's the price I need to pay if I want to use JSON for the card info.
+    if (
+      this.characterBeingControlledByClient.currentLocation.locationType ===
+      'Road'
+    ) {
+      return this.roadEventDeck[0];
+    } else if (
+      this.characterBeingControlledByClient.currentLocation.locationType ===
+      'City'
+    ) {
+      return this.cityEventDeck[0];
+    } else {
+      throw new Error('No card deck corresponding to location type.');
+    }
+  }
+
   protected async drawEventCard() {
+    const deck = this.getCardDeckAccordingToLocationType();
+
     this.cardName = await this.cardService.getNextCardInDeck(
-      this.roadEventDeck[0],
+      deck,
       this.gameSession.id
     );
     this.deckName =
@@ -445,7 +469,7 @@ export class GameComponent implements OnInit, OnDestroy {
       closeButtonName: 'Draw Event Card',
       numberOfDice: 1,
       comparator: '<=',
-      targetNumber: 6,
+      targetNumber: 2,
     };
     const dialogRef = this.dialog.open(DiceRollDialogComponent, {
       data,
