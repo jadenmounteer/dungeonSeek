@@ -1,13 +1,5 @@
 @import "../../../styles.scss";
 
-@mixin unselectable() {
-  // One of these lines disabled highlighting on mobile
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-  -webkit-tap-highlight-color: transparent;
-}
-
 .game-board {
   // border: 2px solid black;
   width: $game-board-width;

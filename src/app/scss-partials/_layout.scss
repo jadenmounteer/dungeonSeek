@@ -9,6 +9,14 @@ $game-board-height: calc(1536px * 3);
   }
 }
 
+@mixin unselectable() {
+  // One of these lines disabled highlighting on mobile
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-tap-highlight-color: transparent;
+}
+
 @mixin game-board-height-and-smaller {
   @media (max-height: $game-board-height) {
     @content;

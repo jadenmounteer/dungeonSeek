@@ -19,4 +19,5 @@ $image-width: 80px;
 }
 .character-image {
   width: $image-width;
+  @include unselectable();
 }
