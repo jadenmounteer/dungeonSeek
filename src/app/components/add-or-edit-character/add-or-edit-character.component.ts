@@ -13,7 +13,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
-import { Character, CharacterClass } from '../../types/character';
+import {
+  Character,
+  CharacterClass,
+  CharacterMenu,
+  CharacterStats,
+} from '../../types/character';
 import { AuthService } from '../../auth/auth.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
@@ -40,27 +45,35 @@ import { LocationService } from '../../services/location-service';
   styleUrl: './add-or-edit-character.component.scss',
 })
 export class AddOrEditCharacterComponent implements OnInit {
+  private characterStats: CharacterStats = {
+    health: 0,
+    mana: 0,
+    stamina: 0,
+    experience: 0,
+    gold: 0,
+  };
+
+  private characterMenu: CharacterMenu = {
+    equipmentCards: [],
+    potionCards: [],
+    itemCards: [],
+    spellCards: [],
+    statusCards: [],
+    sideQuestCards: [],
+  };
+
   protected character: Partial<Character> = {
     id: '',
     userId: this.authService.activeUser?.uid || '',
     name: '',
     class: 'Sorcerer',
     level: 1,
-
     sex: 'Male',
-
     movementSpeed: 4,
     inParty: false,
     directionFacing: 'Right',
-    equipmentCards: [],
-    potionCards: [],
-    itemCards: [],
-    spellCards: [],
-    statusCards: [],
-    health: 0,
-    mana: 0,
-    experience: 0,
-    gold: 0,
+    characterStats: this.characterStats,
+    characterMenu: this.characterMenu,
   };
 
   constructor(

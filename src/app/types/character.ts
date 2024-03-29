@@ -6,21 +6,31 @@ export interface Character {
   name: string;
   class: CharacterClass;
   sex: CharacterSex;
-  level: number;
   movementSpeed: number;
   inParty: boolean;
   currentLocation: LocationNode;
   directionFacing: 'Right' | 'Left';
+  level: number;
+  characterStats: CharacterStats;
+  characterMenu: CharacterMenu;
+}
+
+export type CharacterStats = {
+  health: number;
+  mana: number;
+  stamina: number;
+  experience: number;
+  gold: number;
+};
+
+export type CharacterMenu = {
   equipmentCards: []; // TODO type all these things
   potionCards: [];
   itemCards: [];
   spellCards: [];
   statusCards: [];
-  health: number;
-  mana: number;
-  experience: number;
-  gold: number;
-}
+  sideQuestCards: [];
+};
 
 export type CharacterSex = 'Male' | 'Female';
 
