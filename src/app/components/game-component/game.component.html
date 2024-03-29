@@ -18,7 +18,10 @@
       <div class="board-9"></div>
     </span>
 
-    <app-character-info></app-character-info>
+    <app-character-info
+      *ngIf="characterBeingControlledByClient"
+      [character]="characterBeingControlledByClient"
+    ></app-character-info>
 
     <app-location-info
       *ngIf="!showEventCard"

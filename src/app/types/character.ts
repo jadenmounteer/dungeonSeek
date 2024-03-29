@@ -5,7 +5,7 @@ export interface Character {
   userId: string;
   name: string;
   class: CharacterClass;
-  sex: 'Male' | 'Female';
+  sex: CharacterSex;
   level: number;
   movementSpeed: number;
   inParty: boolean;
@@ -22,4 +22,6 @@ export interface Character {
   gold: number;
 }
 
-export type CharacterClass = 'Sorcerer';
+export type CharacterSex = 'Male' | 'Female';
+
+export type CharacterClass = 'Sorcerer' | 'Pirate' | 'Rogue' | 'Viking';
