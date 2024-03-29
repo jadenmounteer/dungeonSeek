@@ -1,27 +1,15 @@
 # DungeonSeek
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
+A cross-platform multiplayer tabletop role-playing game. Currently in the alpha stage getting ready for the first play-testers.
 
-## Development server
+## Explore the world of Tesslandia
+![Screenshot 2024-03-29 at 10 48 46 AM](https://github.com/jadenmounteer/dungeonSeek/assets/67714386/1d5b7b58-68fd-4a9d-bf05-6b1f9a3fba6d)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Team up with friends
+<img width="1647" alt="image" src="https://github.com/jadenmounteer/dungeonSeek/assets/67714386/af67af44-8a45-488e-9340-7558bec12f6f">
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Choose your class
+![wizard-right](https://github.com/jadenmounteer/dungeonSeek/assets/67714386/e6443941-a8f7-44ea-8313-12ba6d34681c)
+![sorceress-right](https://github.com/jadenmounteer/dungeonSeek/assets/67714386/b830bf1b-efd6-4a5a-a345-56a400c392c7)
+![female-pirate-right](https://github.com/jadenmounteer/dungeonSeek/assets/67714386/c2973908-4234-4db6-983d-115e79736550)
+![rogue-profile](https://github.com/jadenmounteer/dungeonSeek/assets/67714386/e678d5cf-e8f5-4bf5-a935-1127fc6240b6)
