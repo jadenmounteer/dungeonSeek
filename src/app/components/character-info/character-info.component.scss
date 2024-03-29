@@ -1,0 +1,12 @@
+@import "../../../styles.scss";
+
+.character-image-wrapper {
+  // wrap it in a circle
+  border-radius: 50%;
+  overflow: hidden;
+  width: 50px;
+  border: 1px solid black;
+}
+.character-image {
+  width: 50px;
+}

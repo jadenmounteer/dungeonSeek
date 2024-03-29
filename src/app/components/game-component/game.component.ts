@@ -24,6 +24,7 @@ import {
   DiceRollDialogComponent,
   DiceRollDialogData,
 } from '../dice-roll-dialog/dice-roll-dialog.component';
+import { CharacterInfoComponent } from '../character-info/character-info.component';
 
 @Component({
   selector: 'app-game',
@@ -36,6 +37,7 @@ import {
     GameFooterComponent,
     LocationInfoComponent,
     GameCardComponent,
+    CharacterInfoComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
