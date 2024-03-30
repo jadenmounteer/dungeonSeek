@@ -22,3 +22,15 @@ $image-width: 80px;
   width: $image-width;
   @include unselectable();
 }
+
+.character-info-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.character-stats-sections {
+  display: flex;
+  flex-direction: column;
+}
