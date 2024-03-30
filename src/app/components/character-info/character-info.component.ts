@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Character, CharacterClass, CharacterSex } from '../../types/character';
+import { StatBarComponent } from '../stat-bar/stat-bar.component';
 
 @Component({
   selector: 'app-character-info',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, StatBarComponent],
   templateUrl: './character-info.component.html',
   styleUrl: './character-info.component.scss',
 })

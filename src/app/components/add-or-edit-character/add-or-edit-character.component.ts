@@ -46,11 +46,10 @@ import { LocationService } from '../../services/location-service';
 })
 export class AddOrEditCharacterComponent implements OnInit {
   private characterStats: CharacterStats = {
-    health: 0,
-    mana: 0,
-    stamina: 0,
-    experience: 0,
-    gold: 0,
+    health: { total: 100, current: 100 },
+    mana: { total: 50, current: 50 },
+    stamina: { total: 100, current: 100 },
+    experience: { total: 0, current: 0 },
   };
 
   private characterMenu: CharacterMenu = {

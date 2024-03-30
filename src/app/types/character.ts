@@ -13,14 +13,19 @@ export interface Character {
   level: number;
   characterStats: CharacterStats;
   characterMenu: CharacterMenu;
+  gold: number;
 }
 
 export type CharacterStats = {
-  health: number;
-  mana: number;
-  stamina: number;
-  experience: number;
-  gold: number;
+  health: CharacterStat;
+  mana: CharacterStat;
+  stamina: CharacterStat;
+  experience: CharacterStat;
+};
+
+export type CharacterStat = {
+  total: number;
+  current: number;
 };
 
 export type CharacterMenu = {
