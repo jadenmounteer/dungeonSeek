@@ -2,7 +2,26 @@
   <div class="character-image-wrapper">
     <img [src]="characterImage" class="character-image" />
   </div>
-  <div class="character-stats-section">
-    <app-stat-bar></app-stat-bar>
+  <div class="character-stats-section" *ngIf="character.characterStats">
+    <app-stat-bar
+      [stat]="character.characterStats.health"
+      [statColor]="'red'"
+      [statName]="'Health'"
+    ></app-stat-bar>
+    <app-stat-bar
+      [stat]="character.characterStats.mana"
+      [statColor]="'blue'"
+      [statName]="'Mana'"
+    ></app-stat-bar>
+    <app-stat-bar
+      [stat]="character.characterStats.stamina"
+      [statColor]="'green'"
+      [statName]="'Stamina'"
+    ></app-stat-bar>
+    <app-stat-bar
+      [stat]="character.characterStats.experience"
+      [statColor]="'dark-blue'"
+      [statName]="'experience'"
+    ></app-stat-bar>
   </div>
 </div>
