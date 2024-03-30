@@ -25,9 +25,13 @@ $image-width: 80px;
 
 .character-info-wrapper {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: column;
   gap: 16px;
+
+  @include for-tablet-portrait-up {
+    flex-direction: row;
+  }
 }
 
 .character-stats-sections {
