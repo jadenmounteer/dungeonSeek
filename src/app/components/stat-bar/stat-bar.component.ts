@@ -1,18 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CharacterStat } from '../../types/character';
+import { CommonModule } from '@angular/common';
 
-export type StatColor = 'red' | 'blue' | 'green' | 'dark-blue';
+export type StatName = 'Health' | 'Mana' | 'Stamina' | 'Experience';
 @Component({
   selector: 'app-stat-bar',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './stat-bar.component.html',
   styleUrl: './stat-bar.component.scss',
 })
 export class StatBarComponent implements OnInit {
   @Input() stat!: CharacterStat;
-  @Input() statName!: string;
-  @Input() statColor: StatColor = 'red';
+  @Input() statName!: StatName;
 
   ngOnInit(): void {
     if (!this.stat || !this.statName) {

@@ -1,4 +1,12 @@
-<div class="stat-bar">
+<div
+  class="stat-bar"
+  [ngClass]="{
+    health: statName === 'Health',
+    mana: statName === 'Mana',
+    stamina: statName === 'Stamina',
+    experience: statName === 'Experience'
+  }"
+>
   <span class="current">{{ stat.current }}</span>
   <span>/</span>
   <span class="total">{{ stat.total }}</span>
