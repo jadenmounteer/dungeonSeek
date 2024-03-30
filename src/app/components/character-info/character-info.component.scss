@@ -8,6 +8,7 @@ $image-width: 80px;
   border-radius: 50%;
   overflow: hidden;
   width: $image-width;
+  height: $image-width;
   border: 1px solid grey;
   transition: all 0.3s ease-in-out;
 }
