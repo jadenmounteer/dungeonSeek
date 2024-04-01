@@ -1,33 +1,31 @@
 <div class="game-card-wrapper" @fadeIn @fadeOut>
-  <div class="game-card" [@flipState]="flip">
-    <div class="game-card__side game-card__front">
-      <span class="big-text">{{ deckName }}</span>
+  <div class="game-card">
+    <div class="card-image-wrapper">
+      <img class="card-image" [src]="card?.imgUrl" />
     </div>
-    <div class="game-card__side game-card__back">
-      <div class="card-title">
-        <p>{{ card?.name }}</p>
-      </div>
-      <div class="card-description">
-        <p>{{ card?.description }}</p>
-        <img class="card-image" [src]="card?.imgUrl" />
-      </div>
-      <div class="card-choices">
-        <div class="choice" *ngFor="let choice of card?.choices">
-          <div class="game-button" (click)="onMakeChoice(choice.outcome)">
-            {{ choice.description }}
-          </div>
-        </div>
-      </div>
+  </div>
 
-      <div
-        *ngIf="
-          (card?.choices && (card?.choices)!.length <= 0) || !card?.choices
-        "
-        class="game-button"
-        (click)="onCloseCard()"
-      >
-        Close card
+  <!-- The card info -->
+  <!-- <div class="card-title">
+    <p>{{ card?.name }}</p>
+  </div>
+  <div class="card-description">
+    <p>{{ card?.description }}</p>
+
+  </div>
+  <div class="card-choices">
+    <div class="choice" *ngFor="let choice of card?.choices">
+      <div class="game-button" (click)="onMakeChoice(choice.outcome)">
+        {{ choice.description }}
       </div>
     </div>
   </div>
-</div>
+
+<div
+      *ngIf="(card?.choices && (card?.choices)!.length <= 0) || !card?.choices"
+      class="game-button"
+      (click)="onCloseCard()"
+    >
+      Close card
+    </div>
+--></div>

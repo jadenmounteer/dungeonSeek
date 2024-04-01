@@ -478,7 +478,7 @@ export class GameComponent implements OnInit, OnDestroy {
       closeButtonName: 'Draw Event Card',
       numberOfDice: 1,
       comparator: '<=',
-      targetNumber: 3,
+      targetNumber: 6,
     };
     const dialogRef = this.dialog.open(DiceRollDialogComponent, {
       data,
