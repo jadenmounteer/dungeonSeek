@@ -25,7 +25,7 @@ $image-width: 80px;
 
 .character-info-wrapper {
   display: flex;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
   gap: 16px;
 
@@ -37,4 +37,24 @@ $image-width: 80px;
 .character-stats-sections {
   display: flex;
   flex-direction: column;
+}
+
+.character-gold-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.gold-coin {
+  width: 20px;
+  height: 20px;
+
+  background-color: gold;
+  border-radius: 50%;
+}
+
+.character-stats-and-gold {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

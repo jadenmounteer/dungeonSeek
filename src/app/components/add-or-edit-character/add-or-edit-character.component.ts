@@ -73,6 +73,7 @@ export class AddOrEditCharacterComponent implements OnInit {
     directionFacing: 'Right',
     characterStats: this.characterStats,
     characterMenu: this.characterMenu,
+    gold: 0,
   };
 
   constructor(

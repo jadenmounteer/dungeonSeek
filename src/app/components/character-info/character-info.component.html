@@ -2,22 +2,29 @@
   <div class="character-image-wrapper">
     <img [src]="characterImage" class="character-image" />
   </div>
-  <div class="character-stats-section" *ngIf="character.characterStats">
-    <app-stat-bar
-      [stat]="character.characterStats.health"
-      [statName]="'Health'"
-    ></app-stat-bar>
-    <app-stat-bar
-      [stat]="character.characterStats.mana"
-      [statName]="'Mana'"
-    ></app-stat-bar>
-    <app-stat-bar
-      [stat]="character.characterStats.stamina"
-      [statName]="'Stamina'"
-    ></app-stat-bar>
-    <app-stat-bar
-      [stat]="character.characterStats.experience"
-      [statName]="'Experience'"
-    ></app-stat-bar>
+
+  <div class="character-stats-and-gold">
+    <div class="character-stats-section" *ngIf="character.characterStats">
+      <app-stat-bar
+        [stat]="character.characterStats.health"
+        [statName]="'Health'"
+      ></app-stat-bar>
+      <app-stat-bar
+        [stat]="character.characterStats.mana"
+        [statName]="'Mana'"
+      ></app-stat-bar>
+      <app-stat-bar
+        [stat]="character.characterStats.stamina"
+        [statName]="'Stamina'"
+      ></app-stat-bar>
+      <app-stat-bar
+        [stat]="character.characterStats.experience"
+        [statName]="'Experience'"
+      ></app-stat-bar>
+    </div>
+    <div class="character-gold-section">
+      <span class="gold-coin"></span>
+      <span class="character-gold"> {{ character.gold }}</span>
+    </div>
   </div>
 </div>
