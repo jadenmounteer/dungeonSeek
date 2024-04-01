@@ -6,26 +6,27 @@
   </div>
 
   <!-- The card info -->
-  <!-- <div class="card-title">
-    <p>{{ card?.name }}</p>
-  </div>
-  <div class="card-description">
-    <p>{{ card?.description }}</p>
-
-  </div>
-  <div class="card-choices">
-    <div class="choice" *ngFor="let choice of card?.choices">
-      <div class="game-button" (click)="onMakeChoice(choice.outcome)">
-        {{ choice.description }}
+  <div class="card-info">
+    <div class="card-title">
+      <p>{{ card?.name }}</p>
+    </div>
+    <div class="card-description">
+      <p>{{ card?.description }}</p>
+    </div>
+    <div class="card-choices">
+      <div class="choice" *ngFor="let choice of card?.choices">
+        <div class="game-button" (click)="onMakeChoice(choice.outcome)">
+          {{ choice.description }}
+        </div>
       </div>
     </div>
-  </div>
 
-<div
+    <div
       *ngIf="(card?.choices && (card?.choices)!.length <= 0) || !card?.choices"
       class="game-button"
       (click)="onCloseCard()"
     >
       Close card
     </div>
---></div>
+  </div>
+</div>
