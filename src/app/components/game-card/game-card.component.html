@@ -9,6 +9,7 @@
       </div>
       <div class="card-description">
         <p>{{ card?.description }}</p>
+        <img class="card-image" [src]="card?.imgUrl" />
       </div>
       <div class="card-choices">
         <div class="choice" *ngFor="let choice of card?.choices">
