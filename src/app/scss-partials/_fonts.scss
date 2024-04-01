@@ -1,6 +1,12 @@
 $sticky-text-font-size: 2em;
 $sticky-text-font-size-for-zoomed-in-screen: 1em;
 
+$menu-font-color: white;
+
+@mixin text-glow {
+  text-shadow: 0 0 4px #eee;
+}
+
 .big-text {
   font-size: 1.5rem;
   font-weight: bold;
@@ -16,4 +22,13 @@ $sticky-text-font-size-for-zoomed-in-screen: 1em;
   @include for-zoomed-in-screen {
     font-size: $sticky-text-font-size-for-zoomed-in-screen;
   }
+}
+
+.menu-title {
+  // Big white letters that look like light
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+
+  @include text-glow;
 }
