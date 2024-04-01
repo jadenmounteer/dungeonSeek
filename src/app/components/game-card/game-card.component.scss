@@ -2,7 +2,7 @@
 
 $card-border-radius: 25px;
 
-.game-card-wrapper {
+.menu-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,6 +12,8 @@ $card-border-radius: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
+  // give it a semi-transparent black background
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .game-card {
