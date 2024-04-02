@@ -34,6 +34,7 @@ export interface Dot {
 export class DiceRollDialogComponent implements OnInit {
   @Input() public data: DiceRollDialogData | undefined;
   @Output() public successClose: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public close: EventEmitter<void> = new EventEmitter<void>();
 
   // This probability calculator helps in determining how many dice to use for a given probability: https://www.gigacalculator.com/calculators/dice-probability-calculator.php
   private dotPositionMatrix = {
@@ -143,7 +144,7 @@ export class DiceRollDialogComponent implements OnInit {
     }
   }
 
-  protected close(): void {}
+  protected onClose(): void {}
 
   protected OnSuccessClose(): void {
     this.successClose.emit();
