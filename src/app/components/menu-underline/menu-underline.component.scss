@@ -3,13 +3,13 @@
 .menu-underline {
   width: 40%;
   height: 3px;
-  background-color: #eee;
+  background-color: $dungeon-seek-light;
   // give it a glow
   @include text-glow;
   margin-left: auto;
   margin-right: auto;
   border-radius: 50px;
-  box-shadow: 0 0 10px #eee;
+  box-shadow: 0 0 10px $dungeon-seek-light;
   margin-top: -16px;
   margin-bottom: 16px;
 }

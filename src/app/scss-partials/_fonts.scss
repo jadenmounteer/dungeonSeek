@@ -1,18 +1,18 @@
 $sticky-text-font-size: 2em;
 $sticky-text-font-size-for-zoomed-in-screen: 1em;
 
-$menu-font-color: white;
+$menu-font-color: $dungeon-seek-light;
 
-$button-text-color: white;
+$button-text-color: $dungeon-seek-light;
 
 @mixin text-glow {
-  text-shadow: 0 0 2px #eee;
+  text-shadow: 0 0 2px $dungeon-seek-light;
 }
 
 .big-text {
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: $dungeon-seek-light;
   text-shadow: 2px 2px 2px black;
   margin-top: 0.5rem;
 }
