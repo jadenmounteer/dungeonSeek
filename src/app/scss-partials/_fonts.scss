@@ -3,6 +3,8 @@ $sticky-text-font-size-for-zoomed-in-screen: 1em;
 
 $menu-font-color: white;
 
+$button-text-color: white;
+
 @mixin text-glow {
   text-shadow: 0 0 2px #eee;
 }
@@ -36,4 +38,15 @@ $menu-font-color: white;
 .menu-text {
   font-size: 1.5em;
   color: $menu-font-color;
+}
+
+.menu-sub-title {
+  font-size: 1.5em;
+  color: $menu-font-color;
+}
+
+.choices-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }

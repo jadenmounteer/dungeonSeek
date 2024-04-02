@@ -2,7 +2,7 @@
   // Make it big and green and fantasy looking
   font-size: $sticky-text-font-size;
   font-weight: bold;
-  color: white;
+  color: $button-text-color;
   text-shadow: 2px 2px 2px black;
   background-color: rgb(57, 110, 64);
   border: 2px solid rgb(57, 110, 64);
@@ -38,4 +38,21 @@
   &:hover {
     background-color: grey;
   }
+}
+
+.choice-button {
+  font-size: $sticky-text-font-size;
+  font-weight: bold;
+  color: $button-text-color;
+  background-color: gray;
+  border: 2px solid rgb(38, 38, 38);
+  width: fit-content;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.choice-button:hover {
+  background-color: rgb(113, 112, 112);
 }

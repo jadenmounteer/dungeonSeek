@@ -18,10 +18,14 @@
       <div class="card-description">
         <p class="menu-text">{{ card?.description }}</p>
       </div>
-      <div class="card-choices">
-        <div class="choice" *ngFor="let choice of card?.choices">
-          <div class="game-button" (click)="onMakeChoice(choice.outcome)">
-            {{ choice.description }}
+      <div class="card-choices-section">
+        <h2 class="menu-sub-title">What do you do?</h2>
+        <div class="menu-underline"></div>
+        <div class="choices-wrapper">
+          <div class="choice" *ngFor="let choice of card?.choices">
+            <div class="choice-button" (click)="onMakeChoice(choice.outcome)">
+              {{ choice.description }}
+            </div>
           </div>
         </div>
       </div>
@@ -30,7 +34,7 @@
         *ngIf="
           (card?.choices && (card?.choices)!.length <= 0) || !card?.choices
         "
-        class="game-button"
+        class="choice-button"
         (click)="onCloseCard()"
       >
         Close card
