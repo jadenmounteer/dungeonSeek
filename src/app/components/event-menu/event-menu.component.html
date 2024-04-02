@@ -1,11 +1,7 @@
 <app-menu>
   <div class="menu-content">
     <div class="game-card-wrapper">
-      <div class="game-card">
-        <div class="card-image-wrapper">
-          <img class="card-image" [src]="card?.imgUrl" />
-        </div>
-      </div>
+      <app-game-card [card]="card"></app-game-card>
     </div>
 
     <!-- The card info -->

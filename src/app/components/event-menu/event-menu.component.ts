@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CardService } from '../../services/card.service';
 import { CardInfo, DeckName, Outcome } from '../../types/card-deck';
 import { MenuComponent } from '../menu/menu.component';
+import { GameCardComponent } from '../game-card/game-card.component';
 @Component({
   selector: 'app-event-menu',
   standalone: true,
-  imports: [CommonModule, MenuComponent],
+  imports: [CommonModule, MenuComponent, GameCardComponent],
   templateUrl: './event-menu.component.html',
   styleUrl: './event-menu.component.scss',
 })
@@ -21,10 +22,6 @@ export class EventMenuComponent implements OnInit {
 
   constructor(private cardService: CardService) {}
 
-  toggleFlip() {
-    this.flip = this.flip == 'inactive' ? 'active' : 'inactive';
-  }
-
   ngOnInit(): void {
     if (!this.cardName || !this.deckName) {
       throw new Error('Card name or location type not provided');
@@ -35,15 +32,6 @@ export class EventMenuComponent implements OnInit {
     } else {
       throw new Error('Card not found');
     }
-    this.flipCard();
-  }
-
-  private flipCard() {
-    // flip the card after 5 seconds
-    setTimeout(() => {
-      // flip the card
-      this.toggleFlip();
-    }, 1000);
   }
 
   protected onCloseCard() {
