@@ -3,13 +3,13 @@
     {{ card?.name }}
   </h1>
 
-  <div class="menu-underline"></div>
+  <app-menu-underline></app-menu-underline>
   <div class="card-description">
     <p class="menu-text">{{ card?.description }}</p>
   </div>
   <div class="card-choices-section">
     <h2 class="menu-sub-title">What do you do?</h2>
-    <div class="menu-underline"></div>
+    <app-menu-underline></app-menu-underline>
     <div class="choices-wrapper">
       <div class="choice" *ngFor="let choice of card?.choices">
         <div class="choice-button" (click)="onMakeChoice(choice.outcome)">

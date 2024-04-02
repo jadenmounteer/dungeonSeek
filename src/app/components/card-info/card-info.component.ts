@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardInfo, Outcome } from '../../types/card-deck';
 import { CommonModule } from '@angular/common';
+import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 
 @Component({
   selector: 'app-card-info',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MenuUnderlineComponent],
   templateUrl: './card-info.component.html',
   styleUrl: './card-info.component.scss',
 })
