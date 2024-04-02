@@ -482,23 +482,5 @@ export class GameComponent implements OnInit, OnDestroy {
       targetNumber: 6,
     };
     this.currentCharacterRollingDice = true;
-
-    // TODO after we close the dialogue...
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (this.characterBeingControlledByClient?.movementSpeed) {
-    //     this.characterBeingControlledByClient!.movementSpeed = 0;
-    //   }
-    //   this.currentCharacterRollingDice = false;
-    //   this.currentCharacterRolledForEventCardThisTurn = true;
-    //   this.gameSessionService.scrollToCharacterBeingControlledByClient(
-    //     this.characterBeingControlledByClient
-    //   );
-
-    //   if (result === true) {
-    //     this.drawEventCard();
-    //   }
-    // });
-
-    // TODO show the dice roll animation and then draw the card or not, depending on the roll.
   }
 }

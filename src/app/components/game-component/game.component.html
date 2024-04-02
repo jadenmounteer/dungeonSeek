@@ -40,8 +40,15 @@
     <app-dice-roll-dialog
       *ngIf="currentCharacterRollingDice"
       [data]="diceRollingData"
-      (successClose)="currentCharacterRollingDice = false; drawEventCard()"
-      (close)="currentCharacterRollingDice = false"
+      (successClose)="
+        currentCharacterRollingDice = false;
+        drawEventCard();
+        currentCharacterRolledForEventCardThisTurn = true
+      "
+      (close)="
+        currentCharacterRollingDice = false;
+        currentCharacterRolledForEventCardThisTurn = true
+      "
     ></app-dice-roll-dialog>
 
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">
