@@ -2,23 +2,6 @@
 
 $card-border-radius: 25px;
 
-.menu-background {
-  // TODO this will be shared
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  height: 100%;
-  width: 100%;
-  // give it a semi-transparent black background
-  background-color: rgba(0, 0, 0, 0.817);
-
-  // These styles will be native to the specific component
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .menu-content {
   display: flex;
   justify-content: center;

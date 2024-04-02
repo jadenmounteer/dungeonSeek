@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { fadeIn } from '../../animations/fade-in-animation';
-import { fadeOut } from '../../animations/fade-out-animation';
 import { CardService } from '../../services/card.service';
 import { CardInfo, DeckName, Outcome } from '../../types/card-deck';
+import { MenuComponent } from '../menu/menu.component';
 @Component({
   selector: 'app-event-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MenuComponent],
   templateUrl: './event-menu.component.html',
   styleUrl: './event-menu.component.scss',
-  animations: [fadeIn, fadeOut],
 })
 export class EventMenuComponent implements OnInit {
   @Input() public cardName: string | undefined;
