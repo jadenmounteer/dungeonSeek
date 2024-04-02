@@ -3,7 +3,7 @@
     <h2 class="menu-title">{{ data?.title }}</h2>
     <app-menu-underline></app-menu-underline>
 
-    <p class="menu-text">{{ data?.message }}</p>
+    <p class="menu-text" *ngIf="sum === 0">{{ data?.message }}</p>
 
     <div class="dice-section">
       <div class="die" *ngFor="let die of dice">
@@ -19,25 +19,32 @@
     </div>
 
     <div class="sum-section">
-      <p *ngIf="rolledDice" class="menu-text">You rolled a sum of {{ sum }}</p>
+      <p *ngIf="rolledDice" class="menu-text">You rolled a {{ sum }}</p>
     </div>
 
-    <button (click)="onRoll()" cdkFocusInitial *ngIf="!rolledDice">Roll</button>
-    <button
-      mat-button
+    <div
+      class="choice-button"
+      (click)="onRoll()"
+      cdkFocusInitial
+      *ngIf="!rolledDice"
+    >
+      Roll
+    </div>
+    <div
+      class="choice-button"
       (click)="OnSuccessClose()"
       cdkFocusInitial
       *ngIf="rolledDice && inTargetRange"
     >
       {{ data?.closeButtonName }}
-    </button>
-    <button
-      mat-button
+    </div>
+    <div
+      class="choice-button"
       (click)="onClose()"
       cdkFocusInitial
       *ngIf="rolledDice && !inTargetRange"
     >
       Close
-    </button>
+    </div>
   </div>
 </app-menu>

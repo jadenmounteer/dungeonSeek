@@ -2,6 +2,7 @@
 
 .dice-section {
   display: flex;
+  justify-content: center;
 }
 
 .die {
@@ -29,4 +30,15 @@
   left: var(--left);
   transform: translateX(calc(var(--left) * -1))
     translateY(calc(var(--top) * -1));
+}
+
+.choice-button {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.sum-section {
+  text-align: center;
 }

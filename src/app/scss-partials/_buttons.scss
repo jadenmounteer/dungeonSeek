@@ -51,6 +51,8 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.5s;
+  min-width: 100px;
+  text-align: center;
 }
 
 .choice-button:hover {
