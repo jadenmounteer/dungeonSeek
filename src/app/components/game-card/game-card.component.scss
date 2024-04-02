@@ -11,20 +11,32 @@ $card-border-radius: 25px;
   height: 100%;
   width: 100%;
   // give it a semi-transparent black background
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.817);
 
   // These styles will be native to the specific component
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-content {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 16p;
-
+  padding-left: 16px;
+  padding-right: 16px;
   @include for-tablet-portrait-up {
     flex-direction: row;
+    justify-content: space-between;
   }
 }
 
+.game-card-wrapper {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
 .game-card {
   position: relative;
   border-radius: $card-border-radius;
@@ -54,4 +66,10 @@ $card-border-radius: 25px;
   margin-right: auto;
   border-radius: 50px;
   box-shadow: 0 0 10px #eee;
+}
+
+.card-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
