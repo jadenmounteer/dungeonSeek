@@ -144,7 +144,9 @@ export class DiceRollDialogComponent implements OnInit {
     }
   }
 
-  protected onClose(): void {}
+  protected onClose(): void {
+    this.close.emit();
+  }
 
   protected OnSuccessClose(): void {
     this.successClose.emit();
