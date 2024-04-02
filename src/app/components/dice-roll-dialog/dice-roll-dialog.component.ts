@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
@@ -33,6 +33,7 @@ export interface Dot {
 })
 export class DiceRollDialogComponent implements OnInit {
   @Input() public data: DiceRollDialogData | undefined;
+  @Output() public successClose: EventEmitter<void> = new EventEmitter<void>();
 
   // This probability calculator helps in determining how many dice to use for a given probability: https://www.gigacalculator.com/calculators/dice-probability-calculator.php
   private dotPositionMatrix = {
@@ -144,5 +145,7 @@ export class DiceRollDialogComponent implements OnInit {
 
   protected close(): void {}
 
-  protected successClose(): void {}
+  protected OnSuccessClose(): void {
+    this.successClose.emit();
+  }
 }
