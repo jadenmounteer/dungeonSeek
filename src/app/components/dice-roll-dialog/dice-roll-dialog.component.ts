@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from '../menu/menu.component';
+import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 
 export type DiceRollComparator = '>=' | '<=' | '=';
 
@@ -27,7 +27,7 @@ export interface Dot {
 @Component({
   selector: 'app-dice-roll-dialog',
   standalone: true,
-  imports: [CommonModule, MenuComponent],
+  imports: [CommonModule, MenuComponent, MenuUnderlineComponent],
   templateUrl: './dice-roll-dialog.component.html',
   styleUrl: './dice-roll-dialog.component.scss',
 })

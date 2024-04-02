@@ -1,7 +1,8 @@
 <app-menu *ngIf="initialized">
   <h2 class="menu-title">{{ data?.title }}</h2>
+  <app-menu-underline></app-menu-underline>
 
-  <p>{{ data?.message }}</p>
+  <p class="menu-text">{{ data?.message }}</p>
 
   <div class="dice-section">
     <div class="die" *ngFor="let die of dice">
@@ -17,7 +18,7 @@
   </div>
 
   <div class="sum-section">
-    <p *ngIf="rolledDice">You rolled a sum of {{ sum }}</p>
+    <p *ngIf="rolledDice" class="menu-text">You rolled a sum of {{ sum }}</p>
   </div>
 
   <button (click)="onRoll()" cdkFocusInitial *ngIf="!rolledDice">Roll</button>
