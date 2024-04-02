@@ -456,6 +456,8 @@ export class GameComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe((result) => {
         if (result === 'yes') {
+          this.characterBeingControlledByClient!.movementSpeed = 0;
+
           this.rollForEventCard();
         } else {
           this.gameSessionService.scrollToCharacterBeingControlledByClient(
