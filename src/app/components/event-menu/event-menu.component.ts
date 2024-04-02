@@ -1,10 +1,3 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
@@ -12,14 +5,14 @@ import { fadeOut } from '../../animations/fade-out-animation';
 import { CardService } from '../../services/card.service';
 import { CardInfo, DeckName, Outcome } from '../../types/card-deck';
 @Component({
-  selector: 'app-game-card',
+  selector: 'app-event-menu',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './game-card.component.html',
-  styleUrl: './game-card.component.scss',
+  templateUrl: './event-menu.component.html',
+  styleUrl: './event-menu.component.scss',
   animations: [fadeIn, fadeOut],
 })
-export class GameCardComponent implements OnInit {
+export class EventMenuComponent implements OnInit {
   @Input() public cardName: string | undefined;
   @Input() public deckName: DeckName | undefined;
   @Output() public closeCard = new EventEmitter<any>();

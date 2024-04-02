@@ -14,9 +14,8 @@ import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
-import { GameCardComponent } from '../game-card/game-card.component';
 import { CardService } from '../../services/card.service';
-import { CardDeck, CardInfo, DeckName, Outcome } from '../../types/card-deck';
+import { CardDeck, DeckName, Outcome } from '../../types/card-deck';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogueComponent } from '../confirmation-dialogue/confirmation-dialogue.component';
 import type { ConfirmationDialogData } from '../confirmation-dialogue/confirmation-dialogue.component';
@@ -25,6 +24,7 @@ import {
   DiceRollDialogData,
 } from '../dice-roll-dialog/dice-roll-dialog.component';
 import { CharacterInfoComponent } from '../character-info/character-info.component';
+import { EventMenuComponent } from '../event-menu/event-menu.component';
 
 @Component({
   selector: 'app-game',
@@ -36,7 +36,7 @@ import { CharacterInfoComponent } from '../character-info/character-info.compone
     TurnArrowComponent,
     GameFooterComponent,
     LocationInfoComponent,
-    GameCardComponent,
+    EventMenuComponent,
     CharacterInfoComponent,
   ],
   templateUrl: './game.component.html',

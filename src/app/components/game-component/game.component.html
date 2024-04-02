@@ -29,13 +29,13 @@
     ></app-location-info>
 
     <!-- Only appears when you draw an event card -->
-    <app-game-card
+    <app-event-menu
       *ngIf="showEventCard"
       [cardName]="cardName"
       [deckName]="deckName"
       (closeCard)="closeCard()"
       (makeChoice)="makeChoice($event)"
-    ></app-game-card>
+    ></app-event-menu>
 
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">
       <div
