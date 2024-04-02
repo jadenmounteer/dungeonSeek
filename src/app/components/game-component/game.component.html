@@ -37,6 +37,11 @@
       (makeChoice)="makeChoice($event)"
     ></app-event-menu>
 
+    <app-dice-roll-dialog
+      *ngIf="currentCharacterRollingDice"
+      [data]="diceRollingData"
+    ></app-dice-roll-dialog>
+
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">
       <div
         class="player-wrapper"

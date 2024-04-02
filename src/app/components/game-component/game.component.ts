@@ -38,6 +38,7 @@ import { EventMenuComponent } from '../event-menu/event-menu.component';
     LocationInfoComponent,
     EventMenuComponent,
     CharacterInfoComponent,
+    DiceRollDialogComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -47,6 +48,8 @@ export class GameComponent implements OnInit, OnDestroy {
   protected cityEventDeckSub: Subscription | undefined;
   protected roadEventDeck: CardDeck[] = [];
   protected cityEventDeck: CardDeck[] = [];
+
+  protected diceRollingData: DiceRollDialogData | undefined;
 
   protected charactersBeingControlledByClient: Character[] = [];
 
@@ -470,9 +473,7 @@ export class GameComponent implements OnInit, OnDestroy {
    * They have a 1 in 4 chance of drawing an event card.
    */
   protected rollForEventCard() {
-    this.currentCharacterRollingDice = true;
-
-    const data: DiceRollDialogData = {
+    this.diceRollingData = {
       title: 'Roll for Event Card',
       message: 'If you roll a 3 or less, draw an event card.',
       closeButtonName: 'Draw Event Card',
@@ -480,24 +481,23 @@ export class GameComponent implements OnInit, OnDestroy {
       comparator: '<=',
       targetNumber: 6,
     };
-    const dialogRef = this.dialog.open(DiceRollDialogComponent, {
-      data,
-    });
+    this.currentCharacterRollingDice = true;
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (this.characterBeingControlledByClient?.movementSpeed) {
-        this.characterBeingControlledByClient!.movementSpeed = 0;
-      }
-      this.currentCharacterRollingDice = false;
-      this.currentCharacterRolledForEventCardThisTurn = true;
-      this.gameSessionService.scrollToCharacterBeingControlledByClient(
-        this.characterBeingControlledByClient
-      );
+    // TODO after we close the dialogue...
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   if (this.characterBeingControlledByClient?.movementSpeed) {
+    //     this.characterBeingControlledByClient!.movementSpeed = 0;
+    //   }
+    //   this.currentCharacterRollingDice = false;
+    //   this.currentCharacterRolledForEventCardThisTurn = true;
+    //   this.gameSessionService.scrollToCharacterBeingControlledByClient(
+    //     this.characterBeingControlledByClient
+    //   );
 
-      if (result === true) {
-        this.drawEventCard();
-      }
-    });
+    //   if (result === true) {
+    //     this.drawEventCard();
+    //   }
+    // });
 
     // TODO show the dice roll animation and then draw the card or not, depending on the roll.
   }

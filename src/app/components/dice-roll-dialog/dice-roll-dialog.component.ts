@@ -1,14 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MenuComponent } from '../menu/menu.component';
 
 export type DiceRollComparator = '>=' | '<=' | '=';
 
@@ -34,20 +27,14 @@ export interface Dot {
 @Component({
   selector: 'app-dice-roll-dialog',
   standalone: true,
-  imports: [
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogContent,
-    MatDialogTitle,
-    MatButtonModule,
-    CommonModule,
-  ],
+  imports: [CommonModule, MenuComponent],
   templateUrl: './dice-roll-dialog.component.html',
   styleUrl: './dice-roll-dialog.component.scss',
 })
-export class DiceRollDialogComponent {
-  // This probability calculator helps in determining how many dice to use for a given probability: https://www.gigacalculator.com/calculators/dice-probability-calculator.php
+export class DiceRollDialogComponent implements OnInit {
+  @Input() public data: DiceRollDialogData | undefined;
 
+  // This probability calculator helps in determining how many dice to use for a given probability: https://www.gigacalculator.com/calculators/dice-probability-calculator.php
   private dotPositionMatrix = {
     1: [[50, 50]],
     2: [
@@ -88,17 +75,19 @@ export class DiceRollDialogComponent {
   protected dice: Die[] = [];
 
   protected sum: number = 0;
+  protected initialized = false;
 
-  constructor(
-    public dialogueRef: MatDialogRef<DiceRollDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DiceRollDialogData
-  ) {
-    dialogueRef.disableClose = true;
+  constructor() {}
+  ngOnInit(): void {
     this.rollDice();
+    this.initialized = true;
   }
 
   // Creates the face of the dice. Called when the dice is rolled as well.
   private rollDice(): number {
+    if (!this.data) {
+      throw new Error('Data is not defined');
+    }
     this.dice = [];
     let sum = 0;
     for (let i = 0; i < this.data.numberOfDice; i++) {
@@ -140,6 +129,9 @@ export class DiceRollDialogComponent {
   }
 
   private checkTargetRange(): boolean {
+    if (!this.data) {
+      throw new Error('Data is not defined');
+    }
     switch (this.data.comparator) {
       case '>=':
         return this.sum >= this.data.targetNumber;
@@ -150,11 +142,7 @@ export class DiceRollDialogComponent {
     }
   }
 
-  protected close(): void {
-    this.dialogueRef.close();
-  }
+  protected close(): void {}
 
-  protected successClose(): void {
-    this.dialogueRef.close(true);
-  }
+  protected successClose(): void {}
 }

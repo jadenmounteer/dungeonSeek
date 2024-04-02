@@ -1,6 +1,7 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
-<mat-dialog-content>
-  <p>{{ data.message }}</p>
+<app-menu *ngIf="initialized">
+  <h2 class="menu-title">{{ data?.title }}</h2>
+
+  <p>{{ data?.message }}</p>
 
   <div class="dice-section">
     <div class="die" *ngFor="let die of dice">
@@ -18,18 +19,15 @@
   <div class="sum-section">
     <p *ngIf="rolledDice">You rolled a sum of {{ sum }}</p>
   </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onRoll()" cdkFocusInitial *ngIf="!rolledDice">
-    Roll
-  </button>
+
+  <button (click)="onRoll()" cdkFocusInitial *ngIf="!rolledDice">Roll</button>
   <button
     mat-button
     (click)="successClose()"
     cdkFocusInitial
     *ngIf="rolledDice && inTargetRange"
   >
-    {{ data.closeButtonName }}
+    {{ data?.closeButtonName }}
   </button>
   <button
     mat-button
@@ -38,5 +36,5 @@
     *ngIf="rolledDice && !inTargetRange"
   >
     Close
-  </button>
-</mat-dialog-actions>
+  </button></app-menu
+>
