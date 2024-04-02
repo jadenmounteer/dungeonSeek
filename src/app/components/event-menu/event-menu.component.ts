@@ -4,10 +4,11 @@ import { CardService } from '../../services/card.service';
 import { CardInfo, DeckName, Outcome } from '../../types/card-deck';
 import { MenuComponent } from '../menu/menu.component';
 import { GameCardComponent } from '../game-card/game-card.component';
+import { CardInfoComponent } from '../card-info/card-info.component';
 @Component({
   selector: 'app-event-menu',
   standalone: true,
-  imports: [CommonModule, MenuComponent, GameCardComponent],
+  imports: [CommonModule, MenuComponent, GameCardComponent, CardInfoComponent],
   templateUrl: './event-menu.component.html',
   styleUrl: './event-menu.component.scss',
 })
