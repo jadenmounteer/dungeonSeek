@@ -2,14 +2,17 @@
   {
     "name": "Sword of Banishment",
     "description": "An enchanted sword. Wield it to banish your foes to distant lands.",
-    "ability-description": "50% chance to send your opponent to a random location on the map on hit.",
     "imgUrl": "assets/weapons/sword.png",
     "type": "sword",
+    "fullPrice": 50000,
     "stats": {
       "attack": 30,
       "defense": 0,
       "speed": 0
     },
-    "fullPrice": 50000
+    "ability": {
+      "name": "Banishment",
+      "description": "50% chance to send your opponent to a random location on the map on hit."
+    }
   }
 ]
