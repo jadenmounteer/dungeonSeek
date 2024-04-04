@@ -62,5 +62,5 @@ export enum CityEventCardNames {
 export enum DeckName {
   ROAD_EVENTS = 'Road Events',
   CITY_EVENTS = 'City Events',
-  ITEMS = 'Items',
+  WEAPONS = 'Weapons',
 }
