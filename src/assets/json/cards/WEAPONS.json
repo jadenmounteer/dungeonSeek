@@ -5,6 +5,7 @@
     "imgUrl": "assets/weapons/sword.png",
     "type": "sword",
     "fullPrice": 50000,
+    "rewardType": "Insane",
     "stats": {
       "attack": 30,
       "defense": 0,
@@ -12,7 +13,7 @@
     },
     "ability": {
       "name": "Banishment",
-      "description": "50% chance to send your opponent to a random location on the map on hit."
+      "description": "50% chance to send your opponent to a distant location on the map on hit."
     }
   }
 ]
