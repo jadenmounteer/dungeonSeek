@@ -25,6 +25,7 @@ import {
 } from '../dice-roll-dialog/dice-roll-dialog.component';
 import { CharacterInfoComponent } from '../character-info/character-info.component';
 import { EventMenuComponent } from '../event-menu/event-menu.component';
+import { ItemMenuComponent } from '../item-menu/item-menu.component';
 
 @Component({
   selector: 'app-game',
@@ -39,6 +40,7 @@ import { EventMenuComponent } from '../event-menu/event-menu.component';
     EventMenuComponent,
     CharacterInfoComponent,
     DiceRollDialogComponent,
+    ItemMenuComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
