@@ -6,11 +6,16 @@
   <app-menu-underline></app-menu-underline>
   <div class="card-description">
     <p class="menu-text">{{ card?.description }}</p>
+    <p class="menu-text">Type: {{ card?.type }}</p>
+    <p class="menu-text">Value: {{ card?.fullPrice }}</p>
+    <p class="menu-text">Attack: {{ card?.stats?.attack }}</p>
+    <p class="menu-text">Defense: {{ card?.stats?.defense }}</p>
+    <p class="menu-text">Speed: {{ card?.stats?.speed }}</p>
   </div>
+
   <div class="card-choices-section">
     <h2 class="menu-sub-title">What do you do?</h2>
     <app-menu-underline></app-menu-underline>
+    <div class="choice-button" (click)="onCloseCard()">Add to inventory</div>
   </div>
-
-  <div class="choice-button" (click)="onCloseCard()">Add to inventory</div>
 </div>
