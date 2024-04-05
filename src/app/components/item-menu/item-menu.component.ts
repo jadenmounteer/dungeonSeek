@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { EventCardInfoComponent } from '../event-card-info/event-card-info.component';
+import { EventCardInfoViewComponent } from '../event-card-info-view/event-card-info-view.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { MenuComponent } from '../menu/menu.component';
 
@@ -11,7 +11,7 @@ import { MenuComponent } from '../menu/menu.component';
     CommonModule,
     MenuComponent,
     GameCardComponent,
-    EventCardInfoComponent,
+    EventCardInfoViewComponent,
   ],
   templateUrl: './item-menu.component.html',
   styleUrl: './item-menu.component.scss',

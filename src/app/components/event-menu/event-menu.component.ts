@@ -4,7 +4,7 @@ import { CardService } from '../../services/card.service';
 import { CardInfo, DeckName, Outcome } from '../../types/card-deck';
 import { MenuComponent } from '../menu/menu.component';
 import { GameCardComponent } from '../game-card/game-card.component';
-import { EventCardInfoComponent } from '../event-card-info/event-card-info.component';
+import { EventCardInfoViewComponent } from '../event-card-info-view/event-card-info-view.component';
 @Component({
   selector: 'app-event-menu',
   standalone: true,
@@ -12,7 +12,7 @@ import { EventCardInfoComponent } from '../event-card-info/event-card-info.compo
     CommonModule,
     MenuComponent,
     GameCardComponent,
-    EventCardInfoComponent,
+    EventCardInfoViewComponent,
   ],
   templateUrl: './event-menu.component.html',
   styleUrl: './event-menu.component.scss',

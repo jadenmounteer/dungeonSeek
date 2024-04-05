@@ -4,10 +4,10 @@
       <app-game-card [card]="card"></app-game-card>
     </div>
 
-    <app-event-card-info
+    <app-event-card-info-view
       [card]="card"
       (closeCard)="onCloseCard()"
       (makeChoice)="onMakeChoice($event)"
-    ></app-event-card-info>
+    ></app-event-card-info-view>
   </div>
 </app-menu>
