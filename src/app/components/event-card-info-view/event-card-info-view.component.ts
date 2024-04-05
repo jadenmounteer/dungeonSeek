@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardInfo, Outcome } from '../../types/card-deck';
+import { Outcome } from '../../types/card-deck';
 import { CommonModule } from '@angular/common';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
+import { EventCardInfo } from '../../types/event-card';
 
 @Component({
   selector: 'app-event-card-info-view',
@@ -11,7 +12,7 @@ import { MenuUnderlineComponent } from '../menu-underline/menu-underline.compone
   styleUrl: './event-card-info-view.component.scss',
 })
 export class EventCardInfoViewComponent {
-  @Input() public card: CardInfo | undefined;
+  @Input() public card: EventCardInfo | undefined;
   @Output() public closeCard = new EventEmitter<any>();
   @Output() public makeChoice = new EventEmitter<Outcome>();
 

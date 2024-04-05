@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { CardInfo } from '../../types/card-deck';
+import { EventCardInfo } from '../../types/event-card';
+import { WeaponCardInfo } from '../../types/weapon-card-info';
 
 @Component({
   selector: 'app-game-card',
@@ -9,5 +10,5 @@ import { CardInfo } from '../../types/card-deck';
   styleUrl: './game-card.component.scss',
 })
 export class GameCardComponent {
-  @Input() card: CardInfo | undefined;
+  @Input() card: EventCardInfo | WeaponCardInfo | undefined;
 }

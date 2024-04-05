@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CardService } from '../../services/card.service';
-import { CardInfo, DeckName, Outcome } from '../../types/card-deck';
+import { DeckName, Outcome } from '../../types/card-deck';
 import { MenuComponent } from '../menu/menu.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { EventCardInfoViewComponent } from '../event-card-info-view/event-card-info-view.component';
+import { EventCardInfo } from '../../types/event-card';
 @Component({
   selector: 'app-event-menu',
   standalone: true,
@@ -24,7 +25,7 @@ export class EventMenuComponent implements OnInit {
   @Output() public makeChoice = new EventEmitter<Outcome>();
 
   protected flip: string = 'inactive';
-  protected card: CardInfo | undefined;
+  protected card: EventCardInfo | undefined;
 
   constructor(private cardService: CardService) {}
 

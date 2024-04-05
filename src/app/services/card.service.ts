@@ -10,13 +10,13 @@ import {
 } from '@angular/fire/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import {
-  CardInfo,
   CardDeck,
   RoadEventCardNames,
   CityEventCardNames,
   DeckName,
 } from '../types/card-deck';
 import { Observable } from 'rxjs';
+import { EventCardInfo } from '../types/event-card';
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +25,8 @@ export class CardService {
   // These maps hold all the JSON data for the event cards.
   // They are used to get a specific event card when you don't want to get one off the top of the deck
   // They are also used to display the card data in the UI
-  private roadEventCardsInfo: Map<string, CardInfo> = new Map();
-  private cityEventCardsInfo: Map<string, CardInfo> = new Map();
+  private roadEventCardsInfo: Map<string, EventCardInfo> = new Map();
+  private cityEventCardsInfo: Map<string, EventCardInfo> = new Map();
 
   constructor(private firestore: Firestore) {}
 
@@ -54,7 +54,9 @@ export class CardService {
   // Called when a user jumps into the game.
   // This allows them to have access to the event cards.
   // Using JSON for the card info so I don't have to overload the db
-  private async fetchEventCardsInfo(deckName: DeckName): Promise<CardInfo[]> {
+  private async fetchEventCardsInfo(
+    deckName: DeckName
+  ): Promise<EventCardInfo[]> {
     // Get the deck key from the deck name
     const deckKey = Object.keys(DeckName).find((key) => {
       return DeckName[key as keyof typeof DeckName] === deckName;
@@ -75,7 +77,7 @@ export class CardService {
   public getCardInfo(
     cardName: string,
     deckName: DeckName
-  ): CardInfo | undefined {
+  ): EventCardInfo | undefined {
     if (deckName === DeckName.ROAD_EVENTS) {
       return this.roadEventCardsInfo.get(cardName);
     }
@@ -151,7 +153,7 @@ export class CardService {
     await Promise.all(
       Object.values(DeckName).map(async (deckName) => {
         const cards = await this.fetchEventCardsInfo(deckName as DeckName);
-        const mapOfCardNames = new Map<string, CardInfo>();
+        const mapOfCardNames = new Map<string, EventCardInfo>();
         cards.forEach((card) => {
           mapOfCardNames.set(card.name, card);
         });
