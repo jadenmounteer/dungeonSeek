@@ -14,7 +14,6 @@ import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
-import { CardService } from '../../services/card.service';
 import { CardDeck, DeckName, Outcome } from '../../types/card-deck';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogueComponent } from '../confirmation-dialogue/confirmation-dialogue.component';
@@ -26,6 +25,8 @@ import {
 import { CharacterInfoComponent } from '../character-info/character-info.component';
 import { EventMenuComponent } from '../event-menu/event-menu.component';
 import { ItemMenuComponent } from '../item-menu/item-menu.component';
+import { EventCardService } from '../../services/event-card.service';
+import { RoadEventCardNames } from '../../types/event-card';
 
 @Component({
   selector: 'app-game',
@@ -46,11 +47,6 @@ import { ItemMenuComponent } from '../item-menu/item-menu.component';
   styleUrl: './game.component.scss',
 })
 export class GameComponent implements OnInit, OnDestroy {
-  protected roadEventDeckSub: Subscription | undefined;
-  protected cityEventDeckSub: Subscription | undefined;
-  protected roadEventDeck: CardDeck[] = [];
-  protected cityEventDeck: CardDeck[] = [];
-
   protected diceRollingData: DiceRollDialogData | undefined;
 
   protected charactersBeingControlledByClient: Character[] = [];
@@ -81,8 +77,8 @@ export class GameComponent implements OnInit, OnDestroy {
     private characterService: CharacterService,
     private authService: AuthService,
     private turnService: TurnService,
-    private cardService: CardService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private eventCardService: EventCardService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -91,7 +87,7 @@ export class GameComponent implements OnInit, OnDestroy {
       .subscribe((gameSession) => {
         this.gameSession = gameSession;
 
-        this.setCardDeckSubscriptions();
+        this.eventCardService.setCardDeckSubscriptions(this.gameSession.id);
 
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn
@@ -119,24 +115,6 @@ export class GameComponent implements OnInit, OnDestroy {
           this.moveCharacterToLocation(location);
         }
       );
-  }
-
-  private setCardDeckSubscriptions() {
-    if (!this.roadEventDeckSub) {
-      this.roadEventDeckSub = this.cardService
-        .getCardDeckForGameSession(this.gameSession.id, DeckName.ROAD_EVENTS)
-        .subscribe((roadEventCards) => {
-          this.roadEventDeck = roadEventCards;
-        });
-    }
-
-    if (!this.cityEventDeckSub) {
-      this.cityEventDeckSub = this.cardService
-        .getCardDeckForGameSession(this.gameSession.id, DeckName.CITY_EVENTS)
-        .subscribe((cityEventCards) => {
-          this.cityEventDeck = cityEventCards;
-        });
-    }
   }
 
   private updateLocationNodeDataRelativeToPlayer(): void {
@@ -188,12 +166,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub.unsubscribe();
     this.gameSessionSub.unsubscribe();
     this.charactersSub.unsubscribe();
-    if (this.roadEventDeckSub) {
-      this.roadEventDeckSub.unsubscribe();
-    }
-    if (this.cityEventDeckSub) {
-      this.cityEventDeckSub.unsubscribe();
-    }
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameSession.playerIDs.length > 1) {
@@ -397,40 +369,17 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getCardDeckAccordingToLocationType(): CardDeck {
+  protected async drawEventCard(): Promise<void> {
     if (!this.characterBeingControlledByClient) {
-      throw new Error('No character being controlled by client');
+      throw new Error(
+        "No character being controlled by client. We can't draw an event card without a character."
+      );
     }
-
-    // We use [0] because I'm lazy and that's how the observable works.
-    // I know it's messy but that's the price I need to pay if I want to use JSON for the card info.
-    if (
-      this.characterBeingControlledByClient.currentLocation.locationType ===
-      'Road'
-    ) {
-      return this.roadEventDeck[0];
-    } else if (
-      this.characterBeingControlledByClient.currentLocation.locationType ===
-      'City'
-    ) {
-      return this.cityEventDeck[0];
-    } else if (
-      this.characterBeingControlledByClient.currentLocation.locationType ===
-      'Dungeon'
-    ) {
-      return this.roadEventDeck[0];
-    } else {
-      throw new Error('No card deck corresponding to location type.');
-    }
-  }
-
-  protected async drawEventCard() {
-    const deck = this.getCardDeckAccordingToLocationType();
-
-    this.cardName = await this.cardService.getNextCardInDeck(
-      deck,
+    this.cardName = await this.eventCardService.drawEventCard(
+      this.characterBeingControlledByClient.currentLocation.locationType,
       this.gameSession.id
     );
+
     this.deckName =
       this.characterBeingControlledByClient?.currentLocation.eventDeckType;
 

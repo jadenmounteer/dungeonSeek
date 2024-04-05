@@ -27,7 +27,13 @@ export interface CardDeck {
   cardNames: string[];
 }
 
-// When adding a new deck, add a new JSON file with the same name
+/**
+ * When adding a new deck:
+ * 1. Add a new JSON file with the same name
+ * 2. Add the enum to this type
+ * 3. Add the deck subscription to the card type component and add it to the setCardDeckSubscription method.
+ * 4. Set the subscriptions in the game session component if necessary. See how we do it for event cards.
+ *  **/
 export enum DeckName {
   ROAD_EVENTS = 'Road Events',
   CITY_EVENTS = 'City Events',
