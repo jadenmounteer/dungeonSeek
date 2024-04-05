@@ -7,7 +7,7 @@
     "choices": [
       {
         "description": "Open the chest",
-        "outcome": "FIND_LOOT"
+        "outcome": "5"
       }
     ],
     "imgUrl": "assets/card-images/forest-event.png"
