@@ -21,3 +21,7 @@ export interface WeaponCardStats {
   defense: number;
   speed: number;
 }
+
+export enum WeaponCardNames {
+  SWORD_OF_BANISHMENT = 'Sword of Banishment',
+}

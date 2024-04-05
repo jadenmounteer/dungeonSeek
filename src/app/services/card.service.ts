@@ -12,6 +12,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { CardDeck, DeckName } from '../types/card-deck';
 import { Observable } from 'rxjs';
 import { RoadEventCardNames, CityEventCardNames } from '../types/event-card';
+import { WeaponCardNames } from '../types/weapon-card-info';
 
 @Injectable({
   providedIn: 'root',
@@ -78,6 +79,10 @@ export class CardService {
     }
     if (deckType === DeckName.CITY_EVENTS) {
       cardNames = Object.values(CityEventCardNames);
+    }
+
+    if (deckType === DeckName.WEAPONS) {
+      cardNames = Object.values(WeaponCardNames);
     }
 
     // Loop through all of the card names and add the number of instances of that card to the array
