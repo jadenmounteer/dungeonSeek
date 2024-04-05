@@ -19,6 +19,8 @@ export enum Outcome {
   ADD_GOLD = 2,
   ADD_ITEM = 3,
   TRADE_WITH_MERCHANT = 4,
+  FIND_WEAPON = 5,
+  FIND_LOOT = 5, // Could be any type of loot
 }
 
 export interface CardDeck {
@@ -40,5 +42,6 @@ export interface CardDeck {
 export enum DeckName {
   ROAD_EVENTS = 'Road Events',
   CITY_EVENTS = 'City Events',
+  FOREST_EVENTS = 'Forest Events',
   WEAPONS = 'Weapons',
 }

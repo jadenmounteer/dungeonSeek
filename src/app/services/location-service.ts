@@ -16,10 +16,18 @@ export type LocationNode = {
   eventDeckType: DeckName; // The type of deck from which you draw a card at this location when an event occurs.
 };
 
-export type LocationType = 'Road' | 'Dungeon' | 'Wilderness' | 'Town' | 'City';
+export type LocationType =
+  | 'Road'
+  | 'Dungeon'
+  | 'Wilderness'
+  | 'Town'
+  | 'City'
+  | 'Forest';
 
 export type LocationKey =
   | 'Goeth'
+  | 'East Maleth Forest'
+  | 'West Maleth Forest'
   | 'East Goeth Road'
   | 'Unf'
   | 'East Unf Road'
@@ -52,7 +60,7 @@ export class LocationService {
   private eastGoethRoad: LocationNode = {
     name: 'East Goeth Road',
     position: { xPosition: 2838, yPosition: 2700 },
-    adjacentLocations: ['Goeth', 'Unf'],
+    adjacentLocations: ['Goeth', 'West Maleth Forest', 'Unf'],
     distanceFromPlayer: null,
     locationType: 'Road',
     eventDeckType: DeckName.ROAD_EVENTS,
@@ -61,7 +69,12 @@ export class LocationService {
   private unf: LocationNode = {
     name: 'Unf',
     position: { xPosition: 3113, yPosition: 2608 },
-    adjacentLocations: ['East Goeth Road', 'East Unf Road'],
+    adjacentLocations: [
+      'East Goeth Road',
+      'East Unf Road',
+      'West Maleth Forest',
+      'East Maleth Forest',
+    ],
     distanceFromPlayer: null,
     locationType: 'Town',
     eventDeckType: DeckName.CITY_EVENTS,
@@ -74,6 +87,24 @@ export class LocationService {
     distanceFromPlayer: null,
     locationType: 'Road',
     eventDeckType: DeckName.ROAD_EVENTS,
+  };
+
+  private westMalethForest: LocationNode = {
+    name: 'West Maleth Forest',
+    position: { xPosition: 2989, yPosition: 2868 },
+    adjacentLocations: ['Goeth', 'East Unf Road', 'Unf', 'East Maleth Forest'],
+    distanceFromPlayer: null,
+    locationType: 'Forest',
+    eventDeckType: DeckName.FOREST_EVENTS,
+  };
+
+  private eastMalethForest: LocationNode = {
+    name: 'East Maleth Forest',
+    position: { xPosition: 3313, yPosition: 2815 },
+    adjacentLocations: ['West Maleth Forest', 'Unf', 'Lake View Cavern'],
+    distanceFromPlayer: null,
+    locationType: 'Forest',
+    eventDeckType: DeckName.FOREST_EVENTS,
   };
 
   private lakeViewCavern: LocationNode = {
@@ -168,6 +199,8 @@ export class LocationService {
 
   public locationsMap: Map<LocationKey, LocationNode> = new Map([
     ['Goeth', this.goeth],
+    ['East Maleth Forest', this.eastMalethForest],
+    ['West Maleth Forest', this.westMalethForest],
     ['East Goeth Road', this.eastGoethRoad],
     ['Unf', this.unf],
     ['East Unf Road', this.eastUnfRoad],

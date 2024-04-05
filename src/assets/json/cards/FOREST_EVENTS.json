@@ -1,0 +1,15 @@
+[
+  {
+    "name": "A Hidden Chest",
+    "description": "As you walk through the forest your foot bumps an object hidden under some bramble. As you inspect it you notice it is a wooden chest.",
+    "quantity": 1,
+    "discardAfterUse": false,
+    "choices": [
+      {
+        "description": "Open the chest",
+        "outcome": "FIND_LOOT"
+      }
+    ],
+    "imgUrl": "assets/card-images/forest-event.png"
+  }
+]
