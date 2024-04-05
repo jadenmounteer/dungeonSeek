@@ -2,7 +2,7 @@
   {
     "name": "Sword of Banishment",
     "description": "An enchanted sword. Wield it to banish your foes to distant lands.",
-    "imgUrl": "assets/weapons/sword.png",
+    "imgUrl": "assets/card-images/weapons/swords/sword.png",
     "type": "Sword",
     "fullPrice": 50000,
     "rewardType": "Insane",
