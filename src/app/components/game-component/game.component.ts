@@ -3,7 +3,7 @@ import { PlayerComponent } from '../characters/player/player.component';
 import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
 import { LocationNode, LocationService } from '../../services/location-service';
 import { Subscription } from 'rxjs';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GameSessionService } from '../../services/game-session/game-session.service';
 import { GameSession } from '../../types/game-session';
@@ -14,7 +14,7 @@ import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
-import { CardDeck, DeckName, Outcome } from '../../types/card-deck';
+import { DeckName, Outcome } from '../../types/card-deck';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogueComponent } from '../confirmation-dialogue/confirmation-dialogue.component';
 import type { ConfirmationDialogData } from '../confirmation-dialogue/confirmation-dialogue.component';
@@ -26,7 +26,6 @@ import { CharacterInfoComponent } from '../character-info/character-info.compone
 import { EventMenuComponent } from '../event-menu/event-menu.component';
 import { ItemMenuComponent } from '../item-menu/item-menu.component';
 import { EventCardService } from '../../services/event-card.service';
-import { RoadEventCardNames } from '../../types/event-card';
 
 @Component({
   selector: 'app-game',
