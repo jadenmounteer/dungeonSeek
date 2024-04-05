@@ -33,6 +33,7 @@ export interface CardDeck {
  * 2. Add the enum to this type
  * 3. Add the deck subscription to the card type component and add it to the setCardDeckSubscription method.
  * 4. Set the subscriptions in the game session component if necessary. See how we do it for event cards.
+ * 5. Add the deck to the card service so it can be fetched from the db.
  *  **/
 export enum DeckName {
   ROAD_EVENTS = 'Road Events',
