@@ -200,7 +200,7 @@ export class EventCardService implements OnDestroy {
       }
 
       if (deckType === DeckName.FOREST_EVENTS) {
-        this.cityEventCardsInfo.forEach((value, key) => {
+        this.forestEventCardsInfo.forEach((value, key) => {
           mapOfCardNamesAndQty.set(key, value.quantity);
         });
       }
