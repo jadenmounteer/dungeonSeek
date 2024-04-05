@@ -6,7 +6,7 @@
     "type": "Sword",
     "fullPrice": 50000,
     "rewardType": "Insane",
-    "discardAfterUse": true,
+    "discardAfterUse": false,
     "quantity": 3,
     "stats": {
       "attack": 30,
