@@ -9,14 +9,13 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { Firestore } from '@angular/fire/firestore';
-import {
-  CardDeck,
-  RoadEventCardNames,
-  CityEventCardNames,
-  DeckName,
-} from '../types/card-deck';
+import { CardDeck, DeckName } from '../types/card-deck';
 import { Observable } from 'rxjs';
-import { EventCardInfo } from '../types/event-card';
+import {
+  CityEventCardNames,
+  EventCardInfo,
+  RoadEventCardNames,
+} from '../types/event-card';
 
 @Injectable({
   providedIn: 'root',
