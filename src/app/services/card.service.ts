@@ -11,22 +11,12 @@ import {
 import { Firestore } from '@angular/fire/firestore';
 import { CardDeck, DeckName } from '../types/card-deck';
 import { Observable } from 'rxjs';
-import {
-  CityEventCardNames,
-  EventCardInfo,
-  RoadEventCardNames,
-} from '../types/event-card';
+import { RoadEventCardNames, CityEventCardNames } from '../types/event-card';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CardService {
-  // These maps hold all the JSON data for the event cards.
-  // They are used to get a specific event card when you don't want to get one off the top of the deck
-  // They are also used to display the card data in the UI
-  private roadEventCardsInfo: Map<string, EventCardInfo> = new Map();
-  private cityEventCardsInfo: Map<string, EventCardInfo> = new Map();
-
   constructor(private firestore: Firestore) {}
 
   // Observables to get the card decks from the db
@@ -50,49 +40,29 @@ export class CardService {
     }) as Observable<CardDeck[]>;
   }
 
-  // Called when a user jumps into the game.
-  // This allows them to have access to the event cards.
-  // Using JSON for the card info so I don't have to overload the db
-  private async fetchEventCardsInfo(
-    deckName: DeckName
-  ): Promise<EventCardInfo[]> {
+  public async createCardDecks(gameSessionID: string) {
+    // Create a new card deck for each option in the DeckName type
+    Object.values(DeckName).forEach((deckName) => {
+      this.createCardDeck(gameSessionID, deckName as DeckName);
+    });
+  }
+
+  private async getSingleCardInfoFromJSON(
+    cardName: string,
+    deckType: DeckName
+  ): Promise<any> {
     // Get the deck key from the deck name
     const deckKey = Object.keys(DeckName).find((key) => {
-      return DeckName[key as keyof typeof DeckName] === deckName;
+      return DeckName[key as keyof typeof DeckName] === deckType;
     });
+
     // fetch the JSON data using http
     const response = await fetch(`assets/json/cards/${deckKey}.json`);
     const jsonResponse = await response.json();
 
-    return jsonResponse;
-  }
-
-  /**
-   * Gets a specific event card's information when you draw one off the top of the deck
-   * @param cardName
-   * @param deckName
-   * @returns
-   */
-  public getCardInfo(
-    cardName: string,
-    deckName: DeckName
-  ): EventCardInfo | undefined {
-    if (deckName === DeckName.ROAD_EVENTS) {
-      return this.roadEventCardsInfo.get(cardName);
-    }
-    if (deckName === DeckName.CITY_EVENTS) {
-      return this.cityEventCardsInfo.get(cardName);
-    }
-    return;
-  }
-
-  public async createCardDecks(gameSessionID: string) {
-    // This gets the card info for all cards in the game session and stores it in the service
-    // so the client has access to any of the card info.
-    await this.fetchCardInfoFromJSON();
-    // Create a new card deck for each option in the DeckName type
-    Object.values(DeckName).forEach((deckName) => {
-      this.createCardDeck(gameSessionID, deckName as DeckName);
+    // Get the single cardInfo
+    return jsonResponse.find((card: any) => {
+      return card.name === cardName;
     });
   }
 
@@ -111,8 +81,8 @@ export class CardService {
     }
 
     // Loop through all of the card names and add the number of instances of that card to the array
-    cardNames.forEach((cardName) => {
-      const cardInfo = this.getCardInfo(cardName, deckType);
+    cardNames.forEach(async (cardName) => {
+      const cardInfo = await this.getSingleCardInfoFromJSON(cardName, deckType);
 
       if (!cardInfo) {
         throw new Error(
@@ -147,27 +117,7 @@ export class CardService {
     return addDoc(collectionRef, { ...cardDeck });
   }
 
-  // This is necessary so I can keep all the card data in JSON and not overload the db
-  public async fetchCardInfoFromJSON(): Promise<void> {
-    await Promise.all(
-      Object.values(DeckName).map(async (deckName) => {
-        const cards = await this.fetchEventCardsInfo(deckName as DeckName);
-        const mapOfCardNames = new Map<string, EventCardInfo>();
-        cards.forEach((card) => {
-          mapOfCardNames.set(card.name, card);
-        });
-
-        if (deckName === DeckName.ROAD_EVENTS) {
-          this.roadEventCardsInfo = mapOfCardNames;
-        }
-        if (deckName === DeckName.CITY_EVENTS) {
-          this.cityEventCardsInfo = mapOfCardNames;
-        }
-      })
-    );
-  }
-
-  private shuffle(array: Array<any>): string[] {
+  public shuffle(array: Array<any>): string[] {
     let currentIndex = array.length,
       randomIndex;
 
@@ -187,24 +137,11 @@ export class CardService {
     return array;
   }
 
-  public async getNextCardInDeck(
-    cardDeck: CardDeck,
-    gameSessionID: string
-  ): Promise<string> {
-    let nextCard = cardDeck.cardNames.pop() as string; // We draw it and it is removed from the deck
-
-    // Get the card's info from the JSON
-    const cardInfo = this.getCardInfo(nextCard, cardDeck.deckName as DeckName);
-
+  public placeCardBackInDeck(cardDeck: CardDeck, nextCard: string): void {
     // If the card is not a one-time use, put it at the bottom of the deck to be drawn again
-    if (!cardInfo?.discardAfterUse) {
-      cardDeck.cardNames.unshift(nextCard);
-      // Since we inserted the card again, shuffle the deck so the order isn't predictable
-      cardDeck.cardNames = this.shuffle(cardDeck.cardNames);
-    }
-
-    await this.updateCardDeck(cardDeck, gameSessionID);
-    return nextCard;
+    cardDeck.cardNames.unshift(nextCard);
+    // Since we inserted the card again, shuffle the deck so the order isn't predictable
+    cardDeck.cardNames = this.shuffle(cardDeck.cardNames);
   }
 
   public updateCardDeck(cardDeck: CardDeck, gameSessionID: string) {

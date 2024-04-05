@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CardService } from '../../services/card.service';
 import { DeckName, Outcome } from '../../types/card-deck';
 import { MenuComponent } from '../menu/menu.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { EventCardInfoViewComponent } from '../event-card-info-view/event-card-info-view.component';
 import { EventCardInfo } from '../../types/event-card';
+import { EventCardService } from '../../services/event-card.service';
 @Component({
   selector: 'app-event-menu',
   standalone: true,
@@ -27,13 +27,16 @@ export class EventMenuComponent implements OnInit {
   protected flip: string = 'inactive';
   protected card: EventCardInfo | undefined;
 
-  constructor(private cardService: CardService) {}
+  constructor(private eventCardService: EventCardService) {}
 
   ngOnInit(): void {
     if (!this.cardName || !this.deckName) {
       throw new Error('Card name or location type not provided');
     }
-    const card = this.cardService.getCardInfo(this.cardName, this.deckName);
+    const card = this.eventCardService.getEventCardInfo(
+      this.cardName,
+      this.deckName
+    );
     if (card) {
       this.card = card;
     } else {

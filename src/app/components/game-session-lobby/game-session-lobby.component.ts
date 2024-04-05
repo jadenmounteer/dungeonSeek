@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddOrEditCharacterComponent } from '../add-or-edit-character/add-or-edit-character.component';
 import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
-import { CardService } from '../../services/card.service';
+import { EventCardService } from '../../services/event-card.service';
 
 @Component({
   selector: 'app-game-session-lobby',
@@ -33,7 +33,7 @@ export class GameSessionLobbyComponent implements OnDestroy {
     private dialog: MatDialog,
     private characterService: CharacterService,
     protected authService: AuthService,
-    private cardService: CardService
+    private eventCardService: EventCardService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -42,14 +42,16 @@ export class GameSessionLobbyComponent implements OnDestroy {
       .subscribe(async (gameSession) => {
         this.gameSession = gameSession;
 
-        // This gets the card info for all cards in the game session and stores it in the service
-        // so the client has access to any of the card info.
-        await this.cardService.fetchCardInfoFromJSON();
+        await this.loadGameCards();
 
-        // TODO I can probable do this in a cleaner way with RXJS.
+        // TODO I can probably do this in a cleaner way with RXJS.
         // I know there's an operator where you can subscribe to multiple observables at once.
         this.setCharactersSub();
       });
+  }
+
+  private async loadGameCards(): Promise<void> {
+    await this.eventCardService.fetchEventCardInfoFromJSON();
   }
 
   private setCharactersSub(): void {

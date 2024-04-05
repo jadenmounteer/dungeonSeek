@@ -34,6 +34,7 @@ export interface CardDeck {
  * 3. Add the deck subscription to the card type component and add it to the setCardDeckSubscription method.
  * 4. Set the subscriptions in the game session component if necessary. See how we do it for event cards.
  * 5. Add the deck to the card service so it can be fetched from the db.
+ * 6. In the loadGameCards method in the game-session-lobby component, make sure to fetch the json info.
  *  **/
 export enum DeckName {
   ROAD_EVENTS = 'Road Events',
