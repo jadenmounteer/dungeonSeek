@@ -41,7 +41,11 @@
     <!-- <app-item-menu> </app-item-menu> -->
 
     <!-- Appears when you are viewing a weapon card -->
-    <app-weapon-menu></app-weapon-menu>
+    <app-weapon-menu
+      *ngIf="showWeaponCard"
+      [cardName]="cardName"
+      (closeMenu)="closeCard()"
+    ></app-weapon-menu>
 
     <app-dice-roll-dialog
       *ngIf="currentCharacterRollingDice"

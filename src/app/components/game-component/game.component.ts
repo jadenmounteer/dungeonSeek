@@ -69,6 +69,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected waitingForNextTurnToStart = false;
   protected showEventCard = false;
+  protected showWeaponCard = false;
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
 
@@ -373,6 +374,19 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
+  private async drawWeaponCard(): Promise<void> {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error(
+        "No character being controlled by client. We can't draw a weapon card without a character."
+      );
+    }
+    this.cardName = await this.weaponCardService.drawWeaponCard(
+      this.gameSession.id
+    );
+
+    this.showWeaponCard = true;
+  }
+
   protected async drawEventCard(): Promise<void> {
     if (!this.characterBeingControlledByClient) {
       throw new Error(
@@ -392,6 +406,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected closeCard() {
     this.showEventCard = false;
+    this.showWeaponCard = false;
   }
   protected makeChoice(outcome: Outcome) {
     this.showEventCard = false;
