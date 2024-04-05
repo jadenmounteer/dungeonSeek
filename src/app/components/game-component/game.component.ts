@@ -26,6 +26,7 @@ import { CharacterInfoComponent } from '../character-info/character-info.compone
 import { EventMenuComponent } from '../event-menu/event-menu.component';
 import { ItemMenuComponent } from '../item-menu/item-menu.component';
 import { EventCardService } from '../../services/event-card.service';
+import { WeaponCardService } from '../../services/weapon-card.service';
 
 @Component({
   selector: 'app-game',
@@ -77,7 +78,8 @@ export class GameComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private turnService: TurnService,
     public dialog: MatDialog,
-    private eventCardService: EventCardService
+    private eventCardService: EventCardService,
+    private weaponCardService: WeaponCardService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -87,6 +89,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.gameSession = gameSession;
 
         this.eventCardService.setCardDeckSubscriptions(this.gameSession.id);
+        this.weaponCardService.setCardDeckSubscriptions(this.gameSession.id);
 
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn

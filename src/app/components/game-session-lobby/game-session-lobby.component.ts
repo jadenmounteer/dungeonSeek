@@ -11,6 +11,7 @@ import { AddOrEditCharacterComponent } from '../add-or-edit-character/add-or-edi
 import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
 import { EventCardService } from '../../services/event-card.service';
+import { WeaponCardService } from '../../services/weapon-card.service';
 
 @Component({
   selector: 'app-game-session-lobby',
@@ -33,7 +34,8 @@ export class GameSessionLobbyComponent implements OnDestroy {
     private dialog: MatDialog,
     private characterService: CharacterService,
     protected authService: AuthService,
-    private eventCardService: EventCardService
+    private eventCardService: EventCardService,
+    private weaponCardService: WeaponCardService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -52,6 +54,7 @@ export class GameSessionLobbyComponent implements OnDestroy {
 
   private async loadGameCards(): Promise<void> {
     await this.eventCardService.fetchEventCardInfoFromJSON();
+    await this.weaponCardService.fetchWeaponCardInfoFromJSON();
   }
 
   private setCharactersSub(): void {

@@ -113,7 +113,6 @@ export class EventCardService implements OnDestroy {
     cardName: string,
     deckName: DeckName
   ): EventCardInfo | undefined {
-    console.log(this.roadEventCardsInfo);
     if (deckName === DeckName.ROAD_EVENTS) {
       return this.roadEventCardsInfo.get(cardName);
     }
