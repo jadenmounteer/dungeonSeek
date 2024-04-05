@@ -1,5 +1,8 @@
 @import "../../../styles.scss";
 
+.menu-content {
+  flex-direction: column;
+}
 .dice-section {
   display: flex;
   justify-content: center;

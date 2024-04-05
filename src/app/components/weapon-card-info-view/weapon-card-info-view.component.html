@@ -1,1 +1,16 @@
-<p>weapon-card-info-view works!</p>
+<div class="card-info">
+  <h1 class="menu-title">
+    {{ card?.name }}
+  </h1>
+
+  <app-menu-underline></app-menu-underline>
+  <div class="card-description">
+    <p class="menu-text">{{ card?.description }}</p>
+  </div>
+  <div class="card-choices-section">
+    <h2 class="menu-sub-title">What do you do?</h2>
+    <app-menu-underline></app-menu-underline>
+  </div>
+
+  <div class="choice-button" (click)="onCloseCard()">Add to inventory</div>
+</div>

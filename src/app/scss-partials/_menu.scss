@@ -2,3 +2,23 @@
 .menu-sub-title {
   text-align: center;
 }
+
+.menu-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-left: 16px;
+  padding-right: 16px;
+  column-gap: 24px;
+  @include for-tablet-portrait-up {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.game-card-wrapper {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
