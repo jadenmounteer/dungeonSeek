@@ -3,11 +3,7 @@ import { CardService } from './card.service';
 import { CardDeck, DeckName } from '../types/card-deck';
 import { LocationType } from './location-service';
 import { Subscription } from 'rxjs';
-import {
-  CityEventCardNames,
-  EventCardInfo,
-  RoadEventCardNames,
-} from '../types/event-card';
+import { EventCardInfo } from '../types/event-card';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +11,17 @@ import {
 export class EventCardService implements OnDestroy {
   private roadEventDeckSub: Subscription | undefined;
   private cityEventDeckSub: Subscription | undefined;
+  private ForestEventDeckSub: Subscription | undefined;
   private roadEventDeck: CardDeck[] = [];
   private cityEventDeck: CardDeck[] = [];
+  private forestEventDeck: CardDeck[] = [];
 
   // These maps hold all the JSON data for the event cards.
   // They are used to get a specific event card when you don't want to get one off the top of the deck
   // They are also used to display the card data in the UI
   private roadEventCardsInfo: Map<string, EventCardInfo> = new Map();
   private cityEventCardsInfo: Map<string, EventCardInfo> = new Map();
+  private forestEventCardsInfo: Map<string, EventCardInfo> = new Map();
 
   constructor(private cardService: CardService) {}
 
@@ -32,6 +31,9 @@ export class EventCardService implements OnDestroy {
     }
     if (this.cityEventDeckSub) {
       this.cityEventDeckSub.unsubscribe();
+    }
+    if (this.ForestEventDeckSub) {
+      this.ForestEventDeckSub.unsubscribe();
     }
   }
 
@@ -49,6 +51,14 @@ export class EventCardService implements OnDestroy {
         .getCardDeckForGameSession(gameSessionID, DeckName.CITY_EVENTS)
         .subscribe((cityEventCards: CardDeck[]) => {
           this.cityEventDeck = cityEventCards;
+        });
+    }
+
+    if (!this.ForestEventDeckSub) {
+      this.ForestEventDeckSub = this.cardService
+        .getCardDeckForGameSession(gameSessionID, DeckName.FOREST_EVENTS)
+        .subscribe((forestEventCards: CardDeck[]) => {
+          this.forestEventDeck = forestEventCards;
         });
     }
   }
@@ -83,6 +93,8 @@ export class EventCardService implements OnDestroy {
       return this.roadEventDeck[0];
     } else if (locationType === 'City') {
       return this.cityEventDeck[0];
+    } else if (locationType === 'Forest') {
+      return this.forestEventDeck[0];
     } else if (locationType === 'Dungeon') {
       return this.roadEventDeck[0];
     } else {
@@ -123,6 +135,9 @@ export class EventCardService implements OnDestroy {
     if (deckName === DeckName.CITY_EVENTS) {
       return this.cityEventCardsInfo.get(cardName);
     }
+    if (deckName === DeckName.FOREST_EVENTS) {
+      return this.forestEventCardsInfo.get(cardName);
+    }
     return;
   }
 
@@ -150,6 +165,9 @@ export class EventCardService implements OnDestroy {
     }
     if (deckName === DeckName.CITY_EVENTS) {
       this.cityEventCardsInfo = mapOfCardNames;
+    }
+    if (deckName === DeckName.FOREST_EVENTS) {
+      this.forestEventCardsInfo = mapOfCardNames;
     }
   }
 
@@ -181,6 +199,12 @@ export class EventCardService implements OnDestroy {
         });
       }
 
+      if (deckType === DeckName.FOREST_EVENTS) {
+        this.cityEventCardsInfo.forEach((value, key) => {
+          mapOfCardNamesAndQty.set(key, value.quantity);
+        });
+      }
+
       let cardNames =
         this.cardService.addCardsToDeckAccordingToQuantity(
           mapOfCardNamesAndQty
@@ -192,7 +216,9 @@ export class EventCardService implements OnDestroy {
 
   private deckNameIsEventDeck(deckName: DeckName): boolean {
     return (
-      deckName === DeckName.ROAD_EVENTS || deckName === DeckName.CITY_EVENTS
+      deckName === DeckName.ROAD_EVENTS ||
+      deckName === DeckName.CITY_EVENTS ||
+      deckName === DeckName.FOREST_EVENTS
     );
   }
 }
