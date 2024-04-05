@@ -27,6 +27,7 @@ import { EventMenuComponent } from '../event-menu/event-menu.component';
 import { ItemMenuComponent } from '../item-menu/item-menu.component';
 import { EventCardService } from '../../services/event-card.service';
 import { WeaponCardService } from '../../services/weapon-card.service';
+import { WeaponMenuComponent } from '../weapon-menu/weapon-menu.component';
 
 @Component({
   selector: 'app-game',
@@ -42,6 +43,7 @@ import { WeaponCardService } from '../../services/weapon-card.service';
     CharacterInfoComponent,
     DiceRollDialogComponent,
     ItemMenuComponent,
+    WeaponMenuComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
