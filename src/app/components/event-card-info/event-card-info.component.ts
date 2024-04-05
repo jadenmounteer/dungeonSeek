@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 
 @Component({
-  selector: 'app-card-info',
+  selector: 'app-event-card-info',
   standalone: true,
   imports: [CommonModule, MenuUnderlineComponent],
-  templateUrl: './card-info.component.html',
-  styleUrl: './card-info.component.scss',
+  templateUrl: './event-card-info.component.html',
+  styleUrl: './event-card-info.component.scss',
 })
-export class CardInfoComponent {
+export class EventCardInfoComponent {
   @Input() public card: CardInfo | undefined;
   @Output() public closeCard = new EventEmitter<any>();
   @Output() public makeChoice = new EventEmitter<Outcome>();
