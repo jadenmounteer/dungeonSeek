@@ -11,8 +11,6 @@ import {
 import { Firestore } from '@angular/fire/firestore';
 import { CardDeck, DeckName } from '../types/card-deck';
 import { Observable } from 'rxjs';
-import { RoadEventCardNames, CityEventCardNames } from '../types/event-card';
-import { WeaponCardNames } from '../types/weapon-card-info';
 
 @Injectable({
   providedIn: 'root',
@@ -41,66 +39,27 @@ export class CardService {
     }) as Observable<CardDeck[]>;
   }
 
-  public async createCardDecks(gameSessionID: string) {
-    // Create a new card deck for each option in the DeckName type
-    Object.values(DeckName).forEach((deckName) => {
-      this.createCardDeck(gameSessionID, deckName as DeckName);
-    });
-  }
-
-  private async getSingleCardInfoFromJSON(
-    cardName: string,
-    deckType: DeckName
-  ): Promise<any> {
-    // Get the deck key from the deck name
-    const deckKey = Object.keys(DeckName).find((key) => {
-      return DeckName[key as keyof typeof DeckName] === deckType;
-    });
-
-    // fetch the JSON data using http
-    const response = await fetch(`assets/json/cards/${deckKey}.json`);
-    const jsonResponse = await response.json();
-
-    // Get the single cardInfo
-    return jsonResponse.find((card: any) => {
-      return card.name === cardName;
-    });
-  }
-
-  // Creates a card deck in the db
-  private async createCardDeck(
-    gameSessionID: string,
-    deckType: DeckName
-  ): Promise<any> {
-    // get the card names from the CardName enum
+  public addCardsToDeckAccordingToQuantity(
+    mapOfCardNamesAndQty: Map<string, number>
+  ) {
     let cardNames: string[] = [];
-    if (deckType === DeckName.ROAD_EVENTS) {
-      cardNames = Object.values(RoadEventCardNames);
-    }
-    if (deckType === DeckName.CITY_EVENTS) {
-      cardNames = Object.values(CityEventCardNames);
-    }
 
-    if (deckType === DeckName.WEAPONS) {
-      cardNames = Object.values(WeaponCardNames);
-    }
-
-    // Loop through all of the card names and add the number of instances of that card to the array
-    cardNames.forEach(async (cardName) => {
-      const cardInfo = await this.getSingleCardInfoFromJSON(cardName, deckType);
-
-      if (!cardInfo) {
-        throw new Error(
-          'Card info not found for ' +
-            cardName +
-            ' the string might be wrong in the card names type.'
-        );
+    // loop through the key and value of the map
+    for (const [key, value] of mapOfCardNamesAndQty) {
+      // Add the card to the deck according to the quantity
+      for (let i = 0; i < value; i++) {
+        cardNames.push(key);
       }
-      for (let i = 1; i < cardInfo.quantity; i++) {
-        cardNames.push(cardName);
-      }
-    });
+    }
 
+    return cardNames;
+  }
+
+  public createCardDeck(
+    gameSessionID: string,
+    deckType: DeckName,
+    cardNames: string[]
+  ) {
     // Shuffle all of the CardNames into an array
     const shuffledCardNames = this.shuffle(cardNames);
 

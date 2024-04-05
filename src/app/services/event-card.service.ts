@@ -3,7 +3,11 @@ import { CardService } from './card.service';
 import { CardDeck, DeckName } from '../types/card-deck';
 import { LocationType } from './location-service';
 import { Subscription } from 'rxjs';
-import { EventCardInfo } from '../types/event-card';
+import {
+  CityEventCardNames,
+  EventCardInfo,
+  RoadEventCardNames,
+} from '../types/event-card';
 
 @Injectable({
   providedIn: 'root',
@@ -141,12 +145,54 @@ export class EventCardService implements OnDestroy {
     deckName: DeckName,
     mapOfCardNames: Map<string, EventCardInfo>
   ) {
-    console.log('Setting event card info maps');
     if (deckName === DeckName.ROAD_EVENTS) {
       this.roadEventCardsInfo = mapOfCardNames;
     }
     if (deckName === DeckName.CITY_EVENTS) {
       this.cityEventCardsInfo = mapOfCardNames;
     }
+  }
+
+  public async createEventCardDecks(gameSessionID: string): Promise<void> {
+    // Create a new card deck for each option in the DeckName type that are event types.
+    // Get the card info map
+    await this.fetchEventCardInfoFromJSON();
+
+    for (const deckName of Object.values(DeckName)) {
+      const deckType = deckName as DeckName;
+
+      // I'm going to regret this...
+      // This is so we don't add other deck types here.
+      if (!this.deckNameIsEventDeck(deckType)) {
+        return;
+      }
+
+      // get the card names from the CardName enum
+      let mapOfCardNamesAndQty = new Map<string, number>();
+
+      if (deckType === DeckName.ROAD_EVENTS) {
+        this.roadEventCardsInfo.forEach((value, key) => {
+          mapOfCardNamesAndQty.set(key, value.quantity);
+        });
+      }
+      if (deckType === DeckName.CITY_EVENTS) {
+        this.cityEventCardsInfo.forEach((value, key) => {
+          mapOfCardNamesAndQty.set(key, value.quantity);
+        });
+      }
+
+      let cardNames =
+        this.cardService.addCardsToDeckAccordingToQuantity(
+          mapOfCardNamesAndQty
+        );
+
+      this.cardService.createCardDeck(gameSessionID, deckType, cardNames);
+    }
+  }
+
+  private deckNameIsEventDeck(deckName: DeckName): boolean {
+    return (
+      deckName === DeckName.ROAD_EVENTS || deckName === DeckName.CITY_EVENTS
+    );
   }
 }

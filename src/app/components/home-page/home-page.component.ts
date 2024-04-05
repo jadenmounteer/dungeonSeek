@@ -13,7 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateOrEditGameSessionDialogueComponent } from '../create-or-edit-game-session-dialogue/create-or-edit-game-session-dialogue.component';
 import { GameSession } from '../../types/game-session';
-import { CardService } from '../../services/card.service';
+import { EventCardService } from '../../services/event-card.service';
+import { WeaponCardService } from '../../services/weapon-card.service';
 
 @Component({
   selector: 'app-home-page',
@@ -39,7 +40,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
     protected router: Router,
     private gameSessionService: GameSessionService,
     public dialog: MatDialog,
-    private cardService: CardService
+    private eventCardService: EventCardService,
+    private weaponCardService: WeaponCardService
   ) {
     this.gameSessionsSub = this.gameSessionService.usersGameSessions$.subscribe(
       (gameSessions) => {
@@ -75,15 +77,20 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
       this.gameSessionService
         .createNewGameSession(newGameSession)
-        .then((result) => {
+        .then(async (result) => {
           this.gameSessionsParticipating.push(newGameSession);
-          this.cardService.createCardDecks(result.id);
+          await this.createCardDecks(result.id);
           this.goToGameLobby(result.id);
         })
         .catch((err) => {
           console.error('Error creating game session:', err);
         });
     });
+  }
+
+  private async createCardDecks(gameSessionID: string) {
+    await this.eventCardService.createEventCardDecks(gameSessionID);
+    await this.weaponCardService.createWeaponCardDeck(gameSessionID);
   }
 
   protected goToGameLobby(gameSessionId: string) {

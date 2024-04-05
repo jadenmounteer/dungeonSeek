@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { CardService } from './card.service';
 import { Subscription } from 'rxjs';
 import { CardDeck, DeckName } from '../types/card-deck';
-import { WeaponCardInfo } from '../types/weapon-card-info';
+import { WeaponCardInfo, WeaponCardNames } from '../types/weapon-card-info';
 
 @Injectable({
   providedIn: 'root',
@@ -89,6 +89,30 @@ export class WeaponCardService implements OnDestroy {
 
         this.weaponCardsInfo = mapOfCardNames;
       })
+    );
+  }
+
+  public async createWeaponCardDeck(gameSessionID: string): Promise<void> {
+    let cardNames: string[] = [];
+    cardNames = Object.values(WeaponCardNames);
+
+    // Get the card info map
+    await this.fetchWeaponCardInfoFromJSON();
+
+    // Create a map of the card's name and the quantity of the card
+    const mapOfCardNamesAndQty = new Map<string, number>();
+
+    this.weaponCardsInfo.forEach((value, key) => {
+      mapOfCardNamesAndQty.set(key, value.quantity);
+    });
+
+    cardNames =
+      this.cardService.addCardsToDeckAccordingToQuantity(mapOfCardNamesAndQty);
+
+    await this.cardService.createCardDeck(
+      gameSessionID,
+      DeckName.WEAPONS,
+      cardNames
     );
   }
 }
