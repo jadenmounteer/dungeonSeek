@@ -33,7 +33,7 @@ export type PassiveCardAbilityKey =
   | 'Poison'
   | 'Regenerate'
   | 'Reflect'
-  | 'MagikaRegen';
+  | 'Magika Regen';
 
 export const passiveAbiliiesMap: { [key: string]: CardAbility } = {
   poison: {
