@@ -6,7 +6,7 @@
     "type": "Sword",
     "fullPrice": 50000,
     "rewardType": "Insane",
-    "discardAfterUse": false,
+    "discardAfterUse": true,
     "quantity": 3,
     "stats": {
       "attack": 30,
@@ -14,5 +14,37 @@
       "speed": 0
     },
     "cardAbility": "Banish"
+  },
+  {
+    "name": "Sword of the Ancients",
+    "description": "A sword forged by sorcerers of old. It is said to be able to cut through anything.",
+    "imgUrl": "assets/card-images/weapons/swords/sword.png",
+    "type": "Sword",
+    "fullPrice": 50000,
+    "rewardType": "Insane",
+    "discardAfterUse": true,
+    "quantity": 3,
+    "stats": {
+      "attack": 30,
+      "defense": 0,
+      "speed": 0
+    },
+    "cardAbility": "Banish"
+  },
+  {
+    "name": "Iron Sword",
+    "description": "A simple iron sword. It is reliable and easy to use.",
+    "imgUrl": "assets/card-images/weapons/swords/sword.png",
+    "type": "Sword",
+    "fullPrice": 500,
+    "rewardType": "Easy",
+    "discardAfterUse": true,
+    "quantity": 10,
+    "stats": {
+      "attack": 20,
+      "defense": 0,
+      "speed": 0
+    },
+    "cardAbility": "null"
   }
 ]
