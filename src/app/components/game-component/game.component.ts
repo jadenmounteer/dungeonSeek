@@ -392,6 +392,19 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showWeaponCard = true;
   }
 
+  private async drawItemCard(): Promise<void> {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error(
+        "No character being controlled by client. We can't draw an item card without a character."
+      );
+    }
+    this.cardName = await this.itemCardService.drawItemCard(
+      this.gameSession.id
+    );
+
+    this.showItemCard = true;
+  }
+
   protected async drawEventCard(): Promise<void> {
     if (!this.characterBeingControlledByClient) {
       throw new Error(
@@ -420,7 +433,9 @@ export class GameComponent implements OnInit, OnDestroy {
 
     // Find loot
     if (outcome == 5) {
-      this.drawWeaponCard();
+      // this.drawWeaponCard();
+      // TODO Add the loot service here
+      this.drawItemCard();
     }
   }
 
