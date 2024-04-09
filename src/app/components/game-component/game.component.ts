@@ -425,6 +425,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected closeCard() {
     this.showEventCard = false;
     this.showWeaponCard = false;
+    this.showItemCard = false;
   }
   protected makeChoice(outcome: Outcome) {
     this.showEventCard = false;

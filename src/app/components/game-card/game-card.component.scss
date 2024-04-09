@@ -4,12 +4,13 @@ $card-border-radius: 25px;
 .game-card {
   position: relative;
   border-radius: $card-border-radius;
-  width: 150px;
-  height: 175px;
+  min-width: 150px;
+  min-height: 175px;
   background-image: url("../../../assets/card-images/parchment-texture.jpeg");
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
 .card-image {
