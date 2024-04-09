@@ -44,4 +44,6 @@ export enum DeckName {
   CITY_EVENTS = 'City Events',
   FOREST_EVENTS = 'Forest Events',
   WEAPONS = 'Weapons',
+  ITEMS = 'Items',
+  // ARMOR = 'Armor',
 }

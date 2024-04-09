@@ -31,3 +31,7 @@ export type ItemCardType =
   | 'Trap'
   | 'Lock Pick'
   | 'Bread';
+
+export enum ItemCardNames {
+  POTION_OF_MINOR_HEALING = 'Potion of Minor Healing',
+}

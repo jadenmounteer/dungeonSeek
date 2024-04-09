@@ -1,6 +1,6 @@
 [
   {
-    "name": "Minor Potion of Healing",
+    "name": "Potion of Minor Healing",
     "description": "A magical potion to restore health.",
     "imgUrl": "assets/card-images/items/potions/health-potion.png",
     "type": "Potion",
