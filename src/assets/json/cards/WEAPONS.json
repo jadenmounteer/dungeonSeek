@@ -7,7 +7,7 @@
     "fullPrice": 50000,
     "rewardType": "Insane",
     "discardAfterUse": true,
-    "quantity": 3,
+    "quantity": 1,
     "stats": {
       "attack": 30,
       "defense": 0,
@@ -23,7 +23,7 @@
     "fullPrice": 50000,
     "rewardType": "Insane",
     "discardAfterUse": true,
-    "quantity": 3,
+    "quantity": 1,
     "stats": {
       "attack": 30,
       "defense": 0,
@@ -39,7 +39,7 @@
     "fullPrice": 500,
     "rewardType": "Easy",
     "discardAfterUse": true,
-    "quantity": 10,
+    "quantity": 5,
     "stats": {
       "attack": 20,
       "defense": 0,
