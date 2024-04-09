@@ -12,6 +12,7 @@ import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
 import { EventCardService } from '../../services/event-card.service';
 import { WeaponCardService } from '../../services/weapon-card.service';
+import { ItemCardService } from '../../services/item-card.service';
 
 @Component({
   selector: 'app-game-session-lobby',
@@ -35,7 +36,8 @@ export class GameSessionLobbyComponent implements OnDestroy {
     private characterService: CharacterService,
     protected authService: AuthService,
     private eventCardService: EventCardService,
-    private weaponCardService: WeaponCardService
+    private weaponCardService: WeaponCardService,
+    private itemCardService: ItemCardService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -55,6 +57,7 @@ export class GameSessionLobbyComponent implements OnDestroy {
   private async loadGameCards(): Promise<void> {
     await this.eventCardService.fetchEventCardInfoFromJSON();
     await this.weaponCardService.fetchWeaponCardInfoFromJSON();
+    await this.itemCardService.fetchItemCardInfoFromJSON();
   }
 
   private setCharactersSub(): void {

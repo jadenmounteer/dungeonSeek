@@ -15,6 +15,7 @@ import { CreateOrEditGameSessionDialogueComponent } from '../create-or-edit-game
 import { GameSession } from '../../types/game-session';
 import { EventCardService } from '../../services/event-card.service';
 import { WeaponCardService } from '../../services/weapon-card.service';
+import { ItemCardService } from '../../services/item-card.service';
 
 @Component({
   selector: 'app-home-page',
@@ -41,7 +42,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
     private gameSessionService: GameSessionService,
     public dialog: MatDialog,
     private eventCardService: EventCardService,
-    private weaponCardService: WeaponCardService
+    private weaponCardService: WeaponCardService,
+    private itemCardService: ItemCardService
   ) {
     this.gameSessionsSub = this.gameSessionService.usersGameSessions$.subscribe(
       (gameSessions) => {
@@ -91,6 +93,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private async createCardDecks(gameSessionID: string) {
     await this.eventCardService.createEventCardDecks(gameSessionID);
     await this.weaponCardService.createWeaponCardDeck(gameSessionID);
+    await this.itemCardService.createItemCardDeck(gameSessionID);
   }
 
   protected goToGameLobby(gameSessionId: string) {

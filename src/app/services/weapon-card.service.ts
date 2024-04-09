@@ -51,7 +51,7 @@ export class WeaponCardService implements OnDestroy {
   }
 
   /**
-   * Gets a specific event card's information when you draw one off the top of the deck
+   * Gets a specific card's information when you draw one off the top of the deck
    * @param cardName
    * @param deckName
    * @returns
@@ -61,7 +61,7 @@ export class WeaponCardService implements OnDestroy {
   }
 
   // Called when a user jumps into the game.
-  // This allows them to have access to the event cards.
+  // This allows them to have access to the cards.
   // Using JSON for the card info so I don't have to overload the db
   private async fetchWeaponCardsInfo(
     deckName: DeckName
