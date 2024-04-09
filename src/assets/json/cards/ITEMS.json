@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Minor Potion of Healing",
+    "description": "A magical potion to restore health.",
+    "imgUrl": "assets/card-images/items/potions/health-potion.png",
+    "type": "Potion",
+    "fullPrice": 20,
+    "rewardType": "Easy",
+    "discardAfterUse": false,
+    "quantity": 10,
+    "stats": {
+      "health": 10,
+      "attack": 0,
+      "defense": 0,
+      "speed": 0,
+      "mana": 0
+    },
+    "cardAbility": "Heal"
+  }
+]
