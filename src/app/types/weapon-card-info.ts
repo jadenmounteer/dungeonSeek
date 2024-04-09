@@ -24,4 +24,6 @@ export interface WeaponCardStats {
 
 export enum WeaponCardNames {
   SWORD_OF_BANISHMENT = 'Sword of Banishment',
+  SWORD_OF_THE_ANCIENTS = 'Sword of the Ancients',
+  IRON_SWORD = 'Iron Sword',
 }

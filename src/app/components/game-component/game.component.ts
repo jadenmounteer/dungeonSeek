@@ -458,7 +458,7 @@ export class GameComponent implements OnInit, OnDestroy {
       closeButtonName: 'Draw Event Card',
       numberOfDice: 1,
       comparator: '<=',
-      targetNumber: 6,
+      targetNumber: 3,
     };
     this.currentCharacterRollingDice = true;
   }
