@@ -70,6 +70,8 @@ export class GameComponent implements OnInit, OnDestroy {
   protected waitingForNextTurnToStart = false;
   protected showEventCard = false;
   protected showWeaponCard = false;
+  protected showItemCard = false;
+
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
 

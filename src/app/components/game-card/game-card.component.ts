@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { EventCardInfo } from '../../types/event-card';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
+import { ItemCardInfo } from '../../types/item-card-info';
 
 @Component({
   selector: 'app-game-card',
@@ -10,5 +11,5 @@ import { WeaponCardInfo } from '../../types/weapon-card-info';
   styleUrl: './game-card.component.scss',
 })
 export class GameCardComponent {
-  @Input() card: EventCardInfo | WeaponCardInfo | undefined;
+  @Input() card: EventCardInfo | WeaponCardInfo | ItemCardInfo | undefined; // TODO I can make this only require the image url
 }

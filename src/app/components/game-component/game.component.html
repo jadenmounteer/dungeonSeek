@@ -38,7 +38,11 @@
     ></app-event-menu>
 
     <!-- Appears if you are viewing an item -->
-    <!-- <app-item-menu> </app-item-menu> -->
+    <app-item-menu
+      *ngIf="showItemCard"
+      [cardName]="cardName"
+      (closeMenu)="closeCard()"
+    ></app-item-menu>
 
     <!-- Appears when you are viewing a weapon card -->
     <app-weapon-menu
