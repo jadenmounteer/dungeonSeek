@@ -13,6 +13,15 @@
     <p class="menu-text">Speed: {{ card?.stats?.speed }}</p>
   </div>
 
+  <div class="card-ability-section" *ngIf="weaponAbility">
+    <h2 class="menu-sub-title">Ability</h2>
+    <app-menu-underline></app-menu-underline>
+
+    <p class="menu-text">{{ weaponAbility.name }}</p>
+    <p class="menu-text">{{ weaponAbility.usedAgainstOpponentDescription }}</p>
+    <!-- We don't show the usedAgainstSelfDescription because this is a weapon -->
+  </div>
+
   <div class="card-choices-section">
     <h2 class="menu-sub-title">What do you do?</h2>
     <app-menu-underline></app-menu-underline>
