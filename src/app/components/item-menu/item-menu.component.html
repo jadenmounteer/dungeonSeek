@@ -4,6 +4,9 @@
       <app-game-card [card]="card"></app-game-card>
     </div>
 
-    <app-item-card-info-view></app-item-card-info-view>
+    <app-item-card-info-view
+      [card]="card"
+      (closeCard)="onCloseMenu()"
+    ></app-item-card-info-view>
   </div>
 </app-menu>
