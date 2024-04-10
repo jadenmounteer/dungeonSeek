@@ -385,9 +385,7 @@ export class GameComponent implements OnInit, OnDestroy {
         "No character being controlled by client. We can't draw a weapon card without a character."
       );
     }
-    this.cardName = await this.weaponCardService.drawWeaponCard(
-      this.gameSession.id
-    );
+    this.cardName = await this.weaponCardService.drawCard(this.gameSession.id);
 
     this.showWeaponCard = true;
   }

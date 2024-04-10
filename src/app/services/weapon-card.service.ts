@@ -1,20 +1,18 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { CardService } from './card.service';
 import { Subscription } from 'rxjs';
 import { CardDeck, DeckName } from '../types/card-deck';
 import { WeaponCardInfo, WeaponCardNames } from '../types/weapon-card-info';
+import { CardDeckService } from './card-deck.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class WeaponCardService implements OnDestroy {
+export class WeaponCardService extends CardDeckService implements OnDestroy {
   private weaponDeckSub: Subscription | undefined;
   private weaponDeck: CardDeck[] = [];
 
   // Map to hold the json data for the cards
   private weaponCardsInfo: Map<string, WeaponCardInfo> = new Map();
-
-  constructor(private cardService: CardService) {}
 
   ngOnDestroy(): void {
     if (this.weaponDeckSub) {
@@ -22,7 +20,7 @@ export class WeaponCardService implements OnDestroy {
     }
   }
 
-  public setCardDeckSubscriptions(gameSessionID: string) {
+  public setCardDeckSubscriptions(gameSessionID: string): void {
     if (!this.weaponDeckSub) {
       this.weaponDeckSub = this.cardService
         .getCardDeckForGameSession(gameSessionID, DeckName.WEAPONS)
@@ -32,7 +30,7 @@ export class WeaponCardService implements OnDestroy {
     }
   }
 
-  public async drawWeaponCard(gameSessionID: string): Promise<string> {
+  public async drawCard(gameSessionID: string): Promise<string> {
     const deck = this.weaponDeck[0];
 
     let nextCard = deck.cardNames.pop() as string; // We draw it and it is removed from the deck
@@ -95,4 +93,11 @@ export class WeaponCardService implements OnDestroy {
       cardNames
     );
   }
+}
+function override(
+  target: WeaponCardService,
+  propertyKey: 'setCardDeckSubscriptions',
+  descriptor: TypedPropertyDescriptor<(gameSessionID: string) => void>
+): void | TypedPropertyDescriptor<(gameSessionID: string) => void> {
+  throw new Error('Function not implemented.');
 }
