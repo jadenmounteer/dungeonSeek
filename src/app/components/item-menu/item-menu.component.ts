@@ -29,7 +29,7 @@ export class ItemMenuComponent implements OnInit {
     if (!this.cardName) {
       throw new Error('Item card name not provided');
     }
-    const card = this.itemCardService.getItemCardInfo(this.cardName);
+    const card = this.itemCardService.getCardInfo(this.cardName);
     if (card) {
       this.card = card;
     } else {

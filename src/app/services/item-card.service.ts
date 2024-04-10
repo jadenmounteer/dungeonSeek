@@ -3,18 +3,17 @@ import { Subscription } from 'rxjs';
 import { CardDeck, DeckName } from '../types/card-deck';
 import { ItemCardInfo, ItemCardNames } from '../types/item-card-info';
 import { CardService } from './card.service';
+import { CardDeckService } from './card-deck.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ItemCardService implements OnDestroy {
+export class ItemCardService extends CardDeckService implements OnDestroy {
   private itemDeckSub: Subscription | undefined;
   private itemDeck: CardDeck[] = [];
 
   // Map to hold the json data for the cards
   private itemCardsInfo: Map<string, ItemCardInfo> = new Map();
-
-  constructor(private cardService: CardService) {}
 
   ngOnDestroy(): void {
     if (this.itemDeckSub) {
@@ -32,13 +31,13 @@ export class ItemCardService implements OnDestroy {
     }
   }
 
-  public async drawItemCard(gameSessionID: string): Promise<string> {
+  public async drawCard(gameSessionID: string): Promise<string> {
     const deck = this.itemDeck[0];
 
     let nextCard = deck.cardNames.pop() as string; // We draw it and it is removed from the deck
 
     // Get the card's info from the JSON
-    const cardInfo = this.getItemCardInfo(nextCard);
+    const cardInfo = this.getCardInfo(nextCard);
 
     // If the card is not a one-time use, put it at the bottom of the deck to be drawn again
     if (cardInfo?.discardAfterUse === false) {
@@ -56,12 +55,12 @@ export class ItemCardService implements OnDestroy {
    * @param deckName
    * @returns
    */
-  public getItemCardInfo(cardName: string): ItemCardInfo | undefined {
+  public getCardInfo(cardName: string): ItemCardInfo | undefined {
     return this.itemCardsInfo.get(cardName);
   }
 
   // This is necessary so I can keep all the card data in JSON and not overload the db
-  public async fetchItemCardInfoFromJSON(): Promise<void> {
+  public async fetchCardInfoFromJSON(): Promise<void> {
     const cards = (await this.cardService.fetchCardsInfoByDeck(
       DeckName.ITEMS
     )) as ItemCardInfo[];
@@ -72,12 +71,12 @@ export class ItemCardService implements OnDestroy {
     this.itemCardsInfo = mapOfCardNames;
   }
 
-  public async createItemCardDeck(gameSessionID: string): Promise<void> {
+  public async createDeck(gameSessionID: string): Promise<void> {
     let cardNames: string[] = [];
     cardNames = Object.values(ItemCardNames);
 
     // Get the card info map
-    await this.fetchItemCardInfoFromJSON();
+    await this.fetchCardInfoFromJSON();
 
     // Create a map of the card's name and the quantity of the card
     const mapOfCardNamesAndQty = new Map<string, number>();
