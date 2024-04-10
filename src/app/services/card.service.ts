@@ -117,4 +117,19 @@ export class CardService {
     // Update the card deck in the db
     updateDoc(docRef, { ...cardDeck });
   }
+
+  // Called when a user jumps into the game.
+  // This allows them to have access to the event cards.
+  // Using JSON for the card info so I don't have to overload the db
+  public async fetchCardsInfoByDeck(deckName: DeckName): Promise<any[]> {
+    // Get the deck key from the deck name
+    const deckKey = Object.keys(DeckName).find((key) => {
+      return DeckName[key as keyof typeof DeckName] === deckName;
+    });
+    // fetch the JSON data using http
+    const response = await fetch(`assets/json/cards/${deckKey}.json`);
+    const jsonResponse = await response.json();
+
+    return jsonResponse;
+  }
 }

@@ -60,26 +60,11 @@ export class WeaponCardService implements OnDestroy {
     return this.weaponCardsInfo.get(cardName);
   }
 
-  // Called when a user jumps into the game.
-  // This allows them to have access to the cards.
-  // Using JSON for the card info so I don't have to overload the db
-  private async fetchWeaponCardsInfo(
-    deckName: DeckName
-  ): Promise<WeaponCardInfo[]> {
-    // Get the deck key from the deck name
-    const deckKey = Object.keys(DeckName).find((key) => {
-      return DeckName[key as keyof typeof DeckName] === deckName;
-    });
-    // fetch the JSON data using http
-    const response = await fetch(`assets/json/cards/${deckKey}.json`);
-    const jsonResponse = await response.json();
-
-    return jsonResponse;
-  }
-
   // This is necessary so I can keep all the card data in JSON and not overload the db
   public async fetchWeaponCardInfoFromJSON(): Promise<void> {
-    const cards = await this.fetchWeaponCardsInfo(DeckName.WEAPONS);
+    const cards = (await this.cardService.fetchCardsInfoByDeck(
+      DeckName.WEAPONS
+    )) as WeaponCardInfo[];
     const mapOfCardNames = new Map<string, WeaponCardInfo>();
     cards.forEach((card) => {
       mapOfCardNames.set(card.name, card);

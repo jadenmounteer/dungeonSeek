@@ -102,23 +102,6 @@ export class EventCardService implements OnDestroy {
     }
   }
 
-  // Called when a user jumps into the game.
-  // This allows them to have access to the event cards.
-  // Using JSON for the card info so I don't have to overload the db
-  private async fetchEventCardsInfo(
-    deckName: DeckName
-  ): Promise<EventCardInfo[]> {
-    // Get the deck key from the deck name
-    const deckKey = Object.keys(DeckName).find((key) => {
-      return DeckName[key as keyof typeof DeckName] === deckName;
-    });
-    // fetch the JSON data using http
-    const response = await fetch(`assets/json/cards/${deckKey}.json`);
-    const jsonResponse = await response.json();
-
-    return jsonResponse;
-  }
-
   /**
    * Gets a specific event card's information when you draw one off the top of the deck
    * @param cardName
@@ -147,7 +130,9 @@ export class EventCardService implements OnDestroy {
   }
 
   private async setRoadEventInfoMap() {
-    const cards = await this.fetchEventCardsInfo(DeckName.ROAD_EVENTS);
+    const cards = (await this.cardService.fetchCardsInfoByDeck(
+      DeckName.ROAD_EVENTS
+    )) as EventCardInfo[];
     const mapOfCardNames = new Map<string, EventCardInfo>();
     cards.forEach((card) => {
       mapOfCardNames.set(card.name, card);
@@ -156,7 +141,9 @@ export class EventCardService implements OnDestroy {
   }
 
   private async setCityEventInfoMap() {
-    const cards = await this.fetchEventCardsInfo(DeckName.CITY_EVENTS);
+    const cards = (await this.cardService.fetchCardsInfoByDeck(
+      DeckName.CITY_EVENTS
+    )) as EventCardInfo[];
     const mapOfCardNames = new Map<string, EventCardInfo>();
     cards.forEach((card) => {
       mapOfCardNames.set(card.name, card);
@@ -165,7 +152,9 @@ export class EventCardService implements OnDestroy {
   }
 
   private async setForestEventInfoMap() {
-    const cards = await this.fetchEventCardsInfo(DeckName.FOREST_EVENTS);
+    const cards = (await this.cardService.fetchCardsInfoByDeck(
+      DeckName.FOREST_EVENTS
+    )) as EventCardInfo[];
     const mapOfCardNames = new Map<string, EventCardInfo>();
     cards.forEach((card) => {
       mapOfCardNames.set(card.name, card);
