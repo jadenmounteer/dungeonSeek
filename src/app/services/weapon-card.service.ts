@@ -36,7 +36,7 @@ export class WeaponCardService extends CardDeckService implements OnDestroy {
     let nextCard = deck.cardNames.pop() as string; // We draw it and it is removed from the deck
 
     // Get the card's info from the JSON
-    const cardInfo = this.getWeaponCardInfo(nextCard);
+    const cardInfo = this.getCardInfo(nextCard);
 
     // If the card is not a one-time use, put it at the bottom of the deck to be drawn again
     if (cardInfo?.discardAfterUse === false) {
@@ -48,18 +48,11 @@ export class WeaponCardService extends CardDeckService implements OnDestroy {
     return nextCard;
   }
 
-  /**
-   * Gets a specific card's information when you draw one off the top of the deck
-   * @param cardName
-   * @param deckName
-   * @returns
-   */
-  public getWeaponCardInfo(cardName: string): WeaponCardInfo | undefined {
+  public getCardInfo(cardName: string): WeaponCardInfo | undefined {
     return this.weaponCardsInfo.get(cardName);
   }
 
-  // This is necessary so I can keep all the card data in JSON and not overload the db
-  public async fetchWeaponCardInfoFromJSON(): Promise<void> {
+  public async fetchCardInfoFromJSON(): Promise<void> {
     const cards = (await this.cardService.fetchCardsInfoByDeck(
       DeckName.WEAPONS
     )) as WeaponCardInfo[];
@@ -70,12 +63,12 @@ export class WeaponCardService extends CardDeckService implements OnDestroy {
     this.weaponCardsInfo = mapOfCardNames;
   }
 
-  public async createWeaponCardDeck(gameSessionID: string): Promise<void> {
+  public async createDeck(gameSessionID: string): Promise<void> {
     let cardNames: string[] = [];
     cardNames = Object.values(WeaponCardNames);
 
     // Get the card info map
-    await this.fetchWeaponCardInfoFromJSON();
+    await this.fetchCardInfoFromJSON();
 
     // Create a map of the card's name and the quantity of the card
     const mapOfCardNamesAndQty = new Map<string, number>();
@@ -93,11 +86,4 @@ export class WeaponCardService extends CardDeckService implements OnDestroy {
       cardNames
     );
   }
-}
-function override(
-  target: WeaponCardService,
-  propertyKey: 'setCardDeckSubscriptions',
-  descriptor: TypedPropertyDescriptor<(gameSessionID: string) => void>
-): void | TypedPropertyDescriptor<(gameSessionID: string) => void> {
-  throw new Error('Function not implemented.');
 }

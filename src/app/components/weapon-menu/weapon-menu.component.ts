@@ -30,7 +30,7 @@ export class WeaponMenuComponent implements OnInit {
     if (!this.cardName) {
       throw new Error('Weapon card name not provided');
     }
-    const card = this.weaponCardService.getWeaponCardInfo(this.cardName);
+    const card = this.weaponCardService.getCardInfo(this.cardName);
     if (card) {
       this.card = card;
     } else {

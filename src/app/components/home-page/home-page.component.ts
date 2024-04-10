@@ -92,7 +92,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   private async createCardDecks(gameSessionID: string) {
     await this.eventCardService.createEventCardDecks(gameSessionID);
-    await this.weaponCardService.createWeaponCardDeck(gameSessionID);
+    await this.weaponCardService.createDeck(gameSessionID);
     await this.itemCardService.createItemCardDeck(gameSessionID);
   }
 
