@@ -55,7 +55,7 @@ export class GameSessionLobbyComponent implements OnDestroy {
   }
 
   private async loadGameCards(): Promise<void> {
-    await this.eventCardService.fetchEventCardInfoFromJSON();
+    await this.eventCardService.fetchCardInfoFromJSON();
     await this.weaponCardService.fetchCardInfoFromJSON();
     await this.itemCardService.fetchCardInfoFromJSON();
   }

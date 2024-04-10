@@ -4,11 +4,12 @@ import { CardDeck, DeckName } from '../types/card-deck';
 import { LocationType } from './location-service';
 import { Subscription } from 'rxjs';
 import { EventCardInfo } from '../types/event-card';
+import { CardDeckService } from './card-deck.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EventCardService implements OnDestroy {
+export class EventCardService extends CardDeckService implements OnDestroy {
   private roadEventDeckSub: Subscription | undefined;
   private cityEventDeckSub: Subscription | undefined;
   private ForestEventDeckSub: Subscription | undefined;
@@ -22,8 +23,6 @@ export class EventCardService implements OnDestroy {
   private roadEventCardsInfo: Map<string, EventCardInfo> = new Map();
   private cityEventCardsInfo: Map<string, EventCardInfo> = new Map();
   private forestEventCardsInfo: Map<string, EventCardInfo> = new Map();
-
-  constructor(private cardService: CardService) {}
 
   ngOnDestroy(): void {
     if (this.roadEventDeckSub) {
@@ -63,16 +62,16 @@ export class EventCardService implements OnDestroy {
     }
   }
 
-  public async drawEventCard(
-    locationType: LocationType,
-    gameSessionID: string
+  public async drawCard(
+    gameSessionID: string,
+    locationType: LocationType
   ): Promise<string> {
     const deck = this.getEventCardDeckAccordingToLocationType(locationType);
 
     let nextCard = deck.cardNames.pop() as string; // We draw it and it is removed from the deck
 
     // Get the card's info from the JSON
-    const cardInfo = this.getEventCardInfo(nextCard, deck.deckName as DeckName);
+    const cardInfo = this.getCardInfo(nextCard, deck.deckName as DeckName);
 
     // If the card is not a one-time use, put it at the bottom of the deck to be drawn again
     if (cardInfo?.discardAfterUse === false) {
@@ -108,7 +107,7 @@ export class EventCardService implements OnDestroy {
    * @param deckName
    * @returns
    */
-  public getEventCardInfo(
+  public getCardInfo(
     cardName: string,
     deckName: DeckName
   ): EventCardInfo | undefined {
@@ -125,7 +124,7 @@ export class EventCardService implements OnDestroy {
   }
 
   // This is necessary so I can keep all the card data in JSON and not overload the db
-  public async fetchEventCardInfoFromJSON(): Promise<void> {
+  public async fetchCardInfoFromJSON(): Promise<void> {
     await this.setEventCardInfoMaps();
   }
 
@@ -168,54 +167,43 @@ export class EventCardService implements OnDestroy {
     await this.setForestEventInfoMap();
   }
 
+  private getEventCardDeckNames(): DeckName[] {
+    return [DeckName.ROAD_EVENTS, DeckName.CITY_EVENTS, DeckName.FOREST_EVENTS];
+  }
+
+  public async createDeck(gameSessionID: string, deckName: DeckName) {
+    let mapOfCardNamesAndQty = new Map<string, number>();
+
+    if (deckName === DeckName.ROAD_EVENTS) {
+      this.roadEventCardsInfo.forEach((value, key) => {
+        mapOfCardNamesAndQty.set(key, value.quantity);
+      });
+    }
+    if (deckName === DeckName.CITY_EVENTS) {
+      this.cityEventCardsInfo.forEach((value, key) => {
+        mapOfCardNamesAndQty.set(key, value.quantity);
+      });
+    }
+
+    if (deckName === DeckName.FOREST_EVENTS) {
+      this.forestEventCardsInfo.forEach((value, key) => {
+        mapOfCardNamesAndQty.set(key, value.quantity);
+      });
+    }
+
+    let cardNames =
+      this.cardService.addCardsToDeckAccordingToQuantity(mapOfCardNamesAndQty);
+
+    await this.cardService.createCardDeck(gameSessionID, deckName, cardNames);
+  }
+
   public async createEventCardDecks(gameSessionID: string): Promise<void> {
     // Create a new card deck for each option in the DeckName type that are event types.
     // Get the card info map
-    await this.fetchEventCardInfoFromJSON();
+    await this.fetchCardInfoFromJSON();
 
-    for (const deckName of Object.values(DeckName)) {
-      const deckType = deckName as DeckName;
-
-      // I'm going to regret this...
-      // This is so we don't add other deck types here.
-      if (!this.deckNameIsEventDeck(deckType)) {
-        return;
-      }
-
-      // get the card names from the CardName enum
-      let mapOfCardNamesAndQty = new Map<string, number>();
-
-      if (deckType === DeckName.ROAD_EVENTS) {
-        this.roadEventCardsInfo.forEach((value, key) => {
-          mapOfCardNamesAndQty.set(key, value.quantity);
-        });
-      }
-      if (deckType === DeckName.CITY_EVENTS) {
-        this.cityEventCardsInfo.forEach((value, key) => {
-          mapOfCardNamesAndQty.set(key, value.quantity);
-        });
-      }
-
-      if (deckType === DeckName.FOREST_EVENTS) {
-        this.forestEventCardsInfo.forEach((value, key) => {
-          mapOfCardNamesAndQty.set(key, value.quantity);
-        });
-      }
-
-      let cardNames =
-        this.cardService.addCardsToDeckAccordingToQuantity(
-          mapOfCardNamesAndQty
-        );
-
-      this.cardService.createCardDeck(gameSessionID, deckType, cardNames);
+    for (const deckType of this.getEventCardDeckNames()) {
+      this.createDeck(gameSessionID, deckType);
     }
-  }
-
-  private deckNameIsEventDeck(deckName: DeckName): boolean {
-    return (
-      deckName === DeckName.ROAD_EVENTS ||
-      deckName === DeckName.CITY_EVENTS ||
-      deckName === DeckName.FOREST_EVENTS
-    );
   }
 }

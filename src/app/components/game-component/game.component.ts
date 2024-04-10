@@ -407,9 +407,9 @@ export class GameComponent implements OnInit, OnDestroy {
         "No character being controlled by client. We can't draw an event card without a character."
       );
     }
-    this.cardName = await this.eventCardService.drawEventCard(
-      this.characterBeingControlledByClient.currentLocation.locationType,
-      this.gameSession.id
+    this.cardName = await this.eventCardService.drawCard(
+      this.gameSession.id,
+      this.characterBeingControlledByClient.currentLocation.locationType
     );
 
     this.deckName =

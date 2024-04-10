@@ -33,7 +33,7 @@ export class EventMenuComponent implements OnInit {
     if (!this.cardName || !this.deckName) {
       throw new Error('Card name or location type not provided');
     }
-    const card = this.eventCardService.getEventCardInfo(
+    const card = this.eventCardService.getCardInfo(
       this.cardName,
       this.deckName
     );

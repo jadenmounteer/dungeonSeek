@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CardService } from './card.service';
+import { LocationType } from './location-service';
+import { DeckName } from '../types/card-deck';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,10 @@ export abstract class CardDeckService {
 
   abstract setCardDeckSubscriptions(gameSessionID: string): void;
 
-  abstract drawCard(gameSessionID: string): Promise<string>;
+  abstract drawCard(
+    gameSessionID: string,
+    locationType?: LocationType
+  ): Promise<string>;
 
   /**
    * Gets a specific card's information when you draw one off the top of the deck
@@ -17,10 +22,13 @@ export abstract class CardDeckService {
    * @param deckName
    * @returns the info type of that card
    */
-  abstract getCardInfo(cardName: string): any;
+  abstract getCardInfo(cardName: string, deckName?: DeckName): any;
 
   // This is necessary so I can keep all the card data in JSON and not overload the db
   abstract fetchCardInfoFromJSON(): Promise<void>;
 
-  abstract createDeck(gameSessionID: string): Promise<void>;
+  abstract createDeck(
+    gameSessionID: string,
+    deckName?: DeckName
+  ): Promise<void>;
 }
