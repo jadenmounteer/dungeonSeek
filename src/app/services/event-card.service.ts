@@ -143,32 +143,40 @@ export class EventCardService implements OnDestroy {
 
   // This is necessary so I can keep all the card data in JSON and not overload the db
   public async fetchEventCardInfoFromJSON(): Promise<void> {
-    await Promise.all(
-      Object.values(DeckName).map(async (deckName) => {
-        const cards = await this.fetchEventCardsInfo(deckName as DeckName);
-        const mapOfCardNames = new Map<string, EventCardInfo>();
-        cards.forEach((card) => {
-          mapOfCardNames.set(card.name, card);
-        });
-
-        this.setEventCardInfoMaps(deckName as DeckName, mapOfCardNames);
-      })
-    );
+    await this.setEventCardInfoMaps();
   }
 
-  private setEventCardInfoMaps(
-    deckName: DeckName,
-    mapOfCardNames: Map<string, EventCardInfo>
-  ) {
-    if (deckName === DeckName.ROAD_EVENTS) {
-      this.roadEventCardsInfo = mapOfCardNames;
-    }
-    if (deckName === DeckName.CITY_EVENTS) {
-      this.cityEventCardsInfo = mapOfCardNames;
-    }
-    if (deckName === DeckName.FOREST_EVENTS) {
-      this.forestEventCardsInfo = mapOfCardNames;
-    }
+  private async setRoadEventInfoMap() {
+    const cards = await this.fetchEventCardsInfo(DeckName.ROAD_EVENTS);
+    const mapOfCardNames = new Map<string, EventCardInfo>();
+    cards.forEach((card) => {
+      mapOfCardNames.set(card.name, card);
+    });
+    this.roadEventCardsInfo = mapOfCardNames;
+  }
+
+  private async setCityEventInfoMap() {
+    const cards = await this.fetchEventCardsInfo(DeckName.CITY_EVENTS);
+    const mapOfCardNames = new Map<string, EventCardInfo>();
+    cards.forEach((card) => {
+      mapOfCardNames.set(card.name, card);
+    });
+    this.cityEventCardsInfo = mapOfCardNames;
+  }
+
+  private async setForestEventInfoMap() {
+    const cards = await this.fetchEventCardsInfo(DeckName.FOREST_EVENTS);
+    const mapOfCardNames = new Map<string, EventCardInfo>();
+    cards.forEach((card) => {
+      mapOfCardNames.set(card.name, card);
+    });
+    this.forestEventCardsInfo = mapOfCardNames;
+  }
+
+  private async setEventCardInfoMaps() {
+    await this.setRoadEventInfoMap();
+    await this.setCityEventInfoMap();
+    await this.setForestEventInfoMap();
   }
 
   public async createEventCardDecks(gameSessionID: string): Promise<void> {
