@@ -80,17 +80,12 @@ export class ItemCardService implements OnDestroy {
 
   // This is necessary so I can keep all the card data in JSON and not overload the db
   public async fetchItemCardInfoFromJSON(): Promise<void> {
-    await Promise.all(
-      Object.values(DeckName).map(async (deckName) => {
-        const cards = await this.fetchItemCardsInfo(deckName as DeckName);
-        const mapOfCardNames = new Map<string, ItemCardInfo>();
-        cards.forEach((card) => {
-          mapOfCardNames.set(card.name, card);
-        });
-
-        this.itemCardsInfo = mapOfCardNames;
-      })
-    );
+    const cards = await this.fetchItemCardsInfo(DeckName.ITEMS);
+    const mapOfCardNames = new Map<string, ItemCardInfo>();
+    cards.forEach((card) => {
+      mapOfCardNames.set(card.name, card);
+    });
+    this.itemCardsInfo = mapOfCardNames;
   }
 
   public async createItemCardDeck(gameSessionID: string): Promise<void> {
