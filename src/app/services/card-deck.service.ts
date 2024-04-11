@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CardService } from './card.service';
 import { LocationType } from './location-service';
-import { DeckName } from '../types/card-deck';
+import { CardCriteria, DeckName } from '../types/card-deck';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export abstract class CardDeckService {
 
   abstract drawCard(
     gameSessionID: string,
-    locationType?: LocationType
+    cardCriteria?: CardCriteria
   ): Promise<string>;
 
   /**

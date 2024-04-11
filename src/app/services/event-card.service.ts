@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { CardService } from './card.service';
-import { CardDeck, DeckName } from '../types/card-deck';
+import { CardCriteria, CardDeck, DeckName } from '../types/card-deck';
 import { LocationType } from './location-service';
 import { Subscription } from 'rxjs';
 import { EventCardInfo } from '../types/event-card';
@@ -64,9 +64,14 @@ export class EventCardService extends CardDeckService implements OnDestroy {
 
   public async drawCard(
     gameSessionID: string,
-    locationType: LocationType
+    cardCriteria: CardCriteria
   ): Promise<string> {
-    const deck = this.getEventCardDeckAccordingToLocationType(locationType);
+    if (!cardCriteria.locationType) {
+      throw new Error('No location type provided.');
+    }
+    const deck = this.getEventCardDeckAccordingToLocationType(
+      cardCriteria.locationType
+    );
 
     let nextCard = deck.cardNames.pop() as string; // We draw it and it is removed from the deck
 

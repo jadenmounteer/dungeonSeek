@@ -1,9 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CardDeck, DeckName } from '../types/card-deck';
+import { CardCriteria, CardDeck, DeckName } from '../types/card-deck';
 import { ItemCardInfo, ItemCardNames } from '../types/item-card-info';
 import { CardService } from './card.service';
 import { CardDeckService } from './card-deck.service';
+import { CardRewardType } from '../types/card-reward-type';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,10 @@ export class ItemCardService extends CardDeckService implements OnDestroy {
     }
   }
 
-  public async drawCard(gameSessionID: string): Promise<string> {
+  public async drawCard(
+    gameSessionID: string,
+    cardCriteria?: CardCriteria
+  ): Promise<string> {
     const deck = this.itemDeck[0];
 
     let nextCard = deck.cardNames.pop() as string; // We draw it and it is removed from the deck

@@ -30,6 +30,7 @@ import { WeaponCardService } from '../../services/weapon-card.service';
 import { WeaponMenuComponent } from '../weapon-menu/weapon-menu.component';
 import { ItemCardService } from '../../services/item-card.service';
 import { LootService } from '../../services/loot.service';
+import { CardRewardType } from '../../types/card-reward-type';
 
 @Component({
   selector: 'app-game',
@@ -400,7 +401,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showWeaponCard = true;
   }
 
-  private async drawItemCard(): Promise<void> {
+  private async drawItemCard(lootType?: CardRewardType): Promise<void> {
     if (!this.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't draw an item card without a character."
@@ -417,9 +418,14 @@ export class GameComponent implements OnInit, OnDestroy {
         "No character being controlled by client. We can't draw an event card without a character."
       );
     }
+
+    const cardCriteria = {
+      locationType:
+        this.characterBeingControlledByClient.currentLocation.locationType,
+    };
     this.cardName = await this.eventCardService.drawCard(
       this.gameSession.id,
-      this.characterBeingControlledByClient.currentLocation.locationType
+      cardCriteria
     );
 
     this.deckName =

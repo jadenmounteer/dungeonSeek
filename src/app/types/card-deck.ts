@@ -1,9 +1,15 @@
-// TODO implement this
+import { LocationType } from '../services/location-service';
+import { CardRewardType } from './card-reward-type';
+
+// The criteria needed to draw this card. If players do not meet this criteria the card is placed at the bottom of the deck.
+// and another is drawn.
 export interface CardCriteria {
-  level: number;
-  gold: number;
-  items: string[];
-  questsCompleted: string[];
+  locationType?: LocationType;
+  lootType?: CardRewardType;
+  level?: number;
+  gold?: number;
+  items?: string[];
+  questsCompleted?: string[];
 }
 
 // The choices the player can make when drawing this card.
