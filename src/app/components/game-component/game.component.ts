@@ -81,7 +81,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected drawWeaponSubscription =
     this.lootService.drawWeaponSubject.subscribe(() => this.drawWeaponCard());
   protected drawItemSubscription = this.lootService.drawWeaponSubject.subscribe(
-    () => this.drawItemCard()
+    (lootType) => this.drawItemCard(lootType)
   );
 
   constructor(
@@ -407,7 +407,15 @@ export class GameComponent implements OnInit, OnDestroy {
         "No character being controlled by client. We can't draw an item card without a character."
       );
     }
-    this.cardName = await this.itemCardService.drawCard(this.gameSession.id);
+
+    const cardCriteria = {
+      lootType: lootType,
+    };
+
+    this.cardName = await this.itemCardService.drawCard(
+      this.gameSession.id,
+      cardCriteria
+    );
 
     this.showItemCard = true;
   }
