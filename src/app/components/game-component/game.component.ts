@@ -79,7 +79,9 @@ export class GameComponent implements OnInit, OnDestroy {
   protected deckName: DeckName | undefined;
 
   protected drawWeaponSubscription =
-    this.lootService.drawWeaponSubject.subscribe(() => this.drawWeaponCard());
+    this.lootService.drawWeaponSubject.subscribe((lootType) =>
+      this.drawWeaponCard(lootType)
+    );
   protected drawItemSubscription = this.lootService.drawWeaponSubject.subscribe(
     (lootType) => this.drawItemCard(lootType)
   );
@@ -390,13 +392,21 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  private async drawWeaponCard(): Promise<void> {
+  private async drawWeaponCard(lootType: CardRewardType): Promise<void> {
     if (!this.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't draw a weapon card without a character."
       );
     }
-    this.cardName = await this.weaponCardService.drawCard(this.gameSession.id);
+
+    const cardCriteria = {
+      lootType: lootType,
+    };
+
+    this.cardName = await this.weaponCardService.drawCard(
+      this.gameSession.id,
+      cardCriteria
+    );
 
     this.showWeaponCard = true;
   }
