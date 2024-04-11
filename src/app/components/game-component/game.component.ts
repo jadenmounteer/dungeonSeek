@@ -29,6 +29,7 @@ import { EventCardService } from '../../services/event-card.service';
 import { WeaponCardService } from '../../services/weapon-card.service';
 import { WeaponMenuComponent } from '../weapon-menu/weapon-menu.component';
 import { ItemCardService } from '../../services/item-card.service';
+import { LootService } from '../../services/loot.service';
 
 @Component({
   selector: 'app-game',
@@ -76,6 +77,13 @@ export class GameComponent implements OnInit, OnDestroy {
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
 
+  protected drawEasyWeaponSubscription =
+    this.lootService.drawEasyWeaponSubject.subscribe(() =>
+      this.drawWeaponCard()
+    );
+  protected drawEasyItemSubscription =
+    this.lootService.drawEasyWeaponSubject.subscribe(() => this.drawItemCard());
+
   constructor(
     protected locationService: LocationService,
     private activatedRoute: ActivatedRoute,
@@ -86,7 +94,8 @@ export class GameComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private eventCardService: EventCardService,
     private weaponCardService: WeaponCardService,
-    private itemCardService: ItemCardService
+    private itemCardService: ItemCardService,
+    private lootService: LootService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
@@ -176,6 +185,8 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub.unsubscribe();
     this.gameSessionSub.unsubscribe();
     this.charactersSub.unsubscribe();
+    this.drawEasyWeaponSubscription.unsubscribe();
+    this.drawEasyItemSubscription.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameSession.playerIDs.length > 1) {
@@ -426,8 +437,8 @@ export class GameComponent implements OnInit, OnDestroy {
   protected makeChoice(outcome: Outcome) {
     this.showEventCard = false;
 
-    // Find loot
-    if (outcome == 5) {
+    // Find easy loot
+    if (outcome == 9) {
       // this.drawWeaponCard();
       // TODO Add the loot service here
       this.drawItemCard();
