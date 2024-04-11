@@ -425,8 +425,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
   protected makeChoice(outcome: Outcome) {
     this.showEventCard = false;
-    // Get the key of the outcome enum
-    const outcomeKey = Outcome[outcome];
 
     // Find loot
     if (outcome == 5) {
