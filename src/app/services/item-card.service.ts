@@ -43,6 +43,16 @@ export class ItemCardService extends CardDeckService implements OnDestroy {
     // Get the card's info from the JSON
     const cardInfo = this.getCardInfo(nextCard);
 
+    // If the card doesn't meet the card's current criteria, draw another card
+    if (
+      cardCriteria &&
+      cardInfo &&
+      this.cardMeetsCriteria(cardCriteria, cardInfo)
+    ) {
+      this.cardService.placeCardBackInDeck(deck, nextCard);
+      nextCard = await this.drawCard(gameSessionID, cardCriteria);
+    }
+
     // If the card is not a one-time use, put it at the bottom of the deck to be drawn again
     if (cardInfo?.discardAfterUse === false) {
       this.cardService.placeCardBackInDeck(deck, nextCard);
@@ -51,6 +61,18 @@ export class ItemCardService extends CardDeckService implements OnDestroy {
     await this.cardService.updateCardDeck(deck, gameSessionID);
 
     return nextCard;
+  }
+
+  // TODO put this in the abstract class. Every card type needs to implement this.
+  private cardMeetsCriteria(
+    cardCriteria: CardCriteria,
+    cardInfo: ItemCardInfo
+  ): boolean {
+    if (cardCriteria?.lootType === cardInfo.rewardType) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
