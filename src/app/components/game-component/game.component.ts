@@ -82,7 +82,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.lootService.drawWeaponSubject.subscribe((lootType) =>
       this.drawWeaponCard(lootType)
     );
-  protected drawItemSubscription = this.lootService.drawWeaponSubject.subscribe(
+  protected drawItemSubscription = this.lootService.drawItemSubject.subscribe(
     (lootType) => this.drawItemCard(lootType)
   );
 
