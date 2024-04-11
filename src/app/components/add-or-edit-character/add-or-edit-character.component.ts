@@ -53,12 +53,12 @@ export class AddOrEditCharacterComponent implements OnInit {
   };
 
   private characterMenu: CharacterMenu = {
-    equipmentCards: [],
-    potionCards: [],
+    weaponCards: [],
     itemCards: [],
     spellCards: [],
     statusCards: [],
     sideQuestCards: [],
+    mainQuestCards: [],
   };
 
   protected character: Partial<Character> = {
