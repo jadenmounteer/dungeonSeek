@@ -78,6 +78,16 @@ export class EventCardService extends CardDeckService implements OnDestroy {
     // Get the card's info from the JSON
     const cardInfo = this.getCardInfo(nextCard, deck.deckName as DeckName);
 
+    // If the card doesn't meet the card's current criteria, draw another card
+    if (
+      cardCriteria &&
+      cardInfo?.cardCriteria &&
+      !this.cardMeetsCriteria(cardCriteria, cardInfo)
+    ) {
+      this.cardService.placeCardBackInDeck(deck, nextCard);
+      nextCard = await this.drawCard(gameSessionID, cardCriteria);
+    }
+
     // If the card is not a one-time use, put it at the bottom of the deck to be drawn again
     if (cardInfo?.discardAfterUse === false) {
       this.cardService.placeCardBackInDeck(deck, nextCard);
@@ -86,6 +96,17 @@ export class EventCardService extends CardDeckService implements OnDestroy {
     await this.cardService.updateCardDeck(deck, gameSessionID);
 
     return nextCard;
+  }
+
+  protected cardMeetsCriteria(
+    cardCriteria: CardCriteria,
+    cardInfo: EventCardInfo
+  ): boolean {
+    if (cardCriteria === cardInfo.cardCriteria) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private getEventCardDeckAccordingToLocationType(

@@ -64,7 +64,7 @@ export class ItemCardService extends CardDeckService implements OnDestroy {
   }
 
   // TODO put this in the abstract class. Every card type needs to implement this.
-  private cardMeetsCriteria(
+  protected cardMeetsCriteria(
     cardCriteria: CardCriteria,
     cardInfo: ItemCardInfo
   ): boolean {

@@ -61,7 +61,7 @@ export class WeaponCardService extends CardDeckService implements OnDestroy {
     return nextCard;
   }
 
-  private cardMeetsCriteria(
+  protected cardMeetsCriteria(
     cardCriteria: CardCriteria,
     cardInfo: WeaponCardInfo
   ): boolean {

@@ -16,6 +16,11 @@ export abstract class CardDeckService {
     cardCriteria?: CardCriteria
   ): Promise<string>;
 
+  protected abstract cardMeetsCriteria(
+    cardCriteria: CardCriteria,
+    cardInfo: any
+  ): boolean;
+
   /**
    * Gets a specific card's information when you draw one off the top of the deck
    * @param cardName
