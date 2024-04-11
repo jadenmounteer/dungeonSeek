@@ -441,7 +441,7 @@ export class GameComponent implements OnInit, OnDestroy {
     if (outcome == 9) {
       // this.drawWeaponCard();
       // TODO Add the loot service here
-      this.drawItemCard();
+      this.lootService.drawEasyLootCard();
     }
   }
 
