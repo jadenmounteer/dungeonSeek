@@ -47,7 +47,7 @@ export class ItemCardService extends CardDeckService implements OnDestroy {
     if (
       cardCriteria &&
       cardInfo &&
-      this.cardMeetsCriteria(cardCriteria, cardInfo)
+      !this.cardMeetsCriteria(cardCriteria, cardInfo)
     ) {
       this.cardService.placeCardBackInDeck(deck, nextCard);
       nextCard = await this.drawCard(gameSessionID, cardCriteria);

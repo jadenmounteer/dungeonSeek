@@ -22,5 +22,7 @@ export class LootService {
     } else {
       this.drawItemSubject.next(lootType);
     }
+
+    this.drawWeaponSubject.next(lootType);
   }
 }
