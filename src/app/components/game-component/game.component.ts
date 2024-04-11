@@ -77,12 +77,11 @@ export class GameComponent implements OnInit, OnDestroy {
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
 
-  protected drawEasyWeaponSubscription =
-    this.lootService.drawEasyWeaponSubject.subscribe(() =>
-      this.drawWeaponCard()
-    );
-  protected drawEasyItemSubscription =
-    this.lootService.drawEasyWeaponSubject.subscribe(() => this.drawItemCard());
+  protected drawWeaponSubscription =
+    this.lootService.drawWeaponSubject.subscribe(() => this.drawWeaponCard());
+  protected drawItemSubscription = this.lootService.drawWeaponSubject.subscribe(
+    () => this.drawItemCard()
+  );
 
   constructor(
     protected locationService: LocationService,
@@ -185,8 +184,8 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playerPositionSub.unsubscribe();
     this.gameSessionSub.unsubscribe();
     this.charactersSub.unsubscribe();
-    this.drawEasyWeaponSubscription.unsubscribe();
-    this.drawEasyItemSubscription.unsubscribe();
+    this.drawWeaponSubscription.unsubscribe();
+    this.drawItemSubscription.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameSession.playerIDs.length > 1) {
@@ -438,10 +437,11 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showEventCard = false;
 
     // Find easy loot
+    // TODO I can probably make this a map of keys and strings
     if (outcome == 9) {
       // this.drawWeaponCard();
       // TODO Add the loot service here
-      this.lootService.drawEasyLootCard();
+      this.lootService.drawLootCard('Easy');
     }
   }
 

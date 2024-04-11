@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { CardRewardType } from '../types/card-reward-type';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LootService {
   // Subjects are used as event emitters to tell the game component to draw a card.
-  public drawEasyWeaponSubject = new Subject<void>();
-  public drawEasyItemSubject = new Subject<void>();
+  public drawWeaponSubject = new Subject<CardRewardType>();
+  public drawItemSubject = new Subject<CardRewardType>();
 
   constructor() {}
 
@@ -15,11 +16,11 @@ export class LootService {
     // Randomly determine if the player should draw a weapon card
     return Math.random() > 0.5;
   }
-  public drawEasyLootCard(): void {
+  public drawLootCard(lootType: CardRewardType): void {
     if (this.shouldDrawWeaponCard()) {
-      this.drawEasyWeaponSubject.next();
+      this.drawWeaponSubject.next(lootType);
     } else {
-      this.drawEasyItemSubject.next();
+      this.drawItemSubject.next(lootType);
     }
   }
 }
