@@ -17,6 +17,14 @@ $button-text-color: $dungeon-seek-light;
   margin-top: 0.5rem;
 }
 
+.medium-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: $dungeon-seek-light;
+  text-shadow: 2px 2px 2px black;
+  margin-top: 0.5rem;
+}
+
 // text that is sticky to the top and bottom of the screen
 .sticky-text {
   font-size: $sticky-text-font-size;

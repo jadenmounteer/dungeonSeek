@@ -43,6 +43,7 @@ $image-width: 80px;
   display: flex;
   flex-direction: row;
   align-items: self-end;
+  gap: 3px;
 }
 
 .character-stats-and-gold {
@@ -52,5 +53,5 @@ $image-width: 80px;
 }
 
 .gold-coin {
-  width: 20px;
+  width: 23px;
 }
