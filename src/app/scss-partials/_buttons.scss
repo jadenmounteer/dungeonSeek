@@ -1,11 +1,20 @@
+@mixin button-color {
+  background-color: gray;
+  border: 2px solid rgb(38, 38, 38);
+  color: $button-text-color;
+  transition: background-color 0.5s;
+
+  &:hover {
+    background-color: rgb(113, 112, 112);
+  }
+}
+
 .game-button {
-  // Make it big and green and fantasy looking
   font-size: $sticky-text-font-size;
   font-weight: bold;
-  color: $button-text-color;
   text-shadow: 2px 2px 2px black;
-  background-color: rgb(57, 110, 64);
-  border: 2px solid rgb(57, 110, 64);
+
+  @include button-color;
 
   border-radius: 10px;
   margin: 10px;
@@ -23,12 +32,6 @@
   @include for-zoomed-in-screen {
     font-size: $sticky-text-font-size-for-zoomed-in-screen;
   }
-
-  // transition the background-color on hover
-  transition: background-color 0.5s;
-  &:hover {
-    background-color: rgb(57, 110, 64, 0.5);
-  }
 }
 
 .disabled-button {
@@ -43,20 +46,14 @@
 .choice-button {
   font-size: $sticky-text-font-size;
   font-weight: bold;
-  color: $button-text-color;
-  background-color: gray;
-  border: 2px solid rgb(38, 38, 38);
+
+  @include button-color;
   width: fit-content;
   padding: 8px;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.5s;
   min-width: 100px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-}
-
-.choice-button:hover {
-  background-color: rgb(113, 112, 112);
 }
