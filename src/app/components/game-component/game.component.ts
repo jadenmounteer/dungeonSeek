@@ -78,12 +78,16 @@ export class GameComponent implements OnInit, OnDestroy {
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
 
+  // LOOT SUBSCRIPTIONS
   protected drawWeaponSubscription =
     this.lootService.drawWeaponSubject.subscribe((lootType) =>
       this.drawWeaponCard(lootType)
     );
   protected drawItemSubscription = this.lootService.drawItemSubject.subscribe(
     (lootType) => this.drawItemCard(lootType)
+  );
+  protected drawGoldSubscription = this.lootService.drawGoldSubject.subscribe(
+    (goldAmount) => this.drawGoldCard(goldAmount)
   );
 
   constructor(
@@ -189,6 +193,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.charactersSub.unsubscribe();
     this.drawWeaponSubscription.unsubscribe();
     this.drawItemSubscription.unsubscribe();
+    this.drawGoldSubscription.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameSession.playerIDs.length > 1) {
@@ -409,6 +414,14 @@ export class GameComponent implements OnInit, OnDestroy {
     );
 
     this.showWeaponCard = true;
+  }
+
+  private async drawGoldCard(goldAmount: number): Promise<void> {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error(
+        "No character being controlled by client. We can't draw an item card without a character."
+      );
+    }
   }
 
   private async drawItemCard(lootType?: CardRewardType): Promise<void> {
