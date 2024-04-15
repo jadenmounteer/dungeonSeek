@@ -31,6 +31,7 @@ import { WeaponMenuComponent } from '../weapon-menu/weapon-menu.component';
 import { ItemCardService } from '../../services/item-card.service';
 import { LootService } from '../../services/loot.service';
 import { CardRewardType } from '../../types/card-reward-type';
+import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
 
 @Component({
   selector: 'app-game',
@@ -47,6 +48,7 @@ import { CardRewardType } from '../../types/card-reward-type';
     DiceRollDialogComponent,
     ItemMenuComponent,
     WeaponMenuComponent,
+    GoldMenuComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -74,6 +76,8 @@ export class GameComponent implements OnInit, OnDestroy {
   protected showEventCard = false;
   protected showWeaponCard = false;
   protected showItemCard = false;
+  protected showGoldCard = false;
+  protected goldFoundAmount: number = 0;
 
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
@@ -422,6 +426,9 @@ export class GameComponent implements OnInit, OnDestroy {
         "No character being controlled by client. We can't draw an item card without a character."
       );
     }
+
+    this.goldFoundAmount = goldAmount;
+    this.showGoldCard = true;
   }
 
   private async drawItemCard(lootType?: CardRewardType): Promise<void> {

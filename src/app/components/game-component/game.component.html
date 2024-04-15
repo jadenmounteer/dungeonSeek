@@ -51,6 +51,14 @@
       (closeMenu)="closeCard()"
     ></app-weapon-menu>
 
+    <!-- Appears when the character finds gold -->
+    <app-gold-menu
+      *ngIf="showGoldCard"
+      [goldAmount]="goldFoundAmount"
+      (closeMenu)="closeCard()"
+    >
+    </app-gold-menu>
+
     <app-dice-roll-dialog
       *ngIf="currentCharacterRollingDice"
       [data]="diceRollingData"

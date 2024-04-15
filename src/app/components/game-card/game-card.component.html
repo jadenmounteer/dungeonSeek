@@ -1,5 +1,11 @@
-<div class="game-card">
+<div class="game-card" *ngIf="card">
   <div class="card-image-wrapper">
-    <img class="card-image" [src]="card?.imgUrl" />
+    <img class="card-image" [src]="card.imgUrl" />
+  </div>
+</div>
+
+<div class="game-card" *ngIf="gold">
+  <div class="card-image-wrapper">
+    <img class="card-image" src="../../../assets/game-pieces/coin.png" />
   </div>
 </div>
