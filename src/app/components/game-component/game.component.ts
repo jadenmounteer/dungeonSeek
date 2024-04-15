@@ -431,6 +431,24 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showGoldCard = true;
   }
 
+  // TODO Make a service to handle similar logic and extract it from the game component.
+  protected addGoldToCharacter() {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error(
+        "No character being controlled by client. We can't add gold to a character without a character."
+      );
+    }
+
+    this.characterBeingControlledByClient.gold += this.goldFoundAmount;
+    this.characterService.updateCharacter(
+      this.characterBeingControlledByClient,
+      this.gameSession.id
+    );
+
+    this.goldFoundAmount = 0;
+    this.showGoldCard = false;
+  }
+
   private async drawItemCard(lootType?: CardRewardType): Promise<void> {
     if (!this.characterBeingControlledByClient) {
       throw new Error(
@@ -476,7 +494,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showEventCard = false;
     this.showWeaponCard = false;
     this.showItemCard = false;
-    this.showGoldCard = false;
   }
   protected makeChoice(outcome: Outcome) {
     this.showEventCard = false;
@@ -529,7 +546,7 @@ export class GameComponent implements OnInit, OnDestroy {
       closeButtonName: 'Draw Event Card',
       numberOfDice: 1,
       comparator: '<=',
-      targetNumber: 3, // use 6 for testing
+      targetNumber: 6, // use 6 for testing
     };
     this.currentCharacterRollingDice = true;
   }
