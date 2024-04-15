@@ -1,14 +1,18 @@
 <app-menu>
-  <app-game-card [gold]="true"> </app-game-card>
+  <div class="menu-content">
+    <div class="game-card-wrapper">
+      <app-game-card [gold]="true"> </app-game-card>
+    </div>
 
-  <div class="card-info">
-    <h1 class="menu-title">You found {{ goldAmount }} gold!</h1>
+    <div class="card-info">
+      <h1 class="menu-title">You found {{ goldAmount }} gold!</h1>
 
-    <app-menu-underline></app-menu-underline>
-
-    <div class="card-choices-section">
       <app-menu-underline></app-menu-underline>
-      <div class="choice-button" (click)="onCloseMenu()">Close</div>
+
+      <div class="card-choices-section">
+        <app-menu-underline></app-menu-underline>
+        <div class="choice-button" (click)="onCloseMenu()">Close</div>
+      </div>
     </div>
   </div>
 </app-menu>

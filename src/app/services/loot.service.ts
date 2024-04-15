@@ -40,7 +40,7 @@ export class LootService {
   }
 
   public drawLootCard(lootType: CardRewardType): void {
-    const randomNumber = this.pickANumberBetween(1, 3);
+    const randomNumber = this.pickANumberBetween(3, 3);
 
     if (randomNumber === 1) {
       this.drawWeaponSubject.next(lootType);
