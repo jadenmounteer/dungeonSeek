@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GameSessionService } from '../../services/game-session/game-session.service';
 import { GameSession } from '../../types/game-session';
-import { Character } from '../../types/character';
+import { Character, CharacterMenuEquipment } from '../../types/character';
 import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
 import { TurnService } from '../../services/turn.service';
@@ -486,8 +486,13 @@ export class GameComponent implements OnInit, OnDestroy {
       );
     }
 
+    const newEquipment: CharacterMenuEquipment = {
+      cardName: this.cardName,
+      equipped: false,
+    };
+
     this.characterBeingControlledByClient.characterMenu.weaponCards.push(
-      this.cardName
+      newEquipment
     );
     this.characterService.updateCharacter(
       this.characterBeingControlledByClient,

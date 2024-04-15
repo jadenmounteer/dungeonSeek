@@ -29,12 +29,18 @@ export type CharacterStat = {
 };
 
 export type CharacterMenu = {
-  weaponCards: string[];
+  weaponCards: CharacterMenuEquipment[];
   itemCards: string[];
   spellCards: string[];
   statusCards: string[];
   sideQuestCards: string[];
   mainQuestCards: string[];
+  // TODO add Armor cards
+};
+
+export type CharacterMenuEquipment = {
+  cardName: string;
+  equipped: boolean; // true if equipped, false if not
 };
 
 export type CharacterSex = 'Male' | 'Female';
