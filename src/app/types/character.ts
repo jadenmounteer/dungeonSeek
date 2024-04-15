@@ -29,12 +29,12 @@ export type CharacterStat = {
 };
 
 export type CharacterMenu = {
-  weaponCards: [];
-  itemCards: [];
-  spellCards: [];
-  statusCards: [];
-  sideQuestCards: [];
-  mainQuestCards: [];
+  weaponCards: string[];
+  itemCards: string[];
+  spellCards: string[];
+  statusCards: string[];
+  sideQuestCards: string[];
+  mainQuestCards: string[];
 };
 
 export type CharacterSex = 'Male' | 'Female';

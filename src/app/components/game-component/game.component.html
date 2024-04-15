@@ -41,14 +41,14 @@
     <app-item-menu
       *ngIf="showItemCard"
       [cardName]="cardName"
-      (closeMenu)="closeCard()"
+      (closeMenu)="addItemToPlayerInventory()"
     ></app-item-menu>
 
     <!-- Appears when you are viewing a weapon card -->
     <app-weapon-menu
       *ngIf="showWeaponCard"
       [cardName]="cardName"
-      (closeMenu)="closeCard()"
+      (closeMenu)="addWeaponToPlayerInventory()"
     ></app-weapon-menu>
 
     <!-- Appears when the character finds gold -->

@@ -449,6 +449,54 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showGoldCard = false;
   }
 
+  protected addItemToPlayerInventory(): void {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error(
+        "No character being controlled by client. We can't add an item to a character without a character."
+      );
+    }
+
+    if (!this.cardName) {
+      throw new Error(
+        "No card name. We can't add an item to a character without a card name."
+      );
+    }
+
+    this.characterBeingControlledByClient.characterMenu.itemCards.push(
+      this.cardName
+    );
+    this.characterService.updateCharacter(
+      this.characterBeingControlledByClient,
+      this.gameSession.id
+    );
+
+    this.showItemCard = false;
+  }
+
+  protected addWeaponToPlayerInventory(): void {
+    if (!this.characterBeingControlledByClient) {
+      throw new Error(
+        "No character being controlled by client. We can't add a weapon to a character without a character."
+      );
+    }
+
+    if (!this.cardName) {
+      throw new Error(
+        "No card name. We can't add a weapon to a character without a card name."
+      );
+    }
+
+    this.characterBeingControlledByClient.characterMenu.weaponCards.push(
+      this.cardName
+    );
+    this.characterService.updateCharacter(
+      this.characterBeingControlledByClient,
+      this.gameSession.id
+    );
+
+    this.showWeaponCard = false;
+  }
+
   private async drawItemCard(lootType?: CardRewardType): Promise<void> {
     if (!this.characterBeingControlledByClient) {
       throw new Error(
@@ -492,8 +540,6 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected closeCard() {
     this.showEventCard = false;
-    this.showWeaponCard = false;
-    this.showItemCard = false;
   }
   protected makeChoice(outcome: Outcome) {
     this.showEventCard = false;
