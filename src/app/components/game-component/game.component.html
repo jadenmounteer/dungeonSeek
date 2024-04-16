@@ -21,6 +21,7 @@
     <app-character-info
       *ngIf="characterBeingControlledByClient"
       [character]="characterBeingControlledByClient"
+      (openCharacterMenu)="openCharacterMenu()"
     ></app-character-info>
 
     <app-location-info
@@ -58,6 +59,9 @@
       (closeMenu)="addGoldToCharacter()"
     >
     </app-gold-menu>
+
+    <!-- Appears if you are viewing the character's menu -->
+    <app-character-menu *ngIf="showCharacterMenu"> </app-character-menu>
 
     <app-dice-roll-dialog
       *ngIf="currentCharacterRollingDice"

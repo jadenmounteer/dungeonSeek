@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Character, CharacterClass, CharacterSex } from '../../types/character';
 import { StatBarComponent } from '../stat-bar/stat-bar.component';
 
@@ -12,6 +12,7 @@ import { StatBarComponent } from '../stat-bar/stat-bar.component';
 })
 export class CharacterInfoComponent {
   @Input() character!: Character;
+  @Output() showCharacterMenu: boolean = false;
 
   protected characterImage: string = '';
 

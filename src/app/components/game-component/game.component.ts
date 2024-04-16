@@ -32,6 +32,7 @@ import { ItemCardService } from '../../services/item-card.service';
 import { LootService } from '../../services/loot.service';
 import { CardRewardType } from '../../types/card-reward-type';
 import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
+import { CharacterMenuComponent } from '../character-menu/character-menu.component';
 
 @Component({
   selector: 'app-game',
@@ -49,6 +50,7 @@ import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
     ItemMenuComponent,
     WeaponMenuComponent,
     GoldMenuComponent,
+    CharacterMenuComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -77,6 +79,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected showWeaponCard = false;
   protected showItemCard = false;
   protected showGoldCard = false;
+  protected showCharacterMenu = false;
   protected goldFoundAmount: number = 0;
 
   protected cardName: string | undefined;
@@ -600,5 +603,9 @@ export class GameComponent implements OnInit, OnDestroy {
       targetNumber: 3, // use 6 for testing
     };
     this.currentCharacterRollingDice = true;
+  }
+
+  protected openCharacterMenu(): void {
+    this.showCharacterMenu = true;
   }
 }
