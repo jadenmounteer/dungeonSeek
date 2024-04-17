@@ -21,7 +21,7 @@
     <app-character-info
       *ngIf="characterBeingControlledByClient"
       [character]="characterBeingControlledByClient"
-      (openCharacterMenu)="openCharacterMenu()"
+      (showCharacterMenu)="toggleCharacterMenu()"
     ></app-character-info>
 
     <app-location-info

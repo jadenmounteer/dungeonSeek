@@ -605,7 +605,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.currentCharacterRollingDice = true;
   }
 
-  protected openCharacterMenu(): void {
-    this.showCharacterMenu = true;
+  protected toggleCharacterMenu(): void {
+    this.showCharacterMenu = !this.showCharacterMenu;
   }
 }
