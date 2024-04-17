@@ -52,4 +52,8 @@ export class CharacterInfoComponent {
         return 'assets/character-profile-images/sorceress-profile.png';
     }
   }
+
+  protected toggleCharacterMenu(): void {
+    this.showCharacterMenu.emit();
+  }
 }
