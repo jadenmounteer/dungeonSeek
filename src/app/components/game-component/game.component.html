@@ -64,6 +64,7 @@
     <app-character-menu
       *ngIf="showCharacterMenu"
       [character]="characterBeingControlledByClient"
+      (closeMenu)="showCharacterMenu = false"
     >
     </app-character-menu>
 

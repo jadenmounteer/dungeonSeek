@@ -1,3 +1,10 @@
 <div class="menu-background" @fadeIn @fadeOut>
+  <div
+    class="close-menu-icon big-text"
+    *ngIf="showCloseMenu"
+    (click)="onCloseMenu()"
+  >
+    X
+  </div>
   <ng-content></ng-content>
 </div>
