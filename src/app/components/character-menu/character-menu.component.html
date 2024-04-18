@@ -17,12 +17,16 @@
           <app-character-stats [character]="character"></app-character-stats>
         </div>
       </div>
-      <div class="big-text dungeon-seek-dropdown-button">
+      <div
+        class="big-text dungeon-seek-dropdown-button"
+        (click)="toggleDropdown()"
+      >
         {{ currentMenu }}
-        <i class="arrow down"></i>
+        <i class="arrow down" *ngIf="!dropdownOpen"></i>
+        <i class="arrow up" *ngIf="dropdownOpen"></i>
       </div>
 
-      <div class="dungeon-seek-dropdown-menu">
+      <div class="dungeon-seek-dropdown-menu" *ngIf="dropdownOpen">
         <ul>
           <li
             *ngFor="let option of dropdownOptions"

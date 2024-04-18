@@ -30,6 +30,7 @@ export class CharacterMenuComponent {
   @Input() character: Character | undefined;
   @Output() closeMenu = new EventEmitter<any>();
 
+  protected dropdownOpen: boolean = false;
   protected currentMenu: MenuType = 'Items';
   protected dropdownOptions: MenuType[] = [
     'Items',
@@ -41,5 +42,9 @@ export class CharacterMenuComponent {
 
   protected onCloseMenu() {
     this.closeMenu.emit();
+  }
+
+  protected toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 }
