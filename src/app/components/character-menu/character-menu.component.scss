@@ -27,6 +27,9 @@
   cursor: pointer;
   padding: 8px;
   transition: all 0.3s;
+  max-width: 130px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dungeon-seek-dropdown-menu:hover {
