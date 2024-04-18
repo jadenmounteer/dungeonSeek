@@ -1,44 +1,42 @@
 <app-menu [showCloseMenu]="true" (closeMenu)="onCloseMenu()">
-  <div class="menu-content" *ngIf="character">
-    <div class="character-menu">
-      <div class="character-menu-header">
-        <div class="character-info">
-          <p class="menu-text">
-            {{ character.name }} - Level {{ character.level }}
-            {{ character.class }}
-          </p>
-        </div>
-        <app-menu-underline></app-menu-underline>
+  <div class="character-menu" *ngIf="character">
+    <div class="character-menu-header">
+      <div class="character-info">
+        <p class="menu-text">
+          {{ character.name }} - Level {{ character.level }}
+          {{ character.class }}
+        </p>
+      </div>
+      <app-menu-underline></app-menu-underline>
 
-        <div class="image-and-stats">
-          <app-character-profile-image
-            [character]="character"
-          ></app-character-profile-image>
-          <app-character-stats [character]="character"></app-character-stats>
-        </div>
+      <div class="image-and-stats">
+        <app-character-profile-image
+          [character]="character"
+        ></app-character-profile-image>
+        <app-character-stats [character]="character"></app-character-stats>
       </div>
-      <div
-        class="big-text dungeon-seek-dropdown-button"
-        (click)="toggleDropdown()"
-      >
-        {{ currentMenu }}
-        <i class="arrow down" *ngIf="!dropdownOpen"></i>
-        <i class="arrow up" *ngIf="dropdownOpen"></i>
-      </div>
+    </div>
+    <div
+      class="big-text dungeon-seek-dropdown-button"
+      (click)="toggleDropdown()"
+    >
+      {{ currentMenu }}
+      <i class="arrow down" *ngIf="!dropdownOpen"></i>
+      <i class="arrow up" *ngIf="dropdownOpen"></i>
+    </div>
 
-      <div class="dungeon-seek-dropdown-menu" *ngIf="dropdownOpen">
-        <ul>
-          <li *ngFor="let option of dropdownOptions">
-            <span
-              *ngIf="option != currentMenu"
-              class="dropdown-list-item menu-text"
-              (click)="changeVisibleMenu(option)"
-            >
-              {{ option }}
-            </span>
-          </li>
-        </ul>
-      </div>
+    <div class="dungeon-seek-dropdown-menu" *ngIf="dropdownOpen">
+      <ul>
+        <li *ngFor="let option of dropdownOptions">
+          <span
+            *ngIf="option != currentMenu"
+            class="dropdown-list-item menu-text"
+            (click)="changeVisibleMenu(option)"
+          >
+            {{ option }}
+          </span>
+        </li>
+      </ul>
     </div>
   </div>
 </app-menu>
