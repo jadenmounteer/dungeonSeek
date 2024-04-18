@@ -4,5 +4,7 @@
       [character]="character"
     ></app-character-profile-image>
     <app-character-stats [character]="character"></app-character-stats>
+    <p class="menu-text">{{ character.name }}</p>
+    <p class="menu-text">Level: {{ character.level }} {{ character.class }}</p>
   </div>
 </app-menu>
