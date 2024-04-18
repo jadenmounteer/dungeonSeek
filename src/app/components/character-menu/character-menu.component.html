@@ -28,11 +28,14 @@
 
       <div class="dungeon-seek-dropdown-menu" *ngIf="dropdownOpen">
         <ul>
-          <li
-            *ngFor="let option of dropdownOptions"
-            class="dropdown-list-item menu-text"
-          >
-            {{ option }}
+          <li *ngFor="let option of dropdownOptions">
+            <span
+              *ngIf="option != currentMenu"
+              class="dropdown-list-item menu-text"
+              (click)="changeVisibleMenu(option)"
+            >
+              {{ option }}
+            </span>
           </li>
         </ul>
       </div>

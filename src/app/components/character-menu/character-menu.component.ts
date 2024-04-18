@@ -47,4 +47,9 @@ export class CharacterMenuComponent {
   protected toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
+
+  protected changeVisibleMenu(newMenu: MenuType) {
+    this.currentMenu = newMenu;
+    this.toggleDropdown();
+  }
 }

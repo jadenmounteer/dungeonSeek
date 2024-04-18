@@ -27,7 +27,7 @@
   cursor: pointer;
   padding: 8px;
   transition: all 0.3s;
-  max-width: 130px;
+  max-width: fit-content;
   margin-left: auto;
   margin-right: auto;
 }
@@ -49,15 +49,17 @@
 ul {
   list-style: none;
   padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .dropdown-list-item {
   color: $dungeon-seek-light;
-  transition: all 0.1s;
+  transition: color 0.3s;
   padding: 8px;
 }
 .dropdown-list-item:hover {
-  background-color: $dungeon-seek-light;
   color: $dungeon-seek-less-light;
   cursor: pointer;
 }
