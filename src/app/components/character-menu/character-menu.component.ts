@@ -4,6 +4,7 @@ import { MenuComponent } from '../menu/menu.component';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 import { CharacterProfileImageComponent } from '../character-profile-image/character-profile-image.component';
 import { CommonModule } from '@angular/common';
+import { CharacterStatsComponent } from '../character-stats/character-stats.component';
 
 @Component({
   selector: 'app-character-menu',
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
     MenuUnderlineComponent,
     CharacterProfileImageComponent,
     CommonModule,
+    CharacterStatsComponent,
   ],
   templateUrl: './character-menu.component.html',
   styleUrl: './character-menu.component.scss',
