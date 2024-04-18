@@ -1,10 +1,25 @@
 @import "../../../styles.scss";
 
+.character-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.character-info {
+  text-align: center;
+}
+.image-and-stats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 .character-menu-header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   column-gap: 16px;
+  flex-direction: column;
 }
 
 .dungeon-seek-dropdown-menu {

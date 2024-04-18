@@ -1,22 +1,26 @@
 <app-menu [showCloseMenu]="true" (closeMenu)="onCloseMenu()">
   <div class="menu-content" *ngIf="character">
-    <div class="character-menu-header">
-      <app-character-profile-image
-        [character]="character"
-      ></app-character-profile-image>
-      <app-character-stats [character]="character"></app-character-stats>
+    <div class="character-menu">
+      <div class="character-menu-header">
+        <div class="character-info">
+          <p class="menu-text">
+            {{ character.name }} - Level {{ character.level }}
+            {{ character.class }}
+          </p>
+        </div>
+        <app-menu-underline></app-menu-underline>
 
-      <div class="character-info">
-        <p class="menu-text">
-          {{ character.name }} - Level {{ character.level }}
-          {{ character.class }}
-        </p>
+        <div class="image-and-stats">
+          <app-character-profile-image
+            [character]="character"
+          ></app-character-profile-image>
+          <app-character-stats [character]="character"></app-character-stats>
+        </div>
       </div>
-    </div>
-    <app-menu-underline></app-menu-underline>
-    <div class="big-text dungeon-seek-dropdown-menu">
-      {{ currentMenu }}
-      <i class="arrow down"></i>
+      <div class="big-text dungeon-seek-dropdown-menu">
+        {{ currentMenu }}
+        <i class="arrow down"></i>
+      </div>
     </div>
   </div>
 </app-menu>
