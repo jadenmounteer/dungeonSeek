@@ -1,3 +1,7 @@
 <app-menu [showCloseMenu]="true" (closeMenu)="onCloseMenu()">
-  <div class="menu-content"></div>
+  <div class="menu-content" *ngIf="character">
+    <app-character-profile-image
+      [character]="character"
+    ></app-character-profile-image>
+  </div>
 </app-menu>
