@@ -1,12 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Character } from '../../types/character';
+import { MenuComponent } from '../menu/menu.component';
+import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 
 @Component({
   selector: 'app-character-menu',
   standalone: true,
-  imports: [],
+  imports: [MenuComponent, MenuUnderlineComponent],
   templateUrl: './character-menu.component.html',
-  styleUrl: './character-menu.component.scss'
+  styleUrl: './character-menu.component.scss',
 })
 export class CharacterMenuComponent {
+  @Input() character: Character | undefined;
+  @Output() closeMenu = new EventEmitter<any>();
 
+  protected onCloseMenu() {
+    this.closeMenu.emit();
+  }
 }

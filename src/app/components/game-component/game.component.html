@@ -61,7 +61,11 @@
     </app-gold-menu>
 
     <!-- Appears if you are viewing the character's menu -->
-    <app-character-menu *ngIf="showCharacterMenu"> </app-character-menu>
+    <app-character-menu
+      *ngIf="showCharacterMenu"
+      [character]="characterBeingControlledByClient"
+    >
+    </app-character-menu>
 
     <app-dice-roll-dialog
       *ngIf="currentCharacterRollingDice"
