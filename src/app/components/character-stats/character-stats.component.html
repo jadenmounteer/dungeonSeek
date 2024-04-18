@@ -1,0 +1,28 @@
+<div class="character-stats-and-gold">
+  <div class="character-stats-section" *ngIf="character.characterStats">
+    <app-stat-bar
+      [stat]="character.characterStats.health"
+      [statName]="'Health'"
+    ></app-stat-bar>
+    <app-stat-bar
+      [stat]="character.characterStats.mana"
+      [statName]="'Mana'"
+    ></app-stat-bar>
+    <app-stat-bar
+      [stat]="character.characterStats.stamina"
+      [statName]="'Stamina'"
+    ></app-stat-bar>
+    <app-stat-bar
+      [stat]="character.characterStats.experience"
+      [statName]="'Experience'"
+    ></app-stat-bar>
+  </div>
+  <div class="character-gold-section">
+    <img
+      class="gold-coin"
+      src="assets/game-pieces/coin.png"
+      alt="A gold coin"
+    />
+    <span class="character-gold medium-text"> {{ character.gold }}</span>
+  </div>
+</div>
