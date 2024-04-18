@@ -23,6 +23,8 @@ export class CharacterMenuComponent {
   @Input() character: Character | undefined;
   @Output() closeMenu = new EventEmitter<any>();
 
+  protected currentMenu: string = 'Inventory';
+
   protected onCloseMenu() {
     this.closeMenu.emit();
   }

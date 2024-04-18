@@ -6,3 +6,31 @@
   justify-content: center;
   column-gap: 16px;
 }
+
+.dungeon-seek-dropdown-menu {
+  border: 2px solid $dungeon-seek-light;
+  cursor: pointer;
+  padding: 8px;
+  transition: all 0.3s;
+}
+
+.dungeon-seek-dropdown-menu:hover {
+  background-color: $dungeon-seek-less-light;
+}
+
+.arrow {
+  border: solid $dungeon-seek-light;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
