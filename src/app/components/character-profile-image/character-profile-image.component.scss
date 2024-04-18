@@ -1,0 +1,24 @@
+@import "../../../styles.scss";
+
+$image-width: 80px;
+
+.character-image-wrapper {
+  cursor: pointer;
+  // wrap it in a circle
+  border-radius: 50%;
+  overflow: hidden;
+  width: $image-width;
+  height: $image-width;
+  border: 1px solid grey;
+  transition: all 0.3s ease-in-out;
+}
+
+.character-image-wrapper:hover {
+  // Give the gold color a misty effect
+  border: 1px solid gold;
+  box-shadow: 0 0 10px gold;
+}
+.character-image {
+  width: $image-width;
+  @include unselectable();
+}

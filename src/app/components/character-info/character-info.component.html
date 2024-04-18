@@ -1,7 +1,8 @@
 <div class="character-info-wrapper">
-  <div class="character-image-wrapper" (click)="toggleCharacterMenu()">
-    <img [src]="characterImage" class="character-image" />
-  </div>
+  <app-character-profile-image
+    (click)="toggleCharacterMenu()"
+    [character]="character"
+  ></app-character-profile-image>
 
   <div class="character-stats-and-gold">
     <div class="character-stats-section" *ngIf="character.characterStats">
