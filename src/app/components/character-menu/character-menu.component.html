@@ -24,7 +24,12 @@
 
       <div class="dungeon-seek-dropdown-menu">
         <ul>
-          <li *ngFor="let option of dropdownOptions">{{ option }}</li>
+          <li
+            *ngFor="let option of dropdownOptions"
+            class="dropdown-list-item menu-text"
+          >
+            {{ option }}
+          </li>
         </ul>
       </div>
     </div>

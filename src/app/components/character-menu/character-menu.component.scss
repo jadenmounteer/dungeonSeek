@@ -37,8 +37,29 @@
 }
 
 .dungeon-seek-dropdown-menu {
-  background-color: white;
-  width: 130px;
+  background-color: $menu-color;
+  border: 2px solid $dungeon-seek-light;
+  width: fit-content;
+  padding: 8px;
+  position: relative;
+  top: 7px;
+  left: 141px;
+}
+
+ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.dropdown-list-item {
+  color: $dungeon-seek-light;
+  transition: all 0.3s;
+  padding: 8px;
+}
+.dropdown-list-item:hover {
+  background-color: $dungeon-seek-light;
+  color: $dungeon-seek-less-light;
+  cursor: pointer;
 }
 
 .arrow {
