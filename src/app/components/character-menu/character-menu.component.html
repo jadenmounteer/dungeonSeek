@@ -17,9 +17,15 @@
           <app-character-stats [character]="character"></app-character-stats>
         </div>
       </div>
-      <div class="big-text dungeon-seek-dropdown-menu">
+      <div class="big-text dungeon-seek-dropdown-button">
         {{ currentMenu }}
         <i class="arrow down"></i>
+      </div>
+
+      <div class="dungeon-seek-dropdown-menu">
+        <ul>
+          <li *ngFor="let option of dropdownOptions">{{ option }}</li>
+        </ul>
       </div>
     </div>
   </div>

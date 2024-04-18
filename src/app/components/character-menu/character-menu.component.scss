@@ -22,7 +22,7 @@
   flex-direction: column;
 }
 
-.dungeon-seek-dropdown-menu {
+.dungeon-seek-dropdown-button {
   border: 2px solid $dungeon-seek-light;
   cursor: pointer;
   padding: 8px;
@@ -32,8 +32,13 @@
   margin-right: auto;
 }
 
-.dungeon-seek-dropdown-menu:hover {
+.dungeon-seek-dropdown-button:hover {
   background-color: $dungeon-seek-less-light;
+}
+
+.dungeon-seek-dropdown-menu {
+  background-color: white;
+  width: 130px;
 }
 
 .arrow {

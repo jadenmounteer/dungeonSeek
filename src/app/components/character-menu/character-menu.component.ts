@@ -6,6 +6,13 @@ import { CharacterProfileImageComponent } from '../character-profile-image/chara
 import { CommonModule } from '@angular/common';
 import { CharacterStatsComponent } from '../character-stats/character-stats.component';
 
+export type MenuType =
+  | 'Weapons'
+  | 'Items'
+  | 'Spells'
+  | 'Statuses'
+  | 'Campaign'
+  | 'Side-quests';
 @Component({
   selector: 'app-character-menu',
   standalone: true,
@@ -23,7 +30,14 @@ export class CharacterMenuComponent {
   @Input() character: Character | undefined;
   @Output() closeMenu = new EventEmitter<any>();
 
-  protected currentMenu: string = 'Inventory';
+  protected currentMenu: MenuType = 'Items';
+  protected dropdownOptions: MenuType[] = [
+    'Items',
+    'Weapons',
+    'Side-quests',
+    'Campaign',
+    'Statuses',
+  ];
 
   protected onCloseMenu() {
     this.closeMenu.emit();
