@@ -7,6 +7,9 @@ import { CommonModule } from '@angular/common';
 import { CharacterStatsComponent } from '../character-stats/character-stats.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
+import { WeaponCardInfo } from '../../types/weapon-card-info';
+import { WeaponCardService } from '../../services/weapon-card.service';
+import { ItemCardService } from '../../services/item-card.service';
 
 export type MenuType =
   | 'Weapons'
@@ -44,6 +47,13 @@ export class CharacterMenuComponent {
     'Campaign',
     'Statuses',
   ];
+
+  protected mapOfWeaponCardInfo: { [key: string]: WeaponCardInfo } = {};
+
+  constructor(
+    protected weaponCardService: WeaponCardService,
+    protected itemCardService: ItemCardService
+  ) {}
 
   protected onCloseMenu() {
     this.closeMenu.emit();
