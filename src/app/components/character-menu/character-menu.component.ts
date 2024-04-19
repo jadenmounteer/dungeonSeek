@@ -37,7 +37,7 @@ export class CharacterMenuComponent {
   @Input() character: Character | undefined;
   @Output() closeMenu = new EventEmitter<any>();
 
-  protected cardsLoading: boolean = true;
+  protected cardsLoading: boolean = false;
   protected dropdownOpen: boolean = false;
   protected currentMenu: MenuType = 'Items';
   protected dropdownOptions: MenuType[] = [

@@ -4,6 +4,8 @@ $card-border-radius: 25px;
   border-radius: $card-border-radius;
   min-width: 150px;
   min-height: 175px;
+  max-width: 150px;
+  max-height: 175px;
   background-image: url("../../assets/card-images/parchment-texture.jpeg");
   display: flex;
   justify-content: center;
