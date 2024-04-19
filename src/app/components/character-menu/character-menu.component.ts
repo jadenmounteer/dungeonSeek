@@ -5,6 +5,7 @@ import { MenuUnderlineComponent } from '../menu-underline/menu-underline.compone
 import { CharacterProfileImageComponent } from '../character-profile-image/character-profile-image.component';
 import { CommonModule } from '@angular/common';
 import { CharacterStatsComponent } from '../character-stats/character-stats.component';
+import { GameCardComponent } from '../game-card/game-card.component';
 
 export type MenuType =
   | 'Weapons'
@@ -22,6 +23,7 @@ export type MenuType =
     CharacterProfileImageComponent,
     CommonModule,
     CharacterStatsComponent,
+    GameCardComponent,
   ],
   templateUrl: './character-menu.component.html',
   styleUrl: './character-menu.component.scss',
