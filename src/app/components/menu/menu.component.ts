@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +15,18 @@ export class MenuComponent {
   @Output() closeMenu = new EventEmitter<any>();
   @Input() showCloseMenu: boolean = false;
 
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.disableBodyScroll();
+  }
   protected onCloseMenu() {
+    this.enableBodyScroll();
     this.closeMenu.emit();
+  }
+
+  protected enableBodyScroll() {
+    this.document.body.style.overflow = 'auto';
+  }
+  protected disableBodyScroll() {
+    this.document.body.style.overflow = 'hidden';
   }
 }
