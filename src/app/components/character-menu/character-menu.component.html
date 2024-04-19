@@ -39,13 +39,17 @@
       </ul>
     </div>
 
-    <div *ngIf="cardsLoading">
-      <app-loading-icon></app-loading-icon>
-    </div>
+    <div class="cards-section">
+      <div *ngIf="cardsLoading" class="cards-loading-icon-container">
+        <div>
+          <app-loading-icon></app-loading-icon>
+        </div>
+      </div>
 
-    <div *ngIf="currentMenu === 'Weapons'">
-      <div *ngFor="let weaponCard of character.characterMenu.weaponCards">
-        <app-game-card></app-game-card>
+      <div *ngIf="currentMenu === 'Weapons'">
+        <div *ngFor="let weaponCard of character.characterMenu.weaponCards">
+          <app-game-card></app-game-card>
+        </div>
       </div>
     </div>
   </div>

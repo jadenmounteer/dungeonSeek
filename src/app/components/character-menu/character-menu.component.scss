@@ -3,6 +3,7 @@
 .character-menu {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 .character-info {
@@ -80,4 +81,9 @@ ul {
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+
+.cards-loading-icon-container {
+  display: flex;
+  justify-content: center;
 }
