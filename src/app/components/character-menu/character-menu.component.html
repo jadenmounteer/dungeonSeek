@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <div *ngIf="currentMenu === 'Weapons'">
+      <div *ngIf="currentMenu === 'Weapons'" class="card-section">
         <div *ngFor="let weaponCard of character.characterMenu.weaponCards">
           <app-game-card
             [card]="weaponCardService.getCardInfo(weaponCard.cardName)"
@@ -57,7 +57,7 @@
         </div>
       </div>
 
-      <div *ngIf="currentMenu === 'Items'">
+      <div *ngIf="currentMenu === 'Items'" class="card-section">
         <div *ngFor="let itemCard of character.characterMenu.itemCards">
           <app-game-card
             [card]="itemCardService.getCardInfo(itemCard)"

@@ -91,3 +91,14 @@ ul {
   display: flex;
   justify-content: center;
 }
+
+.cards-section {
+  margin-left: auto;
+  margin-right: auto;
+}
+.card-section {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex-wrap: wrap;
+}
