@@ -9,12 +9,11 @@ $card-border-radius: 25px;
   border-radius: $card-border-radius;
   width: 200px;
   height: 300px;
-  gap: 8px;
+
   background-image: url("../../../assets/card-images/parchment-texture.jpeg");
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .card-image {
@@ -23,4 +22,6 @@ $card-border-radius: 25px;
 
 .card-image-wrapper {
   text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
 }
