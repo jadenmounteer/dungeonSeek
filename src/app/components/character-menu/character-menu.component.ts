@@ -6,6 +6,7 @@ import { CharacterProfileImageComponent } from '../character-profile-image/chara
 import { CommonModule } from '@angular/common';
 import { CharacterStatsComponent } from '../character-stats/character-stats.component';
 import { GameCardComponent } from '../game-card/game-card.component';
+import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
 
 export type MenuType =
   | 'Weapons'
@@ -24,6 +25,7 @@ export type MenuType =
     CommonModule,
     CharacterStatsComponent,
     GameCardComponent,
+    LoadingIconComponent,
   ],
   templateUrl: './character-menu.component.html',
   styleUrl: './character-menu.component.scss',
@@ -32,6 +34,7 @@ export class CharacterMenuComponent {
   @Input() character: Character | undefined;
   @Output() closeMenu = new EventEmitter<any>();
 
+  protected cardsLoading: boolean = true;
   protected dropdownOpen: boolean = false;
   protected currentMenu: MenuType = 'Items';
   protected dropdownOptions: MenuType[] = [

@@ -39,6 +39,10 @@
       </ul>
     </div>
 
+    <div *ngIf="cardsLoading">
+      <app-loading-icon></app-loading-icon>
+    </div>
+
     <div *ngIf="currentMenu === 'Weapons'">
       <div *ngFor="let weaponCard of character.characterMenu.weaponCards">
         <app-game-card></app-game-card>
