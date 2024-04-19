@@ -24,14 +24,19 @@
   flex-direction: column;
 }
 
+.dungeon-seek-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .dungeon-seek-dropdown-button {
   border: 2px solid $dungeon-seek-light;
   cursor: pointer;
   padding: 8px;
   transition: all 0.3s;
   max-width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .dungeon-seek-dropdown-button:hover {
@@ -43,9 +48,8 @@
   border: 2px solid $dungeon-seek-light;
   width: fit-content;
   padding: 8px;
-  position: relative;
-  top: 7px;
-  left: 141px;
+  position: absolute;
+  z-index: 9999;
 }
 
 ul {

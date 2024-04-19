@@ -16,27 +16,30 @@
         <app-character-stats [character]="character"></app-character-stats>
       </div>
     </div>
-    <div
-      class="big-text dungeon-seek-dropdown-button"
-      (click)="toggleDropdown()"
-    >
-      {{ currentMenu }}
-      <i class="arrow down" *ngIf="!dropdownOpen"></i>
-      <i class="arrow up" *ngIf="dropdownOpen"></i>
-    </div>
 
-    <div class="dungeon-seek-dropdown-menu" *ngIf="dropdownOpen">
-      <ul>
-        <li *ngFor="let option of dropdownOptions">
-          <span
-            *ngIf="option != currentMenu"
-            class="dropdown-list-item menu-text"
-            (click)="changeVisibleMenu(option)"
-          >
-            {{ option }}
-          </span>
-        </li>
-      </ul>
+    <div class="dungeon-seek-dropdown">
+      <div
+        class="big-text dungeon-seek-dropdown-button"
+        (click)="toggleDropdown()"
+      >
+        {{ currentMenu }}
+        <i class="arrow down" *ngIf="!dropdownOpen"></i>
+        <i class="arrow up" *ngIf="dropdownOpen"></i>
+      </div>
+
+      <div class="dungeon-seek-dropdown-menu" *ngIf="dropdownOpen">
+        <ul>
+          <li *ngFor="let option of dropdownOptions">
+            <span
+              *ngIf="option != currentMenu"
+              class="dropdown-list-item menu-text"
+              (click)="changeVisibleMenu(option)"
+            >
+              {{ option }}
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="cards-section">
