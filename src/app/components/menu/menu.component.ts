@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { CommonModule, DOCUMENT } from '@angular/common';
@@ -11,15 +18,19 @@ import { CommonModule, DOCUMENT } from '@angular/common';
   styleUrl: './menu.component.scss',
   animations: [fadeIn, fadeOut],
 })
-export class MenuComponent {
+export class MenuComponent implements OnDestroy {
   @Output() closeMenu = new EventEmitter<any>();
   @Input() showCloseMenu: boolean = false;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.disableBodyScroll();
   }
-  protected onCloseMenu() {
+
+  public ngOnDestroy() {
     this.enableBodyScroll();
+  }
+
+  protected onCloseMenu() {
     this.closeMenu.emit();
   }
 
