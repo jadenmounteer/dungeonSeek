@@ -103,3 +103,16 @@ ul {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+// Card hover effect found here: https://nestedsoftware.com/2019/11/05/card-with-expand-on-hover-effect-2ccm.200941.html
+
+app-game-card {
+  transition: all 0.5s ease; /* back to normal */
+}
+
+app-game-card:hover {
+  cursor: pointer;
+  // Do a cool card hover effect here
+  transform: translate3D(0, -1px, 0) scale(1.03);
+  transition: all 0.4s ease; /* zoom in */
+}
