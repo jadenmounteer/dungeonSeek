@@ -10,6 +10,7 @@ import { LoadingIconComponent } from '../loading-icon/loading-icon.component';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
 import { WeaponCardService } from '../../services/weapon-card.service';
 import { ItemCardService } from '../../services/item-card.service';
+import { fadeIn } from '../../animations/fade-in-animation';
 
 export type MenuType =
   | 'Weapons'
@@ -32,6 +33,7 @@ export type MenuType =
   ],
   templateUrl: './character-menu.component.html',
   styleUrl: './character-menu.component.scss',
+  animations: [fadeIn],
 })
 export class CharacterMenuComponent {
   @Input() character: Character | undefined;

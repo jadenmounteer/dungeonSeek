@@ -55,11 +55,13 @@
         @if(currentMenu === 'Weapons') { @for(weaponCard of
         character.characterMenu.weaponCards; track weaponCard){
         <app-game-card
+          @fadeIn
           [card]="weaponCardService.getCardInfo(weaponCard.cardName)"
         ></app-game-card>
         } } @else if(currentMenu === 'Items') { @for(itemCard of
         character.characterMenu.itemCards; track itemCard){
         <app-game-card
+          @fadeIn
           [card]="itemCardService.getCardInfo(itemCard)"
         ></app-game-card>
         } }
