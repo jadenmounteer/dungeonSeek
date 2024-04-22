@@ -29,6 +29,7 @@
       [location]="characterBeingControlledByClient?.currentLocation"
     ></app-location-info>
 
+    @defer(when showEventCard) {
     <!-- Only appears when you draw an event card -->
     <app-event-menu
       *ngIf="showEventCard"
@@ -37,21 +38,21 @@
       (closeCard)="closeCard()"
       (makeChoice)="makeChoice($event)"
     ></app-event-menu>
-
+    } @defer(when showItemCard) {
     <!-- Appears if you are viewing an item -->
     <app-item-menu
       *ngIf="showItemCard"
       [cardName]="cardName"
       (closeMenu)="addItemToPlayerInventory()"
     ></app-item-menu>
-
+    } @defer(when showWeaponCard) {
     <!-- Appears when you are viewing a weapon card -->
     <app-weapon-menu
       *ngIf="showWeaponCard"
       [cardName]="cardName"
       (closeMenu)="addWeaponToPlayerInventory()"
     ></app-weapon-menu>
-
+    } @defer(when showGoldCard){
     <!-- Appears when the character finds gold -->
     <app-gold-menu
       *ngIf="showGoldCard"
@@ -59,15 +60,18 @@
       (closeMenu)="addGoldToCharacter()"
     >
     </app-gold-menu>
+    }
 
-    <!-- Appears if you are viewing the character's menu -->
+    <!-- Defer the character menu using the Angular 17 syntax to lazy load a large component on a condition -->
+    @defer (when showCharacterMenu) {
+    <!-- Appears when you are viewing the character menu -->
     <app-character-menu
       *ngIf="showCharacterMenu"
       [character]="characterBeingControlledByClient"
       (closeMenu)="showCharacterMenu = false"
     >
     </app-character-menu>
-
+    } @defer (when currentCharacterRollingDice) {
     <app-dice-roll-dialog
       *ngIf="currentCharacterRollingDice"
       [data]="diceRollingData"
@@ -81,6 +85,7 @@
         currentCharacterRolledForEventCardThisTurn = true
       "
     ></app-dice-roll-dialog>
+    }
 
     <span *ngFor="let character of allCharactersCurrentlyInGameSession">
       <div
