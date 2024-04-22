@@ -3,8 +3,8 @@
   top: 0;
   left: 0;
   z-index: 9999;
-  height: 100vh;
-  width: 100vw;
+  height: 100%; // Needs to be percent so it is responsive and changes when the user zooms in or out.
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.817);
 
   // Make it scroll vertically
