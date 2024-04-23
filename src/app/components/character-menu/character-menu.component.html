@@ -57,7 +57,7 @@
         <app-game-card
           @fadeIn
           [card]="weaponCardService.getCardInfo(weaponCard.cardName)"
-          (click)="showWeaponMenu = true; weaponInfoToShow = weaponCard"
+          (click)="showWeaponMenu = true; weaponEquipmentToShow = weaponCard"
         ></app-game-card>
         } } @else if(currentMenu === 'Items') { @for(itemCard of
         character.characterMenu.itemCards; track itemCard){
@@ -73,7 +73,8 @@
 
 <!-- The sub menus that appear -->
 <app-character-menu-weapon-menu
-  *ngIf="showWeaponMenu && weaponInfoToShow"
-  [weaponEquipment]="weaponInfoToShow"
+  *ngIf="showWeaponMenu && weaponEquipmentToShow"
+  [weaponEquipment]="weaponEquipmentToShow"
   (closeMenu)="showWeaponMenu = false"
+  (toggleEquip)="showWeaponMenu = false; toggleWeaponEquip()"
 ></app-character-menu-weapon-menu>

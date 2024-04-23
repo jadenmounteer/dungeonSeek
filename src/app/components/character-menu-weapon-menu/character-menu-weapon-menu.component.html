@@ -31,4 +31,21 @@
       <!-- We don't show the usedAgainstSelfDescription because this is a weapon -->
     </div>
   </div>
+
+  <div class="buttons-section">
+    <div
+      class="choice-button"
+      *ngIf="!weaponEquipment.equipped"
+      (click)="onToggleEquip()"
+    >
+      Equip
+    </div>
+    <div
+      class="choice-button"
+      *ngIf="weaponEquipment.equipped"
+      (click)="onToggleEquip()"
+    >
+      Unequip
+    </div>
+  </div>
 </app-menu>

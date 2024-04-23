@@ -42,7 +42,7 @@ export class CharacterMenuComponent {
   @Output() closeMenu = new EventEmitter<any>();
 
   protected showWeaponMenu: boolean = true;
-  protected weaponInfoToShow: CharacterMenuEquipment | undefined;
+  protected weaponEquipmentToShow: CharacterMenuEquipment | undefined;
 
   protected cardsLoading: boolean = false;
   protected dropdownOpen: boolean = false;
@@ -73,5 +73,12 @@ export class CharacterMenuComponent {
   protected changeVisibleMenu(newMenu: MenuType) {
     this.currentMenu = newMenu;
     this.toggleDropdown();
+  }
+
+  protected toggleWeaponEquip(): void {
+    if (this.weaponEquipmentToShow) {
+      this.weaponEquipmentToShow.equipped =
+        !this.weaponEquipmentToShow.equipped;
+    }
   }
 }

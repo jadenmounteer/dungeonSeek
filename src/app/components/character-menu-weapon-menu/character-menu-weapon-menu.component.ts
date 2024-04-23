@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CharacterMenuWeaponMenuComponent implements OnInit {
   @Output() closeMenu = new EventEmitter<any>();
+  @Output() toggleEquip = new EventEmitter<any>();
   @Input() weaponEquipment!: CharacterMenuEquipment;
 
   protected weaponCardInfo: WeaponCardInfo | undefined;
@@ -58,5 +59,9 @@ export class CharacterMenuWeaponMenuComponent implements OnInit {
 
   protected onCloseMenu() {
     this.closeMenu.emit();
+  }
+
+  protected onToggleEquip() {
+    this.toggleEquip.emit();
   }
 }
