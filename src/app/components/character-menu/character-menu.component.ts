@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Character, CharacterMenuEquipment } from '../../types/character';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
@@ -37,7 +37,7 @@ export type MenuType =
   styleUrl: './character-menu.component.scss',
   animations: [fadeIn],
 })
-export class CharacterMenuComponent {
+export class CharacterMenuComponent implements OnInit {
   @Input() character: Character | undefined;
   @Output() closeMenu = new EventEmitter<any>();
 
@@ -62,6 +62,13 @@ export class CharacterMenuComponent {
     protected itemCardService: ItemCardService
   ) {}
 
+  public ngOnInit(): void {
+    if (this.character) {
+      this.sortEquipmentCards(this.character.characterMenu.weaponCards);
+      // TODO sort the other equippment cards
+    }
+  }
+
   protected onCloseMenu() {
     this.closeMenu.emit();
   }
@@ -79,6 +86,23 @@ export class CharacterMenuComponent {
     if (this.weaponEquipmentToShow) {
       this.weaponEquipmentToShow.equipped =
         !this.weaponEquipmentToShow.equipped;
+
+      if (this.character) {
+        this.sortEquipmentCards(this.character.characterMenu.weaponCards);
+      }
     }
+  }
+
+  private sortEquipmentCards(cardsToSort: CharacterMenuEquipment[]): void {
+    cardsToSort.sort((a, b) => {
+      // Shows equipped cards first
+      if (a.equipped && !b.equipped) {
+        return -1;
+      }
+      if (!a.equipped && b.equipped) {
+        return 1;
+      }
+      return 0;
+    });
   }
 }
