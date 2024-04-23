@@ -5,6 +5,7 @@ import { MenuComponent } from '../menu/menu.component';
 import { CharacterMenuEquipment } from '../../types/character';
 import { WeaponCardService } from '../../services/weapon-card.service';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
+import { CardAbility, actionAbilitiesMap } from '../../types/card-ability';
 
 @Component({
   selector: 'app-character-menu-weapon-menu',
@@ -19,6 +20,7 @@ export class CharacterMenuWeaponMenuComponent implements OnInit {
   @Input() weaponEquipment!: CharacterMenuEquipment;
 
   protected weaponCardInfo: WeaponCardInfo | undefined;
+  protected weaponAbility: CardAbility | undefined;
 
   constructor(private weaponCardService: WeaponCardService) {}
 
@@ -28,6 +30,11 @@ export class CharacterMenuWeaponMenuComponent implements OnInit {
     }
 
     this.getWeaponCardInfo();
+    if (this.weaponCardInfo && this.weaponCardInfo.cardAbility) {
+      this.weaponAbility = this.setWeaponAbility(
+        this.weaponCardInfo.cardAbility
+      );
+    }
   }
 
   private getWeaponCardInfo() {
@@ -40,6 +47,11 @@ export class CharacterMenuWeaponMenuComponent implements OnInit {
         `${this.weaponEquipment.cardName} card not found in weapon deck`
       );
     }
+  }
+
+  private setWeaponAbility(abilityName: string): CardAbility {
+    // Get the card ability according to the map
+    return actionAbilitiesMap[abilityName];
   }
 
   protected onCloseMenu() {
