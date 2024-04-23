@@ -33,6 +33,7 @@ import { LootService } from '../../services/loot.service';
 import { CardRewardType } from '../../types/card-reward-type';
 import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
 import { CharacterMenuComponent } from '../character-menu/character-menu.component';
+import { ConfirmationMenuComponent } from '../confirmation-menu/confirmation-menu.component';
 
 @Component({
   selector: 'app-game',
@@ -51,6 +52,7 @@ import { CharacterMenuComponent } from '../character-menu/character-menu.compone
     WeaponMenuComponent,
     GoldMenuComponent,
     CharacterMenuComponent,
+    ConfirmationMenuComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
@@ -81,6 +83,9 @@ export class GameComponent implements OnInit, OnDestroy {
   protected showGoldCard = false;
   protected showCharacterMenu = false;
   protected goldFoundAmount: number = 0;
+
+  protected showConfirmationMenu = false;
+  protected confirmationMessage: string = '';
 
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
@@ -561,31 +566,26 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected endMovement() {
+  protected confirmEndMovement() {
     if (this.characterBeingControlledByClient!.movementSpeed ?? 0 > 0) {
-      // TODO Show a confirmation dialog telling the user they won't be able to move anymore if they roll for an event card.
-      const data: ConfirmationDialogData = {
-        title: undefined,
-        message: `You can still move ${
-          this.characterBeingControlledByClient!.movementSpeed
-        } spaces. Are you sure you want to stop moving?`,
-      };
-      const dialogRef = this.dialog.open(ConfirmationDialogueComponent, {
-        data,
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result === 'yes') {
-          this.characterBeingControlledByClient!.movementSpeed = 0;
+      this.showConfirmationMenu = true;
+      this.confirmationMessage = `You can still move ${
+        this.characterBeingControlledByClient!.movementSpeed
+      } spaces. Are you sure you want to stop moving?`;
+      // dialogRef.afterClosed().subscribe((result) => {
+      //   if (result === 'yes') {
+      //     this.characterBeingControlledByClient!.movementSpeed = 0;
 
-          this.rollForEventCard();
-        } else {
-          this.gameSessionService.scrollToCharacterBeingControlledByClient(
-            this.characterBeingControlledByClient
-          );
-        }
-      });
-    } else {
-      this.rollForEventCard();
+      //     this.rollForEventCard();
+      //   } else {
+      //     this.gameSessionService.scrollToCharacterBeingControlledByClient(
+      //       this.characterBeingControlledByClient
+      //     );
+      //   }
+      // });
+      // } else {
+      //   this.rollForEventCard();
+      // }
     }
   }
 
