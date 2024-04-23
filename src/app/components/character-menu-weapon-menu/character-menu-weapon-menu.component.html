@@ -5,5 +5,30 @@
   [subMenu]="true"
   *ngIf="weaponCardInfo"
 >
-  <h1 class="big-text">Weapon menu works!</h1>
+  <div class="card-info">
+    <h1 class="menu-title">
+      {{ weaponCardInfo.name }}
+    </h1>
+
+    <app-menu-underline></app-menu-underline>
+    <div class="card-description">
+      <p class="menu-text">{{ weaponCardInfo.description }}</p>
+      <p class="menu-text">Type: {{ weaponCardInfo.type }}</p>
+      <p class="menu-text">Value: {{ weaponCardInfo.fullPrice }}</p>
+      <p class="menu-text">Attack: {{ weaponCardInfo.stats.attack }}</p>
+      <p class="menu-text">Defense: {{ weaponCardInfo.stats.defense }}</p>
+      <p class="menu-text">Speed: {{ weaponCardInfo.stats.speed }}</p>
+    </div>
+
+    <div class="card-ability-section" *ngIf="weaponAbility">
+      <h2 class="menu-sub-title">Ability</h2>
+      <app-menu-underline></app-menu-underline>
+
+      <p class="menu-text">{{ weaponAbility.name }}</p>
+      <p class="menu-text">
+        {{ weaponAbility.usedAgainstOpponentDescription }}
+      </p>
+      <!-- We don't show the usedAgainstSelfDescription because this is a weapon -->
+    </div>
+  </div>
 </app-menu>

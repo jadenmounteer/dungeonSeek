@@ -6,11 +6,13 @@ import { CharacterMenuEquipment } from '../../types/character';
 import { WeaponCardService } from '../../services/weapon-card.service';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
 import { CardAbility, actionAbilitiesMap } from '../../types/card-ability';
+import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-character-menu-weapon-menu',
   standalone: true,
-  imports: [MenuComponent],
+  imports: [MenuComponent, MenuUnderlineComponent, CommonModule],
   templateUrl: './character-menu-weapon-menu.component.html',
   styleUrl: './character-menu-weapon-menu.component.scss',
   animations: [fadeIn, fadeOut],
