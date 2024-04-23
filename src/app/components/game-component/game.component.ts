@@ -86,6 +86,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected showConfirmationMenu = false;
   protected confirmationMessage: string = '';
+  protected confirmMenuCallback: () => void = () => {};
 
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
@@ -572,21 +573,17 @@ export class GameComponent implements OnInit, OnDestroy {
       this.confirmationMessage = `You can still move ${
         this.characterBeingControlledByClient!.movementSpeed
       } spaces. Are you sure you want to stop moving?`;
-      // dialogRef.afterClosed().subscribe((result) => {
-      //   if (result === 'yes') {
-      //     this.characterBeingControlledByClient!.movementSpeed = 0;
 
-      //     this.rollForEventCard();
-      //   } else {
-      //     this.gameSessionService.scrollToCharacterBeingControlledByClient(
-      //       this.characterBeingControlledByClient
-      //     );
-      //   }
-      // });
-      // } else {
-      //   this.rollForEventCard();
-      // }
+      this.confirmMenuCallback = this.endMovementEarly;
+    } else {
+      this.rollForEventCard();
     }
+  }
+
+  private endMovementEarly() {
+    this.characterBeingControlledByClient!.movementSpeed = 0;
+
+    this.rollForEventCard();
   }
 
   /**

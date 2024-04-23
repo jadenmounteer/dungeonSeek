@@ -91,6 +91,7 @@
       *ngIf="showConfirmationMenu"
       [message]="confirmationMessage"
       (closeMenu)="showConfirmationMenu = false"
+      (confirm)="showConfirmationMenu = false; confirmMenuCallback()"
     />
     }
 
