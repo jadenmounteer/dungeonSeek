@@ -94,6 +94,15 @@ export class CharacterMenuComponent implements OnInit {
       this.weaponEquipmentToShow.equipped =
         !this.weaponEquipmentToShow.equipped;
 
+      // If we equipped the weapon, unequip all other weapons
+      if (this.weaponEquipmentToShow.equipped) {
+        this.character?.characterMenu.weaponCards.forEach((card) => {
+          if (card !== this.weaponEquipmentToShow) {
+            card.equipped = false;
+          }
+        });
+      }
+
       if (this.character) {
         // Save the character to the database
         this.characterService.updateCharacter(
