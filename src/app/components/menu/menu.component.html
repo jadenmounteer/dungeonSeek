@@ -1,4 +1,9 @@
-<div class="menu-background" @fadeIn @fadeOut>
+<div
+  class="menu-background"
+  @fadeIn
+  @fadeOut
+  [ngClass]="{ 'full-screen': fullScreen, 'not-full-screen': !fullScreen }"
+>
   <div
     class="close-menu-icon big-text"
     *ngIf="showCloseMenu"
@@ -8,3 +13,7 @@
   </div>
   <ng-content></ng-content>
 </div>
+
+@if(!fullScreen) {
+<div class="menu-overlay"></div>
+}

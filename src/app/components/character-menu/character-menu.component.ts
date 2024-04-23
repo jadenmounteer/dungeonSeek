@@ -11,6 +11,7 @@ import { WeaponCardInfo } from '../../types/weapon-card-info';
 import { WeaponCardService } from '../../services/weapon-card.service';
 import { ItemCardService } from '../../services/item-card.service';
 import { fadeIn } from '../../animations/fade-in-animation';
+import { CharacterMenuWeaponMenuComponent } from '../character-menu-weapon-menu/character-menu-weapon-menu.component';
 
 export type MenuType =
   | 'Weapons'
@@ -30,6 +31,7 @@ export type MenuType =
     CharacterStatsComponent,
     GameCardComponent,
     LoadingIconComponent,
+    CharacterMenuWeaponMenuComponent,
   ],
   templateUrl: './character-menu.component.html',
   styleUrl: './character-menu.component.scss',

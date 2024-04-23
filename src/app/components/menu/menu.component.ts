@@ -21,6 +21,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 export class MenuComponent implements OnDestroy {
   @Output() closeMenu = new EventEmitter<any>();
   @Input() showCloseMenu: boolean = false;
+  @Input() fullScreen: boolean = true;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.disableBodyScroll();

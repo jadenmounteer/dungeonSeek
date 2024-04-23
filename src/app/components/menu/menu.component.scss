@@ -2,13 +2,34 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
-  height: 100%; // Needs to be percent so it is responsive and changes when the user zooms in or out.
-  width: 100%;
+  z-index: 9998;
+
   background-color: rgba(0, 0, 0, 0.817);
 
   // Make it scroll vertically
   overflow-y: auto;
+}
+
+// The overlay that appears behind the non-full screen overlay
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9998;
+  background-color: rgba(0, 0, 0, 0.417);
+}
+.not-full-screen {
+  // Center it
+  z-index: 9999;
+  height: 50%;
+  width: 50%;
+}
+
+.full-screen {
+  height: 100%; // Needs to be percent so it is responsive and changes when the user zooms in or out.
+  width: 100%;
 }
 
 .close-menu-icon {
