@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { MenuComponent } from '../menu/menu.component';
+import { CharacterMenuEquipment } from '../../types/character';
 
 @Component({
   selector: 'app-character-menu-weapon-menu',
@@ -11,8 +12,15 @@ import { MenuComponent } from '../menu/menu.component';
   styleUrl: './character-menu-weapon-menu.component.scss',
   animations: [fadeIn, fadeOut],
 })
-export class CharacterMenuWeaponMenuComponent {
+export class CharacterMenuWeaponMenuComponent implements OnInit {
   @Output() closeMenu = new EventEmitter<any>();
+  @Input() weaponEquipment!: CharacterMenuEquipment;
+
+  ngOnInit(): void {
+    if (!this.weaponEquipment) {
+      throw new Error('Weapon Equipment is required');
+    }
+  }
 
   protected onCloseMenu() {
     this.closeMenu.emit();

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Character } from '../../types/character';
+import { Character, CharacterMenuEquipment } from '../../types/character';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 import { CharacterProfileImageComponent } from '../character-profile-image/character-profile-image.component';
@@ -40,6 +40,9 @@ export type MenuType =
 export class CharacterMenuComponent {
   @Input() character: Character | undefined;
   @Output() closeMenu = new EventEmitter<any>();
+
+  protected showWeaponMenu: boolean = true;
+  protected weaponInfoToShow: CharacterMenuEquipment | undefined;
 
   protected cardsLoading: boolean = false;
   protected dropdownOpen: boolean = false;
