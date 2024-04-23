@@ -1,3 +1,7 @@
-<app-menu [fullScreen]="false">
+<app-menu
+  [fullScreen]="false"
+  [showCloseMenu]="true"
+  (closeMenu)="onCloseMenu()"
+>
   <h1 class="big-text">Weapon menu works!</h1>
 </app-menu>

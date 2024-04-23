@@ -1,3 +1,5 @@
+@import "../../../styles.scss";
+
 .menu-background {
   position: fixed;
   top: 0;
@@ -22,9 +24,16 @@
 }
 .not-full-screen {
   // Center it
+
   z-index: 9999;
-  height: 50%;
-  width: 50%;
+  height: 100%;
+  width: 100%;
+  @include for-tablet-landscape-up {
+    height: 50%;
+    width: 50%;
+    top: 25%;
+    left: 25%;
+  }
 }
 
 .full-screen {
