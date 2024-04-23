@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
 import { CommonModule } from '@angular/common';
-import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 
 @Component({
   selector: 'app-confirmation-menu',
   standalone: true,
-  imports: [MenuComponent, CommonModule, MenuUnderlineComponent],
+  imports: [MenuComponent, CommonModule],
   templateUrl: './confirmation-menu.component.html',
   styleUrl: './confirmation-menu.component.scss',
 })
@@ -17,5 +16,9 @@ export class ConfirmationMenuComponent {
 
   protected onCloseMenu() {
     this.closeMenu.emit();
+  }
+
+  protected onConfirm() {
+    this.confirm.emit();
   }
 }

@@ -5,5 +5,10 @@
 >
   <div class="menu-content">
     <p class="big-text">{{ message }}</p>
+
+    <div class="buttons-section">
+      <div class="choice-button" (click)="onConfirm()">Yes</div>
+      <div class="choice-button" (click)="onCloseMenu()">No</div>
+    </div>
   </div>
 </app-menu>
