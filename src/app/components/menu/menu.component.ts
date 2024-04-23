@@ -22,13 +22,16 @@ export class MenuComponent implements OnDestroy {
   @Output() closeMenu = new EventEmitter<any>();
   @Input() showCloseMenu: boolean = false;
   @Input() fullScreen: boolean = true;
+  @Input() subMenu: boolean = false; // If this menu was opened in another menu
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.disableBodyScroll();
   }
 
   public ngOnDestroy() {
-    this.enableBodyScroll();
+    if (!this.subMenu) {
+      this.enableBodyScroll();
+    }
   }
 
   protected onCloseMenu() {
