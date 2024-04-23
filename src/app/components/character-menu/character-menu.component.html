@@ -53,11 +53,12 @@
 
       <div class="card-section">
         @if(currentMenu === 'Weapons') { @for(weaponCard of
-        character.characterMenu.weaponCards; track weaponCard){
+        character.characterMenu.weaponCards; track weaponCard; ){
         <app-game-card
           @fadeIn
           [card]="weaponCardService.getCardInfo(weaponCard.cardName)"
           (click)="showWeaponMenu = true; weaponEquipmentToShow = weaponCard"
+          [equipped]="weaponCard.equipped"
         ></app-game-card>
         } } @else if(currentMenu === 'Items') { @for(itemCard of
         character.characterMenu.itemCards; track itemCard){

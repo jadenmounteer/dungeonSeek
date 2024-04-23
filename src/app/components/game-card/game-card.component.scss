@@ -25,3 +25,18 @@ $card-border-radius: 25px;
   margin-top: auto;
   margin-bottom: auto;
 }
+
+.equipped-icon {
+  // Make a green circle around the icon
+  border: 2px solid $success-color;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -16px;
+  right: -5px;
+  background-color: $success-color;
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+}
