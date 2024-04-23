@@ -69,6 +69,7 @@
       *ngIf="showCharacterMenu"
       [character]="characterBeingControlledByClient"
       (closeMenu)="showCharacterMenu = false"
+      [gameSessionID]="gameSession.id"
     >
     </app-character-menu>
     } @defer (when currentCharacterRollingDice) {

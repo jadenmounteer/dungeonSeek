@@ -12,6 +12,7 @@ import { WeaponCardService } from '../../services/weapon-card.service';
 import { ItemCardService } from '../../services/item-card.service';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { CharacterMenuWeaponMenuComponent } from '../character-menu-weapon-menu/character-menu-weapon-menu.component';
+import { CharacterService } from '../../services/character/character.service';
 
 export type MenuType =
   | 'Weapons'
@@ -39,6 +40,7 @@ export type MenuType =
 })
 export class CharacterMenuComponent implements OnInit {
   @Input() character: Character | undefined;
+  @Input() gameSessionID!: string;
   @Output() closeMenu = new EventEmitter<any>();
 
   protected showWeaponMenu: boolean = true;
@@ -59,10 +61,15 @@ export class CharacterMenuComponent implements OnInit {
 
   constructor(
     protected weaponCardService: WeaponCardService,
-    protected itemCardService: ItemCardService
+    protected itemCardService: ItemCardService,
+    protected characterService: CharacterService
   ) {}
 
   public ngOnInit(): void {
+    if (!this.gameSessionID) {
+      throw new Error('Game session ID not provided');
+    }
+
     if (this.character) {
       this.sortEquipmentCards(this.character.characterMenu.weaponCards);
       // TODO sort the other equippment cards
@@ -88,6 +95,12 @@ export class CharacterMenuComponent implements OnInit {
         !this.weaponEquipmentToShow.equipped;
 
       if (this.character) {
+        // Save the character to the database
+        this.characterService.updateCharacter(
+          this.character,
+          this.gameSessionID
+        );
+
         this.sortEquipmentCards(this.character.characterMenu.weaponCards);
       }
     }
