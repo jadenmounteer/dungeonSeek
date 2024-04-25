@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { PlayerComponent } from '../characters/player/player.component';
 import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
 import { LocationNode, LocationService } from '../../services/location-service';
@@ -16,8 +16,6 @@ import { GameFooterComponent } from '../game-footer-legacy/game-footer.component
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { DeckName, Outcome } from '../../types/card-deck';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogueComponent } from '../confirmation-dialogue/confirmation-dialogue.component';
-import type { ConfirmationDialogData } from '../confirmation-dialogue/confirmation-dialogue.component';
 import {
   DiceRollDialogComponent,
   DiceRollDialogData,
@@ -81,7 +79,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected showWeaponCard = false;
   protected showItemCard = false;
   protected showGoldCard = false;
-  protected showCharacterMenu = false;
+  protected showCharacterMenu = signal(false);
   protected goldFoundAmount: number = 0;
 
   protected showConfirmationMenu = false;
@@ -603,6 +601,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected toggleCharacterMenu(): void {
-    this.showCharacterMenu = !this.showCharacterMenu;
+    // update the signal
+    this.showCharacterMenu.update((oldValue) => !oldValue);
   }
 }

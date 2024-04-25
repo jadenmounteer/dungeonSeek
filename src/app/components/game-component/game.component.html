@@ -63,12 +63,12 @@
     }
 
     <!-- Defer the character menu using the Angular 17 syntax to lazy load a large component on a condition -->
-    @defer (when showCharacterMenu) {
+    @defer (when showCharacterMenu()) {
     <!-- Appears when you are viewing the character menu -->
     <app-character-menu
-      *ngIf="showCharacterMenu"
+      *ngIf="showCharacterMenu()"
       [character]="characterBeingControlledByClient"
-      (closeMenu)="showCharacterMenu = false"
+      (closeMenu)="toggleCharacterMenu()"
       [gameSessionID]="gameSession.id"
     >
     </app-character-menu>
