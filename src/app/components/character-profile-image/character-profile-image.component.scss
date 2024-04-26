@@ -1,22 +1,24 @@
 @import "../../../styles.scss";
 
+$image-width: 1;
+
 .character-image-wrapper {
   cursor: pointer;
   // wrap it in a circle
   border-radius: 50%;
   overflow: hidden;
-  width: 5vw;
-  height: 10vh;
-  border: 0.1vw solid grey;
-  transition: box-shadow 0.3s ease-in-out, border 0.3s ease-in-out;
+  width: $image-width;
+  height: $image-width;
+  border: 1px solid grey;
+  transition: all 0.3s ease-in-out;
 }
 
 .character-image-wrapper:hover {
   // Give the gold color a misty effect
-  border: 0.1vw solid gold;
-  box-shadow: 0 0 1vw gold;
+  border: 1px solid gold;
+  box-shadow: 0 0 10px gold;
 }
 .character-image {
-  width: 5vw;
+  width: $image-width;
   @include unselectable();
 }
