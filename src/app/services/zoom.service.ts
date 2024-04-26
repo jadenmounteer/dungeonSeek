@@ -11,7 +11,7 @@ export class ZoomService {
 
   // Define the maximum and minimum zoom levels
   private readonly MAX_ZOOM: number = 2; // 200%
-  private readonly MIN_ZOOM: number = 0.5; // 50%
+  private readonly MIN_ZOOM: number = 0.2; // 50%
 
   // BehaviorSubjects for the gestures
   public zoomOutSubject = new BehaviorSubject<number>(0);
