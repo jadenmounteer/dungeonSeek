@@ -8,11 +8,19 @@
   <div class="card-image-wrapper">
     <img class="card-image" [src]="card.imgUrl" />
   </div>
+</div>
 
-  <div class="game-card" *ngIf="gold">
-    <div class="card-image-wrapper">
-      <img class="card-image" src="../../../assets/game-pieces/coin.png" />
-    </div>
+<div
+  class="game-card"
+  *ngIf="gold"
+  [ngClass]="{ 'card-just-found': cardJustFound, clickable: clickable }"
+>
+  <div class="card-image-wrapper">
+    <img class="card-image" src="../../../assets/game-pieces/coin.png" />
+  </div>
+
+  <div class="card-title big-text">
+    <h1>{{ goldAmount }}</h1>
   </div>
 </div>
 
