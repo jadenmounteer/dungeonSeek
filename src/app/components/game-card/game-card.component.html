@@ -1,4 +1,8 @@
-<div class="game-card" *ngIf="card">
+<div
+  class="game-card"
+  *ngIf="card"
+  [ngClass]="{ 'card-just-fount': cardJustFound }"
+>
   <div class="card-title big-text">{{ card.name }}</div>
 
   <div class="card-image-wrapper">

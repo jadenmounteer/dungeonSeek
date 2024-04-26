@@ -40,3 +40,17 @@ $card-border-radius: 25px;
   justify-content: center;
   padding: 2px;
 }
+
+.game-card {
+  transition: all 0.5s ease; /* back to normal */
+  // Make it smaller than the original size
+  transform: scale(0.8);
+}
+
+// Card hover effect found here: https://nestedsoftware.com/2019/11/05/card-with-expand-on-hover-effect-2ccm.200941.html
+.game-card:hover {
+  cursor: pointer;
+  // Do a cool card hover effect here
+  transform: translate3D(0, -1px, 0) scale(0.9);
+  transition: all 0.4s ease; /* zoom in */
+}
