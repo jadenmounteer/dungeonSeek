@@ -75,7 +75,8 @@
 <!-- The sub menus that appear -->
 <app-character-menu-weapon-menu
   *ngIf="showWeaponMenu && weaponEquipmentToShow"
-  [weaponEquipment]="weaponEquipmentToShow"
+  [cardName]="weaponEquipmentToShow.cardName"
+  [equipped]="weaponEquipmentToShow.equipped"
   (closeMenu)="showWeaponMenu = false"
   (toggleEquip)="showWeaponMenu = false; toggleWeaponEquip()"
 ></app-character-menu-weapon-menu>

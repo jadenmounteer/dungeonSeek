@@ -6,6 +6,7 @@ import { MenuComponent } from '../menu/menu.component';
 import { WeaponCardInfoViewComponent } from '../weapon-card-info-view/weapon-card-info-view.component';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
 import { WeaponCardService } from '../../services/weapon-card.service';
+import { CharacterMenuWeaponMenuComponent } from '../character-menu-weapon-menu/character-menu-weapon-menu.component';
 
 @Component({
   selector: 'app-weapon-menu',
@@ -15,6 +16,7 @@ import { WeaponCardService } from '../../services/weapon-card.service';
     MenuComponent,
     GameCardComponent,
     WeaponCardInfoViewComponent,
+    CharacterMenuWeaponMenuComponent,
   ],
   templateUrl: './weapon-menu.component.html',
   styleUrl: './weapon-menu.component.scss',
@@ -23,6 +25,7 @@ export class WeaponMenuComponent implements OnInit {
   @Input() public cardName: string | undefined;
   @Output() public closeMenu = new EventEmitter<any>();
   protected card: WeaponCardInfo | undefined;
+  protected showWeaponMenu = false;
 
   constructor(private weaponCardService: WeaponCardService) {}
 
