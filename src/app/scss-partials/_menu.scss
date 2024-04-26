@@ -29,9 +29,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 24px;
 }
 .card-drawn-content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  align-items: center;
 }
