@@ -1,20 +1,23 @@
 <app-menu>
-  <div class="menu-content">
-    <div class="game-card-wrapper">
-      <app-game-card
-        [card]="card"
-        [cardJustFound]="true"
-        (click)="showWeaponMenu = true"
-      ></app-game-card>
+  <div class="menu-wrapper">
+    <div class="menu-content">
+      <h1 class="big-text">Weapon Found!</h1>
+      <div class="game-card-wrapper">
+        <app-game-card
+          [card]="card"
+          [cardJustFound]="true"
+          (click)="showWeaponMenu = true"
+        ></app-game-card>
+      </div>
+
+      <app-weapon-card-info-view
+        *ngIf="showWeaponMenu && card"
+        [cardInfo]="card"
+        (closeMenu)="showWeaponMenu = false"
+        [viewOnly]="true"
+      ></app-weapon-card-info-view>
+
+      <div class="choice-button" (click)="onCloseMenu()">Add to inventory</div>
     </div>
-
-    <app-weapon-card-info-view
-      *ngIf="showWeaponMenu && card"
-      [cardInfo]="card"
-      (closeMenu)="showWeaponMenu = false"
-      [viewOnly]="true"
-    ></app-weapon-card-info-view>
-
-    <div class="choice-button" (click)="onCloseMenu()">Add to inventory</div>
   </div>
 </app-menu>
