@@ -9,6 +9,10 @@ export class ZoomService {
 
   private scalePercentage: number = 1; // The percentage of the scale in decimal form
 
+  // Define the maximum and minimum zoom levels
+  private readonly MAX_ZOOM: number = 2; // 200%
+  private readonly MIN_ZOOM: number = 0.4; // 40%
+
   // BehaviorSubjects for the gestures
   public moveFingersTogether = new BehaviorSubject<number>(0);
   public moveFingersApart = new BehaviorSubject<number>(0);
@@ -33,13 +37,22 @@ export class ZoomService {
       const dy = event.touches[0].clientY - event.touches[1].clientY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      // Use the distance to calculate the amount we need to add to the style.transform.scale
-      this.scalePercentage += (distance - this.initialDistance) / 1000;
+      // Calculate the new scale percentage
+      const newScalePercentage =
+        this.scalePercentage + (distance - this.initialDistance) / 1000;
 
-      if (distance < this.initialDistance) {
-        this.fingersTogether();
-      } else if (distance > this.initialDistance) {
-        this.fingersApart();
+      // Check if the new scale percentage is within the allowed range
+      if (
+        newScalePercentage >= this.MIN_ZOOM &&
+        newScalePercentage <= this.MAX_ZOOM
+      ) {
+        this.scalePercentage = newScalePercentage;
+
+        if (distance < this.initialDistance) {
+          this.fingersTogether();
+        } else if (distance > this.initialDistance) {
+          this.fingersApart();
+        }
       }
 
       this.initialDistance = distance;

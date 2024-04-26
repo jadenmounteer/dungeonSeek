@@ -6,6 +6,7 @@
   height: $game-board-height;
   position: relative;
   @include unselectable();
+  transition: transform 0.3s ease;
 }
 
 .board-wrapper {
