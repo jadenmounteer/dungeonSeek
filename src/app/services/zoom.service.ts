@@ -1,13 +1,17 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GestureService {
-  @Output() moveFingersTogether = new EventEmitter<void>();
-  @Output() moveFingersApart = new EventEmitter<void>();
-
+export class ZoomService {
   private initialDistance: number = 0;
+
+  private scalePercentage: number = 1; // The percentage of the scale in decimal form
+
+  // BehaviorSubjects for the gestures
+  public moveFingersTogether = new BehaviorSubject<number>(0);
+  public moveFingersApart = new BehaviorSubject<number>(0);
 
   constructor() {
     // Add event listeners
@@ -29,6 +33,9 @@ export class GestureService {
       const dy = event.touches[0].clientY - event.touches[1].clientY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
+      // Use the distance to calculate the amount we need to add to the style.transform.scale
+      this.scalePercentage += (distance - this.initialDistance) / 1000;
+
       if (distance < this.initialDistance) {
         this.fingersTogether();
       } else if (distance > this.initialDistance) {
@@ -40,10 +47,10 @@ export class GestureService {
   }
 
   private fingersTogether(): void {
-    this.moveFingersTogether.emit();
+    this.moveFingersTogether.next(this.scalePercentage);
   }
 
   private fingersApart(): void {
-    this.moveFingersApart.emit();
+    this.moveFingersApart.next(this.scalePercentage);
   }
 }

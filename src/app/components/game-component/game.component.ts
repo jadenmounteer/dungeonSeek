@@ -32,7 +32,7 @@ import { CardRewardType } from '../../types/card-reward-type';
 import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
 import { CharacterMenuComponent } from '../character-menu/character-menu.component';
 import { ConfirmationMenuComponent } from '../confirmation-menu/confirmation-menu.component';
-import { GestureService } from '../../services/gesture.service';
+import { ZoomService } from '../../services/zoom.service';
 
 @Component({
   selector: 'app-game',
@@ -90,6 +90,11 @@ export class GameComponent implements OnInit, OnDestroy {
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
 
+  private growGameBoardSub: Subscription;
+  private shrinkGameBoardSub: Subscription;
+
+  protected gameBoardScaleTestVar = '';
+
   // LOOT SUBSCRIPTIONS
   protected drawWeaponSubscription =
     this.lootService.drawWeaponSubject.subscribe((lootType) =>
@@ -114,9 +119,18 @@ export class GameComponent implements OnInit, OnDestroy {
     private weaponCardService: WeaponCardService,
     private itemCardService: ItemCardService,
     private lootService: LootService,
-    private gestureService: GestureService
+    protected zoomService: ZoomService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
+
+    this.shrinkGameBoardSub = this.zoomService.moveFingersTogether.subscribe(
+      (scalePercentage) => {
+        this.onShrinkGameBoard(scalePercentage);
+      }
+    );
+    this.growGameBoardSub = this.zoomService.moveFingersApart.subscribe(
+      (scalePercentage) => this.onGrowGameBoard(scalePercentage)
+    );
 
     this.gameSessionSub = this.gameSessionService
       .getGameSession(gameSessionID)
@@ -207,6 +221,8 @@ export class GameComponent implements OnInit, OnDestroy {
     this.drawWeaponSubscription.unsubscribe();
     this.drawItemSubscription.unsubscribe();
     this.drawGoldSubscription.unsubscribe();
+    this.growGameBoardSub.unsubscribe();
+    this.shrinkGameBoardSub.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameSession.playerIDs.length > 1) {
@@ -605,5 +621,25 @@ export class GameComponent implements OnInit, OnDestroy {
   protected toggleCharacterMenu(): void {
     // update the signal
     this.showCharacterMenu.update((oldValue) => !oldValue);
+  }
+
+  protected onShrinkGameBoard(scalePercentage: number) {
+    // Scale the game board down
+    const gameBoard = document.getElementById('game-board');
+
+    if (gameBoard) {
+      gameBoard.style.transform = `scale(${scalePercentage})`;
+      this.gameBoardScaleTestVar = gameBoard.style.transform;
+    }
+  }
+
+  protected onGrowGameBoard(scalePercentage: number) {
+    // Scale the game board up
+    const gameBoard = document.getElementById('game-board');
+
+    if (gameBoard) {
+      gameBoard.style.transform = `scale(${scalePercentage})`;
+      this.gameBoardScaleTestVar = gameBoard.style.transform;
+    }
   }
 }
