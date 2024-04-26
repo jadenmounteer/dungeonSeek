@@ -1,1 +1,8 @@
 @import "../../../styles.scss";
+
+.card-drawn-content {
+  max-width: 90%;
+  @include for-tablet-landscape-up {
+    max-width: 50%;
+  }
+}
