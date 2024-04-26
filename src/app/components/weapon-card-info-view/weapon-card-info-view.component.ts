@@ -2,22 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { MenuComponent } from '../menu/menu.component';
-import { CharacterMenuEquipment } from '../../types/character';
-import { WeaponCardService } from '../../services/weapon-card.service';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
 import { CardAbility, actionAbilitiesMap } from '../../types/card-ability';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-character-menu-weapon-menu',
+  selector: 'app-weapon-card-info-view',
   standalone: true,
   imports: [MenuComponent, MenuUnderlineComponent, CommonModule],
-  templateUrl: './character-menu-weapon-menu.component.html',
-  styleUrl: './character-menu-weapon-menu.component.scss',
+  templateUrl: './weapon-card-info-view.html',
+  styleUrl: './weapon-card-info-view.scss',
   animations: [fadeIn, fadeOut],
 })
-export class CharacterMenuWeaponMenuComponent implements OnInit {
+export class WeaponCardInfoViewComponent implements OnInit {
   @Output() closeMenu = new EventEmitter<any>();
   @Output() toggleEquip = new EventEmitter<any>();
   @Input() cardInfo!: WeaponCardInfo;
@@ -26,7 +24,7 @@ export class CharacterMenuWeaponMenuComponent implements OnInit {
 
   protected weaponAbility: CardAbility | undefined;
 
-  constructor(private weaponCardService: WeaponCardService) {}
+  constructor() {}
 
   ngOnInit(): void {
     if (!this.cardInfo) {

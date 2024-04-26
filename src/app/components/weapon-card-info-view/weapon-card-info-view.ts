@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CharacterMenuWeaponMenuComponent } from './character-menu-weapon-menu.component';
+import { CharacterMenuWeaponMenuComponent } from './weapon-card-info-view.component';
 
 describe('CharacterMenuWeaponMenuComponent', () => {
   let component: CharacterMenuWeaponMenuComponent;
@@ -8,10 +8,9 @@ describe('CharacterMenuWeaponMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CharacterMenuWeaponMenuComponent]
-    })
-    .compileComponents();
-    
+      imports: [CharacterMenuWeaponMenuComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(CharacterMenuWeaponMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

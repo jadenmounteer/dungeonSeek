@@ -5,7 +5,7 @@ import { GameCardComponent } from '../game-card/game-card.component';
 import { MenuComponent } from '../menu/menu.component';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
 import { WeaponCardService } from '../../services/weapon-card.service';
-import { CharacterMenuWeaponMenuComponent } from '../character-menu-weapon-menu/character-menu-weapon-menu.component';
+import { WeaponCardInfoViewComponent } from '../weapon-card-info-view/weapon-card-info-view.component';
 
 @Component({
   selector: 'app-weapon-menu',
@@ -14,7 +14,7 @@ import { CharacterMenuWeaponMenuComponent } from '../character-menu-weapon-menu/
     CommonModule,
     MenuComponent,
     GameCardComponent,
-    CharacterMenuWeaponMenuComponent,
+    WeaponCardInfoViewComponent,
   ],
   templateUrl: './weapon-menu.component.html',
   styleUrl: './weapon-menu.component.scss',

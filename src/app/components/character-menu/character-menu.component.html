@@ -73,10 +73,10 @@
 </app-menu>
 
 <!-- The sub menus that appear -->
-<app-character-menu-weapon-menu
+<app-weapon-card-info-view
   *ngIf="showWeaponMenu && weaponEquipmentToShow && weaponCardInfoToShow"
   [cardInfo]="weaponCardInfoToShow"
   [equipped]="weaponEquipmentToShow.equipped"
   (closeMenu)="showWeaponMenu = false"
   (toggleEquip)="showWeaponMenu = false; toggleWeaponEquip()"
-></app-character-menu-weapon-menu>
+></app-weapon-card-info-view>
