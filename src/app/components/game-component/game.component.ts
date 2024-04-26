@@ -32,6 +32,7 @@ import { CardRewardType } from '../../types/card-reward-type';
 import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
 import { CharacterMenuComponent } from '../character-menu/character-menu.component';
 import { ConfirmationMenuComponent } from '../confirmation-menu/confirmation-menu.component';
+import { GestureService } from '../../services/gesture.service';
 
 @Component({
   selector: 'app-game',
@@ -112,7 +113,8 @@ export class GameComponent implements OnInit, OnDestroy {
     private eventCardService: EventCardService,
     private weaponCardService: WeaponCardService,
     private itemCardService: ItemCardService,
-    private lootService: LootService
+    private lootService: LootService,
+    private gestureService: GestureService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
