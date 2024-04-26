@@ -3,11 +3,12 @@ import { ItemCardInfo } from '../../types/item-card-info';
 import { CardAbility, actionAbilitiesMap } from '../../types/card-ability';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 import { CommonModule } from '@angular/common';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-item-card-info-view',
   standalone: true,
-  imports: [CommonModule, MenuUnderlineComponent],
+  imports: [CommonModule, MenuUnderlineComponent, MenuComponent],
   templateUrl: './item-card-info-view.component.html',
   styleUrl: './item-card-info-view.component.scss',
 })

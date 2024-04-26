@@ -3,12 +3,9 @@
   [showCloseMenu]="true"
   (closeMenu)="onCloseMenu()"
   [subMenu]="true"
-  *ngIf="cardInfo"
 >
   <div class="card-info">
-    <h1 class="menu-title">
-      {{ cardInfo.name }}
-    </h1>
+    <h1 class="menu-title">{{ cardInfo.name }}</h1>
 
     <app-menu-underline></app-menu-underline>
     <div class="card-description">

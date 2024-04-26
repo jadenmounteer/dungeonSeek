@@ -65,6 +65,7 @@
         <app-game-card
           @fadeIn
           [card]="itemCardService.getCardInfo(itemCard)"
+          (click)="openItemMenu(itemCard)"
         ></app-game-card>
         } }
       </div>
@@ -80,3 +81,11 @@
   (closeMenu)="showWeaponMenu = false"
   (toggleEquip)="showWeaponMenu = false; toggleWeaponEquip()"
 ></app-weapon-card-info-view>
+
+<app-item-card-info-view
+  *ngIf="showItemMenu && itemCardInfoToShow && itemEquipmentToShow"
+  [cardInfo]="itemCardInfoToShow"
+  (closeCard)="showItemMenu = false"
+  (useItem)="showItemMenu = false; useItem()"
+>
+</app-item-card-info-view>

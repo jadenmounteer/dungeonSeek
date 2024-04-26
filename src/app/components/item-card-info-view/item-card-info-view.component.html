@@ -1,28 +1,35 @@
-<div class="card-info">
-  <h1 class="menu-title">
-    {{ cardInfo.name }}
-  </h1>
+<app-menu
+  [fullScreen]="false"
+  [showCloseMenu]="true"
+  (closeMenu)="onCloseCard()"
+  [subMenu]="true"
+>
+  <div class="card-info">
+    <h1 class="menu-title">
+      {{ cardInfo.name }}
+    </h1>
 
-  <app-menu-underline></app-menu-underline>
-  <div class="card-description">
-    <p class="menu-text">{{ cardInfo.description }}</p>
-    <p class="menu-text">Type: {{ cardInfo.type }}</p>
-    <p class="menu-text">Value: {{ cardInfo.fullPrice }}</p>
-    <p class="menu-text">Attack: {{ cardInfo.stats.attack }}</p>
-    <p class="menu-text">Defense: {{ cardInfo.stats.defense }}</p>
-    <p class="menu-text">Speed: {{ cardInfo.stats.speed }}</p>
-  </div>
-
-  <div class="card-ability-section" *ngIf="itemAbility">
-    <h2 class="menu-sub-title">Ability</h2>
     <app-menu-underline></app-menu-underline>
+    <div class="card-description">
+      <p class="menu-text">{{ cardInfo.description }}</p>
+      <p class="menu-text">Type: {{ cardInfo.type }}</p>
+      <p class="menu-text">Value: {{ cardInfo.fullPrice }}</p>
+      <p class="menu-text">Attack: {{ cardInfo.stats.attack }}</p>
+      <p class="menu-text">Defense: {{ cardInfo.stats.defense }}</p>
+      <p class="menu-text">Speed: {{ cardInfo.stats.speed }}</p>
+    </div>
 
-    <p class="menu-text">{{ itemAbility.name }}</p>
-    <p class="menu-text">{{ itemAbility.usedAgainstOpponentDescription }}</p>
-    <!-- We don't show the usedAgainstSelfDescription because this is a weapon -->
-  </div>
+    <div class="card-ability-section" *ngIf="itemAbility">
+      <h2 class="menu-sub-title">Ability</h2>
+      <app-menu-underline></app-menu-underline>
 
-  <div class="buttons-section">
-    <div class="choice-button" (click)="onUse()">Use</div>
+      <p class="menu-text">{{ itemAbility.name }}</p>
+      <p class="menu-text">{{ itemAbility.usedAgainstOpponentDescription }}</p>
+      <!-- We don't show the usedAgainstSelfDescription because this is a weapon -->
+    </div>
+
+    <div class="buttons-section" *ngIf="!viewOnly">
+      <div class="choice-button" (click)="onUse()">Use</div>
+    </div>
   </div>
-</div>
+</app-menu>

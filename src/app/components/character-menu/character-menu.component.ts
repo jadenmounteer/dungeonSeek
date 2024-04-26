@@ -13,6 +13,8 @@ import { ItemCardService } from '../../services/item-card.service';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { CharacterService } from '../../services/character/character.service';
 import { WeaponCardInfoViewComponent } from '../weapon-card-info-view/weapon-card-info-view.component';
+import { ItemCardInfoViewComponent } from '../item-card-info-view/item-card-info-view.component';
+import { ItemCardInfo } from '../../types/item-card-info';
 
 export type MenuType =
   | 'Weapons'
@@ -33,6 +35,7 @@ export type MenuType =
     GameCardComponent,
     LoadingIconComponent,
     WeaponCardInfoViewComponent,
+    ItemCardInfoViewComponent,
   ],
   templateUrl: './character-menu.component.html',
   styleUrl: './character-menu.component.scss',
@@ -46,6 +49,10 @@ export class CharacterMenuComponent implements OnInit {
   protected showWeaponMenu: boolean = false;
   protected weaponEquipmentToShow: CharacterMenuEquipment | undefined;
   protected weaponCardInfoToShow: WeaponCardInfo | undefined;
+
+  protected showItemMenu: boolean = false;
+  protected itemEquipmentToShow: string | undefined;
+  protected itemCardInfoToShow: ItemCardInfo | undefined;
 
   protected cardsLoading: boolean = false;
   protected dropdownOpen: boolean = false;
@@ -98,6 +105,18 @@ export class CharacterMenuComponent implements OnInit {
     );
 
     this.showWeaponMenu = true;
+  }
+
+  protected openItemMenu(itemCard: string) {
+    this.itemEquipmentToShow = itemCard;
+
+    this.itemCardInfoToShow = this.itemCardService.getCardInfo(itemCard);
+
+    this.showItemMenu = true;
+  }
+
+  protected useItem() {
+    // TODO implement this
   }
 
   protected toggleWeaponEquip(): void {
