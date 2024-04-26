@@ -123,12 +123,12 @@ export class GameComponent implements OnInit, OnDestroy {
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
 
-    this.shrinkGameBoardSub = this.zoomService.moveFingersTogether.subscribe(
+    this.shrinkGameBoardSub = this.zoomService.zoomOutSubject.subscribe(
       (scalePercentage) => {
         this.onShrinkGameBoard(scalePercentage);
       }
     );
-    this.growGameBoardSub = this.zoomService.moveFingersApart.subscribe(
+    this.growGameBoardSub = this.zoomService.zoomInSubject.subscribe(
       (scalePercentage) => this.onGrowGameBoard(scalePercentage)
     );
 
@@ -621,6 +621,16 @@ export class GameComponent implements OnInit, OnDestroy {
   protected toggleCharacterMenu(): void {
     // update the signal
     this.showCharacterMenu.update((oldValue) => !oldValue);
+  }
+
+  protected zoomIn(): void {
+    const newZoomValue = this.zoomService.zoomIn();
+    this.onGrowGameBoard(newZoomValue);
+  }
+
+  protected zoomOut(): void {
+    const newZoomValue = this.zoomService.zoomOut();
+    this.onShrinkGameBoard(newZoomValue);
   }
 
   protected onShrinkGameBoard(scalePercentage: number) {

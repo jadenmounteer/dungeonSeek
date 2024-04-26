@@ -122,6 +122,24 @@
   z-index: 999;
 }
 
+.zoom-buttons-section {
+  // put it in the top right corner of the screen
+  position: fixed;
+  top: 0;
+  right: 16px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: $dungeon-seek-light;
+}
+
+.zoom-button {
+  cursor: pointer;
+  font-size: 4em;
+}
+
 app-character-info {
   position: fixed;
   top: 0;
