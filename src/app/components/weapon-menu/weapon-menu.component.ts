@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { GameCardComponent } from '../game-card/game-card.component';
 import { MenuComponent } from '../menu/menu.component';
-import { WeaponCardInfoViewComponent } from '../weapon-card-info-view/weapon-card-info-view.component';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
 import { WeaponCardService } from '../../services/weapon-card.service';
 import { CharacterMenuWeaponMenuComponent } from '../character-menu-weapon-menu/character-menu-weapon-menu.component';
@@ -15,7 +14,6 @@ import { CharacterMenuWeaponMenuComponent } from '../character-menu-weapon-menu/
     CommonModule,
     MenuComponent,
     GameCardComponent,
-    WeaponCardInfoViewComponent,
     CharacterMenuWeaponMenuComponent,
   ],
   templateUrl: './weapon-menu.component.html',
