@@ -20,8 +20,8 @@ export class ZoomService {
   constructor() {}
 
   public zoomIn(): number {
-    // Zoom the screen in 10% increments
-    const newZoomValue = this.scalePercentage + 0.1;
+    // Zoom the screen in 15% increments
+    const newZoomValue = this.scalePercentage + 0.2;
 
     if (newZoomValue <= this.MAX_ZOOM) {
       this.scalePercentage += 0.1;
@@ -32,7 +32,7 @@ export class ZoomService {
 
   public zoomOut(): number {
     // Zoom the screen out 10% increments
-    const newZoomValue = this.scalePercentage - 0.1;
+    const newZoomValue = this.scalePercentage - 0.2;
 
     if (newZoomValue >= this.MIN_ZOOM) {
       this.scalePercentage -= 0.1;

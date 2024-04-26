@@ -6,7 +6,10 @@
   height: $game-board-height;
   position: relative;
   @include unselectable();
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
+
+  // Disable the double tap zoom on iphone
+  touch-action: manipulation;
 }
 
 .board-wrapper {
