@@ -1,50 +1,52 @@
 <app-menu *ngIf="initialized">
-  <div class="menu-content">
-    <h2 class="menu-title">{{ data?.title }}</h2>
-    <app-menu-underline></app-menu-underline>
+  <div class="card-drawn-wrapper">
+    <div class="card-drawn-content">
+      <h2 class="menu-title">{{ data?.title }}</h2>
+      <app-menu-underline></app-menu-underline>
 
-    <p class="menu-text" *ngIf="sum === 0">{{ data?.message }}</p>
+      <p class="menu-text" *ngIf="sum === 0">{{ data?.message }}</p>
 
-    <div class="dice-section">
-      <div class="die" *ngFor="let die of dice">
-        <!-- Show the number of dots according to the dice value -->
+      <div class="dice-section">
+        <div class="die" *ngFor="let die of dice">
+          <!-- Show the number of dots according to the dice value -->
 
-        <div
-          *ngFor="let dot of die.dots"
-          class="die-dot"
-          [style.--top]="dot.topPosition + '%'"
-          [style.--left]="dot.leftPosition + '%'"
-        ></div>
+          <div
+            *ngFor="let dot of die.dots"
+            class="die-dot"
+            [style.--top]="dot.topPosition + '%'"
+            [style.--left]="dot.leftPosition + '%'"
+          ></div>
+        </div>
       </div>
-    </div>
 
-    <div class="sum-section">
-      <p *ngIf="rolledDice" class="menu-text">You rolled a {{ sum }}</p>
-    </div>
+      <div class="sum-section">
+        <p *ngIf="rolledDice" class="menu-text">You rolled a {{ sum }}</p>
+      </div>
 
-    <div
-      class="choice-button"
-      (click)="onRoll()"
-      cdkFocusInitial
-      *ngIf="!rolledDice"
-    >
-      Roll
-    </div>
-    <div
-      class="choice-button"
-      (click)="OnSuccessClose()"
-      cdkFocusInitial
-      *ngIf="rolledDice && inTargetRange"
-    >
-      {{ data?.closeButtonName }}
-    </div>
-    <div
-      class="choice-button"
-      (click)="onClose()"
-      cdkFocusInitial
-      *ngIf="rolledDice && !inTargetRange"
-    >
-      Close
+      <div
+        class="choice-button"
+        (click)="onRoll()"
+        cdkFocusInitial
+        *ngIf="!rolledDice"
+      >
+        Roll
+      </div>
+      <div
+        class="choice-button"
+        (click)="OnSuccessClose()"
+        cdkFocusInitial
+        *ngIf="rolledDice && inTargetRange"
+      >
+        {{ data?.closeButtonName }}
+      </div>
+      <div
+        class="choice-button"
+        (click)="onClose()"
+        cdkFocusInitial
+        *ngIf="rolledDice && !inTargetRange"
+      >
+        Close
+      </div>
     </div>
   </div>
 </app-menu>
