@@ -3,21 +3,21 @@
   [showCloseMenu]="true"
   (closeMenu)="onCloseMenu()"
   [subMenu]="true"
-  *ngIf="weaponCardInfo"
+  *ngIf="cardInfo"
 >
   <div class="card-info">
     <h1 class="menu-title">
-      {{ weaponCardInfo.name }}
+      {{ cardInfo.name }}
     </h1>
 
     <app-menu-underline></app-menu-underline>
     <div class="card-description">
-      <p class="menu-text">{{ weaponCardInfo.description }}</p>
-      <p class="menu-text">Type: {{ weaponCardInfo.type }}</p>
-      <p class="menu-text">Value: {{ weaponCardInfo.fullPrice }}</p>
-      <p class="menu-text">Attack: {{ weaponCardInfo.stats.attack }}</p>
-      <p class="menu-text">Defense: {{ weaponCardInfo.stats.defense }}</p>
-      <p class="menu-text">Speed: {{ weaponCardInfo.stats.speed }}</p>
+      <p class="menu-text">{{ cardInfo.description }}</p>
+      <p class="menu-text">Type: {{ cardInfo.type }}</p>
+      <p class="menu-text">Value: {{ cardInfo.fullPrice }}</p>
+      <p class="menu-text">Attack: {{ cardInfo.stats.attack }}</p>
+      <p class="menu-text">Defense: {{ cardInfo.stats.defense }}</p>
+      <p class="menu-text">Speed: {{ cardInfo.stats.speed }}</p>
     </div>
 
     <div class="card-ability-section" *ngIf="weaponAbility">

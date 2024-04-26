@@ -43,8 +43,9 @@ export class CharacterMenuComponent implements OnInit {
   @Input() gameSessionID!: string;
   @Output() closeMenu = new EventEmitter<any>();
 
-  protected showWeaponMenu: boolean = true;
+  protected showWeaponMenu: boolean = false;
   protected weaponEquipmentToShow: CharacterMenuEquipment | undefined;
+  protected weaponCardInfoToShow: WeaponCardInfo | undefined;
 
   protected cardsLoading: boolean = false;
   protected dropdownOpen: boolean = false;
@@ -87,6 +88,16 @@ export class CharacterMenuComponent implements OnInit {
   protected changeVisibleMenu(newMenu: MenuType) {
     this.currentMenu = newMenu;
     this.toggleDropdown();
+  }
+
+  protected openWeaponMenu(weaponCard: CharacterMenuEquipment) {
+    this.weaponEquipmentToShow = weaponCard;
+
+    this.weaponCardInfoToShow = this.weaponCardService.getCardInfo(
+      weaponCard.cardName
+    );
+
+    this.showWeaponMenu = true;
   }
 
   protected toggleWeaponEquip(): void {

@@ -20,33 +20,21 @@ import { CommonModule } from '@angular/common';
 export class CharacterMenuWeaponMenuComponent implements OnInit {
   @Output() closeMenu = new EventEmitter<any>();
   @Output() toggleEquip = new EventEmitter<any>();
-  @Input() cardName!: string;
+  @Input() cardInfo!: WeaponCardInfo;
   @Input() equipped: boolean = false;
   @Input() viewOnly: boolean = false; // If true, the menu will not have the action buttons.
 
-  protected weaponCardInfo: WeaponCardInfo | undefined;
   protected weaponAbility: CardAbility | undefined;
 
   constructor(private weaponCardService: WeaponCardService) {}
 
   ngOnInit(): void {
-    if (!this.cardName) {
-      throw new Error('Card name is required');
+    if (!this.cardInfo) {
+      throw new Error('Weapon card info is required.');
     }
 
-    this.getWeaponCardInfo();
-    if (this.weaponCardInfo && this.weaponCardInfo.cardAbility) {
-      this.weaponAbility = this.setWeaponAbility(
-        this.weaponCardInfo.cardAbility
-      );
-    }
-  }
-
-  private getWeaponCardInfo() {
-    this.weaponCardInfo = this.weaponCardService.getCardInfo(this.cardName);
-
-    if (!this.weaponCardInfo) {
-      throw new Error(`${this.cardName} card not found in weapon deck`);
+    if (this.cardInfo.cardAbility) {
+      this.weaponAbility = this.setWeaponAbility(this.cardInfo.cardAbility);
     }
   }
 

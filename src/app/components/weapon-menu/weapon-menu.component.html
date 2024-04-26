@@ -8,8 +8,8 @@
     </div>
 
     <app-character-menu-weapon-menu
-      *ngIf="showWeaponMenu && cardName"
-      [cardName]="cardName"
+      *ngIf="showWeaponMenu && card"
+      [cardInfo]="card"
       (closeMenu)="showWeaponMenu = false"
       [viewOnly]="true"
     ></app-character-menu-weapon-menu>
