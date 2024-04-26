@@ -41,8 +41,9 @@ export class LootService {
 
   public drawLootCard(lootType: CardRewardType): void {
     // const randomNumber = this.pickANumberBetween(1, 3);
+    this.drawGoldSubject.next(5);
 
-    this.drawItemSubject.next(lootType);
+    // this.drawItemSubject.next(lootType);
     // this.drawWeaponSubject.next(lootType);
     // if (randomNumber === 1) {
     //   this.drawWeaponSubject.next(lootType);
@@ -51,7 +52,7 @@ export class LootService {
     // } else {
     //   // Give the player gold
     //   const goldAmount = this.getAmountOfGold(lootType);
-    //   this.drawGoldSubject.next(goldAmount);
+    // this.drawGoldSubject.next(goldAmount);
     // }
   }
 }

@@ -16,6 +16,7 @@ export class GameCardComponent implements OnInit {
   @Input() gold: boolean = false; // If this is a gold card, show the gold icon
   @Input() equipped: boolean = false; // If equipment is equipped.
   @Input() cardJustFound: boolean = false; // If the card was just found, style it differently
+  @Input() clickable: boolean = true; // If the card is clickable
 
   ngOnInit(): void {
     if (this.card && this.gold) {

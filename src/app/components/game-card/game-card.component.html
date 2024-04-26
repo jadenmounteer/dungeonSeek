@@ -1,7 +1,7 @@
 <div
   class="game-card"
   *ngIf="card"
-  [ngClass]="{ 'card-just-found': cardJustFound }"
+  [ngClass]="{ 'card-just-found': cardJustFound, clickable: clickable }"
 >
   <div class="card-title big-text">{{ card.name }}</div>
 
