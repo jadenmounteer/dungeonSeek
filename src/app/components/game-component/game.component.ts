@@ -95,6 +95,9 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected gameBoardScaleTestVar = '';
 
+  protected pinchZoomInSub: Subscription;
+  protected pinchZoomOutSub: Subscription;
+
   // LOOT SUBSCRIPTIONS
   protected drawWeaponSubscription =
     this.lootService.drawWeaponSubject.subscribe((lootType) =>
@@ -122,6 +125,16 @@ export class GameComponent implements OnInit, OnDestroy {
     protected zoomService: ZoomService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
+
+    this.pinchZoomInSub = this.zoomService.moveFingersApart.subscribe(
+      (scalePercentage) => {
+        this.onGrowGameBoard(scalePercentage);
+      }
+    );
+
+    this.pinchZoomOutSub = this.zoomService.moveFingersTogether.subscribe(
+      (scalePercentage) => this.onShrinkGameBoard(scalePercentage)
+    );
 
     this.shrinkGameBoardSub = this.zoomService.zoomOutSubject.subscribe(
       (scalePercentage) => {
@@ -223,6 +236,8 @@ export class GameComponent implements OnInit, OnDestroy {
     this.drawGoldSubscription.unsubscribe();
     this.growGameBoardSub.unsubscribe();
     this.shrinkGameBoardSub.unsubscribe();
+    this.pinchZoomInSub.unsubscribe();
+    this.pinchZoomOutSub.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameSession.playerIDs.length > 1) {

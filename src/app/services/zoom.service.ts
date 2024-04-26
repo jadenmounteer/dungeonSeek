@@ -14,14 +14,57 @@ export class ZoomService {
   private readonly MIN_ZOOM: number = 0.2; // 50%
 
   // BehaviorSubjects for the gestures
+  public moveFingersTogether = new BehaviorSubject<number>(0);
+  public moveFingersApart = new BehaviorSubject<number>(0);
+
+  // BehaviorSubjects for the gestures
   public zoomOutSubject = new BehaviorSubject<number>(0);
   public zoomInSubject = new BehaviorSubject<number>(0);
 
-  constructor() {}
+  constructor() {
+    // Add event listeners for pinch gestures
+    document.addEventListener('touchstart', this.onTouchStart.bind(this));
+    document.addEventListener('touchmove', this.onTouchMove.bind(this));
+  }
 
-  public zoomIn(): number {
+  private onTouchStart(event: TouchEvent): void {
+    if (event.touches.length === 2) {
+      const dx = event.touches[0].clientX - event.touches[1].clientX;
+      const dy = event.touches[0].clientY - event.touches[1].clientY;
+      this.initialDistance = Math.sqrt(dx * dx + dy * dy);
+    }
+  }
+
+  private onTouchMove(event: TouchEvent): void {
+    if (event.touches.length === 2) {
+      const dx = event.touches[0].clientX - event.touches[1].clientX;
+      const dy = event.touches[0].clientY - event.touches[1].clientY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < this.initialDistance) {
+        this.scalePercentage = this.zoomOut(0.06);
+        this.fingersTogether();
+      } else if (distance > this.initialDistance) {
+        // Use the distance to calculate the amount we need to add to the style.transform.scale
+        this.scalePercentage = this.zoomIn(0.06);
+        this.fingersApart();
+      }
+
+      this.initialDistance = distance;
+    }
+  }
+
+  private fingersTogether(): void {
+    this.moveFingersTogether.next(this.scalePercentage);
+  }
+
+  private fingersApart(): void {
+    this.moveFingersApart.next(this.scalePercentage);
+  }
+
+  public zoomIn(incrementPercentage: number = 0.3): number {
     // Zoom the screen in 15% increments
-    const newZoomValue = this.scalePercentage + 0.2;
+    const newZoomValue = this.scalePercentage + incrementPercentage;
 
     if (newZoomValue <= this.MAX_ZOOM) {
       this.scalePercentage += 0.1;
@@ -30,9 +73,9 @@ export class ZoomService {
     return this.scalePercentage;
   }
 
-  public zoomOut(): number {
+  public zoomOut(decrementPercentage: number = 0.3): number {
     // Zoom the screen out 10% increments
-    const newZoomValue = this.scalePercentage - 0.2;
+    const newZoomValue = this.scalePercentage - decrementPercentage;
 
     if (newZoomValue >= this.MIN_ZOOM) {
       this.scalePercentage -= 0.1;
