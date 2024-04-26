@@ -9,8 +9,7 @@
         "description": "You do something...",
         "outcome": "SUBTRACT_GOLD"
       }
-    ],
-    "imgUrl": "assets/card-images/road-event.png"
+    ]
   },
   {
     "name": "The Lost",
@@ -26,8 +25,7 @@
         "description": "Or you could do this...",
         "outcome": "SUBTRACT_GOLD"
       }
-    ],
-    "imgUrl": "assets/card-images/road-event.png"
+    ]
   },
   {
     "name": "The Bandit",
@@ -39,8 +37,7 @@
         "description": "You do something...",
         "outcome": "SUBTRACT_GOLD"
       }
-    ],
-    "imgUrl": "assets/card-images/road-event.png"
+    ]
   },
   {
     "name": "The Merchant",
@@ -56,8 +53,7 @@
         "description": "Or you could do this...",
         "outcome": "SUBTRACT_GOLD"
       }
-    ],
-    "imgUrl": "assets/card-images/road-event.png"
+    ]
   },
   {
     "name": "The Caravan",
@@ -69,7 +65,6 @@
         "description": "You do something...",
         "outcome": "SUBTRACT_GOLD"
       }
-    ],
-    "imgUrl": "assets/card-images/road-event.png"
+    ]
   }
 ]

@@ -9,8 +9,7 @@
         "description": "You do something...",
         "outcome": "SUBTRACT_GOLD"
       }
-    ],
-    "imgUrl": "assets/card-images/city-event.png"
+    ]
   },
   {
     "name": "Rumors of Giant Raids in Mullin",
@@ -22,8 +21,7 @@
         "description": "You do something...",
         "outcome": "SUBTRACT_GOLD"
       }
-    ],
-    "imgUrl": "assets/card-images/city-event.png"
+    ]
   },
   {
     "name": "Pestered by Shopkeeper",
@@ -35,7 +33,6 @@
         "description": "You do something...",
         "outcome": "SUBTRACT_GOLD"
       }
-    ],
-    "imgUrl": "assets/card-images/city-event.png"
+    ]
   }
 ]
