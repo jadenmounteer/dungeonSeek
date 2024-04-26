@@ -181,6 +181,11 @@
   }
 
   <div class="game-buttons-section" *ngIf="!currentCharacterRollingDice">
+    <div class="zoom-buttons-section">
+      <!-- TODO Make these font awesome icons -->
+      <div class="zoom-button" (click)="zoomIn()">+</div>
+      <div class="zoom-button" (click)="zoomOut()">-</div>
+    </div>
     <span *ngIf="characterBeingControlledByClient?.movementSpeed != undefined">
       <div
         class="game-button"
@@ -201,11 +206,5 @@
         End Turn
       </div>
     </span>
-  </div>
-
-  <div class="zoom-buttons-section">
-    <!-- TODO Make these font awesome icons -->
-    <div class="zoom-button" (click)="zoomIn()">+</div>
-    <div class="zoom-button" (click)="zoomOut()">-</div>
   </div>
 </div>

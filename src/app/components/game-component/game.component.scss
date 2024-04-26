@@ -120,24 +120,26 @@
   bottom: 0;
   right: 16px;
   z-index: 999;
+  display: flex;
+  flex-direction: column;
 }
 
 .zoom-buttons-section {
-  // put it in the top right corner of the screen
-  position: fixed;
-  top: 0;
-  right: 16px;
   z-index: 999;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   color: $dungeon-seek-light;
+
+  margin-left: auto;
+  // Align the buttons to the right of the flexbox
 }
 
 .zoom-button {
   cursor: pointer;
   font-size: 4em;
+  @include unselectable();
 }
 
 app-character-info {
