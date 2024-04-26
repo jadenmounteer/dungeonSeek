@@ -12,13 +12,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './item-card-info-view.component.scss',
 })
 export class ItemCardInfoViewComponent implements OnInit {
-  @Input() public card: ItemCardInfo | undefined;
+  @Input() public cardInfo!: ItemCardInfo;
+  @Input() public viewOnly: boolean = false; // If true, the menu will not have the action buttons.
   @Output() public closeCard = new EventEmitter<any>();
+  @Output() useItem = new EventEmitter<any>();
+
   protected itemAbility: CardAbility | undefined;
 
   ngOnInit(): void {
-    if (this.card?.cardAbility) {
-      this.itemAbility = this.setItemAbility(this.card.cardAbility);
+    if (!this.cardInfo) {
+      throw new Error('Item card info is required.');
+    }
+
+    if (this.cardInfo?.cardAbility) {
+      this.itemAbility = this.setItemAbility(this.cardInfo.cardAbility);
     }
   }
 
@@ -29,5 +36,9 @@ export class ItemCardInfoViewComponent implements OnInit {
 
   protected onCloseCard() {
     this.closeCard.emit();
+  }
+
+  protected onUse(): void {
+    this.useItem.emit();
   }
 }

@@ -3,13 +3,19 @@
     <div class="card-drawn-content">
       <h1 class="big-text">Item Found!</h1>
       <div class="game-card-wrapper">
-        <app-game-card [card]="card" [cardJustFound]="true"></app-game-card>
+        <app-game-card
+          [card]="card"
+          [cardJustFound]="true"
+          (click)="showItemMenu = true"
+        ></app-game-card>
       </div>
 
-      <!-- <app-item-card-info-view
-        [card]="card"
+      <app-item-card-info-view
+        *ngIf="card && showItemMenu"
+        [cardInfo]="card"
         (closeCard)="onCloseMenu()"
-      ></app-item-card-info-view> -->
+        [viewOnly]="true"
+      ></app-item-card-info-view>
     </div>
     <div class="choice-button" (click)="onCloseMenu()">Add to Inventory</div>
   </div>

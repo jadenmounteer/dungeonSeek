@@ -22,6 +22,7 @@ export class ItemMenuComponent implements OnInit {
   @Input() public cardName: string | undefined;
   @Output() public closeMenu = new EventEmitter<any>();
   protected card: ItemCardInfo | undefined;
+  protected showItemMenu = false;
 
   constructor(private itemCardService: ItemCardService) {}
 
