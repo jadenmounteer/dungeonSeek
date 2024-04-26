@@ -40,13 +40,10 @@ export class GestureService {
   }
 
   private fingersTogether(): void {
-    alert('Fingers together!');
     this.moveFingersTogether.emit();
   }
 
   private fingersApart(): void {
-    alert('Fingers apart!');
-
     this.moveFingersApart.emit();
   }
 }
