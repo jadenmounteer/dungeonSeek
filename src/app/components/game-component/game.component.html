@@ -182,9 +182,20 @@
 
   <div class="game-buttons-section" *ngIf="!currentCharacterRollingDice">
     <div class="zoom-buttons-section">
-      <!-- TODO Make these font awesome icons -->
-      <div class="zoom-button" (click)="zoomIn()">+</div>
-      <div class="zoom-button" (click)="zoomOut()">-</div>
+      <div
+        class="zoom-button"
+        (click)="zoomIn()"
+        [ngClass]="{ 'disabled-zoom-button': zoomPercentageDisplay >= 1 }"
+      >
+        +
+      </div>
+      <div
+        class="zoom-button"
+        (click)="zoomOut()"
+        [ngClass]="{ 'disabled-zoom-button': zoomPercentageDisplay <= 0.4 }"
+      >
+        -
+      </div>
     </div>
     <span *ngIf="characterBeingControlledByClient?.movementSpeed != undefined">
       <div

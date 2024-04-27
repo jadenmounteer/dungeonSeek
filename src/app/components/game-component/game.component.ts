@@ -101,7 +101,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected pinchZoomInSub: Subscription;
   protected pinchZoomOutSub: Subscription;
 
-  protected zoomPercentageDisplay = 0.1;
+  protected zoomPercentageDisplay = 1;
   protected showZoomPercentage = false;
   private zoomDisplayTimeout: any;
 
@@ -650,12 +650,18 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected zoomIn(): void {
+    if (this.zoomPercentageDisplay >= 1) {
+      return;
+    }
     const newZoomValue = this.zoomService.zoomIn();
     this.onGrowGameBoard(newZoomValue);
     this.showZoomPercentageDisplay(newZoomValue);
   }
 
   protected zoomOut(): void {
+    if (this.zoomPercentageDisplay <= 0.4) {
+      return;
+    }
     const newZoomValue = this.zoomService.zoomOut();
     this.onShrinkGameBoard(newZoomValue);
     this.showZoomPercentageDisplay(newZoomValue);

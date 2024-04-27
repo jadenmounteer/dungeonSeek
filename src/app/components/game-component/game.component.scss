@@ -145,6 +145,11 @@
   @include unselectable();
 }
 
+.disabled-zoom-button {
+  cursor: not-allowed;
+  color: $dungeon-seek-dark-even-more-transparent;
+}
+
 app-character-info {
   position: fixed;
   top: 0;

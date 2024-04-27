@@ -14,8 +14,8 @@ export class ZoomService {
   private readonly MIN_ZOOM: number = 0.2; // 50%
 
   // BehaviorSubjects for the gestures
-  public moveFingersTogether = new BehaviorSubject<number>(0);
-  public moveFingersApart = new BehaviorSubject<number>(0);
+  public moveFingersTogether = new BehaviorSubject<number>(1);
+  public moveFingersApart = new BehaviorSubject<number>(1);
 
   // BehaviorSubjects for the gestures
   public zoomOutSubject = new BehaviorSubject<number>(0);
