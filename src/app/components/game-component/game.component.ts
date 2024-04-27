@@ -332,7 +332,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.updateLocationNodeDataRelativeToPlayer();
     this.gameSessionService.scrollToCharacterBeingControlledByClient(
-      this.characterBeingControlledByClient
+      this.characterBeingControlledByClient,
+      this.zoomPercentageDisplay
     );
   }
 
@@ -429,7 +430,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
     if (this.characterBeingControlledByClient) {
       this.gameSessionService.scrollToCharacterBeingControlledByClient(
-        this.characterBeingControlledByClient
+        this.characterBeingControlledByClient,
+        this.zoomPercentageDisplay
       );
       this.updateLocationNodeDataRelativeToPlayer();
     }
@@ -446,7 +448,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
     if (this.characterBeingControlledByClient) {
       this.gameSessionService.scrollToCharacterBeingControlledByClient(
-        this.characterBeingControlledByClient
+        this.characterBeingControlledByClient,
+        this.zoomPercentageDisplay
       );
       this.updateLocationNodeDataRelativeToPlayer();
     }

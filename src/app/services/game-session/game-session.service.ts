@@ -187,25 +187,48 @@ export class GameSessionService {
     await this.updateGameSession(gameSession);
   }
 
-  public getXOffset(): number {
+  public getXOffset(zoomPercentage: number): number {
+    let xOffset = 0;
+
+    // I got these numbers through trial and error. Feel free to change them.
+    if (zoomPercentage === 1) {
+      xOffset = (window.innerWidth / 2) * -1;
+    } else if (zoomPercentage === 0.7) {
+      xOffset = (window.innerWidth / 2) * -1 * (zoomPercentage + 0.4);
+    } else {
+      xOffset = (window.innerWidth / 2) * -1 * (zoomPercentage + 0.1);
+    }
+
     // To center the player on the screen, we need to know the width of the screen
-    return (window.innerWidth / 2) * -1;
+    return xOffset;
   }
 
-  public getYOffset(): number {
+  public getYOffset(zoomPercentage: number): number {
+    let yOffset = 0;
+
+    // I got these numbers through trial and error. Feel free to change them.
+
+    if (zoomPercentage === 1) {
+      yOffset = (window.innerHeight / 2) * -1;
+    } else if (zoomPercentage === 0.7) {
+      yOffset = (window.innerHeight / 2) * -1 * (zoomPercentage - 0.1);
+    } else {
+      yOffset = (window.innerHeight / 2) * -1 * (zoomPercentage - 0.7);
+    }
     // To center the player on the screen, we need to know the width of the screen
-    return (window.innerHeight / 2) * -1;
+    return yOffset;
   }
 
   public scrollToCharacterBeingControlledByClient(
-    characterBeingControlledByClient: Character | undefined
+    characterBeingControlledByClient: Character | undefined,
+    zoomPercentage: number
   ) {
     if (!characterBeingControlledByClient) {
       return;
     }
 
-    const xOffset = this.getXOffset();
-    const yOffset = this.getYOffset();
+    const xOffset = this.getXOffset(zoomPercentage);
+    const yOffset = this.getYOffset(zoomPercentage);
     const characterXPosition =
       characterBeingControlledByClient.currentLocation.position.xPosition +
       xOffset;
