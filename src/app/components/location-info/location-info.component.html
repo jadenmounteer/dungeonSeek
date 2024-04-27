@@ -1,1 +1,7 @@
-<span class="medium-text">Location: {{ location?.name }}</span>
+<span class="medium-text"
+  >{{ location?.name }}
+
+  @if( location?.locationType === 'City' || location?.locationType === 'Town' )
+  {
+  <i class="fa fa-home"></i> }
+</span>
