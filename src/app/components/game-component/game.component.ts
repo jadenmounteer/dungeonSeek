@@ -93,13 +93,7 @@ export class GameComponent implements OnInit, OnDestroy {
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
 
-  private growGameBoardSub: Subscription;
-  private shrinkGameBoardSub: Subscription;
-
   protected gameBoardScaleTestVar = '';
-
-  protected pinchZoomInSub: Subscription;
-  protected pinchZoomOutSub: Subscription;
 
   protected zoomPercentageDisplay = 1;
   protected showZoomPercentage = false;
@@ -132,29 +126,6 @@ export class GameComponent implements OnInit, OnDestroy {
     protected zoomService: ZoomService
   ) {
     const gameSessionID = this.activatedRoute.snapshot.params['gameSessionId'];
-
-    this.pinchZoomInSub = this.zoomService.moveFingersApart.subscribe(
-      (scalePercentage) => {
-        this.onGrowGameBoard(scalePercentage);
-        this.showZoomPercentageDisplay(scalePercentage);
-      }
-    );
-
-    this.pinchZoomOutSub = this.zoomService.moveFingersTogether.subscribe(
-      (scalePercentage) => {
-        this.onShrinkGameBoard(scalePercentage);
-        this.showZoomPercentageDisplay(scalePercentage);
-      }
-    );
-
-    this.shrinkGameBoardSub = this.zoomService.zoomOutSubject.subscribe(
-      (scalePercentage) => {
-        this.onShrinkGameBoard(scalePercentage);
-      }
-    );
-    this.growGameBoardSub = this.zoomService.zoomInSubject.subscribe(
-      (scalePercentage) => this.onGrowGameBoard(scalePercentage)
-    );
 
     this.gameSessionSub = this.gameSessionService
       .getGameSession(gameSessionID)
@@ -245,10 +216,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.drawWeaponSubscription.unsubscribe();
     this.drawItemSubscription.unsubscribe();
     this.drawGoldSubscription.unsubscribe();
-    this.growGameBoardSub.unsubscribe();
-    this.shrinkGameBoardSub.unsubscribe();
-    this.pinchZoomInSub.unsubscribe();
-    this.pinchZoomOutSub.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameSession.playerIDs.length > 1) {
@@ -653,7 +620,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected zoomIn(): void {
-    if (this.zoomPercentageDisplay >= 1) {
+    if (this.zoomPercentageDisplay === 1) {
       return;
     }
     const newZoomValue = this.zoomService.zoomIn();
