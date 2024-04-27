@@ -10,7 +10,7 @@ export class ZoomService {
   private scalePercentage: number = 1; // The percentage of the scale in decimal form
 
   // Define the maximum and minimum zoom levels
-  private readonly MAX_ZOOM: number = 2; // 200%
+  private readonly MAX_ZOOM: number = 1; // 100%%
   private readonly MIN_ZOOM: number = 0.2; // 50%
 
   // BehaviorSubjects for the gestures
