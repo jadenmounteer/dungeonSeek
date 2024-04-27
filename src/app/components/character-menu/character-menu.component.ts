@@ -116,7 +116,30 @@ export class CharacterMenuComponent implements OnInit {
   }
 
   protected useItem() {
-    // TODO implement this
+    // Get rid of the item in the player's inventory
+
+    if (this.itemEquipmentToShow && this.character) {
+      const numberOfItemsWithSameName =
+        this.character.characterMenu.itemCards.filter(
+          (item) => item === this.itemEquipmentToShow
+        ).length;
+
+      if (numberOfItemsWithSameName > 1) {
+        this.character.characterMenu.itemCards.splice(
+          this.character.characterMenu.itemCards.indexOf(
+            this.itemEquipmentToShow
+          ),
+          1
+        );
+      } else {
+        this.character.characterMenu.itemCards =
+          this.character.characterMenu.itemCards.filter(
+            (item) => item !== this.itemEquipmentToShow
+          );
+      }
+
+      this.characterService.updateCharacter(this.character, this.gameSessionID);
+    }
   }
 
   protected toggleWeaponEquip(): void {
