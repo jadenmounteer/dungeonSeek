@@ -141,7 +141,7 @@
 
 .zoom-button {
   cursor: pointer;
-  font-size: 4em;
+
   @include unselectable();
 }
 

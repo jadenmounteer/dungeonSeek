@@ -178,18 +178,18 @@
   <div class="game-buttons-section" *ngIf="!currentCharacterRollingDice">
     <div class="zoom-buttons-section">
       <div
-        class="zoom-button"
+        class="zoom-button big-text"
         (click)="zoomIn()"
         [ngClass]="{ 'disabled-zoom-button': zoomPercentageDisplay === 1 }"
       >
-        +
+        <i class="fa fa-search-plus"></i>
       </div>
       <div
-        class="zoom-button"
+        class="zoom-button big-text"
         (click)="zoomOut()"
         [ngClass]="{ 'disabled-zoom-button': zoomPercentageDisplay <= 0.4 }"
       >
-        -
+        <i class="fa fa-search-minus"></i>
       </div>
     </div>
     <span *ngIf="characterBeingControlledByClient?.movementSpeed != undefined">
