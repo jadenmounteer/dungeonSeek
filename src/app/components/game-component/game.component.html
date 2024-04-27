@@ -109,11 +109,6 @@
     (showCharacterMenu)="toggleCharacterMenu()"
   ></app-character-info>
 
-  <app-location-info
-    *ngIf="!showEventCard"
-    [location]="characterBeingControlledByClient?.currentLocation"
-  ></app-location-info>
-
   @defer(when showEventCard) {
   <!-- Only appears when you draw an event card -->
   <app-event-menu

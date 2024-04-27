@@ -13,7 +13,6 @@ import { AuthService } from '../../auth/auth.service';
 import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
-import { LocationInfoComponent } from '../location-info/location-info.component';
 import { DeckName, Outcome } from '../../types/card-deck';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -45,7 +44,6 @@ import { fadeOut } from '../../animations/fade-out-animation';
     CommonModule,
     TurnArrowComponent,
     GameFooterComponent,
-    LocationInfoComponent,
     EventMenuComponent,
     CharacterInfoComponent,
     DiceRollDialogComponent,
