@@ -207,4 +207,14 @@
       </div>
     </span>
   </div>
+
+  <!-- Displays the zoom percentage to the user -->
+  <div
+    class="zoom-percentage-display big-text"
+    @fadeIn
+    @fadeOut
+    *ngIf="showZoomPercentage"
+  >
+    <h1>{{ zoomPercentageDisplay }}x</h1>
+  </div>
 </div>

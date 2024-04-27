@@ -151,3 +151,17 @@ app-character-info {
   left: 16px;
   z-index: 999;
 }
+
+.zoom-percentage-display {
+  position: fixed;
+  // Center it in the middle of the screen
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  color: $dungeon-seek-light;
+  background-color: $dungeon-seek-dark-even-more-transparent;
+  border-radius: 50%;
+  height: 110px;
+  width: 110px;
+  text-align: center;
+}

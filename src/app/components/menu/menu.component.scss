@@ -6,7 +6,7 @@
   left: 0;
   z-index: 9998;
 
-  background-color: rgba(0, 0, 0, 0.817);
+  background-color: $dungeon-seek-dark-transparent;
 
   // Make it scroll vertically
   overflow-y: auto;
@@ -20,10 +20,10 @@
   height: 100%;
   width: 100%;
   z-index: 9998;
-  background-color: rgba(0, 0, 0, 0.417);
+  background-color: $dungeon-seek-dark-even-more-transparent;
 }
 .not-full-screen {
-  background-color: rgba(0, 0, 0, 0.912);
+  background-color: $dungeon-seek-dark-transparent;
 
   z-index: 9999;
 

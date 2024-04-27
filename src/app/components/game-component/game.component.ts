@@ -33,6 +33,8 @@ import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
 import { CharacterMenuComponent } from '../character-menu/character-menu.component';
 import { ConfirmationMenuComponent } from '../confirmation-menu/confirmation-menu.component';
 import { ZoomService } from '../../services/zoom.service';
+import { fadeIn } from '../../animations/fade-in-animation';
+import { fadeOut } from '../../animations/fade-out-animation';
 
 @Component({
   selector: 'app-game',
@@ -55,6 +57,7 @@ import { ZoomService } from '../../services/zoom.service';
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
+  animations: [fadeIn, fadeOut],
 })
 export class GameComponent implements OnInit, OnDestroy {
   protected diceRollingData: DiceRollDialogData | undefined;
@@ -97,6 +100,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected pinchZoomInSub: Subscription;
   protected pinchZoomOutSub: Subscription;
+
+  protected zoomPercentageDisplay = 0.1;
+  protected showZoomPercentage = false;
+  private zoomDisplayTimeout: any;
 
   // LOOT SUBSCRIPTIONS
   protected drawWeaponSubscription =
@@ -641,11 +648,24 @@ export class GameComponent implements OnInit, OnDestroy {
   protected zoomIn(): void {
     const newZoomValue = this.zoomService.zoomIn();
     this.onGrowGameBoard(newZoomValue);
+    // The new value rounded to 1 decimal place
+    this.zoomPercentageDisplay = Math.round(newZoomValue * 10) / 10;
+    this.showZoomPercentageDisplay();
   }
 
   protected zoomOut(): void {
     const newZoomValue = this.zoomService.zoomOut();
     this.onShrinkGameBoard(newZoomValue);
+    this.zoomPercentageDisplay = Math.round(newZoomValue * 10) / 10;
+    this.showZoomPercentageDisplay();
+  }
+
+  private showZoomPercentageDisplay(): void {
+    clearTimeout(this.zoomDisplayTimeout);
+    this.showZoomPercentage = true;
+    this.zoomDisplayTimeout = setTimeout(() => {
+      this.showZoomPercentage = false;
+    }, 1000);
   }
 
   protected onShrinkGameBoard(scalePercentage: number) {
