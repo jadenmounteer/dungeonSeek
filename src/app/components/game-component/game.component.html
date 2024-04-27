@@ -58,39 +58,6 @@
       </div>
     </span>
 
-    <div
-      class="player-game-messages-section"
-      *ngIf="!currentCharacterRollingDice"
-    >
-      <span
-        class="player-movement-section"
-        *ngIf="
-          characterBeingControlledByClient?.movementSpeed != undefined &&
-          !currentCharacterRolledForEventCardThisTurn
-        "
-      >
-        <p
-          class="big-text sticky-text"
-          *ngIf="characterBeingControlledByClient!.movementSpeed > 0"
-        >
-          Movement: {{ characterBeingControlledByClient!.movementSpeed }}
-        </p>
-
-        <p
-          class="big-text sticky-text"
-          *ngIf="characterBeingControlledByClient!.movementSpeed <= 0"
-        >
-          You cannot move anymore this turn.
-        </p>
-      </span>
-
-      <span class="player-misc-message-section">
-        <p class="big-text sticky-text" *ngIf="waitingForNextTurnToStart">
-          Waiting for other players to finish their turns...
-        </p>
-      </span>
-    </div>
-
     <!-- Legacy because it will be replaced with other components. -->
     <!-- <app-game-footer
       *ngIf="!loading"
@@ -101,6 +68,39 @@
       (endTurn)="currentCharacterFinishedTurn()"
       (drawEventCard)="drawEventCard()"
     ></app-game-footer> -->
+  </div>
+
+  <div
+    class="player-game-messages-section"
+    *ngIf="!currentCharacterRollingDice"
+  >
+    <span
+      class="player-movement-section"
+      *ngIf="
+        characterBeingControlledByClient?.movementSpeed != undefined &&
+        !currentCharacterRolledForEventCardThisTurn
+      "
+    >
+      <p
+        class="big-text sticky-text"
+        *ngIf="characterBeingControlledByClient!.movementSpeed > 0"
+      >
+        Movement: {{ characterBeingControlledByClient!.movementSpeed }}
+      </p>
+
+      <p
+        class="big-text sticky-text"
+        *ngIf="characterBeingControlledByClient!.movementSpeed <= 0"
+      >
+        You cannot move anymore this turn.
+      </p>
+    </span>
+
+    <span class="player-misc-message-section">
+      <p class="big-text sticky-text" *ngIf="waitingForNextTurnToStart">
+        Waiting for other players to finish their turns...
+      </p>
+    </span>
   </div>
 
   <app-character-info
