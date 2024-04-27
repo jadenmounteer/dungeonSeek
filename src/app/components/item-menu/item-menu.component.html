@@ -13,7 +13,7 @@
       <app-item-card-info-view
         *ngIf="card && showItemMenu"
         [cardInfo]="card"
-        (closeCard)="onCloseMenu()"
+        (closeCard)="showItemMenu = false"
         [viewOnly]="true"
       ></app-item-card-info-view>
     </div>
