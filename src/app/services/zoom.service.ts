@@ -5,8 +5,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ZoomService {
-  private initialDistance: number = 0;
-
   private scalePercentage: number = 1; // The percentage of the scale in decimal form
 
   // Define the maximum and minimum zoom levels
@@ -24,13 +22,13 @@ export class ZoomService {
     // document.addEventListener('touchmove', this.onTouchMove.bind(this));
   }
 
-  private onTouchStart(event: TouchEvent): void {
-    if (event.touches.length === 2) {
-      const dx = event.touches[0].clientX - event.touches[1].clientX;
-      const dy = event.touches[0].clientY - event.touches[1].clientY;
-      this.initialDistance = Math.sqrt(dx * dx + dy * dy);
-    }
-  }
+  // private onTouchStart(event: TouchEvent): void {
+  //   if (event.touches.length === 2) {
+  //     const dx = event.touches[0].clientX - event.touches[1].clientX;
+  //     const dy = event.touches[0].clientY - event.touches[1].clientY;
+  //     this.initialDistance = Math.sqrt(dx * dx + dy * dy);
+  //   }
+  // }
 
   // private onTouchMove(event: TouchEvent): void {
   //   if (event.touches.length === 2) {
