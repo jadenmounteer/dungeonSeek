@@ -5,12 +5,14 @@ $menu-font-color: $dungeon-seek-light;
 
 $button-text-color: $dungeon-seek-light;
 
+$big-text-font-size: 1.5rem;
+
 @mixin text-glow {
   text-shadow: 0 0 2px $dungeon-seek-light;
 }
 
 .big-text {
-  font-size: 1.5rem;
+  font-size: $big-text-font-size;
   font-weight: bold;
   color: $dungeon-seek-light;
   text-shadow: 2px 2px 2px black;

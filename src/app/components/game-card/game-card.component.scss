@@ -3,14 +3,21 @@
 $justFoundGlow: rgb(226, 221, 189);
 
 .card-title {
+  font-size: 5vh;
+
+  @include for-tablet-landscape-up {
+    font-size: $big-text-font-size;
+  }
   text-align: center;
 }
 
 $card-border-radius: 25px;
 .game-card {
   border-radius: $card-border-radius;
-  width: 200px;
-  height: 300px;
+  width: 41vh;
+  height: 57vh;
+  max-width: 200px;
+  max-height: 300px;
 
   background-image: url("../../../assets/card-images/parchment-texture.jpeg");
   padding: 10px;
@@ -19,7 +26,8 @@ $card-border-radius: 25px;
 }
 
 .card-image {
-  width: 100px;
+  max-width: 100px;
+  width: 20vh;
 }
 
 .card-image-wrapper {
