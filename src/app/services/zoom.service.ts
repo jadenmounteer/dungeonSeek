@@ -62,7 +62,6 @@ export class ZoomService {
     const newZoomValue = this.scalePercentage + incrementPercentage;
 
     if (newZoomValue <= this.MAX_ZOOM) {
-      this.scalePercentage += 0.1;
       this.scalePercentage = newZoomValue;
     }
     return this.scalePercentage;
@@ -73,7 +72,6 @@ export class ZoomService {
     const newZoomValue = this.scalePercentage - decrementPercentage;
 
     if (newZoomValue >= this.MIN_ZOOM) {
-      this.scalePercentage -= 0.1;
       this.scalePercentage = newZoomValue;
     }
     return this.scalePercentage;
