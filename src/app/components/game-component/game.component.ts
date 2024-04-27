@@ -136,11 +136,15 @@ export class GameComponent implements OnInit, OnDestroy {
     this.pinchZoomInSub = this.zoomService.moveFingersApart.subscribe(
       (scalePercentage) => {
         this.onGrowGameBoard(scalePercentage);
+        this.showZoomPercentageDisplay(scalePercentage);
       }
     );
 
     this.pinchZoomOutSub = this.zoomService.moveFingersTogether.subscribe(
-      (scalePercentage) => this.onShrinkGameBoard(scalePercentage)
+      (scalePercentage) => {
+        this.onShrinkGameBoard(scalePercentage);
+        this.showZoomPercentageDisplay(scalePercentage);
+      }
     );
 
     this.shrinkGameBoardSub = this.zoomService.zoomOutSubject.subscribe(
@@ -648,20 +652,18 @@ export class GameComponent implements OnInit, OnDestroy {
   protected zoomIn(): void {
     const newZoomValue = this.zoomService.zoomIn();
     this.onGrowGameBoard(newZoomValue);
-    // The new value rounded to 1 decimal place
-    this.zoomPercentageDisplay = Math.round(newZoomValue * 10) / 10;
-    this.showZoomPercentageDisplay();
+    this.showZoomPercentageDisplay(newZoomValue);
   }
 
   protected zoomOut(): void {
     const newZoomValue = this.zoomService.zoomOut();
     this.onShrinkGameBoard(newZoomValue);
-    this.zoomPercentageDisplay = Math.round(newZoomValue * 10) / 10;
-    this.showZoomPercentageDisplay();
+    this.showZoomPercentageDisplay(newZoomValue);
   }
 
-  private showZoomPercentageDisplay(): void {
+  private showZoomPercentageDisplay(newZoomValue: number): void {
     clearTimeout(this.zoomDisplayTimeout);
+    this.zoomPercentageDisplay = Math.round(newZoomValue * 10) / 10;
     this.showZoomPercentage = true;
     this.zoomDisplayTimeout = setTimeout(() => {
       this.showZoomPercentage = false;
