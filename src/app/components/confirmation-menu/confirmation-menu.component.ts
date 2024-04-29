@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  InputSignal,
+  Output,
+  input,
+} from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +19,7 @@ import { CommonModule } from '@angular/common';
 export class ConfirmationMenuComponent {
   @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
   @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
-  @Input() message: string = '';
+  message: InputSignal<string> = input('');
 
   protected onCloseMenu() {
     this.closeMenu.emit();
