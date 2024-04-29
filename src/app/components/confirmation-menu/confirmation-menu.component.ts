@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 export class ConfirmationMenuComponent {
   @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
   @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
-  message: InputSignal<string> = input('');
+  message: InputSignal<string> = input.required();
 
   protected onCloseMenu() {
     this.closeMenu.emit();
