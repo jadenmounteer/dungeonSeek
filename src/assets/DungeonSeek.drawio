@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-04-01T16:45:23.403Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="ADbeZItlvGN07J13PwW7" version="24.2.1" type="device" pages="6">
+<mxfile host="app.diagrams.net" modified="2024-04-29T15:22:26.955Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="8hLq6AAL2nADlFaXg1ci" version="24.2.1" type="device" pages="7">
   <diagram name="Main game view" id="cMHpMG-8lIFeQuoC4nmq">
-    <mxGraphModel dx="1434" dy="684" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="687" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -313,6 +313,20 @@
         </mxCell>
         <mxCell id="y1ZB3kU44jGgI8cCF0Oe-30" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Add to Inventory&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="305" y="1150" width="240" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="ZJ-LX6XuPvTrOAYx5Uwh" name="Combat">
+    <mxGraphModel dx="1434" dy="687" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qjDX6_SUnqIHdTEmm1OZ-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Idea #1&lt;/h1&gt;&lt;p&gt;Show two cards side by side. How would I do this for party members?&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="130" y="110" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="qjDX6_SUnqIHdTEmm1OZ-2" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Idea #2&lt;/h1&gt;&lt;p&gt;Show the game view as normal, but have enemies appear near you. Change the buttons and interfaces to show you are in combat and what is happening. For example, &quot;It&#39;s Goblin&#39;s Turn!&quot;. When you click on an enemy, show their card with their stats and things. This view would facilitate showing the view of all the combat with all your party members as well as your enemies.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="130" y="250" width="180" height="120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
