@@ -614,7 +614,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected toggleCharacterMenu(): void {
     // update the signal
-    this.showCharacterMenu.update((oldValue) => !oldValue);
+    this.showCharacterMenu.set(!this.showCharacterMenu());
   }
 
   protected zoomIn(): void {
