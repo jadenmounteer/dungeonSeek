@@ -16,7 +16,11 @@ export type CardAbilityKey =
   | 'Reflect'
   | 'Magika Regen'
   | 'Shrink'
-  | 'Enlarge';
+  | 'Enlarge'
+  | 'Teleport' // Similar to banish, but the player can choose where to go
+  | 'Turn Invisible' // The player can't be seen by the opponent. Stealth increases by 100%
+  | 'Age' // Ages opponent or player. For example, the player could drink a potion of aging. Characters have an age property. Their stats change accordingly.
+  | 'Renew'; // The opposite of aging.
 
 // Action card abilities are used by spells or scrolls
 export const actionAbilitiesMap: { [key: string]: CardAbility } = {
