@@ -1,4 +1,4 @@
-import { ActionCardAbilityKey } from './card-ability';
+import { CardAbilityKey } from './card-ability';
 import { CardRewardType } from './card-reward-type';
 
 export interface WeaponCardInfo {
@@ -11,7 +11,7 @@ export interface WeaponCardInfo {
   discardAfterUse: boolean;
   quantity: number; // Magical weapons were forged by the sorcerers of old and the knowledge has been lost. There are only a few in existence.
   stats: WeaponCardStats;
-  cardAbility: ActionCardAbilityKey | null;
+  cardAbility: CardAbilityKey | null;
 }
 
 export type WeaponCardType = 'Sword' | 'Bow' | 'Staff' | 'Shield';

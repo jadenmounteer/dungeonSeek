@@ -1,4 +1,4 @@
-import { ActionCardAbilityKey } from './card-ability';
+import { CardAbilityKey } from './card-ability';
 import { CardRewardType } from './card-reward-type';
 
 // Items are things like magic potions or poisons, scrolls, food, lock picks, etc.
@@ -13,7 +13,7 @@ export interface ItemCardInfo {
   discardAfterUse: boolean; // Discard the item after drawing it from the deck. For example, will it be put back into the deck?
   quantity: number; // This is the number of times the item appears in the deck
   stats: ItemCardStats;
-  cardAbility: ActionCardAbilityKey | null;
+  cardAbility: CardAbilityKey | null;
 }
 
 export interface ItemCardStats {

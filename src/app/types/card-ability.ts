@@ -2,12 +2,21 @@
 // while weapons are used on your opponent and spells can be used for both.
 
 export interface CardAbility {
-  name: ActionCardAbilityKey | PassiveCardAbilityKey;
+  name: CardAbilityKey;
   usedAgainstOpponentDescription: String;
   usedAgainstSelfDescription: String;
 }
 
-export type ActionCardAbilityKey = 'Fireball' | 'Heal' | 'Banish';
+export type CardAbilityKey =
+  | 'Fireball'
+  | 'Heal'
+  | 'Banish'
+  | 'Poison'
+  | 'Regenerate'
+  | 'Reflect'
+  | 'Magika Regen'
+  | 'Shrink'
+  | 'Enlarge';
 
 // Action card abilities are used by spells or scrolls
 export const actionAbilitiesMap: { [key: string]: CardAbility } = {
@@ -28,18 +37,6 @@ export const actionAbilitiesMap: { [key: string]: CardAbility } = {
     usedAgainstSelfDescription:
       '50% chance to send yourself to a distant location on the map.', // For example, the player could drink a banishment potion.
   },
-};
-
-export type PassiveCardAbilityKey =
-  | 'Poison'
-  | 'Regenerate'
-  | 'Reflect'
-  | 'Magika Regen'
-  | 'Shrink'
-  | 'Enlarge';
-
-// Passive abilities are used by potions, herbs, or enchantments
-export const passiveAbilitiesMap: { [key: string]: CardAbility } = {
   poison: {
     name: 'Poison',
     usedAgainstOpponentDescription: 'You poison your opponent.',
