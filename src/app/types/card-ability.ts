@@ -9,6 +9,7 @@ export interface CardAbility {
 
 export type ActionCardAbilityKey = 'Fireball' | 'Heal' | 'Banish';
 
+// Action card abilities are used by spells or scrolls
 export const actionAbilitiesMap: { [key: string]: CardAbility } = {
   fireball: {
     name: 'Fireball',
@@ -33,9 +34,12 @@ export type PassiveCardAbilityKey =
   | 'Poison'
   | 'Regenerate'
   | 'Reflect'
-  | 'Magika Regen';
+  | 'Magika Regen'
+  | 'Shrink'
+  | 'Enlarge';
 
-export const passiveAbiliiesMap: { [key: string]: CardAbility } = {
+// Passive abilities are used by potions, herbs, or enchantments
+export const passiveAbilitiesMap: { [key: string]: CardAbility } = {
   poison: {
     name: 'Poison',
     usedAgainstOpponentDescription: 'You poison your opponent.',
@@ -55,5 +59,15 @@ export const passiveAbiliiesMap: { [key: string]: CardAbility } = {
     name: 'Magika Regen',
     usedAgainstOpponentDescription: "You regenerate your opponent's magika.",
     usedAgainstSelfDescription: 'You regenerate your magika.',
+  },
+  shrink: {
+    name: 'Shrink',
+    usedAgainstOpponentDescription: 'You shrink your opponent.',
+    usedAgainstSelfDescription: 'You shrink yourself.', // When something is shrunken I can make it appear smaller using CSS. Some stats are cut in half (health, stamina). However, the stealth is multiplied by 2.
+  },
+  enlarge: {
+    name: 'Enlarge',
+    usedAgainstOpponentDescription: 'You enlarge your opponent.',
+    usedAgainstSelfDescription: 'You enlarge yourself.', // When something is enlarged I can make it appear larger using CSS. Some stats are doubled (health, stamina). However, stealth is divided by 2.
   },
 };
