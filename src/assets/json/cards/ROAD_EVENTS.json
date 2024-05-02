@@ -39,7 +39,7 @@
       },
       {
         "description": "Fight off the bandit.",
-        "outcome": "FIGHT_SINGLE_BANDIT"
+        "outcome": "13"
       }
     ]
   },
