@@ -33,6 +33,7 @@ export enum Outcome {
   FIND_MODERATE_LOOT = 10, // Could be any type of loot
   FIND_HARD_LOOT = 11, // Could be any type of loot
   FIND_INSANE_LOOT = 12, // Could be any type of loot
+  FIGHT_SINGLE_BANDIT = 13,
 }
 
 export interface CardDeck {

@@ -34,8 +34,12 @@
     "discardAfterUse": false,
     "choices": [
       {
-        "description": "You do something...",
+        "description": "Hand the bandit your gold.",
         "outcome": "SUBTRACT_GOLD"
+      },
+      {
+        "description": "Fight off the bandit.",
+        "outcome": "FIGHT_SINGLE_BANDIT"
       }
     ]
   },
