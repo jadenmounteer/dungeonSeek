@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-02T14:02:05.647Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="b6O5Y7-ccfcsLfp8Arfi" version="24.3.1" type="device" pages="7">
+<mxfile host="app.diagrams.net" modified="2024-05-02T17:06:56.632Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="TyjOsuTGAMFe8-iMB9Cp" version="24.3.1" type="device" pages="7">
   <diagram name="Main game view" id="cMHpMG-8lIFeQuoC4nmq">
     <mxGraphModel dx="1434" dy="690" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -629,73 +629,73 @@
         <mxCell id="tItUTw_GjZFBFPsavXP3-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tItUTw_GjZFBFPsavXP3-6" target="h3oILkMjn979Ts67eCMj-95" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="tItUTw_GjZFBFPsavXP3-6" value="This also navigates the player to the character menu where they can attack the enemy OR use an item. They can also attack with a scroll." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="tItUTw_GjZFBFPsavXP3-6" value="Navigates the player to the character menu. Before attacking, they can choose to use an item, or equip equipment before attacking. I will need to limit this so players can only do this once per round." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-277.80999999999995" y="1732" width="250" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="IoWtPxTmhVwRk4Tx4I6u-2" value="Navigates player to the character menu. However, rather than being able to just equipped weapons, they can attack with the weapon equipped." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="470.75" y="2070" width="250" height="30" as="geometry" />
+        <mxCell id="IoWtPxTmhVwRk4Tx4I6u-2" value="Navigates the player to an attack menu, which is similar to the character menu. They can cycle through their weapons, spells, and scrolls and choose which one to attack with. Only equipped weapons appear in the weapons menu." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="470.75" y="2070" width="329.25" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-1" value="&lt;u&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Code Architecture&lt;/b&gt;&lt;/font&gt;&lt;/u&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-1" value="&lt;u&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Code Architecture&lt;/b&gt;&lt;/font&gt;&lt;/u&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1000" y="500" width="170" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-2" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-2" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="930" y="583.75" width="420" height="406.25" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-3" value="&lt;b&gt;GameComponent&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-3" value="&lt;b&gt;GameComponent&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1000" y="556.25" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-4" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-4" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1370" y="577.5" width="420" height="406.25" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-5" value="&lt;b&gt;EventMenu&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-5" value="&lt;b&gt;EventMenu&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1440" y="550" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-6" target="mmyYpzyOoQlz0sNTeCRZ-7">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-6" target="mmyYpzyOoQlz0sNTeCRZ-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-6" value="Player opens event card" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-6" value="Player opens event card" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1170" y="605" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-7" target="mmyYpzyOoQlz0sNTeCRZ-16">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-7" target="mmyYpzyOoQlz0sNTeCRZ-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-7" target="mmyYpzyOoQlz0sNTeCRZ-16">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-7" target="mmyYpzyOoQlz0sNTeCRZ-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-7" value="Player makes choice that initializes combat. Send update to game component with the outcome." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-7" value="Player makes choice that initializes combat. Send update to game component with the outcome." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1410" y="605" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-12" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-12" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1800" y="573.75" width="420" height="406.25" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-13" value="&lt;b&gt;CombatService&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-13" value="&lt;b&gt;CombatService&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1870" y="546.25" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-14" target="mmyYpzyOoQlz0sNTeCRZ-24">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-14" target="mmyYpzyOoQlz0sNTeCRZ-24" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-14" value="inCombat property set to true" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-14" value="inCombat property set to true" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1840" y="608.25" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-16" target="mmyYpzyOoQlz0sNTeCRZ-14">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-16" target="mmyYpzyOoQlz0sNTeCRZ-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-16" value="handleInitializeCombat is called with the enemy card(s) the outcome specifies." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-16" value="handleInitializeCombat is called with the enemy card(s) the outcome specifies." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1160" y="660" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-24" target="mmyYpzyOoQlz0sNTeCRZ-25">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-24" target="mmyYpzyOoQlz0sNTeCRZ-25" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-24" value="inCombat property set to true" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-24" value="inCombat property set to true" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="2050" y="608.25" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-25" target="mmyYpzyOoQlz0sNTeCRZ-29">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-25" target="mmyYpzyOoQlz0sNTeCRZ-29" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-25" value="team 1 array of characters is set. This includes the current player as well as any party members" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-25" value="team 1 array of characters is set. This includes the current player as well as any party members" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="2020" y="690" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-29" value="team 2 array of enemies is created. This includes the enemy cards specified by the event outcome." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="mmyYpzyOoQlz0sNTeCRZ-29" value="team 2 array of enemies is created. This includes the enemy cards specified by the event outcome." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1840" y="702.5" width="150" height="30" as="geometry" />
         </mxCell>
       </root>

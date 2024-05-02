@@ -1,4 +1,4 @@
-import { Position, LocationNode } from '../services/location-service';
+import { LocationNode } from '../services/location-service';
 
 export interface Character {
   id: string;
@@ -45,4 +45,4 @@ export type CharacterMenuEquipment = {
 
 export type CharacterSex = 'Male' | 'Female';
 
-export type CharacterClass = 'Sorcerer' | 'Pirate' | 'Rogue' | 'Viking';
+export type CharacterClass = 'Sorcerer' | 'Pirate' | 'Viking';
