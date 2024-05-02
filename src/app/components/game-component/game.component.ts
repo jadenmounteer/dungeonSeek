@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { PlayerComponent } from '../characters/player/player.component';
 import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
 import { LocationNode, LocationService } from '../../services/location-service';
@@ -34,6 +34,7 @@ import { ConfirmationMenuComponent } from '../confirmation-menu/confirmation-men
 import { ZoomService } from '../../services/zoom.service';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
+import { CombatService } from '../../services/combat.service';
 
 @Component({
   selector: 'app-game',
@@ -58,6 +59,8 @@ import { fadeOut } from '../../animations/fade-out-animation';
   animations: [fadeIn, fadeOut],
 })
 export class GameComponent implements OnInit, OnDestroy {
+  #combatService: CombatService = inject(CombatService);
+
   protected diceRollingData: DiceRollDialogData | undefined;
 
   protected charactersBeingControlledByClient: Character[] = [];
