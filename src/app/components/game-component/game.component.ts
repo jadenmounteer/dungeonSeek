@@ -579,7 +579,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.lootService.drawLootCard('Easy');
     } else if (outcome == 13) {
       // Fight single bandit
-      alert('You fought a bandit!');
+      this.#combatService.startCombat();
     }
   }
 
