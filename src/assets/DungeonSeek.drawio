@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-02T17:06:56.632Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="TyjOsuTGAMFe8-iMB9Cp" version="24.3.1" type="device" pages="7">
+<mxfile host="app.diagrams.net" modified="2024-05-02T22:16:12.056Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="L4GOY1w7cpAuUC5-zZQy" version="24.3.1" type="device" pages="7">
   <diagram name="Main game view" id="cMHpMG-8lIFeQuoC4nmq">
     <mxGraphModel dx="1434" dy="690" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -256,7 +256,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="7It_hhx3WhCHRAlyci0D" name="Draw Card">
-    <mxGraphModel dx="3354" dy="1281" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="690" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -639,7 +639,7 @@
           <mxGeometry x="1000" y="500" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="mmyYpzyOoQlz0sNTeCRZ-2" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="930" y="583.75" width="420" height="406.25" as="geometry" />
+          <mxGeometry x="930" y="583.75" width="420" height="916.25" as="geometry" />
         </mxCell>
         <mxCell id="mmyYpzyOoQlz0sNTeCRZ-3" value="&lt;b&gt;GameComponent&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1000" y="556.25" width="60" height="30" as="geometry" />
@@ -666,7 +666,7 @@
           <mxGeometry x="1410" y="605" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell id="mmyYpzyOoQlz0sNTeCRZ-12" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="1800" y="573.75" width="420" height="406.25" as="geometry" />
+          <mxGeometry x="1800" y="573.75" width="420" height="1036.25" as="geometry" />
         </mxCell>
         <mxCell id="mmyYpzyOoQlz0sNTeCRZ-13" value="&lt;b&gt;CombatService&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1870" y="546.25" width="60" height="30" as="geometry" />
@@ -693,10 +693,94 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="mmyYpzyOoQlz0sNTeCRZ-25" value="team 1 array of characters is set. This includes the current player as well as any party members" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="2020" y="690" width="150" height="30" as="geometry" />
+          <mxGeometry x="2050" y="710" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mmyYpzyOoQlz0sNTeCRZ-29" target="Y663uMO1pom9vuKv_8AM-26">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="mmyYpzyOoQlz0sNTeCRZ-29" value="team 2 array of enemies is created. This includes the enemy cards specified by the event outcome." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="1840" y="702.5" width="150" height="30" as="geometry" />
+          <mxGeometry x="1870" y="732.5" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="1700" width="580" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-2" value="&lt;b&gt;&lt;u&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Attack Goblin 1&lt;/font&gt;&lt;/u&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1245" y="1715.75" width="125" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-4" value="Weapon" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="1803.75" width="120" height="31.75" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-7" value="The two teams are rendered on the screen" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="720" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-9" value="Spell" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1247.5" y="1803.75" width="120" height="31.75" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-10" value="Scrolls" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="1803.75" width="120" height="31.75" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-11" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="1990" width="580" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-12" value="&lt;b&gt;&lt;u&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Attack Goblin 1&lt;/font&gt;&lt;/u&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1245" y="2005.75" width="125" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-17" value="Iron Sword" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1245" y="2090" width="120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-19" value="Weapon" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8F8F8F;" vertex="1" parent="1">
+          <mxGeometry x="1085" y="2038.25" width="120" height="31.75" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-20" value="Spell" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1242.5" y="2038.25" width="120" height="31.75" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-21" value="Scrolls" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1405" y="2038.25" width="120" height="31.75" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-22" value="X" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1540" y="1708.25" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-23" value="X" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1540" y="2005.75" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y663uMO1pom9vuKv_8AM-26" target="Y663uMO1pom9vuKv_8AM-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-26" value="Service determines which team goes first" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="2040" y="820" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y663uMO1pom9vuKv_8AM-28" target="Y663uMO1pom9vuKv_8AM-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y663uMO1pom9vuKv_8AM-28" target="Y663uMO1pom9vuKv_8AM-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-28" value="Service orders team members in sequential order" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="820" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-31" value="Marker and new text appear" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1227.5" y="860" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y663uMO1pom9vuKv_8AM-32" target="Y663uMO1pom9vuKv_8AM-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-32" value="A new round of combat starts. Service alerts GameComponent who&#39;s turn it is and what the instruction text should be" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1870" y="940" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y663uMO1pom9vuKv_8AM-36" target="Y663uMO1pom9vuKv_8AM-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-36" value="Player attacks enemy" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1097.5" y="1005.25" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-41" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y663uMO1pom9vuKv_8AM-38" target="Y663uMO1pom9vuKv_8AM-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-38" value="Enemies stats change accordingly" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1840" y="1032" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y663uMO1pom9vuKv_8AM-40" value="Service determines whose turn it is next" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1840" y="1100" width="150" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
