@@ -185,7 +185,8 @@
     [message]="this.gameDialogueService.gameDialogueMessage"
     (closeMenu)="this.gameDialogueService.showGameDialogue = false"
     (buttonOneClick)="
-      this.gameDialogueService.showGameDialogue = false; confirmMenuCallback()
+      this.gameDialogueService.showGameDialogue = false;
+      this.gameDialogueService.buttonOneCallback()
     "
   />
   }

@@ -87,8 +87,6 @@ export class GameComponent implements OnDestroy {
   protected showCharacterMenu = signal(false);
   protected goldFoundAmount: number = 0;
 
-  protected confirmMenuCallback: () => void = () => {};
-
   protected cardName: string | undefined;
   protected deckName: DeckName | undefined;
 
@@ -591,7 +589,8 @@ export class GameComponent implements OnDestroy {
         this.gameStateService.characterBeingControlledByClient!.movementSpeed
       } spaces. Are you sure you want to stop moving?`;
 
-      this.confirmMenuCallback = this.endMovementEarly;
+      this.gameDialogueService.buttonOneCallback =
+        this.endMovementEarly.bind(this);
     } else {
       this.rollForEventCard();
     }
