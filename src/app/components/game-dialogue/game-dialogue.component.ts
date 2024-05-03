@@ -17,14 +17,19 @@ import { CommonModule } from '@angular/common';
 })
 export class GameDialogueComponent {
   @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
-  @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
+  @Output() buttonOneClick: EventEmitter<void> = new EventEmitter<void>();
+  @Output() buttonTwoClick: EventEmitter<void> = new EventEmitter<void>();
   message: InputSignal<string> = input.required();
 
   protected onCloseMenu() {
     this.closeMenu.emit();
   }
 
-  protected onConfirm() {
-    this.confirm.emit();
+  protected onButtonOneClick() {
+    this.buttonOneClick.emit();
+  }
+
+  protected onButtonTwoClick() {
+    this.buttonOneClick.emit();
   }
 }

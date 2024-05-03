@@ -184,7 +184,7 @@
     *ngIf="this.gameDialogueService.showGameDialogue"
     [message]="this.gameDialogueService.gameDialogueMessage"
     (closeMenu)="this.gameDialogueService.showGameDialogue = false"
-    (confirm)="
+    (buttonOneClick)="
       this.gameDialogueService.showGameDialogue = false; confirmMenuCallback()
     "
   />
