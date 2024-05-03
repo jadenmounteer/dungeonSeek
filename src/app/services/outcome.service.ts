@@ -61,6 +61,13 @@ export class OutcomeService implements OnDestroy {
       this.#gameDialogueService.buttonOneCallback =
         this.#combatService.startCombat.bind(this);
 
+      // TODO when I am implementing the enemies for the player to fight.
+      // Simply update the startCombat method to take the enemies as a parameter.
+      // this.#gameDialogueService.buttonOneCallback = () => {
+      //   const enemies = /* get the enemies the player will need to fight */;
+      //   this.#combatService.startCombat.bind(this, enemies);
+      // };
+
       gameDialogueData.message = `"I changed my mind," the bandit says as he unsheathes his sword. "I'll take your gold and your life!"`;
       gameDialogueData.buttonOneText = 'Begin Combat';
       this.#gameDialogueService.showDialogue(gameDialogueData);
