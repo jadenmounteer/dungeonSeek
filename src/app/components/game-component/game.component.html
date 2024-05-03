@@ -116,7 +116,7 @@
     [cardName]="cardName"
     [deckName]="deckName"
     (closeCard)="closeCard()"
-    (makeChoice)="makeChoice($event)"
+    (makeChoice)="handleMakeChoice($event)"
   ></app-event-menu>
   } @defer(when showItemCard) {
   <!-- Appears if you are viewing an item -->

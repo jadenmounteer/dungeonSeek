@@ -36,6 +36,7 @@ import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { CombatService } from '../../services/combat.service';
 import { Outcome } from '../../types/Outcome';
+import { OutcomeService } from '../../services/outcome.service';
 
 @Component({
   selector: 'app-game',
@@ -61,6 +62,7 @@ import { Outcome } from '../../types/Outcome';
 })
 export class GameComponent implements OnInit, OnDestroy {
   #combatService: CombatService = inject(CombatService);
+  #outcomeService: OutcomeService = inject(OutcomeService);
 
   protected diceRollingData: DiceRollDialogData | undefined;
 
@@ -569,20 +571,24 @@ export class GameComponent implements OnInit, OnDestroy {
   protected closeCard() {
     this.showEventCard = false;
   }
-  protected makeChoice(outcome: Outcome) {
+  protected handleMakeChoice(outcome: Outcome) {
     this.showEventCard = false;
+
+    this.#outcomeService.makeChoice(outcome);
+
+    // THE OLD WAY
 
     // Find easy loot
     // TODO I can probably make this a map of keys and strings
-    if (outcome == Outcome.FIND_EASY_LOOT) {
-      // this.drawWeaponCard();
-      // TODO Add the loot service here
-      this.lootService.drawLootCard('Easy');
-    } else if (outcome == Outcome.FIGHT_SINGLE_BANDIT) {
-      alert("You're fighting a bandit!");
-      // Fight single bandit
-      this.#combatService.startCombat();
-    }
+    // if (outcome == Outcome.FIND_EASY_LOOT) {
+    //   // this.drawWeaponCard();
+    //   // TODO Add the loot service here
+    //   this.lootService.drawLootCard('Easy');
+    // } else if (outcome == Outcome.FIGHT_SINGLE_BANDIT) {
+    //   alert("You're fighting a bandit!");
+    //   // Fight single bandit
+    //   this.#combatService.startCombat();
+    // }
   }
 
   protected confirmEndMovement() {
