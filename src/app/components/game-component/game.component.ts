@@ -157,7 +157,7 @@ export class GameComponent implements OnDestroy {
         }
 
         // TODO I can probable do this in a cleaner way with RXJS.
-        // I know there's an operator where you can subscribe to multiple observables at once.
+        // I know there's an operator where you can subscribe to multiple observables at once. SwitchMap would do the trick!
         if (!this.charactersSub) {
           this.setCharactersSub();
         }
