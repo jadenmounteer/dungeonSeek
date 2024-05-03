@@ -179,12 +179,12 @@
       currentCharacterRolledForEventCardThisTurn = true
     "
   ></app-dice-roll-dialog>
-  } @defer (when showConfirmationMenu) {
+  } @defer (when showGameDialogue) {
   <app-game-dialogue
-    *ngIf="showConfirmationMenu"
-    [message]="confirmationMessage"
-    (closeMenu)="showConfirmationMenu = false"
-    (confirm)="showConfirmationMenu = false; confirmMenuCallback()"
+    *ngIf="showGameDialogue"
+    [message]="gameDialogueMessage"
+    (closeMenu)="showGameDialogue = false"
+    (confirm)="showGameDialogue = false; confirmMenuCallback()"
   />
   }
 

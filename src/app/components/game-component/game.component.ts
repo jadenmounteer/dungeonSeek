@@ -84,8 +84,8 @@ export class GameComponent implements OnDestroy {
   protected showCharacterMenu = signal(false);
   protected goldFoundAmount: number = 0;
 
-  protected showConfirmationMenu = false;
-  protected confirmationMessage: string = '';
+  protected showGameDialogue = false;
+  protected gameDialogueMessage: string = '';
   protected confirmMenuCallback: () => void = () => {};
 
   protected cardName: string | undefined;
@@ -585,8 +585,8 @@ export class GameComponent implements OnDestroy {
       this.gameStateService.characterBeingControlledByClient!.movementSpeed ??
       0 > 0
     ) {
-      this.showConfirmationMenu = true;
-      this.confirmationMessage = `You can still move ${
+      this.showGameDialogue = true;
+      this.gameDialogueMessage = `You can still move ${
         this.gameStateService.characterBeingControlledByClient!.movementSpeed
       } spaces. Are you sure you want to stop moving?`;
 
