@@ -30,6 +30,6 @@ export class GameDialogueComponent {
   }
 
   protected onButtonTwoClick() {
-    this.buttonOneClick.emit();
+    this.buttonTwoClick.emit();
   }
 }

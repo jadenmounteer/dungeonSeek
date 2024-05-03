@@ -9,13 +9,17 @@ export class GameDialogueService {
   public showGameDialogue = false;
   public gameDialogueMessage: string = '';
 
-  public buttonOneCallback: () => void = () => {
-    alert('Button callback not set');
-  };
+  private defaultCallback: () => void = () => {};
 
-  public buttonTwoCallback: () => void = () => {
-    alert('Button callback not set');
-  };
+  public buttonOneCallback = this.defaultCallback;
+
+  public buttonTwoCallback = this.defaultCallback;
 
   constructor() {}
+
+  public closeDialogue(): void {
+    this.showGameDialogue = false;
+    this.buttonOneCallback = this.defaultCallback;
+    this.buttonTwoCallback = this.defaultCallback;
+  }
 }
