@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GameSessionService } from '../../services/game-session/game-session.service';
-import { GameSession } from '../../types/game-session';
 import { CharacterMenuEquipment } from '../../types/character';
 import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
@@ -29,7 +28,6 @@ import { LootService } from '../../services/loot.service';
 import { CardRewardType } from '../../types/card-reward-type';
 import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
 import { CharacterMenuComponent } from '../character-menu/character-menu.component';
-import { ConfirmationMenuComponent } from '../confirmation-menu/confirmation-menu.component';
 import { ZoomService } from '../../services/zoom.service';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
@@ -37,6 +35,7 @@ import { CombatService } from '../../services/combat.service';
 import { Outcome } from '../../types/Outcome';
 import { OutcomeService } from '../../services/outcome.service';
 import { GameStateService } from '../../services/game-state.service';
+import { GameDialogueComponent } from '../game-dialogue/game-dialogue.component';
 
 @Component({
   selector: 'app-game',
@@ -54,7 +53,7 @@ import { GameStateService } from '../../services/game-state.service';
     WeaponMenuComponent,
     GoldMenuComponent,
     CharacterMenuComponent,
-    ConfirmationMenuComponent,
+    GameDialogueComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',

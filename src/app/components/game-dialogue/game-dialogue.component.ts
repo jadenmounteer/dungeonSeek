@@ -9,13 +9,13 @@ import { MenuComponent } from '../menu/menu.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-confirmation-menu',
+  selector: 'app-game-dialogue',
   standalone: true,
   imports: [MenuComponent, CommonModule],
-  templateUrl: './confirmation-menu.component.html',
-  styleUrl: './confirmation-menu.component.scss',
+  templateUrl: './game-dialogue.component.html',
+  styleUrl: './game-dialogue.component.scss',
 })
-export class ConfirmationMenuComponent {
+export class GameDialogueComponent {
   @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
   @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
   message: InputSignal<string> = input.required();

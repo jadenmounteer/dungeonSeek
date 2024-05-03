@@ -180,7 +180,7 @@
     "
   ></app-dice-roll-dialog>
   } @defer (when showConfirmationMenu) {
-  <app-confirmation-menu
+  <app-game-dialogue
     *ngIf="showConfirmationMenu"
     [message]="confirmationMessage"
     (closeMenu)="showConfirmationMenu = false"
