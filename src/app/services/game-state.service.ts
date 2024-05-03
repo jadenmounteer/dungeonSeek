@@ -11,7 +11,7 @@ export class GameStateService {
   #authService: AuthService = inject(AuthService);
   #turnService: TurnService = inject(TurnService);
 
-  public gameSession!: GameSession;
+  public gameSession!: GameSession; // TODO dependant on the GameComponent to set this. I should try to refactor this component using an observable pattern.
   public allCharactersCurrentlyInGameSession: Character[] = [];
   public charactersBeingControlledByClient: Character[] = [];
   public characterBeingControlledByClient: Character | undefined;
