@@ -210,16 +210,6 @@ export class GameComponent implements OnInit, OnDestroy {
     );
   }
 
-  private setCharactersBeingControlledByClient(): void {
-    // set this.characterStateService.charactersBeingControlledByClient to the characters that share the same userID as the client
-    this.characterStateService.charactersBeingControlledByClient =
-      this.characterStateService.allCharactersCurrentlyInGameSession.filter(
-        (character) => {
-          return character.userId === this.authService.activeUser?.uid;
-        }
-      );
-  }
-
   ngOnInit(): void {}
 
   async ngOnDestroy(): Promise<void> {
@@ -404,7 +394,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameSession
     );
 
-    this.setCharactersBeingControlledByClient();
+    this.characterStateService.setCharactersBeingControlledByClient();
 
     // Since they just came back to the game session, clear their id from the array of characterIDsWhoHaveTakenTurn
     // So they can go again
