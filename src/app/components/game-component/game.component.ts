@@ -383,6 +383,7 @@ export class GameComponent implements OnDestroy {
 
     // Since they just came back to the game session, clear their id from the array of characterIDsWhoHaveTakenTurn
     // So they can go again
+    // TODO this does result in characters being able to take infinite turns if they keep refreshing the page.
     await this.turnService.clearClientCharacterIDsFromTurnArray(
       this.gameStateService.gameSession,
       this.characterService.getClientCharacters(
