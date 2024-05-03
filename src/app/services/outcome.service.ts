@@ -29,10 +29,6 @@ export class OutcomeService implements OnDestroy {
     [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
   ]);
 
-  constructor() {
-    const gameSessionID = this.#activatedRoute.snapshot.params['gameSessionId'];
-  }
-
   ngOnDestroy(): void {}
 
   public makeChoice(outcome: Outcome): void {
