@@ -575,20 +575,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showEventCard = false;
 
     this.#outcomeService.makeChoice(outcome);
-
-    // THE OLD WAY
-
-    // Find easy loot
-    // TODO I can probably make this a map of keys and strings
-    // if (outcome == Outcome.FIND_EASY_LOOT) {
-    //   // this.drawWeaponCard();
-    //   // TODO Add the loot service here
-    //   this.lootService.drawLootCard('Easy');
-    // } else if (outcome == Outcome.FIGHT_SINGLE_BANDIT) {
-    //   alert("You're fighting a bandit!");
-    //   // Fight single bandit
-    //   this.#combatService.startCombat();
-    // }
   }
 
   protected confirmEndMovement() {
