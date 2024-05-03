@@ -58,9 +58,8 @@ export class OutcomeService implements OnDestroy {
     if (this.#gameStateService.characterBeingControlledByClient.gold < 30) {
       // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
 
-      this.#gameDialogueService.buttonOneCallback = () => {
+      this.#gameDialogueService.buttonOneCallback =
         this.#combatService.startCombat.bind(this);
-      };
 
       gameDialogueData.message = `"I changed my mind," the bandit says as he unsheathes his sword. "I'll take your gold and your life!"`;
       gameDialogueData.buttonOneText = 'Begin Combat';
