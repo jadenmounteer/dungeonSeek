@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Outcome } from '../../types/card-deck';
 import { CommonModule } from '@angular/common';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 import { EventCardInfo } from '../../types/event-card';
+import { Outcome } from '../../types/Outcome';
 
 @Component({
   selector: 'app-event-card-info-view',

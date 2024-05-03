@@ -13,7 +13,7 @@ import { AuthService } from '../../auth/auth.service';
 import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
-import { DeckName, Outcome } from '../../types/card-deck';
+import { DeckName } from '../../types/card-deck';
 import { MatDialog } from '@angular/material/dialog';
 import {
   DiceRollDialogComponent,
@@ -35,6 +35,7 @@ import { ZoomService } from '../../services/zoom.service';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
 import { CombatService } from '../../services/combat.service';
+import { Outcome } from '../../types/Outcome';
 
 @Component({
   selector: 'app-game',

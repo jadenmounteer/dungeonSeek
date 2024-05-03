@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DeckName, Outcome } from '../../types/card-deck';
+import { DeckName } from '../../types/card-deck';
 import { MenuComponent } from '../menu/menu.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { EventCardInfoViewComponent } from '../event-card-info-view/event-card-info-view.component';
 import { EventCardInfo } from '../../types/event-card';
 import { EventCardService } from '../../services/event-card.service';
+import { Outcome } from '../../types/Outcome';
 @Component({
   selector: 'app-event-menu',
   standalone: true,
