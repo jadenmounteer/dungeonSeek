@@ -14,7 +14,6 @@ import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
 import { DeckName } from '../../types/card-deck';
-import { MatDialog } from '@angular/material/dialog';
 import {
   DiceRollDialogComponent,
   DiceRollDialogData,
@@ -118,7 +117,6 @@ export class GameComponent implements OnDestroy {
     private characterService: CharacterService,
     private authService: AuthService,
     private turnService: TurnService,
-    public dialog: MatDialog,
     private eventCardService: EventCardService,
     private weaponCardService: WeaponCardService,
     private itemCardService: ItemCardService,
