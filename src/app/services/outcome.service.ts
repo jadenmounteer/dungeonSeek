@@ -2,6 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Outcome } from '../types/Outcome';
 import { CombatService } from './combat.service';
 import { LootService } from './loot.service';
+import { CharacterStat } from '../types/character';
+import { CharacterStateService } from './character-state.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +11,7 @@ import { LootService } from './loot.service';
 export class OutcomeService {
   #combatService: CombatService = inject(CombatService);
   #lootService: LootService = inject(LootService);
+  #characterStateService: CharacterStateService = inject(CharacterStateService);
 
   // Strategy pattern map for mapping the outcome to the function that will handle the outcome.
   #outcomeStrategies = new Map<Outcome, () => void>([
@@ -36,8 +39,19 @@ export class OutcomeService {
   }
 
   #banditTakesYourGold(): void {
+    if (!this.#characterStateService.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client.');
+    }
+
     // Check if the player has any gold.
-    // FIXME in order to do this, move the character state properties from the game component into the character service. Inject the character service here. Then I can access the character's properties just like the game component can.
+    if (
+      this.#characterStateService.characterBeingControlledByClient?.gold < 30
+    ) {
+      // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
+      // Initiate combat.
+      this.#combatService.startCombat();
+    }
+
     // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
     // Initiate combat.
     // If you have more than 30 gold, the bandit takes 30 gold and leaves you alone. Show a dialogue.
