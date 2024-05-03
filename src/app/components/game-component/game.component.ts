@@ -235,7 +235,7 @@ export class GameComponent implements OnDestroy {
         if (
           this.gameStateService.charactersBeingControlledByClient.length === 0
         ) {
-          this.enterGameSession();
+          this.onEnterGame();
           this.loading = false;
         }
       });
@@ -373,7 +373,7 @@ export class GameComponent implements OnDestroy {
     }
   }
 
-  private async enterGameSession() {
+  private async onEnterGame() {
     await this.gameSessionService.addPlayersAndCharactersToGameSession(
       this.gameStateService.allCharactersCurrentlyInGameSession,
       this.gameStateService.gameSession
