@@ -13,5 +13,9 @@ export class GameDialogueService {
     alert('Button callback not set');
   };
 
+  public buttonTwoCallback: () => void = () => {
+    alert('Button callback not set');
+  };
+
   constructor() {}
 }
