@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
 import { PlayerComponent } from '../characters/player/player.component';
 import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
 import { LocationNode, LocationService } from '../../services/location-service';
@@ -61,7 +61,7 @@ import { GameStateService } from '../../services/game-state.service';
   styleUrl: './game.component.scss',
   animations: [fadeIn, fadeOut],
 })
-export class GameComponent implements OnInit, OnDestroy {
+export class GameComponent implements OnDestroy {
   #combatService: CombatService = inject(CombatService);
   #outcomeService: OutcomeService = inject(OutcomeService);
   public gameStateService: GameStateService = inject(GameStateService);
@@ -195,8 +195,6 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.locationsLoading = false;
   }
-
-  ngOnInit(): void {}
 
   async ngOnDestroy(): Promise<void> {
     this.playerPositionSub.unsubscribe();
