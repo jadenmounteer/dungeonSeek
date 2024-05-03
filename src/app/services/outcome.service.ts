@@ -37,6 +37,7 @@ export class OutcomeService {
 
   #banditTakesYourGold(): void {
     // Check if the player has any gold.
+    // FIXME in order to do this, move the character state properties from the game component into the character service. Inject the character service here. Then I can access the character's properties just like the game component can.
     // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
     // Initiate combat.
     // If you have more than 30 gold, the bandit takes 30 gold and leaves you alone. Show a dialogue.
