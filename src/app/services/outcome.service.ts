@@ -4,8 +4,6 @@ import { CombatService } from './combat.service';
 import { LootService } from './loot.service';
 import { GameStateService } from './game-state.service';
 import { CharacterService } from './character/character.service';
-import { GameSessionService } from './game-session/game-session.service';
-import { GameSession } from '../types/game-session';
 import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
@@ -16,7 +14,6 @@ export class OutcomeService implements OnDestroy {
   #lootService: LootService = inject(LootService);
   #gameStateService: GameStateService = inject(GameStateService);
   #characterService: CharacterService = inject(CharacterService);
-  #gameSessionService: GameSessionService = inject(GameSessionService);
   #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
   // Strategy pattern map for mapping the outcome to the function that will handle the outcome.
