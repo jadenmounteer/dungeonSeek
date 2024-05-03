@@ -14,8 +14,6 @@ export class OutcomeService {
   constructor() {}
 
   public makeChoice(outcome: Outcome): void {
-    // Convert the string to an int
-    const outcomeToNumber = parseInt(outcome, 10);
     const strategy = this.#outcomeStrategies.get(outcome);
     if (strategy) {
       strategy();
