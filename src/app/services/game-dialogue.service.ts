@@ -1,13 +1,20 @@
 import { Injectable, inject } from '@angular/core';
-import { GameStateService } from './game-state.service';
 
+export interface GameDialogueData {
+  message: string;
+  showButtonOne: boolean;
+  showButtonTwo: boolean;
+  buttonOneText: string;
+  buttonTwoText: string;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class GameDialogueService {
-  #gameStateService: GameStateService = inject(GameStateService);
+  public gameDialogueData: GameDialogueData =
+    this.#setGameDialogueDataToDefault();
+
   public showGameDialogue = false;
-  public gameDialogueMessage: string = '';
 
   public buttonOneCallback: (() => void) | undefined;
 
@@ -15,10 +22,37 @@ export class GameDialogueService {
 
   constructor() {}
 
+  public showDialogue(
+    message: string,
+    showButtonOne = true,
+    showButtonTwo = false,
+    buttonOneText?: string,
+    buttonTwoText?: string
+  ): void {
+    this.gameDialogueData.message = message;
+    this.gameDialogueData.showButtonOne = showButtonOne;
+    this.gameDialogueData.showButtonTwo = showButtonTwo;
+    this.gameDialogueData.buttonOneText = buttonOneText || 'Close';
+    this.gameDialogueData.buttonTwoText = buttonTwoText || '';
+
+    this.showGameDialogue = true;
+  }
+
   public closeDialogue(): void {
     this.showGameDialogue = false;
     this.buttonOneCallback = undefined;
     this.buttonTwoCallback = undefined;
+    this.gameDialogueData = this.#setGameDialogueDataToDefault();
+  }
+
+  #setGameDialogueDataToDefault(): GameDialogueData {
+    return {
+      message: '',
+      showButtonOne: false,
+      showButtonTwo: false,
+      buttonOneText: 'Close',
+      buttonTwoText: '',
+    };
   }
 
   public handleButtonOneClick(): void {

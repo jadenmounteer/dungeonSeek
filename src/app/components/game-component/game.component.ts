@@ -584,8 +584,7 @@ export class GameComponent implements OnDestroy {
       this.gameStateService.characterBeingControlledByClient!.movementSpeed ??
       0 > 0
     ) {
-      this.gameDialogueService.showGameDialogue = true;
-      this.gameDialogueService.gameDialogueMessage = `You can still move ${
+      const message = `You can still move ${
         this.gameStateService.characterBeingControlledByClient!.movementSpeed
       } spaces. Are you sure you want to stop moving?`;
 
@@ -594,6 +593,8 @@ export class GameComponent implements OnDestroy {
 
       this.gameDialogueService.buttonTwoCallback =
         this.gameDialogueService.closeDialogue.bind(this);
+
+      this.gameDialogueService.showDialogue(message, true, true, 'Yes', 'No');
     } else {
       this.rollForEventCard();
     }

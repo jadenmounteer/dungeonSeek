@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
 import { CommonModule } from '@angular/common';
+import { GameDialogueData } from '../../services/game-dialogue.service';
 
 @Component({
   selector: 'app-game-dialogue',
@@ -19,9 +20,8 @@ export class GameDialogueComponent {
   @Output() closeMenu: EventEmitter<void> = new EventEmitter<void>();
   @Output() buttonOneClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() buttonTwoClick: EventEmitter<void> = new EventEmitter<void>();
-  message: InputSignal<string> = input.required();
-  showButtonOne: InputSignal<boolean> = input.required();
-  showButtonTwo: InputSignal<boolean> = input.required();
+
+  gameDialogueData: InputSignal<GameDialogueData> = input.required();
 
   protected onCloseMenu() {
     this.closeMenu.emit();

@@ -4,22 +4,22 @@
   (closeMenu)="onCloseMenu()"
 >
   <div class="menu-content">
-    <p class="big-text">{{ message() }}</p>
+    <p class="big-text">{{ gameDialogueData().message }}</p>
 
     <div class="buttons-section">
       <div
         class="choice-button"
         (click)="onButtonOneClick()"
-        *ngIf="showButtonOne()"
+        *ngIf="gameDialogueData().showButtonOne"
       >
-        Yes
+        {{ gameDialogueData().buttonOneText }}
       </div>
       <div
         class="choice-button"
         (click)="onButtonTwoClick()"
-        *ngIf="showButtonTwo()"
+        *ngIf="gameDialogueData().showButtonTwo"
       >
-        No
+        {{ gameDialogueData().buttonTwoText }}
       </div>
     </div>
   </div>

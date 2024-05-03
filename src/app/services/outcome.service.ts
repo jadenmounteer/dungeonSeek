@@ -5,6 +5,7 @@ import { LootService } from './loot.service';
 import { GameStateService } from './game-state.service';
 import { CharacterService } from './character/character.service';
 import { ActivatedRoute } from '@angular/router';
+import { GameDialogueService } from './game-dialogue.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class OutcomeService implements OnDestroy {
   #lootService: LootService = inject(LootService);
   #gameStateService: GameStateService = inject(GameStateService);
   #characterService: CharacterService = inject(CharacterService);
-  #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  #gameDialogueService: GameDialogueService = inject(GameDialogueService);
 
   // Strategy pattern map for mapping the outcome to the function that will handle the outcome.
   #outcomeStrategies = new Map<Outcome, () => void>([
@@ -47,20 +48,26 @@ export class OutcomeService implements OnDestroy {
     }
 
     // Check if the player has any gold.
-    if (this.#gameStateService.characterBeingControlledByClient.gold < 30) {
+    if (this.#gameStateService.characterBeingControlledByClient.gold > 100) {
       // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
       // Initiate combat.
       this.#combatService.startCombat();
     } else {
-      // If you have more than 30 gold, the bandit takes 30 gold and leaves you alone. Show a dialogue.
-
-      // Show dialogue
-
+      // If you have more than 30 gold, the bandit takes your gold and leaves you alone.
       this.#gameStateService.characterBeingControlledByClient.gold = 0;
       this.#characterService.updateCharacter(
         this.#gameStateService.characterBeingControlledByClient,
         this.#gameStateService.gameSession.id
       );
+
+      // Show dialogue
+      const message =
+        'The bandit smirks as you hand him all of your gold. He dashes off the road and you lose sight of him.';
+      this.#gameDialogueService.showDialogue(message);
+
+      this.#gameDialogueService.buttonOneCallback = () => {
+        this.#gameDialogueService.closeDialogue.bind(this);
+      };
     }
   }
 }

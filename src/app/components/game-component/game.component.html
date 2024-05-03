@@ -182,10 +182,8 @@
   } @defer (when this.gameDialogueService.showGameDialogue) {
   <app-game-dialogue
     *ngIf="this.gameDialogueService.showGameDialogue"
-    [message]="this.gameDialogueService.gameDialogueMessage"
     (closeMenu)="this.gameDialogueService.showGameDialogue = false"
-    [showButtonOne]="this.gameDialogueService.buttonOneCallback != undefined"
-    [showButtonTwo]="this.gameDialogueService.buttonTwoCallback != undefined"
+    [gameDialogueData]="this.gameDialogueService.gameDialogueData"
     (buttonOneClick)="this.gameDialogueService.handleButtonOneClick()"
     (buttonTwoClick)="this.gameDialogueService.handleButtonTwoClick()"
   />
