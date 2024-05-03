@@ -9,17 +9,35 @@ export class GameDialogueService {
   public showGameDialogue = false;
   public gameDialogueMessage: string = '';
 
-  private defaultCallback: () => void = () => {};
+  public buttonOneCallback: (() => void) | undefined;
 
-  public buttonOneCallback = this.defaultCallback;
-
-  public buttonTwoCallback = this.defaultCallback;
+  public buttonTwoCallback: (() => void) | undefined;
 
   constructor() {}
 
   public closeDialogue(): void {
     this.showGameDialogue = false;
-    this.buttonOneCallback = this.defaultCallback;
-    this.buttonTwoCallback = this.defaultCallback;
+    this.buttonOneCallback = undefined;
+    this.buttonTwoCallback = undefined;
+  }
+
+  public handleButtonOneClick(): void {
+    this.showGameDialogue = false;
+
+    if (this.buttonOneCallback === undefined) {
+      return;
+    }
+
+    this.buttonOneCallback();
+  }
+
+  public handleButtonTwoClick(): void {
+    this.showGameDialogue = false;
+
+    if (this.buttonTwoCallback === undefined) {
+      return;
+    }
+
+    this.buttonTwoCallback();
   }
 }

@@ -184,14 +184,10 @@
     *ngIf="this.gameDialogueService.showGameDialogue"
     [message]="this.gameDialogueService.gameDialogueMessage"
     (closeMenu)="this.gameDialogueService.showGameDialogue = false"
-    (buttonOneClick)="
-      this.gameDialogueService.showGameDialogue = false;
-      this.gameDialogueService.buttonOneCallback()
-    "
-    (buttonTwoClick)="
-      this.gameDialogueService.showGameDialogue = false;
-      this.gameDialogueService.buttonTwoCallback()
-    "
+    [showButtonOne]="this.gameDialogueService.buttonOneCallback != undefined"
+    [showButtonTwo]="this.gameDialogueService.buttonTwoCallback != undefined"
+    (buttonOneClick)="this.gameDialogueService.handleButtonOneClick()"
+    (buttonTwoClick)="this.gameDialogueService.handleButtonTwoClick()"
   />
   }
 

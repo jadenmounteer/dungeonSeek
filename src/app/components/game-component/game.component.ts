@@ -591,6 +591,9 @@ export class GameComponent implements OnDestroy {
 
       this.gameDialogueService.buttonOneCallback =
         this.endMovementEarly.bind(this);
+
+      this.gameDialogueService.buttonTwoCallback =
+        this.gameDialogueService.closeDialogue.bind(this);
     } else {
       this.rollForEventCard();
     }

@@ -20,6 +20,8 @@ export class GameDialogueComponent {
   @Output() buttonOneClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() buttonTwoClick: EventEmitter<void> = new EventEmitter<void>();
   message: InputSignal<string> = input.required();
+  showButtonOne: InputSignal<boolean> = input.required();
+  showButtonTwo: InputSignal<boolean> = input.required();
 
   protected onCloseMenu() {
     this.closeMenu.emit();
