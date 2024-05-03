@@ -60,11 +60,11 @@ export class OutcomeService implements OnDestroy {
       this.#combatService.startCombat();
     } else {
       // If you have more than 30 gold, the bandit takes 30 gold and leaves you alone. Show a dialogue.
-      this.#gameStateService.characterBeingControlledByClient.gold -= 30;
-      // this.#characterService.updateCharacter(
-      //   this.#gameStateService.characterBeingControlledByClient,
-      //   this.#gameSession.id
-      // );
+      this.#gameStateService.characterBeingControlledByClient.gold = 0;
+      this.#characterService.updateCharacter(
+        this.#gameStateService.characterBeingControlledByClient,
+        this.#gameStateService.gameSession.id
+      );
     }
   }
 }
