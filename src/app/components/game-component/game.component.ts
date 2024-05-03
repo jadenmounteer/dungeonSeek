@@ -194,22 +194,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.locationsLoading = false;
   }
 
-  private determineWhosNextToBeControlledByClient(): void {
-    this.characterStateService.charactersBeingControlledByClient.forEach(
-      (character) => {
-        if (
-          this.turnService.isItMyTurnOnClientSide(
-            this.gameSession,
-            character.id
-          )
-        ) {
-          this.characterStateService.characterBeingControlledByClient =
-            character;
-        }
-      }
-    );
-  }
-
   ngOnInit(): void {}
 
   async ngOnDestroy(): Promise<void> {
@@ -411,7 +395,9 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameSession.id
     );
 
-    this.determineWhosNextToBeControlledByClient();
+    this.characterStateService.determineWhosNextToBeControlledByClient(
+      this.gameSession
+    );
 
     if (this.characterStateService.characterBeingControlledByClient) {
       this.gameSessionService.scrollToCharacterBeingControlledByClient(
@@ -429,7 +415,9 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameSession.id
     );
 
-    this.determineWhosNextToBeControlledByClient();
+    this.characterStateService.determineWhosNextToBeControlledByClient(
+      this.gameSession
+    );
 
     if (this.characterStateService.characterBeingControlledByClient) {
       this.gameSessionService.scrollToCharacterBeingControlledByClient(
