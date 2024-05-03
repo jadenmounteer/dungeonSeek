@@ -35,7 +35,7 @@
     "choices": [
       {
         "description": "Hand the bandit your gold.",
-        "outcome": "SUBTRACT_GOLD"
+        "outcome": "14"
       },
       {
         "description": "Fight off the bandit.",

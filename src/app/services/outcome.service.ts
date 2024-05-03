@@ -20,6 +20,7 @@ export class OutcomeService {
     [Outcome.FIND_HARD_LOOT, () => this.#lootService.drawLootCard('Hard')],
     [Outcome.FIND_INSANE_LOOT, () => this.#lootService.drawLootCard('Insane')],
     [Outcome.FIGHT_SINGLE_BANDIT, () => this.#combatService.startCombat()],
+    [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
   ]);
 
   constructor() {}
@@ -32,5 +33,12 @@ export class OutcomeService {
       // Handle unknown outcome.
       console.error('No strategy found for outcome: ', outcome);
     }
+  }
+
+  #banditTakesYourGold(): void {
+    // Check if the player has any gold.
+    // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
+    // Initiate combat.
+    // If you have more than 30 gold, the bandit takes 30 gold and leaves you alone. Show a dialogue.
   }
 }
