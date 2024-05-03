@@ -7,10 +7,11 @@ import { GameSession } from '../types/game-session';
 @Injectable({
   providedIn: 'root',
 })
-export class CharacterStateService {
+export class GameStateService {
   #authService: AuthService = inject(AuthService);
   #turnService: TurnService = inject(TurnService);
 
+  public gameSession!: GameSession;
   public allCharactersCurrentlyInGameSession: Character[] = [];
   public charactersBeingControlledByClient: Character[] = [];
   public characterBeingControlledByClient: Character | undefined;

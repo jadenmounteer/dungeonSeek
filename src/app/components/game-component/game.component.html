@@ -20,7 +20,7 @@
 
     <span
       *ngFor="
-        let character of characterStateService.allCharactersCurrentlyInGameSession
+        let character of gameStateService.allCharactersCurrentlyInGameSession
       "
     >
       <div
@@ -32,7 +32,7 @@
       >
         <app-turn-arrow
           *ngIf="
-            characterStateService.characterBeingControlledByClient?.id ===
+            gameStateService.characterBeingControlledByClient?.id ===
             character.id
           "
         ></app-turn-arrow>
@@ -59,8 +59,8 @@
           *ngIf="!locationsLoading"
           [distanceFromCharacter]="location.value.distanceFromPlayer"
           [characterMovementSpeed]="
-            characterStateService.characterBeingControlledByClient
-              ?.movementSpeed ?? 0
+            gameStateService.characterBeingControlledByClient?.movementSpeed ??
+            0
           "
         />
       </div>
@@ -85,28 +85,24 @@
     <span
       class="player-movement-section"
       *ngIf="
-        characterStateService.characterBeingControlledByClient?.movementSpeed !=
+        gameStateService.characterBeingControlledByClient?.movementSpeed !=
           undefined && !currentCharacterRolledForEventCardThisTurn
       "
     >
       <p
         class="big-text sticky-text"
         *ngIf="
-          characterStateService.characterBeingControlledByClient!
-            .movementSpeed > 0
+          gameStateService.characterBeingControlledByClient!.movementSpeed > 0
         "
       >
         Movement:
-        {{
-          characterStateService.characterBeingControlledByClient!.movementSpeed
-        }}
+        {{ gameStateService.characterBeingControlledByClient!.movementSpeed }}
       </p>
 
       <p
         class="big-text sticky-text"
         *ngIf="
-          characterStateService.characterBeingControlledByClient!
-            .movementSpeed <= 0
+          gameStateService.characterBeingControlledByClient!.movementSpeed <= 0
         "
       >
         You cannot move anymore this turn.
@@ -121,8 +117,8 @@
   </div>
 
   <app-character-info
-    *ngIf="characterStateService.characterBeingControlledByClient"
-    [character]="characterStateService.characterBeingControlledByClient"
+    *ngIf="gameStateService.characterBeingControlledByClient"
+    [character]="gameStateService.characterBeingControlledByClient"
     (showCharacterMenu)="toggleCharacterMenu()"
   ></app-character-info>
 
@@ -164,9 +160,9 @@
   <!-- Appears when you are viewing the character menu -->
   <app-character-menu
     *ngIf="showCharacterMenu()"
-    [character]="characterStateService.characterBeingControlledByClient"
+    [character]="gameStateService.characterBeingControlledByClient"
     (closeMenu)="toggleCharacterMenu()"
-    [gameSessionID]="gameSession.id"
+    [gameSessionID]="this.gameStateService.gameSession.id"
   >
   </app-character-menu>
   } @defer (when currentCharacterRollingDice) {
@@ -211,7 +207,7 @@
     </div>
     <span
       *ngIf="
-        characterStateService.characterBeingControlledByClient?.movementSpeed !=
+        gameStateService.characterBeingControlledByClient?.movementSpeed !=
         undefined
       "
     >

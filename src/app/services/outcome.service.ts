@@ -1,17 +1,23 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Outcome } from '../types/Outcome';
 import { CombatService } from './combat.service';
 import { LootService } from './loot.service';
-import { CharacterStat } from '../types/character';
-import { CharacterStateService } from './character-state.service';
+import { GameStateService } from './game-state.service';
+import { CharacterService } from './character/character.service';
+import { GameSessionService } from './game-session/game-session.service';
+import { GameSession } from '../types/game-session';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
-export class OutcomeService {
+export class OutcomeService implements OnDestroy {
   #combatService: CombatService = inject(CombatService);
   #lootService: LootService = inject(LootService);
-  #characterStateService: CharacterStateService = inject(CharacterStateService);
+  #gameStateService: GameStateService = inject(GameStateService);
+  #characterService: CharacterService = inject(CharacterService);
+  #gameSessionService: GameSessionService = inject(GameSessionService);
+  #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
   // Strategy pattern map for mapping the outcome to the function that will handle the outcome.
   #outcomeStrategies = new Map<Outcome, () => void>([
@@ -26,7 +32,11 @@ export class OutcomeService {
     [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
   ]);
 
-  constructor() {}
+  constructor() {
+    const gameSessionID = this.#activatedRoute.snapshot.params['gameSessionId'];
+  }
+
+  ngOnDestroy(): void {}
 
   public makeChoice(outcome: Outcome): void {
     const strategy = this.#outcomeStrategies.get(outcome);
@@ -39,21 +49,22 @@ export class OutcomeService {
   }
 
   #banditTakesYourGold(): void {
-    if (!this.#characterStateService.characterBeingControlledByClient) {
+    if (!this.#gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client.');
     }
 
     // Check if the player has any gold.
-    if (
-      this.#characterStateService.characterBeingControlledByClient?.gold < 30
-    ) {
+    if (this.#gameStateService.characterBeingControlledByClient?.gold < 30) {
       // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
       // Initiate combat.
       this.#combatService.startCombat();
+    } else {
+      // If you have more than 30 gold, the bandit takes 30 gold and leaves you alone. Show a dialogue.
+      this.#gameStateService.characterBeingControlledByClient.gold -= 30;
+      // this.#characterService.updateCharacter(
+      //   this.#gameStateService.characterBeingControlledByClient,
+      //   this.#gameSession.id
+      // );
     }
-
-    // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
-    // Initiate combat.
-    // If you have more than 30 gold, the bandit takes 30 gold and leaves you alone. Show a dialogue.
   }
 }

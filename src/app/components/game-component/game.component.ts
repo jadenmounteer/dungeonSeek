@@ -37,7 +37,7 @@ import { fadeOut } from '../../animations/fade-out-animation';
 import { CombatService } from '../../services/combat.service';
 import { Outcome } from '../../types/Outcome';
 import { OutcomeService } from '../../services/outcome.service';
-import { CharacterStateService } from '../../services/character-state.service';
+import { GameStateService } from '../../services/game-state.service';
 
 @Component({
   selector: 'app-game',
@@ -64,16 +64,13 @@ import { CharacterStateService } from '../../services/character-state.service';
 export class GameComponent implements OnInit, OnDestroy {
   #combatService: CombatService = inject(CombatService);
   #outcomeService: OutcomeService = inject(OutcomeService);
-  public characterStateService: CharacterStateService = inject(
-    CharacterStateService
-  );
+  public gameStateService: GameStateService = inject(GameStateService);
 
   protected diceRollingData: DiceRollDialogData | undefined;
 
   private playerPositionSub: Subscription;
 
   private gameSessionSub: Subscription;
-  protected gameSession!: GameSession;
 
   protected charactersSub!: Subscription;
   protected loading = true;
@@ -133,11 +130,17 @@ export class GameComponent implements OnInit, OnDestroy {
     this.gameSessionSub = this.gameSessionService
       .getGameSession(gameSessionID)
       .subscribe((gameSession) => {
-        this.gameSession = gameSession;
+        this.gameStateService.gameSession = gameSession;
 
-        this.eventCardService.setCardDeckSubscriptions(this.gameSession.id);
-        this.weaponCardService.setCardDeckSubscriptions(this.gameSession.id);
-        this.itemCardService.setCardDeckSubscriptions(this.gameSession.id);
+        this.eventCardService.setCardDeckSubscriptions(
+          this.gameStateService.gameSession.id
+        );
+        this.weaponCardService.setCardDeckSubscriptions(
+          this.gameStateService.gameSession.id
+        );
+        this.itemCardService.setCardDeckSubscriptions(
+          this.gameStateService.gameSession.id
+        );
 
         // If people were waiting for an online player to finish their turn
         // and they just finished their turn, start the next turn
@@ -145,7 +148,8 @@ export class GameComponent implements OnInit, OnDestroy {
         // fire multiple times while we are waiting for other players
         if (
           this.waitingForNextTurnToStart &&
-          this.gameSession.currentTurn.characterIDsWhoHaveTakenTurn.length === 0
+          this.gameStateService.gameSession.currentTurn
+            .characterIDsWhoHaveTakenTurn.length === 0
         ) {
           this.waitingForNextTurnToStart = false;
 
@@ -171,24 +175,22 @@ export class GameComponent implements OnInit, OnDestroy {
     this.locationService.resetLocationDistances();
 
     this.locationsLoading = true;
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw Error('No character being controlled by client');
     }
 
     let playersMovementSpeedValue =
-      this.characterStateService.characterBeingControlledByClient.movementSpeed;
+      this.gameStateService.characterBeingControlledByClient.movementSpeed;
 
     let distanceFromCharacter = 1;
     let locationToCheck: LocationNode =
-      this.characterStateService.characterBeingControlledByClient
-        .currentLocation;
+      this.gameStateService.characterBeingControlledByClient.currentLocation;
 
     this.locationService.setDistanceFromPlayerForAdjacentLocations(
       locationToCheck.adjacentLocations,
       distanceFromCharacter,
       playersMovementSpeedValue,
-      this.characterStateService.characterBeingControlledByClient
-        .currentLocation
+      this.gameStateService.characterBeingControlledByClient.currentLocation
     );
 
     this.locationsLoading = false;
@@ -205,36 +207,35 @@ export class GameComponent implements OnInit, OnDestroy {
     this.drawGoldSubscription.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
-    if (this.gameSession.playerIDs.length > 1) {
+    if (this.gameStateService.gameSession.playerIDs.length > 1) {
       await this.currentCharacterFinishedTurn();
     }
 
     // Remove all of the player's characters from the game session for now
     // so the other players can take turns without needing to wait.
     await this.gameSessionService.temporarilyRemovePlayersAndCharactersFromGameSession(
-      this.gameSession,
-      this.characterStateService.charactersBeingControlledByClient
+      this.gameStateService.gameSession,
+      this.gameStateService.charactersBeingControlledByClient
     );
   }
 
   private setCharactersSub(): void {
     this.charactersSub = this.characterService
-      .getCharactersInGameSession(this.gameSession.id)
+      .getCharactersInGameSession(this.gameStateService.gameSession.id)
       .subscribe((allCharactersInGameLobby) => {
-        this.characterStateService.allCharactersCurrentlyInGameSession =
+        this.gameStateService.allCharactersCurrentlyInGameSession =
           this.gameSessionService.getCharactersInCurrentGameSession(
             allCharactersInGameLobby,
-            this.gameSession
+            this.gameStateService.gameSession
           );
 
         // TODO I probably don't need to do these things every time the characters change.
         // There probably a way to do this after the first time the characters are set.
         // I can probably use RXJS for this.
-        // Or I can do something hacky and just check if the characterStateService.charactersBeingControlledByClient is empty.
+        // Or I can do something hacky and just check if the gameStateService.charactersBeingControlledByClient is empty.
         // If so, do this
         if (
-          this.characterStateService.charactersBeingControlledByClient
-            .length === 0
+          this.gameStateService.charactersBeingControlledByClient.length === 0
         ) {
           this.enterGameSession();
           this.loading = false;
@@ -243,13 +244,12 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private moveCharacterToLocation(location: LocationNode) {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       return;
     }
 
     if (
-      this.characterStateService.characterBeingControlledByClient
-        .movementSpeed === 0
+      this.gameStateService.characterBeingControlledByClient.movementSpeed === 0
     ) {
       return;
     }
@@ -261,63 +261,62 @@ export class GameComponent implements OnInit, OnDestroy {
 
     if (
       location.distanceFromPlayer >
-      this.characterStateService.characterBeingControlledByClient.movementSpeed
+      this.gameStateService.characterBeingControlledByClient.movementSpeed
     ) {
       return;
     }
 
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
     }
     this.changePlayerDirection(location);
     // TODO Take into account the user's movement speed on this turn
-    this.characterStateService.characterBeingControlledByClient.currentLocation.position =
+    this.gameStateService.characterBeingControlledByClient.currentLocation.position =
       location.position;
 
     // I use the spread operator here so we don't store the actual location in the character object.
     // If we don't do this the character object will be storing the actual location object
     // and the character will bring the location with them. :)
-    this.characterStateService.characterBeingControlledByClient.currentLocation =
-      {
-        ...location,
-      };
+    this.gameStateService.characterBeingControlledByClient.currentLocation = {
+      ...location,
+    };
 
-    this.characterStateService.characterBeingControlledByClient.movementSpeed -=
+    this.gameStateService.characterBeingControlledByClient.movementSpeed -=
       location.distanceFromPlayer ?? 1;
 
     // Update the character's location in the database
     this.characterService.updateCharacter(
-      this.characterStateService.characterBeingControlledByClient,
-      this.gameSession.id
+      this.gameStateService.characterBeingControlledByClient,
+      this.gameStateService.gameSession.id
     );
 
     this.updateLocationNodeDataRelativeToPlayer();
     this.gameSessionService.scrollToCharacterBeingControlledByClient(
-      this.characterStateService.characterBeingControlledByClient,
+      this.gameStateService.characterBeingControlledByClient,
       this.zoomPercentageDisplay
     );
   }
 
   // TODO implement this method
   private changePlayerDirection(location: LocationNode) {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
     }
     if (
-      this.characterStateService.characterBeingControlledByClient
-        .currentLocation === null
+      this.gameStateService.characterBeingControlledByClient.currentLocation ===
+      null
     ) {
       return;
     }
     if (
       location.position.xPosition <
-      this.characterStateService.characterBeingControlledByClient
-        .currentLocation.position.xPosition
+      this.gameStateService.characterBeingControlledByClient.currentLocation
+        .position.xPosition
     ) {
-      this.characterStateService.characterBeingControlledByClient.directionFacing =
+      this.gameStateService.characterBeingControlledByClient.directionFacing =
         'Left';
     } else {
-      this.characterStateService.characterBeingControlledByClient.directionFacing =
+      this.gameStateService.characterBeingControlledByClient.directionFacing =
         'Right';
     }
   }
@@ -325,21 +324,21 @@ export class GameComponent implements OnInit, OnDestroy {
   protected async currentCharacterFinishedTurn(): Promise<void> {
     this.currentCharacterRolledForEventCardThisTurn = false;
 
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
     }
 
     await this.turnService.endCharacterTurn(
-      this.gameSession,
-      this.characterStateService.characterBeingControlledByClient.id
+      this.gameStateService.gameSession,
+      this.gameStateService.characterBeingControlledByClient.id
     );
 
     // If all the characters on client side have finished their turn, add the playerID to the array
     let playerIsFinished = true;
-    this.characterStateService.charactersBeingControlledByClient.forEach(
+    this.gameStateService.charactersBeingControlledByClient.forEach(
       (character) => {
         if (
-          !this.gameSession.currentTurn.characterIDsWhoHaveTakenTurn.includes(
+          !this.gameStateService.gameSession.currentTurn.characterIDsWhoHaveTakenTurn.includes(
             character.id
           )
         ) {
@@ -349,18 +348,22 @@ export class GameComponent implements OnInit, OnDestroy {
     );
 
     if (playerIsFinished) {
-      this.characterStateService.characterBeingControlledByClient = undefined;
+      this.gameStateService.characterBeingControlledByClient = undefined;
       await this.turnService.signalToServerThatPlayerIsDone(
         this.authService.activeUser!.uid,
-        this.gameSession
+        this.gameStateService.gameSession
       );
 
-      if (this.turnService.allPlayersHaveFinishedTheirTurn(this.gameSession)) {
+      if (
+        this.turnService.allPlayersHaveFinishedTheirTurn(
+          this.gameStateService.gameSession
+        )
+      ) {
         this.waitingForNextTurnToStart = true;
 
         await this.turnService.createNewTurn(
-          this.gameSession,
-          this.characterStateService.allCharactersCurrentlyInGameSession.map(
+          this.gameStateService.gameSession,
+          this.gameStateService.allCharactersCurrentlyInGameSession.map(
             (character) => character.id
           )
         );
@@ -374,34 +377,34 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private async enterGameSession() {
     await this.gameSessionService.addPlayersAndCharactersToGameSession(
-      this.characterStateService.allCharactersCurrentlyInGameSession,
-      this.gameSession
+      this.gameStateService.allCharactersCurrentlyInGameSession,
+      this.gameStateService.gameSession
     );
 
-    this.characterStateService.setCharactersBeingControlledByClient();
+    this.gameStateService.setCharactersBeingControlledByClient();
 
     // Since they just came back to the game session, clear their id from the array of characterIDsWhoHaveTakenTurn
     // So they can go again
     await this.turnService.clearClientCharacterIDsFromTurnArray(
-      this.gameSession,
+      this.gameStateService.gameSession,
       this.characterService.getClientCharacters(
-        this.characterStateService.allCharactersCurrentlyInGameSession,
+        this.gameStateService.allCharactersCurrentlyInGameSession,
         this.authService.activeUser?.uid
       )
     );
 
     await this.turnService.resetCharacterMovementSpeeds(
-      this.characterStateService.charactersBeingControlledByClient,
-      this.gameSession.id
+      this.gameStateService.charactersBeingControlledByClient,
+      this.gameStateService.gameSession.id
     );
 
-    this.characterStateService.determineWhosNextToBeControlledByClient(
-      this.gameSession
+    this.gameStateService.determineWhosNextToBeControlledByClient(
+      this.gameStateService.gameSession
     );
 
-    if (this.characterStateService.characterBeingControlledByClient) {
+    if (this.gameStateService.characterBeingControlledByClient) {
       this.gameSessionService.scrollToCharacterBeingControlledByClient(
-        this.characterStateService.characterBeingControlledByClient,
+        this.gameStateService.characterBeingControlledByClient,
         this.zoomPercentageDisplay
       );
       this.updateLocationNodeDataRelativeToPlayer();
@@ -411,17 +414,17 @@ export class GameComponent implements OnInit, OnDestroy {
   private async startNewCharacterTurn() {
     // TODO I only need to reset the movement speed of the next player, not all of them.
     await this.turnService.resetCharacterMovementSpeeds(
-      this.characterStateService.charactersBeingControlledByClient,
-      this.gameSession.id
+      this.gameStateService.charactersBeingControlledByClient,
+      this.gameStateService.gameSession.id
     );
 
-    this.characterStateService.determineWhosNextToBeControlledByClient(
-      this.gameSession
+    this.gameStateService.determineWhosNextToBeControlledByClient(
+      this.gameStateService.gameSession
     );
 
-    if (this.characterStateService.characterBeingControlledByClient) {
+    if (this.gameStateService.characterBeingControlledByClient) {
       this.gameSessionService.scrollToCharacterBeingControlledByClient(
-        this.characterStateService.characterBeingControlledByClient,
+        this.gameStateService.characterBeingControlledByClient,
         this.zoomPercentageDisplay
       );
       this.updateLocationNodeDataRelativeToPlayer();
@@ -429,7 +432,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async drawWeaponCard(lootType: CardRewardType): Promise<void> {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't draw a weapon card without a character."
       );
@@ -440,7 +443,7 @@ export class GameComponent implements OnInit, OnDestroy {
     };
 
     this.cardName = await this.weaponCardService.drawCard(
-      this.gameSession.id,
+      this.gameStateService.gameSession.id,
       cardCriteria
     );
 
@@ -448,7 +451,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private async drawGoldCard(goldAmount: number): Promise<void> {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't draw an item card without a character."
       );
@@ -460,17 +463,17 @@ export class GameComponent implements OnInit, OnDestroy {
 
   // TODO Make a service to handle similar logic and extract it from the game component.
   protected addGoldToCharacter() {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't add gold to a character without a character."
       );
     }
 
-    this.characterStateService.characterBeingControlledByClient.gold +=
+    this.gameStateService.characterBeingControlledByClient.gold +=
       this.goldFoundAmount;
     this.characterService.updateCharacter(
-      this.characterStateService.characterBeingControlledByClient,
-      this.gameSession.id
+      this.gameStateService.characterBeingControlledByClient,
+      this.gameStateService.gameSession.id
     );
 
     this.goldFoundAmount = 0;
@@ -478,7 +481,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected addItemToPlayerInventory(): void {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't add an item to a character without a character."
       );
@@ -490,19 +493,19 @@ export class GameComponent implements OnInit, OnDestroy {
       );
     }
 
-    this.characterStateService.characterBeingControlledByClient.characterMenu.itemCards.push(
+    this.gameStateService.characterBeingControlledByClient.characterMenu.itemCards.push(
       this.cardName
     );
     this.characterService.updateCharacter(
-      this.characterStateService.characterBeingControlledByClient,
-      this.gameSession.id
+      this.gameStateService.characterBeingControlledByClient,
+      this.gameStateService.gameSession.id
     );
 
     this.showItemCard = false;
   }
 
   protected addWeaponToPlayerInventory(): void {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't add a weapon to a character without a character."
       );
@@ -519,19 +522,19 @@ export class GameComponent implements OnInit, OnDestroy {
       equipped: false,
     };
 
-    this.characterStateService.characterBeingControlledByClient.characterMenu.weaponCards.push(
+    this.gameStateService.characterBeingControlledByClient.characterMenu.weaponCards.push(
       newEquipment
     );
     this.characterService.updateCharacter(
-      this.characterStateService.characterBeingControlledByClient,
-      this.gameSession.id
+      this.gameStateService.characterBeingControlledByClient,
+      this.gameStateService.gameSession.id
     );
 
     this.showWeaponCard = false;
   }
 
   private async drawItemCard(lootType?: CardRewardType): Promise<void> {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't draw an item card without a character."
       );
@@ -542,7 +545,7 @@ export class GameComponent implements OnInit, OnDestroy {
     };
 
     this.cardName = await this.itemCardService.drawCard(
-      this.gameSession.id,
+      this.gameStateService.gameSession.id,
       cardCriteria
     );
 
@@ -550,7 +553,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   protected async drawEventCard(): Promise<void> {
-    if (!this.characterStateService.characterBeingControlledByClient) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error(
         "No character being controlled by client. We can't draw an event card without a character."
       );
@@ -558,16 +561,16 @@ export class GameComponent implements OnInit, OnDestroy {
 
     const cardCriteria = {
       locationType:
-        this.characterStateService.characterBeingControlledByClient
-          .currentLocation.locationType,
+        this.gameStateService.characterBeingControlledByClient.currentLocation
+          .locationType,
     };
     this.cardName = await this.eventCardService.drawCard(
-      this.gameSession.id,
+      this.gameStateService.gameSession.id,
       cardCriteria
     );
 
     this.deckName =
-      this.characterStateService.characterBeingControlledByClient?.currentLocation.eventDeckType;
+      this.gameStateService.characterBeingControlledByClient?.currentLocation.eventDeckType;
 
     this.showEventCard = true;
   }
@@ -583,14 +586,12 @@ export class GameComponent implements OnInit, OnDestroy {
 
   protected confirmEndMovement() {
     if (
-      this.characterStateService.characterBeingControlledByClient!
-        .movementSpeed ??
+      this.gameStateService.characterBeingControlledByClient!.movementSpeed ??
       0 > 0
     ) {
       this.showConfirmationMenu = true;
       this.confirmationMessage = `You can still move ${
-        this.characterStateService.characterBeingControlledByClient!
-          .movementSpeed
+        this.gameStateService.characterBeingControlledByClient!.movementSpeed
       } spaces. Are you sure you want to stop moving?`;
 
       this.confirmMenuCallback = this.endMovementEarly;
@@ -600,7 +601,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private endMovementEarly() {
-    this.characterStateService.characterBeingControlledByClient!.movementSpeed = 0;
+    this.gameStateService.characterBeingControlledByClient!.movementSpeed = 0;
 
     this.rollForEventCard();
   }
