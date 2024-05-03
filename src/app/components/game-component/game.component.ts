@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GameSessionService } from '../../services/game-session/game-session.service';
 import { GameSession } from '../../types/game-session';
-import { Character, CharacterMenuEquipment } from '../../types/character';
+import { CharacterMenuEquipment } from '../../types/character';
 import { CharacterService } from '../../services/character/character.service';
 import { AuthService } from '../../auth/auth.service';
 import { TurnService } from '../../services/turn.service';
