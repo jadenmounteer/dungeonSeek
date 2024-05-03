@@ -8,5 +8,7 @@ export class CombatService {
   #team2 = []; // The team of the current enemies
   constructor() {}
 
-  public startCombat(): void {}
+  public startCombat(): void {
+    alert('starting combat!');
+  }
 }

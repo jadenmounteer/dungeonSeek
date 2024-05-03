@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Outcome } from '../types/Outcome';
+import { CombatService } from './combat.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OutcomeService {
+  #combatService: CombatService = inject(CombatService);
+
   // Strategy pattern map for mapping the outcome to the function that will handle the outcome.
   #outcomeStrategies = new Map<Outcome, () => void>([
     [Outcome.FIND_EASY_LOOT, () => alert('found easy loot')],
-    [Outcome.FIGHT_SINGLE_BANDIT, () => alert('Fight one bandit')],
+    [Outcome.FIGHT_SINGLE_BANDIT, () => this.#combatService.startCombat()],
   ]);
 
   constructor() {}
