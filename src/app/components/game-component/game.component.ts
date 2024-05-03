@@ -36,6 +36,7 @@ import { Outcome } from '../../types/Outcome';
 import { OutcomeService } from '../../services/outcome.service';
 import { GameStateService } from '../../services/game-state.service';
 import { GameDialogueComponent } from '../game-dialogue/game-dialogue.component';
+import { GameDialogueService } from '../../services/game-dialogue.service';
 
 @Component({
   selector: 'app-game',
@@ -62,6 +63,8 @@ import { GameDialogueComponent } from '../game-dialogue/game-dialogue.component'
 export class GameComponent implements OnDestroy {
   #combatService: CombatService = inject(CombatService);
   #outcomeService: OutcomeService = inject(OutcomeService);
+  public gameDialogueService: GameDialogueService = inject(GameDialogueService);
+
   public gameStateService: GameStateService = inject(GameStateService);
 
   protected diceRollingData: DiceRollDialogData | undefined;
@@ -84,8 +87,6 @@ export class GameComponent implements OnDestroy {
   protected showCharacterMenu = signal(false);
   protected goldFoundAmount: number = 0;
 
-  protected showGameDialogue = false;
-  protected gameDialogueMessage: string = '';
   protected confirmMenuCallback: () => void = () => {};
 
   protected cardName: string | undefined;
@@ -585,8 +586,8 @@ export class GameComponent implements OnDestroy {
       this.gameStateService.characterBeingControlledByClient!.movementSpeed ??
       0 > 0
     ) {
-      this.showGameDialogue = true;
-      this.gameDialogueMessage = `You can still move ${
+      this.gameDialogueService.showGameDialogue = true;
+      this.gameDialogueService.gameDialogueMessage = `You can still move ${
         this.gameStateService.characterBeingControlledByClient!.movementSpeed
       } spaces. Are you sure you want to stop moving?`;
 
