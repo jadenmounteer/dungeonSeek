@@ -36,7 +36,10 @@ import { Outcome } from '../../types/Outcome';
 import { OutcomeService } from '../../services/outcome.service';
 import { GameStateService } from '../../services/game-state.service';
 import { GameDialogueComponent } from '../game-dialogue/game-dialogue.component';
-import { GameDialogueService } from '../../services/game-dialogue.service';
+import {
+  GameDialogueData,
+  GameDialogueService,
+} from '../../services/game-dialogue.service';
 
 @Component({
   selector: 'app-game',
@@ -584,9 +587,15 @@ export class GameComponent implements OnDestroy {
       this.gameStateService.characterBeingControlledByClient!.movementSpeed ??
       0 > 0
     ) {
-      const message = `You can still move ${
-        this.gameStateService.characterBeingControlledByClient!.movementSpeed
-      } spaces. Are you sure you want to stop moving?`;
+      const gameDialogueData: GameDialogueData = {
+        message: `You can still move ${
+          this.gameStateService.characterBeingControlledByClient!.movementSpeed
+        } spaces. Are you sure you want to stop moving?`,
+        showButtonOne: true,
+        showButtonTwo: true,
+        buttonOneText: 'Yes',
+        buttonTwoText: 'No',
+      };
 
       this.gameDialogueService.buttonOneCallback =
         this.endMovementEarly.bind(this);
@@ -594,7 +603,7 @@ export class GameComponent implements OnDestroy {
       this.gameDialogueService.buttonTwoCallback =
         this.gameDialogueService.closeDialogue.bind(this);
 
-      this.gameDialogueService.showDialogue(message, true, true, 'Yes', 'No');
+      this.gameDialogueService.showDialogue(gameDialogueData);
     } else {
       this.rollForEventCard();
     }

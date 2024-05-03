@@ -5,7 +5,7 @@ import { LootService } from './loot.service';
 import { GameStateService } from './game-state.service';
 import { CharacterService } from './character/character.service';
 import { ActivatedRoute } from '@angular/router';
-import { GameDialogueService } from './game-dialogue.service';
+import { GameDialogueData, GameDialogueService } from './game-dialogue.service';
 
 @Injectable({
   providedIn: 'root',
@@ -47,21 +47,24 @@ export class OutcomeService implements OnDestroy {
       throw new Error('No character being controlled by client.');
     }
 
+    const gameDialogueData: GameDialogueData = {
+      message: '',
+      showButtonOne: true,
+      showButtonTwo: false,
+      buttonOneText: 'Close',
+    };
+
     // Check if the player has any gold.
     if (this.#gameStateService.characterBeingControlledByClient.gold < 30) {
       // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
-      const message = `"I changed my mind," the bandit says as he unsheathes his sword. "I'll take your gold and your life!"`;
-      this.#gameDialogueService.showDialogue(
-        message,
-        true,
-        false,
-        'Begin Combat'
-      );
 
-      // Initiate combat.
       this.#gameDialogueService.buttonOneCallback = () => {
         this.#combatService.startCombat.bind(this);
       };
+
+      gameDialogueData.message = `"I changed my mind," the bandit says as he unsheathes his sword. "I'll take your gold and your life!"`;
+      gameDialogueData.buttonOneText = 'Begin Combat';
+      this.#gameDialogueService.showDialogue(gameDialogueData);
     } else {
       // If you have more than 30 gold, the bandit takes your gold and leaves you alone.
       this.#gameStateService.characterBeingControlledByClient.gold = 0;
@@ -71,9 +74,10 @@ export class OutcomeService implements OnDestroy {
       );
 
       // Show dialogue
-      const message =
+
+      gameDialogueData.message =
         'The bandit smirks as you hand him all of your gold. He dashes off the road and you lose sight of him.';
-      this.#gameDialogueService.showDialogue(message);
+      this.#gameDialogueService.showDialogue(gameDialogueData);
 
       this.#gameDialogueService.buttonOneCallback = () => {
         this.#gameDialogueService.closeDialogue.bind(this);

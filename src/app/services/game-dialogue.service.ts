@@ -5,7 +5,7 @@ export interface GameDialogueData {
   showButtonOne: boolean;
   showButtonTwo: boolean;
   buttonOneText: string;
-  buttonTwoText: string;
+  buttonTwoText?: string;
 }
 @Injectable({
   providedIn: 'root',
@@ -22,18 +22,8 @@ export class GameDialogueService {
 
   constructor() {}
 
-  public showDialogue(
-    message: string,
-    showButtonOne = true,
-    showButtonTwo = false,
-    buttonOneText?: string,
-    buttonTwoText?: string
-  ): void {
-    this.gameDialogueData.message = message;
-    this.gameDialogueData.showButtonOne = showButtonOne;
-    this.gameDialogueData.showButtonTwo = showButtonTwo;
-    this.gameDialogueData.buttonOneText = buttonOneText || 'Close';
-    this.gameDialogueData.buttonTwoText = buttonTwoText || '';
+  public showDialogue(gameDialogueData: GameDialogueData): void {
+    this.gameDialogueData = gameDialogueData;
 
     this.showGameDialogue = true;
   }
