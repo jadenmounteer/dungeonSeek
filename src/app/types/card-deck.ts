@@ -41,5 +41,6 @@ export enum DeckName {
   FOREST_EVENTS = 'Forest Events',
   WEAPONS = 'Weapons',
   ITEMS = 'Items',
+  NPCS = 'NPCs', // The NPCs for the base game
   // ARMOR = 'Armor',
 }

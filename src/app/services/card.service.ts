@@ -121,13 +121,14 @@ export class CardService {
   // Called when a user jumps into the game.
   // This allows them to have access to the event cards.
   // Using JSON for the card info so I don't have to overload the db
+  // This method fetches the cards for the base game. When I create a campaign I add additional decks that are fetched via additional methods.
   public async fetchCardsInfoByDeck(deckName: DeckName): Promise<any[]> {
     // Get the deck key from the deck name
     const deckKey = Object.keys(DeckName).find((key) => {
       return DeckName[key as keyof typeof DeckName] === deckName;
     });
     // fetch the JSON data using http
-    const response = await fetch(`assets/json/cards/${deckKey}.json`);
+    const response = await fetch(`assets/json/decks/${deckKey}.json`);
     const jsonResponse = await response.json();
 
     return jsonResponse;
