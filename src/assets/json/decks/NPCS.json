@@ -1,0 +1,15 @@
+[
+  {
+    "id": "",
+    "name": "Bandit",
+    "movementSpeed": 4,
+    "inParty": false,
+    "currentLocation": null,
+    "directionFacing": "Left",
+    "rightFacingImgUrl": "assets/card-images/weapons/swords/sword.png",
+    "leftFacingImgUrl": "assets/card-images/weapons/swords/sword.png",
+    "level": 1,
+    "experiencePointsForDefeatingNpc": 10,
+    "rewardTypeForDefeatingNpc": "Easy"
+  }
+]

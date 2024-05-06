@@ -6,9 +6,11 @@ export interface NPC {
   name: string;
   movementSpeed: number;
   inParty: boolean;
-  currentLocation: LocationNode;
+  currentLocation: LocationNode | null;
   directionFacing: 'Right' | 'Left';
   level: number;
   rewardTypeForDefeatingNpc: CardRewardType;
   experiencePointsForDefeatingNpc: number;
+  rightFacingImgUrl: string;
+  leftFacingImgUrl: string;
 }
