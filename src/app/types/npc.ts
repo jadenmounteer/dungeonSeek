@@ -3,13 +3,13 @@ import { CardRewardType } from './card-reward-type';
 
 export interface Npc {
   id: string; // The firebase id
-  cardId: number; // The id of the card in the card deck. Used to fetch the info from the card deck
+  npcType: NpcType; // The id of the card in the card deck. Used to fetch the info from the card deck
+  name: string; // The creator service generates the name based on the npcType. E.g. John the Bandit
   npcStats: NpcStats;
 }
 
-export interface NpcCardInfo {
-  cardId: number;
-  name: string; // This is the identifier for the npc. It is used to fetch the npc from the card deck
+export interface NpcDisplayInfo {
+  npcType: NpcType; // This is the identifier for the npc. It is used to fetch the npc from the card deck
   rightFacingImgUrl: string;
   leftFacingImgUrl: string;
   movementSpeed: number;
@@ -30,4 +30,12 @@ export interface NpcStats {
   currentMana: number;
   maxStamina: number;
   currentStamina: number;
+}
+
+export enum NpcType {
+  BANDIT = 'Bandit',
+  GOBLIN = 'Goblin',
+  ORC = 'Orc',
+  OGRE = 'Ogre',
+  GIANT = 'Giant',
 }
