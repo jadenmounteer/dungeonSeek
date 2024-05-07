@@ -3,10 +3,11 @@ import { Character } from '../types/character';
 import { AuthService } from '../auth/auth.service';
 import { TurnService } from './turn.service';
 import { GameSession } from '../types/game-session';
-import { NpcType } from '../types/npc';
+import { Npc, NpcType } from '../types/npc';
 import { DeckName } from '../types/card-deck';
 import { CardRewardType } from '../types/card-reward-type';
 import { LocationNode } from './location-service';
+import { NpcFactory } from './npcFactory.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ import { LocationNode } from './location-service';
 export class GameStateService {
   #authService: AuthService = inject(AuthService);
   #turnService: TurnService = inject(TurnService);
+  #npcFactory: NpcFactory = inject(NpcFactory);
 
   public gameSession!: GameSession; // TODO dependant on the GameComponent to set this. I should try to refactor this component using an observable pattern.
   public allCharactersCurrentlyInGameSession: Character[] = [];
@@ -40,10 +42,16 @@ export class GameStateService {
     });
   }
 
-  public async spawnNpc(
+  public async spawnNpcRelativeToPlayer(
     npcType: NpcType,
     deckName: DeckName,
     difficulty: CardRewardType,
-    locationToSpawnAt: LocationNode
-  ): Promise<void> {}
+    currentPlayer: Character
+  ): Promise<void> {
+    const newNpc: Npc = this.#npcFactory.generateNpcRelativeToCurrentPlayer(
+      npcType,
+      currentPlayer,
+      difficulty
+    );
+  }
 }

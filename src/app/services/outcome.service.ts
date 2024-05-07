@@ -61,11 +61,11 @@ export class OutcomeService implements OnDestroy {
       // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
 
       // TODO Spawn the bandit npc
-      await this.#gameStateService.spawnNpc(
+      await this.#gameStateService.spawnNpcRelativeToPlayer(
         NpcType.BANDIT,
         DeckName.BASE_GAME_NPCS,
         'Easy',
-        this.#gameStateService.characterBeingControlledByClient.currentLocation
+        this.#gameStateService.characterBeingControlledByClient
       );
 
       this.#gameDialogueService.buttonOneCallback =
