@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-07T13:54:47.895Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="Nmz0IXd2MLcJP73FnCTJ" version="24.3.1" type="device" pages="8">
+<mxfile host="app.diagrams.net" modified="2024-05-07T14:02:46.402Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="YySGHy33hnRf3jqHDQSH" version="24.3.1" type="device" pages="8">
   <diagram name="Main game view" id="cMHpMG-8lIFeQuoC4nmq">
     <mxGraphModel dx="1434" dy="761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -835,8 +835,8 @@
             <mxPoint x="560" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="SPyY-KG61bjlQAC69FAg-18" value="Creates the npc&#39;s stats relative to the player&#39;s stats and the card reward type" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="685" y="330" width="130" height="90" as="geometry" />
+        <mxCell id="SPyY-KG61bjlQAC69FAg-18" value="Creates the npc&#39;s stats relative to the player&#39;s stats and the card reward type. Generates a name as well." style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="330" width="135" height="90" as="geometry" />
         </mxCell>
         <mxCell id="SPyY-KG61bjlQAC69FAg-19" value="New NPC is inserted into an array of NPCs" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="430" y="330" width="130" height="90" as="geometry" />
