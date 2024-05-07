@@ -2,8 +2,8 @@
   {
     "cardId": 1,
     "name": "Bandit",
-    "rightFacingImgUrl": "assets/card-images/weapons/swords/sword.png",
-    "leftFacingImgUrl": "assets/card-images/weapons/swords/sword.png",
+    "rightFacingImgUrl": "assets/game-pieces/bandit/bandit-right.png",
+    "leftFacingImgUrl": "assets/game-pieces/bandit/bandit-left.png",
     "movementSpeed": 4
   }
 ]
