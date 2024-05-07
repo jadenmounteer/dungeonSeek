@@ -23,10 +23,20 @@ export class NpcFactory {
       id: '',
       npcType: npcType,
       name: this.#generateNewNpcName(npcType),
-      npcStats: this.#generateNpcStatsRelativeToPlayer(
-        difficulty,
-        currentPlayer.characterStats
-      ),
+      npcStats: {
+        health: {
+          total: 100,
+          current: 100,
+        },
+        mana: {
+          total: 100,
+          current: 100,
+        },
+        stamina: {
+          total: 100,
+          current: 100,
+        },
+      },
       currentLocation: currentPlayer.currentLocation,
       level: 1,
       inParty: false,
@@ -44,48 +54,56 @@ export class NpcFactory {
     return currentPlayer.directionFacing === 'Right' ? 'Left' : 'Right';
   }
 
-  #generateNpcStatsRelativeToPlayer(
-    difficulty: CardRewardType,
-    characterStats: CharacterStats
-  ): NpcStats {
-    let npcStats: NpcStats;
+  /**
+   *
+   * @deprecatede
+   */
+  // #generateNpcStatsRelativeToPlayer(
+  //   difficulty: CardRewardType,
+  //   characterStats: CharacterStats
+  // ): NpcStats {
+  //   let npcStats: NpcStats;
 
-    switch (difficulty) {
-      case 'Easy':
-        npcStats = this.#generateStatsInRangeRelativeToPlayer(
-          characterStats,
-          0.2,
-          0.3
-        );
-        break;
-      case 'Moderate':
-        npcStats = this.#generateStatsInRangeRelativeToPlayer(
-          characterStats,
-          0.3,
-          0.4
-        );
-        break;
-      case 'Hard':
-        npcStats = this.#generateStatsInRangeRelativeToPlayer(
-          characterStats,
-          0.4,
-          0.6
-        );
-        break;
-      case 'Insane':
-        npcStats = this.#generateStatsInRangeRelativeToPlayer(
-          characterStats,
-          0.5,
-          0.8
-        );
-        break;
-      default:
-        throw new Error('Unknown difficulty: ' + difficulty);
-    }
+  //   switch (difficulty) {
+  //     case 'Easy':
+  //       npcStats = this.#generateStatsInRangeRelativeToPlayer(
+  //         characterStats,
+  //         0.2,
+  //         0.3
+  //       );
+  //       break;
+  //     case 'Moderate':
+  //       npcStats = this.#generateStatsInRangeRelativeToPlayer(
+  //         characterStats,
+  //         0.3,
+  //         0.4
+  //       );
+  //       break;
+  //     case 'Hard':
+  //       npcStats = this.#generateStatsInRangeRelativeToPlayer(
+  //         characterStats,
+  //         0.4,
+  //         0.6
+  //       );
+  //       break;
+  //     case 'Insane':
+  //       npcStats = this.#generateStatsInRangeRelativeToPlayer(
+  //         characterStats,
+  //         0.5,
+  //         0.8
+  //       );
+  //       break;
+  //     default:
+  //       throw new Error('Unknown difficulty: ' + difficulty);
+  //   }
 
-    return npcStats;
-  }
+  //   return npcStats;
+  // }
 
+  /**
+   *
+   * @deprecated
+   */
   #generateStatsInRangeRelativeToPlayer(
     characterStats: CharacterStats,
     minRatio: number,
