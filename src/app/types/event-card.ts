@@ -9,5 +9,4 @@ export type EventCardInfo = {
   discardAfterUse: boolean; // Whether or not to discard the card after use.
   choices: Choice[];
   cardCriteria: CardCriteria | null; // TODO this will be used to determine if the card can be drawn by the current player. For example, we don't want the orc trophy hunter card to be drawn by a low-level player.
-  difficulty: CardRewardType | undefined; // The difficult of the encounter. Used when generating an npc from this event or when finding loot.
 };

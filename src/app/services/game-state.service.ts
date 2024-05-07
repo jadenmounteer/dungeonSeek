@@ -3,6 +3,10 @@ import { Character } from '../types/character';
 import { AuthService } from '../auth/auth.service';
 import { TurnService } from './turn.service';
 import { GameSession } from '../types/game-session';
+import { NpcType } from '../types/npc';
+import { DeckName } from '../types/card-deck';
+import { CardRewardType } from '../types/card-reward-type';
+import { LocationNode } from './location-service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,4 +39,11 @@ export class GameStateService {
       }
     });
   }
+
+  public async spawnNpc(
+    npcType: NpcType,
+    deckName: DeckName,
+    difficulty: CardRewardType,
+    locationToSpawnAt: LocationNode
+  ): Promise<void> {}
 }

@@ -4,7 +4,6 @@
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure is a man in ragged clothes who appears to be yelling at a tree. As you approach, the man turns and, with wide eyes yells: \"Ones and zeroes! JavaScript! It's all a game!\"",
     "quantity": 0,
     "discardAfterUse": true,
-    "difficulty": "Easy",
     "choices": [
       {
         "description": "You do something...",
@@ -17,7 +16,6 @@
     "description": "You come across a small group of people who appear to be lost. They ask if you know the way to the nearest town. They seem to be in a hurry and are very nervous.",
     "quantity": 0,
     "discardAfterUse": true,
-    "difficulty": "Easy",
     "choices": [
       {
         "description": "You do something...",
@@ -34,7 +32,6 @@
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a bandit! He's armed and dangerous. He demands you hand over all your gold.",
     "quantity": 1,
     "discardAfterUse": false,
-    "difficulty": "Easy",
     "choices": [
       {
         "description": "Hand the bandit your gold.",
@@ -51,7 +48,6 @@
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a merchant! He's selling all sorts of goods. He offers to sell you some of his wares.",
     "quantity": 0,
     "discardAfterUse": false,
-    "difficulty": "Easy",
     "choices": [
       {
         "description": "You do something...",
@@ -68,7 +64,6 @@
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a caravan! They are traveling to the nearest town and offer to let you join them.",
     "quantity": 0,
     "discardAfterUse": false,
-    "difficulty": "Easy",
     "choices": [
       {
         "description": "You do something...",

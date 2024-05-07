@@ -6,6 +6,8 @@ import { GameStateService } from './game-state.service';
 import { CharacterService } from './character/character.service';
 import { ActivatedRoute } from '@angular/router';
 import { GameDialogueData, GameDialogueService } from './game-dialogue.service';
+import { NpcType } from '../types/npc';
+import { DeckName } from '../types/card-deck';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +44,7 @@ export class OutcomeService implements OnDestroy {
     }
   }
 
-  #banditTakesYourGold(): void {
+  async #banditTakesYourGold(): Promise<void> {
     if (!this.#gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client.');
     }
@@ -57,6 +59,14 @@ export class OutcomeService implements OnDestroy {
     // Check if the player has any gold.
     if (this.#gameStateService.characterBeingControlledByClient.gold < 30) {
       // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
+
+      // TODO Spawn the bandit npc
+      await this.#gameStateService.spawnNpc(
+        NpcType.BANDIT,
+        DeckName.BASE_GAME_NPCS,
+        'Easy',
+        this.#gameStateService.characterBeingControlledByClient.currentLocation
+      );
 
       this.#gameDialogueService.buttonOneCallback =
         this.#combatService.startCombat.bind(this);
