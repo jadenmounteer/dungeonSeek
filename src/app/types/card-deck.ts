@@ -41,6 +41,6 @@ export enum DeckName {
   FOREST_EVENTS = 'Forest Events',
   WEAPONS = 'Weapons',
   ITEMS = 'Items',
-  NPCS = 'NPCs', // The NPCs for the base game
+  BASE_GAME_NPCS = 'Base Game NPCs', // The NPCs for the base game. Not fetched like the other decks. A card is fetched only when the player encounters an NPC.
   // ARMOR = 'Armor',
 }
