@@ -22,7 +22,7 @@ export interface NPCStats {
   experiencePointsForDefeatingNpc: number;
   level: number;
   directionFacing: 'Right' | 'Left';
-  currentLocation: LocationNode | null;
+  currentLocation: LocationNode;
   inParty: boolean;
   maxHealth: number;
   currentHealth: number;
