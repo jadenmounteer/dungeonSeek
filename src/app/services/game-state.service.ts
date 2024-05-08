@@ -48,10 +48,18 @@ export class GameStateService {
     difficulty: CardRewardType,
     currentPlayer: Character
   ): Promise<void> {
-    const newNpc: Npc = this.#npcFactory.generateNpcRelativeToCurrentPlayer(
+    const newNpc: Npc = this.#npcFactory.generateNewNpc(
       npcType,
-      currentPlayer,
-      difficulty
+      currentPlayer.currentLocation,
+      difficulty,
+      this.#getDirectionFacingRelativeToPlayer(currentPlayer)
     );
+  }
+
+  #getDirectionFacingRelativeToPlayer(
+    currentPlayer: Character
+  ): 'Right' | 'Left' {
+    // If the player is facing right, the npc should face left and vice versa.
+    return currentPlayer.directionFacing === 'Right' ? 'Left' : 'Right';
   }
 }

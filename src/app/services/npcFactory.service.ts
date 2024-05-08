@@ -11,13 +11,11 @@ import { Character, CharacterStats } from '../types/character';
 export class NpcFactory {
   constructor() {}
 
-  // Npcs Generated relative to the player have stats that are created relative to the player and difficulty.
-  // Npcs that are generated in the world have their own stats independent of the player. For example, the main
-  // boss can be generated independent of the player while a bandit is relative to the player's stats.
-  public generateNpcRelativeToCurrentPlayer(
+  public generateNewNpc(
     npcType: NpcType,
-    currentPlayer: Character,
-    difficulty: CardRewardType
+    location: LocationNode,
+    difficulty: CardRewardType,
+    directionFacing: 'Right' | 'Left' = 'Right'
   ): Npc {
     const newNpc: Npc = {
       id: '',
@@ -37,96 +35,14 @@ export class NpcFactory {
           current: 100,
         },
       },
-      currentLocation: currentPlayer.currentLocation,
+      currentLocation: location,
       level: 1,
       inParty: false,
-      directionFacing: this.#getDirectionFacingRelativeToPlayer(currentPlayer),
+      directionFacing: directionFacing,
       rewardTypeForDefeatingNpc: difficulty,
     };
 
     return newNpc;
-  }
-
-  #getDirectionFacingRelativeToPlayer(
-    currentPlayer: Character
-  ): 'Right' | 'Left' {
-    // If the player is facing right, the npc should face left and vice versa.
-    return currentPlayer.directionFacing === 'Right' ? 'Left' : 'Right';
-  }
-
-  /**
-   *
-   * @deprecatede
-   */
-  // #generateNpcStatsRelativeToPlayer(
-  //   difficulty: CardRewardType,
-  //   characterStats: CharacterStats
-  // ): NpcStats {
-  //   let npcStats: NpcStats;
-
-  //   switch (difficulty) {
-  //     case 'Easy':
-  //       npcStats = this.#generateStatsInRangeRelativeToPlayer(
-  //         characterStats,
-  //         0.2,
-  //         0.3
-  //       );
-  //       break;
-  //     case 'Moderate':
-  //       npcStats = this.#generateStatsInRangeRelativeToPlayer(
-  //         characterStats,
-  //         0.3,
-  //         0.4
-  //       );
-  //       break;
-  //     case 'Hard':
-  //       npcStats = this.#generateStatsInRangeRelativeToPlayer(
-  //         characterStats,
-  //         0.4,
-  //         0.6
-  //       );
-  //       break;
-  //     case 'Insane':
-  //       npcStats = this.#generateStatsInRangeRelativeToPlayer(
-  //         characterStats,
-  //         0.5,
-  //         0.8
-  //       );
-  //       break;
-  //     default:
-  //       throw new Error('Unknown difficulty: ' + difficulty);
-  //   }
-
-  //   return npcStats;
-  // }
-
-  /**
-   *
-   * @deprecated
-   */
-  #generateStatsInRangeRelativeToPlayer(
-    characterStats: CharacterStats,
-    minRatio: number,
-    maxRatio: number
-  ): NpcStats {
-    // Generate NPC stats that are within the specified range of the player's stats
-    let healthTotal = this.#randomInRange(
-      characterStats.health.total * minRatio,
-      characterStats.health.total * maxRatio
-    );
-
-    const npcStats: NpcStats = {
-      health: {
-        total: healthTotal,
-        current: healthTotal,
-      },
-    } as NpcStats;
-
-    return npcStats;
-  }
-
-  #randomInRange(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   #generateNewNpcName(npcType: NpcType): string {
