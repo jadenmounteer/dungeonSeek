@@ -38,6 +38,8 @@ export class NpcService {
       'npcs'
     );
 
-    return addDoc(collectionRef, npc);
+    return addDoc(collectionRef, npc).catch((error) => {
+      console.error('Error adding document: ', error);
+    });
   }
 }

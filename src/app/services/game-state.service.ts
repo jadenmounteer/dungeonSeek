@@ -8,6 +8,7 @@ import { DeckName } from '../types/card-deck';
 import { CardRewardType } from '../types/card-reward-type';
 import { LocationNode } from './location-service';
 import { NpcFactory } from './npcFactory.service';
+import { NpcService } from './npc.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class GameStateService {
   #authService: AuthService = inject(AuthService);
   #turnService: TurnService = inject(TurnService);
   #npcFactory: NpcFactory = inject(NpcFactory);
+  #npcService: NpcService = inject(NpcService);
 
   public gameSession!: GameSession; // TODO dependant on the GameComponent to set this. I should try to refactor this component using an observable pattern.
   public allCharactersCurrentlyInGameSession: Character[] = [];
@@ -56,6 +58,13 @@ export class GameStateService {
       difficulty,
       this.#getDirectionFacingRelativeToPlayer(currentPlayer)
     );
+
+    const answer = await this.#npcService.addNewNpcToGameSession(
+      newNpc,
+      this.gameSession.id
+    );
+
+    console.log(answer);
   }
 
   #getDirectionFacingRelativeToPlayer(
