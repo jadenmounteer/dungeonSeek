@@ -164,6 +164,9 @@ export class GameComponent implements OnDestroy {
         if (!this.charactersSub) {
           this.setCharactersSub();
         }
+        if (!this.npcsSub) {
+          this.setNPCsSub();
+        }
       });
 
     this.playerPositionSub =
