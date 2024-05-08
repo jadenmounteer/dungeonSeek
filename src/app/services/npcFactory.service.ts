@@ -71,6 +71,11 @@ export class NpcFactory {
       'Jack',
       'James',
       'Jake',
+      'Ragnor',
+      'Grubber',
+      'Hank',
+      'Hector',
+      'Hugo',
     ];
 
     const randomName = names[Math.floor(Math.random() * names.length)];
