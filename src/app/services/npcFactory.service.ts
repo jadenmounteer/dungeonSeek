@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Npc, NpcType } from '../types/npc';
 import { LocationNode } from './location-service';
 import { CardRewardType } from '../types/card-reward-type';
+import { DeckName } from '../types/card-deck';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,14 @@ export class NpcFactory {
     npcType: NpcType,
     location: LocationNode,
     difficulty: CardRewardType,
-    directionFacing: 'Right' | 'Left' = 'Right'
+    directionFacing: 'Right' | 'Left' = 'Right',
+    deckName: DeckName
   ): Npc {
     const newNpc: Npc = {
       id: '',
       npcType: npcType,
       name: this.#generateNewNpcName(npcType),
+      deckName: deckName,
       npcStats: {
         health: {
           total: 100,
@@ -46,7 +49,9 @@ export class NpcFactory {
   #generateNewNpcName(npcType: NpcType): string {
     switch (npcType) {
       case NpcType.BANDIT:
-        return this.#generateMaleHumanName() + NpcType.BANDIT;
+        return (
+          this.#generateMaleHumanName() + NpcType.BANDIT.toLocaleLowerCase()
+        );
       case NpcType.GOBLIN:
         return 'Goblin';
       case NpcType.ORC:

@@ -56,7 +56,8 @@ export class GameStateService {
       npcType,
       currentPlayer.currentLocation,
       difficulty,
-      this.#getDirectionFacingRelativeToPlayer(currentPlayer)
+      this.#getDirectionFacingRelativeToPlayer(currentPlayer),
+      deckName
     );
 
     const answer = await this.#npcService.addNewNpcToGameSession(

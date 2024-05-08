@@ -1,4 +1,5 @@
 import { LocationNode } from '../services/location-service';
+import { DeckName } from './card-deck';
 import { CardRewardType } from './card-reward-type';
 import { CharacterStat } from './character';
 
@@ -6,6 +7,7 @@ export interface Npc {
   id: string; // The firebase id
   npcType: NpcType; // The id of the card in the card deck. Used to fetch the info from the card deck
   name: string; // The creator service generates the name based on the npcType. E.g. John the Bandit
+  deckName: DeckName; // The deck the npc belongs to. This will be important when we have multiple npc decks from different campaigns
   npcStats: NpcStats;
   currentLocation: LocationNode;
   level: number;
