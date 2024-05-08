@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, InputSignal, input } from '@angular/core';
+import { Npc } from '../../types/npc';
 
 /**
  * This component is responsible for rendering an NPC and handling its interactions with the world.
@@ -10,4 +11,6 @@ import { Component } from '@angular/core';
   templateUrl: './npc.component.html',
   styleUrl: './npc.component.scss',
 })
-export class NpcComponent {}
+export class NpcComponent {
+  public npc: InputSignal<Npc> = input.required();
+}

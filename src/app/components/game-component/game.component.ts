@@ -41,6 +41,7 @@ import {
   GameDialogueService,
 } from '../../services/game-dialogue.service';
 import { NpcService } from '../../services/npc.service';
+import { NpcComponent } from '../npc/npc.component';
 
 @Component({
   selector: 'app-game',
@@ -59,6 +60,7 @@ import { NpcService } from '../../services/npc.service';
     GoldMenuComponent,
     CharacterMenuComponent,
     GameDialogueComponent,
+    NpcComponent,
   ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss',
