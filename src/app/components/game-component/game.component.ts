@@ -40,6 +40,7 @@ import {
   GameDialogueData,
   GameDialogueService,
 } from '../../services/game-dialogue.service';
+import { NpcService } from '../../services/npc.service';
 
 @Component({
   selector: 'app-game',
@@ -66,6 +67,8 @@ import {
 export class GameComponent implements OnDestroy {
   #combatService: CombatService = inject(CombatService);
   #outcomeService: OutcomeService = inject(OutcomeService);
+  #npcService: NpcService = inject(NpcService);
+
   public gameDialogueService: GameDialogueService = inject(GameDialogueService);
 
   public gameStateService: GameStateService = inject(GameStateService);
@@ -77,6 +80,7 @@ export class GameComponent implements OnDestroy {
   private gameSessionSub: Subscription;
 
   protected charactersSub!: Subscription;
+  public npcsSub!: Subscription;
   protected loading = true;
   protected locationsLoading = true;
   protected currentCharacterRolledForEventCardThisTurn = false;
@@ -202,6 +206,7 @@ export class GameComponent implements OnDestroy {
     this.drawWeaponSubscription.unsubscribe();
     this.drawItemSubscription.unsubscribe();
     this.drawGoldSubscription.unsubscribe();
+    this.npcsSub.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameStateService.gameSession.playerIDs.length > 1) {
@@ -214,6 +219,14 @@ export class GameComponent implements OnDestroy {
       this.gameStateService.gameSession,
       this.gameStateService.charactersBeingControlledByClient
     );
+  }
+
+  private setNPCsSub(): void {
+    this.npcsSub = this.#npcService
+      .getNPCsInGameSession(this.gameStateService.gameSession.id)
+      .subscribe((npcs) => {
+        this.gameStateService.npcsInPlay = npcs;
+      });
   }
 
   private setCharactersSub(): void {

@@ -22,6 +22,8 @@ export class GameStateService {
   public charactersBeingControlledByClient: Character[] = [];
   public characterBeingControlledByClient: Character | undefined;
 
+  public npcsInPlay: Npc[] = []; // The NPCs currently in play on the game board.
+
   constructor() {}
 
   public setCharactersBeingControlledByClient(): void {

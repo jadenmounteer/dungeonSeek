@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Npc, NpcStats, NpcType } from '../types/npc';
+import { Npc, NpcType } from '../types/npc';
 import { LocationNode } from './location-service';
 import { CardRewardType } from '../types/card-reward-type';
-import { DeckName } from '../types/card-deck';
-import { Character, CharacterStats } from '../types/character';
 
 @Injectable({
   providedIn: 'root',
