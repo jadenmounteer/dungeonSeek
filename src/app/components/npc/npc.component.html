@@ -2,11 +2,11 @@
   <img
     class="npc"
     *ngIf="npc().directionFacing === 'Right'"
-    src="../../../assets/game-pieces/bandit/bandit-right.png"
+    [src]="npcDisplayInfo.rightFacingImgUrl"
   />
   <img
     class="npc"
     *ngIf="npc().directionFacing === 'Left'"
-    src="../../../assets/game-pieces/bandit/bandit-left.png"
+    [src]="npcDisplayInfo.leftFacingImgUrl"
   />
 </div>
