@@ -1,1 +1,12 @@
-{{ npc().name }}
+<div>
+  <img
+    class="npc"
+    *ngIf="npc().directionFacing === 'Right'"
+    src="../../../assets/game-pieces/bandit/bandit-right.png"
+  />
+  <img
+    class="npc"
+    *ngIf="npc().directionFacing === 'Left'"
+    src="../../../assets/game-pieces/bandit/bandit-left.png"
+  />
+</div>

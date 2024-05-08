@@ -1,0 +1,5 @@
+@import "../../../styles.scss";
+
+.npc {
+  width: calc($game-board-width / 60);
+}
