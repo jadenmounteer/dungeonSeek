@@ -297,6 +297,11 @@ export class GameComponent implements OnDestroy {
       location.distanceFromPlayer ?? 1;
 
     // Update the character's location in the database
+    this.gameStateService.characterBeingControlledByClient.position = {
+      xPosition: location.position.xPosition,
+      yPosition: location.position.yPosition,
+    };
+
     this.characterService.updateCharacter(
       this.gameStateService.characterBeingControlledByClient,
       this.gameStateService.gameSession.id
@@ -307,6 +312,12 @@ export class GameComponent implements OnDestroy {
       this.gameStateService.characterBeingControlledByClient,
       this.zoomPercentageDisplay
     );
+
+    // TODO Loop through all of the characters and enemies on the game board
+    // adjust the offsets accordingly.
+    // I'll do this by storing a local map in the gameState service every location that has a player or NPC.
+    // Then I'll loop through the map and adjust the offsets accordingly if there are multiple players or NPCs on the same location.
+    this.gameStateService.adjustLocationsWithPeopleOnThem();
   }
 
   // TODO implement this method

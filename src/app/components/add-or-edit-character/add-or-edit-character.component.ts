@@ -100,6 +100,11 @@ export class AddOrEditCharacterComponent implements OnInit {
   private initializeTheCharactersStartingLocation() {
     const startingLocation = this.locationService.locationsMap.get('Goeth')!;
     this.character.currentLocation = startingLocation;
+
+    this.character.position = {
+      xPosition: startingLocation.position.xPosition,
+      yPosition: startingLocation.position.yPosition,
+    };
   }
 
   protected onNoClick(): void {

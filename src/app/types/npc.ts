@@ -1,4 +1,4 @@
-import { LocationNode } from '../services/location-service';
+import { LocationNode, Position } from '../services/location-service';
 import { DeckName } from './card-deck';
 import { CardRewardType } from './card-reward-type';
 import { CharacterStat } from './character';
@@ -10,6 +10,7 @@ export interface Npc {
   deckName: DeckName; // The deck the npc belongs to. This will be important when we have multiple npc decks from different campaigns
   npcStats: NpcStats;
   currentLocation: LocationNode;
+  position: Position;
   level: number;
   inParty: boolean;
   directionFacing: 'Right' | 'Left';

@@ -1,4 +1,4 @@
-import { LocationNode } from '../services/location-service';
+import { LocationNode, Position } from '../services/location-service';
 
 export interface Character {
   id: string;
@@ -9,6 +9,7 @@ export interface Character {
   movementSpeed: number;
   inParty: boolean;
   currentLocation: LocationNode;
+  position: Position;
   directionFacing: 'Right' | 'Left';
   level: number;
   characterStats: CharacterStats;

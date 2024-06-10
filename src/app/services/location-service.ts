@@ -8,7 +8,7 @@ export type Position = {
 };
 
 export type LocationNode = {
-  name: string;
+  name: LocationKey;
   position: Position;
   adjacentLocations: LocationKey[];
   distanceFromPlayer: number | null;

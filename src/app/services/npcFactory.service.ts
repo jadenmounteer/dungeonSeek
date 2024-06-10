@@ -37,6 +37,7 @@ export class NpcFactory {
         },
       },
       currentLocation: location,
+      position: location.position,
       level: 1,
       inParty: false,
       directionFacing: directionFacing,

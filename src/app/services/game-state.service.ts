@@ -6,9 +6,17 @@ import { GameSession } from '../types/game-session';
 import { Npc, NpcType } from '../types/npc';
 import { DeckName } from '../types/card-deck';
 import { CardRewardType } from '../types/card-reward-type';
-import { LocationNode } from './location-service';
+import { LocationKey, LocationNode } from './location-service';
 import { NpcFactory } from './npcFactory.service';
 import { NpcService } from './npc.service';
+
+// I know haha....I just want to code this game already so I can play it.
+// If I were to go back and redesign the game, I'd have the locations be the parents that house the state.
+export type locationWithPeopleOnIt = {
+  location: LocationNode;
+  players: Character[];
+  enemies: Npc[];
+};
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +34,79 @@ export class GameStateService {
 
   public npcsInPlay: Npc[] = []; // The NPCs currently in play on the game board.
 
+  // Used to keep track of the state of the locations so we can adjust the UI accordingly and position everyone so they're not on top of each other.
+  public locationsWithPeopleOnThem: Map<LocationKey, locationWithPeopleOnIt> =
+    new Map();
+
   constructor() {}
+
+  // Called when the game session is first loaded and when something moves.
+  // Used to adjust the placement of things at locations.
+  public adjustLocationsWithPeopleOnThem(): void {
+    // Resent the map
+    this.locationsWithPeopleOnThem.clear();
+    // Loop through all of the characters on the map.
+    this.allCharactersCurrentlyInGameSession.forEach((character) => {
+      // If the location is not in the map, add it.
+      if (!this.locationsWithPeopleOnThem.has(character.currentLocation.name)) {
+        this.locationsWithPeopleOnThem.set(character.currentLocation.name, {
+          location: character.currentLocation,
+          players: [character],
+          enemies: [],
+        });
+      } else {
+        // If the location is in the map, add the character to the players array.
+        this.locationsWithPeopleOnThem
+          .get(character.currentLocation.name)
+          ?.players.push(character);
+      }
+    });
+
+    // Now, loop through all of the npcs on the map.
+    this.npcsInPlay.forEach((npc) => {
+      // If the location is not in the map, add it.
+      if (!this.locationsWithPeopleOnThem.has(npc.currentLocation.name)) {
+        this.locationsWithPeopleOnThem.set(npc.currentLocation.name, {
+          location: npc.currentLocation,
+          players: [],
+          enemies: [npc],
+        });
+      } else {
+        // If the location is in the map, add the npc to the enemies array.
+        this.locationsWithPeopleOnThem
+          .get(npc.currentLocation.name)
+          ?.enemies.push(npc);
+      }
+    });
+
+    // Now that we have the locations with people on them, we can adjust the UI accordingly.
+    // Loop through everyone again and adjust their positions relative to the other people at the same location.
+    this.locationsWithPeopleOnThem.forEach((location) => {
+      // If there are people at the location, adjust their positions.
+      if (location.players.length > 0) {
+        // Adjust the positions of the players.
+        location.players.forEach((player, index) => {
+          // Adjust the position of the player based on the index.
+          player.position = {
+            xPosition: location.location.position.xPosition + index * 50,
+            yPosition: location.location.position.yPosition,
+          };
+        });
+      }
+
+      // If there are enemies at the location, adjust their positions.
+      if (location.enemies.length > 0) {
+        // Adjust the positions of the enemies.
+        location.enemies.forEach((enemy, index) => {
+          // Adjust the position of the enemy based on the index.
+          enemy.position = {
+            xPosition: location.location.position.xPosition + index * 50,
+            yPosition: location.location.position.yPosition,
+          };
+        });
+      }
+    });
+  }
 
   public setCharactersBeingControlledByClient(): void {
     // set this.characterStateService.charactersBeingControlledByClient to the characters that share the same userID as the client
