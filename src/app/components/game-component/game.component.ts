@@ -255,10 +255,11 @@ export class GameComponent implements OnDestroy {
           this.onEnterGame();
           this.loading = false;
         }
+        this.gameStateService.adjustLocationsWithPeopleOnThem();
       });
   }
 
-  private moveCharacterToLocation(location: LocationNode) {
+  private async moveCharacterToLocation(location: LocationNode): Promise<void> {
     if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
     }
@@ -302,7 +303,7 @@ export class GameComponent implements OnDestroy {
       yPosition: location.position.yPosition,
     };
 
-    this.characterService.updateCharacter(
+    await this.characterService.updateCharacter(
       this.gameStateService.characterBeingControlledByClient,
       this.gameStateService.gameSession.id
     );
@@ -317,6 +318,7 @@ export class GameComponent implements OnDestroy {
     // adjust the offsets accordingly.
     // I'll do this by storing a local map in the gameState service every location that has a player or NPC.
     // Then I'll loop through the map and adjust the offsets accordingly if there are multiple players or NPCs on the same location.
+    console.log(`Moving to ${location.name}`);
     this.gameStateService.adjustLocationsWithPeopleOnThem();
   }
 
