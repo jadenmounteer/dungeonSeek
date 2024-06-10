@@ -260,7 +260,7 @@ export class GameComponent implements OnDestroy {
 
   private moveCharacterToLocation(location: LocationNode) {
     if (!this.gameStateService.characterBeingControlledByClient) {
-      return;
+      throw new Error('No character being controlled by client');
     }
 
     if (
@@ -281,11 +281,8 @@ export class GameComponent implements OnDestroy {
       return;
     }
 
-    if (!this.gameStateService.characterBeingControlledByClient) {
-      throw new Error('No character being controlled by client');
-    }
     this.changePlayerDirection(location);
-    // TODO Take into account the user's movement speed on this turn
+
     this.gameStateService.characterBeingControlledByClient.currentLocation.position =
       location.position;
 
