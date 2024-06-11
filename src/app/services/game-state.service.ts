@@ -43,76 +43,80 @@ export class GameStateService {
   // Called when the game session is first loaded and when something moves.
   // Used to adjust the placement of things at locations.
   public adjustLocationsWithPeopleOnThem(): void {
-    // Resent the map
+    this.resetLocations();
+    this.populateLocationsWithCharacters();
+    this.populateLocationsWithNPCs();
+    this.adjustPositionsForAllLocations();
+  }
+
+  private resetLocations(): void {
     this.locationsWithPeopleOnThem.clear();
-    // Loop through all of the characters on the map.
+  }
+
+  private populateLocationsWithCharacters(): void {
     this.allCharactersCurrentlyInGameSession.forEach((character) => {
-      // If the location is not in the map, add it.
-      if (!this.locationsWithPeopleOnThem.has(character.currentLocation.name)) {
-        this.locationsWithPeopleOnThem.set(character.currentLocation.name, {
-          location: character.currentLocation,
-          players: [character],
-          enemies: [],
-        });
-      } else {
-        // If the location is in the map, add the character to the players array.
-        this.locationsWithPeopleOnThem
-          .get(character.currentLocation.name)
-          ?.players.push(character);
-      }
+      this.addCharacterToLocation(character);
     });
+  }
 
-    // Now, loop through all of the npcs on the map.
+  private addCharacterToLocation(character: Character): void {
+    const locationName = character.currentLocation.name;
+    if (!this.locationsWithPeopleOnThem.has(locationName)) {
+      this.locationsWithPeopleOnThem.set(locationName, {
+        location: character.currentLocation,
+        players: [character],
+        enemies: [],
+      });
+    } else {
+      this.locationsWithPeopleOnThem.get(locationName)?.players.push(character);
+    }
+  }
+
+  private populateLocationsWithNPCs(): void {
     this.npcsInPlay.forEach((npc) => {
-      // If the location is not in the map, add it.
-      if (!this.locationsWithPeopleOnThem.has(npc.currentLocation.name)) {
-        this.locationsWithPeopleOnThem.set(npc.currentLocation.name, {
-          location: npc.currentLocation,
-          players: [],
-          enemies: [npc],
-        });
-      } else {
-        // If the location is in the map, add the npc to the enemies array.
-        this.locationsWithPeopleOnThem
-          .get(npc.currentLocation.name)
-          ?.enemies.push(npc);
-      }
+      this.addNPCToLocation(npc);
     });
+  }
 
-    // Now that we have the locations with people on them, we can adjust the UI accordingly.
-    // Loop through everyone again and adjust their positions relative to the other people at the same location.
+  private addNPCToLocation(npc: Npc): void {
+    const locationName = npc.currentLocation.name;
+    if (!this.locationsWithPeopleOnThem.has(locationName)) {
+      this.locationsWithPeopleOnThem.set(locationName, {
+        location: npc.currentLocation,
+        players: [],
+        enemies: [npc],
+      });
+    } else {
+      this.locationsWithPeopleOnThem.get(locationName)?.enemies.push(npc);
+    }
+  }
+
+  private adjustPositionsForAllLocations(): void {
     this.locationsWithPeopleOnThem.forEach((location) => {
-      // If there are people at the location, adjust their positions.
-      if (location.players.length > 0) {
-        // Adjust the positions of the players.
-        location.players.forEach((player, index) => {
-          console.log(
-            `Setting ${player.name} to location ${location.location.name}`
-          );
+      this.adjustPositionsForLocation(location);
+    });
+  }
 
-          // Adjust the position of the player based on the index.
-          player.position = {
-            xPosition: location.location.position.xPosition + index - 50,
-            yPosition: location.location.position.yPosition + index - 100,
-          };
+  private adjustPositionsForLocation(location: locationWithPeopleOnIt): void {
+    this.adjustPlayerPositions(location);
+    this.adjustEnemyPositions(location);
+  }
 
-          console.log(
-            `${player.name}'s current position is now: ${player.position.xPosition}, ${player.position.yPosition}`
-          );
-        });
-      }
+  private adjustPlayerPositions(location: locationWithPeopleOnIt): void {
+    location.players.forEach((player, index) => {
+      player.position = {
+        xPosition: location.location.position.xPosition + index - 50,
+        yPosition: location.location.position.yPosition + index - 100,
+      };
+    });
+  }
 
-      // If there are enemies at the location, adjust their positions.
-      if (location.enemies.length > 0) {
-        // Adjust the positions of the enemies.
-        location.enemies.forEach((enemy, index) => {
-          // Adjust the position of the enemy based on the index.
-          enemy.position = {
-            xPosition: location.location.position.xPosition + index * 50,
-            yPosition: location.location.position.yPosition,
-          };
-        });
-      }
+  private adjustEnemyPositions(location: locationWithPeopleOnIt): void {
+    location.enemies.forEach((enemy, index) => {
+      enemy.position = {
+        xPosition: location.location.position.xPosition + index * 50,
+        yPosition: location.location.position.yPosition,
+      };
     });
   }
 
