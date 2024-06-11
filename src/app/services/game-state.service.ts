@@ -104,6 +104,7 @@ export class GameStateService {
 
   private adjustPlayerPositions(location: locationWithPeopleOnIt): void {
     const locationHasEnemies = location.enemies.length > 0;
+    const locationHasOtherPlayers = location.players.length > 1;
 
     if (locationHasEnemies) {
       location.players.forEach((player, index) => {
@@ -113,11 +114,27 @@ export class GameStateService {
           yPosition: location.location.position.yPosition + index - 100,
         };
       });
+    } else if (!locationHasEnemies && locationHasOtherPlayers) {
+      location.players.forEach((player, index) => {
+        player.position = {
+          xPosition: location.location.position.xPosition + index + 50,
+          yPosition: location.location.position.yPosition + 100,
+        };
+      });
+    } else {
+      // Only thing at the location...
+      location.players.forEach((player) => {
+        player.position = {
+          xPosition: location.location.position.xPosition,
+          yPosition: location.location.position.yPosition,
+        };
+      });
     }
   }
 
   private adjustEnemyPositions(location: locationWithPeopleOnIt): void {
     const locationHasPlayers = location.players.length > 0;
+    const locationHasOtherEnemies = location.enemies.length > 1;
 
     if (locationHasPlayers) {
       location.enemies.forEach((enemy, index) => {
@@ -125,6 +142,21 @@ export class GameStateService {
         enemy.position = {
           xPosition: location.location.position.xPosition + index + 50,
           yPosition: location.location.position.yPosition - 100,
+        };
+      });
+    } else if (!locationHasPlayers && locationHasOtherEnemies) {
+      location.enemies.forEach((enemy, index) => {
+        enemy.position = {
+          xPosition: location.location.position.xPosition + index - 50,
+          yPosition: location.location.position.yPosition - 100,
+        };
+      });
+    } else {
+      // Only thing at the location...
+      location.enemies.forEach((enemy) => {
+        enemy.position = {
+          xPosition: location.location.position.xPosition,
+          yPosition: location.location.position.yPosition,
         };
       });
     }
