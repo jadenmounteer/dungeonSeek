@@ -8,7 +8,7 @@ import {
   collectionData,
 } from '@angular/fire/firestore';
 import { CardService } from './card.service';
-import { CardDeck, DeckName } from '../types/card-deck';
+import { DeckName } from '../types/card-deck';
 
 @Injectable({
   providedIn: 'root',
