@@ -103,12 +103,17 @@ export class GameStateService {
   }
 
   private adjustPlayerPositions(location: locationWithPeopleOnIt): void {
-    location.players.forEach((player, index) => {
-      player.position = {
-        xPosition: location.location.position.xPosition + index - 50,
-        yPosition: location.location.position.yPosition + index - 100,
-      };
-    });
+    const locationHasEnemies = location.enemies.length > 0;
+
+    if (locationHasEnemies) {
+      location.players.forEach((player, index) => {
+        player.directionFacing = 'Right';
+        player.position = {
+          xPosition: location.location.position.xPosition + index - 50,
+          yPosition: location.location.position.yPosition + index - 100,
+        };
+      });
+    }
   }
 
   private adjustEnemyPositions(location: locationWithPeopleOnIt): void {
