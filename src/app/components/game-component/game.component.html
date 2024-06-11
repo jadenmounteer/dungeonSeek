@@ -54,7 +54,9 @@
           'top.px': npc.position.yPosition - 80
         }"
       >
-        <span class="character-name big-text">{{ npc.name }}</span>
+        <span class="character-name big-text"
+          >{{ npc.name }} - Lvl {{ npc.level }}</span
+        >
 
         <app-npc [npc]="npc" />
       </div>
