@@ -117,12 +117,17 @@ export class GameStateService {
   }
 
   private adjustEnemyPositions(location: locationWithPeopleOnIt): void {
-    location.enemies.forEach((enemy, index) => {
-      enemy.position = {
-        xPosition: location.location.position.xPosition + index * 50,
-        yPosition: location.location.position.yPosition,
-      };
-    });
+    const locationHasPlayers = location.players.length > 0;
+
+    if (locationHasPlayers) {
+      location.enemies.forEach((enemy, index) => {
+        enemy.directionFacing = 'Left';
+        enemy.position = {
+          xPosition: location.location.position.xPosition + index + 50,
+          yPosition: location.location.position.yPosition - 100,
+        };
+      });
+    }
   }
 
   public setCharactersBeingControlledByClient(): void {
