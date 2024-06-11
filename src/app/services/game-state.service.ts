@@ -9,7 +9,6 @@ import { CardRewardType } from '../types/card-reward-type';
 import { LocationKey, LocationNode } from './location-service';
 import { NpcFactory } from './npcFactory.service';
 import { NpcService } from './npc.service';
-import { Subject } from 'rxjs';
 
 // I know haha....I just want to code this game already so I can play it.
 // If I were to go back and redesign the game, I'd have the locations be the parents that house the state.
@@ -38,8 +37,6 @@ export class GameStateService {
   // Used to keep track of the state of the locations so we can adjust the UI accordingly and position everyone so they're not on top of each other.
   public locationsWithPeopleOnThem: Map<LocationKey, locationWithPeopleOnIt> =
     new Map();
-
-  public uiChangedSubject: Subject<void> = new Subject<void>();
 
   constructor() {}
 
@@ -117,9 +114,6 @@ export class GameStateService {
         });
       }
     });
-
-    // Emit a subject to update the UI.
-    this.uiChangedSubject.next();
   }
 
   public setCharactersBeingControlledByClient(): void {
