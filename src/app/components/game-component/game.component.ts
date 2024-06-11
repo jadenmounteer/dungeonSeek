@@ -231,6 +231,7 @@ export class GameComponent implements OnDestroy {
       .getNPCsInGameSession(this.gameStateService.gameSession.id)
       .subscribe((npcs) => {
         this.gameStateService.npcsInPlay = npcs;
+        this.gameStateService.adjustLocationsWithPeopleOnThem();
       });
   }
 
