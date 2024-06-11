@@ -8,6 +8,70 @@ import { DeckName } from '../types/card-deck';
   providedIn: 'root',
 })
 export class NpcFactory {
+  private maleHumanNames = [
+    'John',
+    'Bob',
+    'Billy',
+    'Tom',
+    'Tim',
+    'Jim',
+    'Joe',
+    'Jack',
+    'James',
+    'Jake',
+    'Ragnor',
+    'Grubber',
+    'Hank',
+    'Hector',
+    'Hugo',
+  ];
+
+  private maleGoblinNames = [
+    'Gob',
+    'Gobbo',
+    'Gobbert',
+    'Gobson',
+    'Mongo',
+    'Throg',
+  ];
+
+  private maleOrcNames = [
+    'Gor',
+    'Gorbad',
+    'Gorbag',
+    'Gorblag',
+    'Gorblad',
+    'Gorblud',
+    'Crusher',
+    'Smasher',
+    'Basher',
+    'Slasher',
+    'Killer',
+    'Hunter',
+  ];
+
+  private maleGiantNames = [
+    'Gronk',
+    'Grog',
+    'Grug',
+    'Mog',
+    'Log',
+    'Thog',
+    'Throg',
+    'Thrag',
+    'Arg',
+  ];
+
+  private maleOgreNames = ['Nog', 'Melgash', 'Gorash', 'Eggash', 'Mogash'];
+
+  private npcTypeToNameArray: Record<NpcType, string[]> = {
+    [NpcType.BANDIT]: this.maleHumanNames,
+    [NpcType.GOBLIN]: this.maleGoblinNames,
+    [NpcType.ORC]: this.maleOrcNames,
+    [NpcType.OGRE]: this.maleOgreNames,
+    [NpcType.GIANT]: this.maleGiantNames,
+  };
+
   constructor() {}
 
   public generateNewNpc(
@@ -20,7 +84,7 @@ export class NpcFactory {
     const newNpc: Npc = {
       id: '',
       npcType: npcType,
-      name: this.#generateNewNpcName(npcType),
+      name: this.generateNewNpcName(npcType),
       deckName: deckName,
       npcStats: {
         health: {
@@ -47,43 +111,15 @@ export class NpcFactory {
     return newNpc;
   }
 
-  #generateNewNpcName(npcType: NpcType): string {
-    switch (npcType) {
-      case NpcType.BANDIT:
-        return (
-          this.#generateMaleHumanName() + NpcType.BANDIT.toLocaleLowerCase()
-        );
-      case NpcType.GOBLIN:
-        return 'Goblin';
-      case NpcType.ORC:
-        return 'Orc';
-      case NpcType.OGRE:
-        return 'Ogre';
-      case NpcType.GIANT:
-        return 'Giant';
-      default:
-        throw new Error('Unknown npcType: ' + npcType);
+  private generateNewNpcName(npcType: NpcType): string {
+    const nameArray = this.npcTypeToNameArray[npcType];
+    if (!nameArray) {
+      throw new Error('Unknown npcType: ' + npcType);
     }
+    return this.generateRandomName(nameArray) + npcType.toLocaleLowerCase();
   }
-  #generateMaleHumanName(): string {
-    const names = [
-      'John',
-      'Bob',
-      'Billy',
-      'Tom',
-      'Tim',
-      'Jim',
-      'Joe',
-      'Jack',
-      'James',
-      'Jake',
-      'Ragnor',
-      'Grubber',
-      'Hank',
-      'Hector',
-      'Hugo',
-    ];
 
+  private generateRandomName(names: string[]): string {
     const randomName = names[Math.floor(Math.random() * names.length)];
     return randomName + ' the ';
   }
