@@ -38,6 +38,8 @@ export class GameStateService {
   public locationsWithPeopleOnThem: Map<LocationKey, locationWithPeopleOnIt> =
     new Map();
 
+  private distanceBetweenCharacters = 75;
+
   constructor() {}
 
   // Called when the game session is first loaded and when something moves.
@@ -110,15 +112,21 @@ export class GameStateService {
       location.players.forEach((player, index) => {
         player.directionFacing = 'Right';
         player.position = {
-          xPosition: location.location.position.xPosition + index - 50,
-          yPosition: location.location.position.yPosition + index - 100,
+          xPosition:
+            location.location.position.xPosition -
+            this.distanceBetweenCharacters,
+          yPosition:
+            location.location.position.yPosition +
+            index * this.distanceBetweenCharacters,
         };
       });
     } else if (!locationHasEnemies && locationHasOtherPlayers) {
       location.players.forEach((player, index) => {
         player.position = {
-          xPosition: location.location.position.xPosition + index + 50,
-          yPosition: location.location.position.yPosition + 100,
+          xPosition: location.location.position.xPosition,
+          yPosition:
+            location.location.position.yPosition +
+            index * this.distanceBetweenCharacters,
         };
       });
     } else {
@@ -140,15 +148,21 @@ export class GameStateService {
       location.enemies.forEach((enemy, index) => {
         enemy.directionFacing = 'Left';
         enemy.position = {
-          xPosition: location.location.position.xPosition + index + 50,
-          yPosition: location.location.position.yPosition - 100,
+          xPosition:
+            location.location.position.xPosition +
+            this.distanceBetweenCharacters,
+          yPosition:
+            location.location.position.yPosition +
+            index * this.distanceBetweenCharacters,
         };
       });
     } else if (!locationHasPlayers && locationHasOtherEnemies) {
       location.enemies.forEach((enemy, index) => {
         enemy.position = {
-          xPosition: location.location.position.xPosition + index - 50,
-          yPosition: location.location.position.yPosition - 100,
+          xPosition: location.location.position.xPosition,
+          yPosition:
+            location.location.position.yPosition +
+            index * this.distanceBetweenCharacters,
         };
       });
     } else {
