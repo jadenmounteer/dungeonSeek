@@ -1,123 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Npc, NpcType } from '../types/npc';
+import {
+  Npc,
+  NpcType,
+  npcDifficultyToLevel,
+  npcTypeToNameArray,
+} from '../types/npc';
 import { LocationNode } from './location-service';
 import { CardRewardType } from '../types/card-reward-type';
 import { DeckName } from '../types/card-deck';
-
-export interface MinMax {
-  min: number;
-  max: number;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class NpcFactory {
-  private maleHumanNames = [
-    'John',
-    'Bob',
-    'Billy',
-    'Tom',
-    'Tim',
-    'Jim',
-    'Joe',
-    'Jack',
-    'James',
-    'Jake',
-    'Hank',
-    'Hector',
-    'Hugo',
-    'Homer',
-    'Harry',
-    'Henry',
-    'Harold',
-    'Harrison',
-    'Frank',
-    'Fred',
-    'Finn',
-    'Felix',
-    'Floyd',
-    'Fletcher',
-    'Pete',
-    'Paul',
-    'Peter',
-    'Zack',
-    'Zane',
-    'Zander',
-    'Quinn',
-    'Quincy',
-    'Quentin',
-    'Yuri',
-    'Oscar',
-    'Oliver',
-    'Walter',
-    'William',
-    'Winston',
-    'Victor',
-    'Vincent',
-    'Charles',
-    'Christopher',
-  ];
-
-  private maleOrcishNames = [
-    'Gor',
-    'Gorbad',
-    'Gorbag',
-    'Gorblag',
-    'Gorblad',
-    'Gorblud',
-    'Crusher',
-    'Smasher',
-    'Basher',
-    'Slasher',
-    'Killer',
-    'Hunter',
-    'Gob',
-    'Gobbo',
-    'Gobbert',
-    'Gobson',
-    'Mongo',
-    'Throg',
-    'Grubber',
-  ];
-
-  private maleGiantishNames = [
-    'Gronk',
-    'Grog',
-    'Grug',
-    'Mog',
-    'Log',
-    'Thog',
-    'Throg',
-    'Thrag',
-    'Arg',
-    'Nog',
-    'Melgash',
-    'Gorash',
-    'Eggash',
-    'Mogash',
-    'Ragnor',
-  ];
-
-  private npcTypeToNameArray: Record<NpcType, string[]> = {
-    [NpcType.BANDIT]: this.maleHumanNames,
-    [NpcType.GOBLIN]: this.maleOrcishNames,
-    [NpcType.ORC]: this.maleOrcishNames,
-    [NpcType.OGRE]: this.maleGiantishNames,
-    [NpcType.GIANT]: this.maleGiantishNames,
-    [NpcType.ZOMBIE]: this.maleHumanNames,
-    [NpcType.SKELETON]: this.maleHumanNames,
-    [NpcType.VAMPIRE]: this.maleHumanNames,
-    [NpcType.NECROMANCER]: this.maleHumanNames,
-  };
-
-  private npcDifficultyToLevel: Record<CardRewardType, MinMax> = {
-    [CardRewardType.EASY]: { min: 1, max: 5 },
-    [CardRewardType.MODERATE]: { min: 6, max: 11 },
-    [CardRewardType.HARD]: { min: 11, max: 20 },
-    [CardRewardType.INSANE]: { min: 20, max: 30 },
-  };
-
   constructor() {}
 
   public generateNewNpc(
@@ -160,7 +55,7 @@ export class NpcFactory {
   }
 
   private getNpcLevel(difficulty: CardRewardType): number {
-    const minMax = this.npcDifficultyToLevel[difficulty];
+    const minMax = npcDifficultyToLevel[difficulty];
     if (!minMax) {
       throw new Error('Unknown difficulty: ' + difficulty);
     }
@@ -170,7 +65,7 @@ export class NpcFactory {
   }
 
   private generateNewNpcName(npcType: NpcType): string {
-    const nameArray = this.npcTypeToNameArray[npcType];
+    const nameArray = npcTypeToNameArray[npcType];
     if (!nameArray) {
       throw new Error('Unknown npcType: ' + npcType);
     }

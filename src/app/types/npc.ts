@@ -43,3 +43,113 @@ export enum NpcType {
   VAMPIRE = 'Vampire',
   NECROMANCER = 'Necromancer',
 }
+
+const maleHumanNames = [
+  'John',
+  'Bob',
+  'Billy',
+  'Tom',
+  'Tim',
+  'Jim',
+  'Joe',
+  'Jack',
+  'James',
+  'Jake',
+  'Hank',
+  'Hector',
+  'Hugo',
+  'Homer',
+  'Harry',
+  'Henry',
+  'Harold',
+  'Harrison',
+  'Frank',
+  'Fred',
+  'Finn',
+  'Felix',
+  'Floyd',
+  'Fletcher',
+  'Pete',
+  'Paul',
+  'Peter',
+  'Zack',
+  'Zane',
+  'Zander',
+  'Quinn',
+  'Quincy',
+  'Quentin',
+  'Yuri',
+  'Oscar',
+  'Oliver',
+  'Walter',
+  'William',
+  'Winston',
+  'Victor',
+  'Vincent',
+  'Charles',
+  'Christopher',
+];
+
+const maleOrcishNames = [
+  'Gor',
+  'Gorbad',
+  'Gorbag',
+  'Gorblag',
+  'Gorblad',
+  'Gorblud',
+  'Crusher',
+  'Smasher',
+  'Basher',
+  'Slasher',
+  'Killer',
+  'Hunter',
+  'Gob',
+  'Gobbo',
+  'Gobbert',
+  'Gobson',
+  'Mongo',
+  'Throg',
+  'Grubber',
+];
+
+const maleGiantishNames = [
+  'Gronk',
+  'Grog',
+  'Grug',
+  'Mog',
+  'Log',
+  'Thog',
+  'Throg',
+  'Thrag',
+  'Arg',
+  'Nog',
+  'Melgash',
+  'Gorash',
+  'Eggash',
+  'Mogash',
+  'Ragnor',
+];
+
+export const npcTypeToNameArray: Record<NpcType, string[]> = {
+  [NpcType.BANDIT]: maleHumanNames,
+  [NpcType.GOBLIN]: maleOrcishNames,
+  [NpcType.ORC]: maleOrcishNames,
+  [NpcType.OGRE]: maleGiantishNames,
+  [NpcType.GIANT]: maleGiantishNames,
+  [NpcType.ZOMBIE]: maleHumanNames,
+  [NpcType.SKELETON]: maleHumanNames,
+  [NpcType.VAMPIRE]: maleHumanNames,
+  [NpcType.NECROMANCER]: maleHumanNames,
+};
+
+export interface MinMax {
+  min: number;
+  max: number;
+}
+
+export const npcDifficultyToLevel: Record<CardRewardType, MinMax> = {
+  [CardRewardType.EASY]: { min: 1, max: 5 },
+  [CardRewardType.MODERATE]: { min: 6, max: 11 },
+  [CardRewardType.HARD]: { min: 11, max: 20 },
+  [CardRewardType.INSANE]: { min: 20, max: 30 },
+};
