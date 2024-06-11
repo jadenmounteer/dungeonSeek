@@ -38,4 +38,8 @@ export enum NpcType {
   ORC = 'Orc',
   OGRE = 'Ogre',
   GIANT = 'Giant',
+  ZOMBIE = 'Zombie',
+  SKELETON = 'Skeleton',
+  VAMPIRE = 'Vampire',
+  NECROMANCER = 'Necromancer',
 }

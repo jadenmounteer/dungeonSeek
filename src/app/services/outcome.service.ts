@@ -4,10 +4,10 @@ import { CombatService } from './combat.service';
 import { LootService } from './loot.service';
 import { GameStateService } from './game-state.service';
 import { CharacterService } from './character/character.service';
-import { ActivatedRoute } from '@angular/router';
 import { GameDialogueData, GameDialogueService } from './game-dialogue.service';
 import { NpcType } from '../types/npc';
 import { DeckName } from '../types/card-deck';
+import { CardRewardType } from '../types/card-reward-type';
 
 @Injectable({
   providedIn: 'root',
@@ -21,13 +21,22 @@ export class OutcomeService implements OnDestroy {
 
   // Strategy pattern map for mapping the outcome to the function that will handle the outcome.
   #outcomeStrategies = new Map<Outcome, () => void>([
-    [Outcome.FIND_EASY_LOOT, () => this.#lootService.drawLootCard('Easy')],
+    [
+      Outcome.FIND_EASY_LOOT,
+      () => this.#lootService.drawLootCard(CardRewardType.EASY),
+    ],
     [
       Outcome.FIND_MODERATE_LOOT,
-      () => this.#lootService.drawLootCard('Moderate'),
+      () => this.#lootService.drawLootCard(CardRewardType.MODERATE),
     ],
-    [Outcome.FIND_HARD_LOOT, () => this.#lootService.drawLootCard('Hard')],
-    [Outcome.FIND_INSANE_LOOT, () => this.#lootService.drawLootCard('Insane')],
+    [
+      Outcome.FIND_HARD_LOOT,
+      () => this.#lootService.drawLootCard(CardRewardType.HARD),
+    ],
+    [
+      Outcome.FIND_INSANE_LOOT,
+      () => this.#lootService.drawLootCard(CardRewardType.INSANE),
+    ],
     [Outcome.FIGHT_SINGLE_BANDIT, () => this.#combatService.startCombat()],
     [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
   ]);
@@ -64,7 +73,7 @@ export class OutcomeService implements OnDestroy {
       await this.#gameStateService.spawnNpcRelativeToPlayer(
         NpcType.BANDIT,
         DeckName.BASE_GAME_NPCS,
-        'Easy',
+        CardRewardType.EASY,
         this.#gameStateService.characterBeingControlledByClient
       );
 
