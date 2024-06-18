@@ -3,6 +3,7 @@ import {
   Npc,
   NpcType,
   npcDifficultyToLevel,
+  npcTypeToArmorClassArray,
   npcTypeToNameArray,
 } from '../types/npc';
 import { LocationNode } from './location-service';
@@ -34,7 +35,7 @@ export class NpcFactory {
           total: 100,
           current: 100,
         },
-        armorClass: 10,
+        armorClass: this.generateNpcArmorClass(npcType),
       },
       currentLocation: location,
       position: location.position,
@@ -63,6 +64,14 @@ export class NpcFactory {
       throw new Error('Unknown npcType: ' + npcType);
     }
     return this.generateRandomName(nameArray) + npcType.toLocaleLowerCase();
+  }
+
+  private generateNpcArmorClass(npcType: NpcType): number {
+    const armorClass = npcTypeToArmorClassArray[npcType];
+    if (!armorClass) {
+      throw new Error('Unknown npcType: ' + npcType);
+    }
+    return armorClass;
   }
 
   private generateRandomName(names: string[]): string {

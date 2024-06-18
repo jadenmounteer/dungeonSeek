@@ -141,6 +141,18 @@ export const npcTypeToNameArray: Record<NpcType, string[]> = {
   [NpcType.NECROMANCER]: maleHumanNames,
 };
 
+export const npcTypeToArmorClassArray: Record<NpcType, number> = {
+  [NpcType.BANDIT]: 5,
+  [NpcType.GOBLIN]: 12,
+  [NpcType.ORC]: 14,
+  [NpcType.OGRE]: 15,
+  [NpcType.GIANT]: 16,
+  [NpcType.ZOMBIE]: 8,
+  [NpcType.SKELETON]: 10,
+  [NpcType.VAMPIRE]: 15,
+  [NpcType.NECROMANCER]: 12,
+};
+
 export interface MinMax {
   min: number;
   max: number;
