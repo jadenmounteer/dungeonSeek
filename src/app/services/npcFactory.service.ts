@@ -4,6 +4,7 @@ import {
   NpcType,
   npcDifficultyToLevel,
   npcTypeToArmorClassArray,
+  npcTypeToHealthArray,
   npcTypeToNameArray,
 } from '../types/npc';
 import { LocationNode } from './location-service';
@@ -25,6 +26,8 @@ export class NpcFactory {
   ): Npc {
     const npcLevel = this.getNpcLevel(difficulty);
 
+    const totalHealth = this.generateNpcHealth(npcType, npcLevel);
+
     const newNpc: Npc = {
       id: '',
       npcType: npcType,
@@ -32,8 +35,8 @@ export class NpcFactory {
       deckName: deckName,
       npcStats: {
         health: {
-          total: 100,
-          current: 100,
+          total: totalHealth,
+          current: totalHealth,
         },
         armorClass: this.generateNpcArmorClass(npcType, npcLevel),
       },
@@ -64,6 +67,18 @@ export class NpcFactory {
       throw new Error('Unknown npcType: ' + npcType);
     }
     return this.generateRandomName(nameArray) + npcType.toLocaleLowerCase();
+  }
+
+  private generateNpcHealth(npcType: NpcType, level: number): number {
+    const initialHealth = npcTypeToHealthArray[npcType];
+    if (!initialHealth) {
+      throw new Error('Unknown npcType: ' + npcType);
+    }
+
+    // Add a bonus according to the npc's level;
+    const levelBonus = Math.floor(level / 2);
+
+    return levelBonus + initialHealth;
   }
 
   private generateNpcArmorClass(npcType: NpcType, level: number): number {

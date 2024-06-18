@@ -154,6 +154,18 @@ export const npcTypeToArmorClassArray: Record<NpcType, number> = {
   [NpcType.NECROMANCER]: 12,
 };
 
+export const npcTypeToHealthArray: Record<NpcType, number> = {
+  [NpcType.BANDIT]: 100,
+  [NpcType.GOBLIN]: 50,
+  [NpcType.ORC]: 100,
+  [NpcType.OGRE]: 200,
+  [NpcType.GIANT]: 500,
+  [NpcType.ZOMBIE]: 80,
+  [NpcType.SKELETON]: 80,
+  [NpcType.VAMPIRE]: 100,
+  [NpcType.NECROMANCER]: 100,
+};
+
 export interface MinMax {
   min: number;
   max: number;
