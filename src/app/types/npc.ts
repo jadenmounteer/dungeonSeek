@@ -28,8 +28,7 @@ export interface NpcDisplayInfo {
 // This is the info that is stored in the db. Everything else concerning the npc is fetched from JSON.
 export interface NpcStats {
   health: CharacterStat;
-  mana: CharacterStat;
-  stamina: CharacterStat;
+  armorClass: number;
 }
 
 export enum NpcType {

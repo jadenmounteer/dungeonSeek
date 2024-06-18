@@ -34,14 +34,7 @@ export class NpcFactory {
           total: 100,
           current: 100,
         },
-        mana: {
-          total: 100,
-          current: 100,
-        },
-        stamina: {
-          total: 100,
-          current: 100,
-        },
+        armorClass: 10,
       },
       currentLocation: location,
       position: location.position,
