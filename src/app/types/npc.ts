@@ -141,9 +141,10 @@ export const npcTypeToNameArray: Record<NpcType, string[]> = {
   [NpcType.NECROMANCER]: maleHumanNames,
 };
 
+// TODO Tweak these numbers according to how tough the npc should be.
 export const npcTypeToArmorClassArray: Record<NpcType, number> = {
-  [NpcType.BANDIT]: 5,
-  [NpcType.GOBLIN]: 12,
+  [NpcType.BANDIT]: 4,
+  [NpcType.GOBLIN]: 1,
   [NpcType.ORC]: 14,
   [NpcType.OGRE]: 15,
   [NpcType.GIANT]: 16,

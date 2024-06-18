@@ -35,7 +35,7 @@ export class NpcFactory {
           total: 100,
           current: 100,
         },
-        armorClass: this.generateNpcArmorClass(npcType),
+        armorClass: this.generateNpcArmorClass(npcType, npcLevel),
       },
       currentLocation: location,
       position: location.position,
@@ -66,12 +66,16 @@ export class NpcFactory {
     return this.generateRandomName(nameArray) + npcType.toLocaleLowerCase();
   }
 
-  private generateNpcArmorClass(npcType: NpcType): number {
-    const armorClass = npcTypeToArmorClassArray[npcType];
-    if (!armorClass) {
+  private generateNpcArmorClass(npcType: NpcType, level: number): number {
+    const initialArmorClass = npcTypeToArmorClassArray[npcType];
+    if (!initialArmorClass) {
       throw new Error('Unknown npcType: ' + npcType);
     }
-    return armorClass;
+
+    // Add a bonus according to the npc's level;
+    const levelBonus = Math.floor(level / 2);
+
+    return levelBonus + initialArmorClass;
   }
 
   private generateRandomName(names: string[]): string {
