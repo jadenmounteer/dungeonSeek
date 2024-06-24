@@ -177,3 +177,40 @@ export const npcDifficultyToLevel: Record<CardRewardType, MinMax> = {
   [CardRewardType.HARD]: { min: 11, max: 20 },
   [CardRewardType.INSANE]: { min: 20, max: 30 },
 };
+
+// The base npc class
+export abstract class Npc {
+  id: string = '';
+  npcType: NpcType;
+  name: string;
+  deckName: DeckName;
+  movementSpeed: number = 4;
+  npcStats: {
+    health: { total: number; current: number };
+    armorClass: number;
+  };
+  currentLocation: LocationNode;
+  position: Position;
+  inParty: boolean = false;
+  directionFacing: 'Right' | 'Left';
+  rewardTypeForDefeatingNpc: CardRewardType;
+
+  constructor(
+    npcType: NpcType,
+    location: LocationNode,
+    difficulty: CardRewardType,
+    directionFacing: 'Right' | 'Left',
+    deckName: DeckName
+  ) {
+    this.npcType = npcType;
+    this.name = ''; // This should be set in subclasses
+    this.deckName = deckName;
+    this.npcStats = { health: { total: 100, current: 100 }, armorClass: 100 };
+    this.currentLocation = location;
+    this.position = location.position;
+    this.directionFacing = directionFacing;
+    this.rewardTypeForDefeatingNpc = difficulty;
+  }
+
+  // Define any common methods here
+}
