@@ -2,11 +2,6 @@
   {
     "npcType": "Bandit",
     "rightFacingImgUrl": "assets/game-pieces/bandit/bandit-right.png",
-    "leftFacingImgUrl": "assets/game-pieces/bandit/bandit-left.png",
-    "movementSpeed": 4,
-    "npcStats": {
-      "health": 100,
-      "armorClass": 2
-    }
+    "leftFacingImgUrl": "assets/game-pieces/bandit/bandit-left.png"
   }
 ]

@@ -13,6 +13,8 @@ export interface Npc {
   inParty: boolean;
   directionFacing: 'Right' | 'Left';
   rewardTypeForDefeatingNpc: CardRewardType;
+  movementSpeed: number;
+  npcStats: NpcStats;
 }
 
 // This is the data that is stored in the json. It will not be stored in the db.
@@ -20,8 +22,6 @@ export interface NpcInfo {
   npcType: NpcType; // This is the identifier for the npc. It is used to fetch the npc from the card deck
   rightFacingImgUrl: string;
   leftFacingImgUrl: string;
-  movementSpeed: number;
-  npcStats: NpcStats;
 }
 
 // These npc stats are added to the npc when it is created and set to the database.

@@ -29,6 +29,11 @@ export class NpcFactory {
       npcType: npcType,
       name: this.generateNewNpcName(npcType),
       deckName: deckName,
+      movementSpeed: 4,
+      npcStats: {
+        health: { total: 100, current: 100 },
+        armorClass: 100,
+      },
 
       currentLocation: location,
       position: location.position,
