@@ -1,5 +1,5 @@
 import { Component, InputSignal, OnInit, inject, input } from '@angular/core';
-import { Npc, NpcDisplayInfo } from '../../types/npc';
+import { Npc, NpcInfo } from '../../types/npc';
 import { CommonModule } from '@angular/common';
 import { NpcService } from '../../services/npc.service';
 
@@ -14,7 +14,7 @@ import { NpcService } from '../../services/npc.service';
   styleUrl: './npc.component.scss',
 })
 export class NpcComponent implements OnInit {
-  public npcDisplayInfo!: NpcDisplayInfo;
+  public npcInfo!: NpcInfo;
 
   private npcService: NpcService = inject(NpcService);
 
@@ -23,7 +23,7 @@ export class NpcComponent implements OnInit {
   public ngOnInit(): void {
     const info = this.npcService.getCardInfo(this.npc().npcType);
     if (info) {
-      this.npcDisplayInfo = info;
+      this.npcInfo = info;
     } else {
       throw new Error(`${this.npc().npcType} card not found in npc deck`);
     }

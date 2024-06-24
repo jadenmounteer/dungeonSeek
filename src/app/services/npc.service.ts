@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Npc, NpcDisplayInfo } from '../types/npc';
+import { Npc, NpcInfo } from '../types/npc';
 import {
   Firestore,
   addDoc,
@@ -18,7 +18,7 @@ export class NpcService {
   private cardService: CardService = inject(CardService);
 
   // Map to hold the json data for the cards
-  private npcDisplayInfo: Map<string, NpcDisplayInfo> = new Map();
+  private npcInfo: Map<string, NpcInfo> = new Map();
 
   constructor() {
     // We don't handle NPC cards like other card decks because specific npcs come from event cards.
@@ -30,16 +30,16 @@ export class NpcService {
   public async fetchCardInfoFromJSON(): Promise<void> {
     const cards = (await this.cardService.fetchCardsInfoByDeck(
       DeckName.BASE_GAME_NPCS
-    )) as NpcDisplayInfo[];
-    const mapOfCardNames = new Map<string, NpcDisplayInfo>();
+    )) as NpcInfo[];
+    const mapOfCardNames = new Map<string, NpcInfo>();
     cards.forEach((card) => {
       mapOfCardNames.set(card.npcType, card);
     });
-    this.npcDisplayInfo = mapOfCardNames;
+    this.npcInfo = mapOfCardNames;
   }
 
-  public getCardInfo(cardName: string): NpcDisplayInfo | undefined {
-    return this.npcDisplayInfo.get(cardName);
+  public getCardInfo(cardName: string): NpcInfo | undefined {
+    return this.npcInfo.get(cardName);
   }
 
   public getNPCsInGameSession(gameSessionID: string): Observable<Npc[]> {

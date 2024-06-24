@@ -24,41 +24,21 @@ export class NpcFactory {
     directionFacing: 'Right' | 'Left' = 'Right',
     deckName: DeckName
   ): Npc {
-    const npcLevel = this.getNpcLevel(difficulty);
-
-    const totalHealth = this.generateNpcHealth(npcType, npcLevel);
-
     const newNpc: Npc = {
       id: '',
       npcType: npcType,
       name: this.generateNewNpcName(npcType),
       deckName: deckName,
-      npcStats: {
-        health: {
-          total: totalHealth,
-          current: totalHealth,
-        },
-        armorClass: this.generateNpcArmorClass(npcType, npcLevel),
-      },
+
       currentLocation: location,
       position: location.position,
-      level: npcLevel,
+
       inParty: false,
       directionFacing: directionFacing,
       rewardTypeForDefeatingNpc: difficulty,
     };
 
     return newNpc;
-  }
-
-  private getNpcLevel(difficulty: CardRewardType): number {
-    const minMax = npcDifficultyToLevel[difficulty];
-    if (!minMax) {
-      throw new Error('Unknown difficulty: ' + difficulty);
-    }
-    return Math.floor(
-      Math.random() * (minMax.max - minMax.min + 1) + minMax.min
-    );
   }
 
   private generateNewNpcName(npcType: NpcType): string {
@@ -79,18 +59,6 @@ export class NpcFactory {
     const levelBonus = Math.floor(level / 2);
 
     return levelBonus + initialHealth;
-  }
-
-  private generateNpcArmorClass(npcType: NpcType, level: number): number {
-    const initialArmorClass = npcTypeToArmorClassArray[npcType];
-    if (!initialArmorClass) {
-      throw new Error('Unknown npcType: ' + npcType);
-    }
-
-    // Add a bonus according to the npc's level;
-    const levelBonus = Math.floor(level / 2);
-
-    return levelBonus + initialArmorClass;
   }
 
   private generateRandomName(names: string[]): string {

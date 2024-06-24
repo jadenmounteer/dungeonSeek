@@ -8,20 +8,20 @@ export interface Npc {
   npcType: NpcType; // The id of the card in the card deck. Used to fetch the info from the card deck
   name: string; // The creator service generates the name based on the npcType. E.g. John the Bandit
   deckName: DeckName; // The deck the npc belongs to. This will be important when we have multiple npc decks from different campaigns
-  npcStats: NpcStats;
   currentLocation: LocationNode;
   position: Position;
-  level: number;
   inParty: boolean;
   directionFacing: 'Right' | 'Left';
   rewardTypeForDefeatingNpc: CardRewardType;
 }
 
-export interface NpcDisplayInfo {
+// This is the data that is stored in the json. It will not be stored in the db.
+export interface NpcInfo {
   npcType: NpcType; // This is the identifier for the npc. It is used to fetch the npc from the card deck
   rightFacingImgUrl: string;
   leftFacingImgUrl: string;
   movementSpeed: number;
+  npcStats: NpcStats;
 }
 
 // These npc stats are added to the npc when it is created and set to the database.
