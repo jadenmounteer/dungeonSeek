@@ -204,7 +204,7 @@ export class GameStateService {
       directionFacing: this.#getDirectionFacingRelativeToPlayer(currentPlayer),
       npcStats: null,
     };
-    const newNpc: Npc = this.#npcFactory.renderNpc(npcData);
+    const newNpc: Npc = this.#npcFactory.createNpcObject(npcData);
 
     const answer = await this.#npcService.addNewNpcToGameSession(
       newNpc,

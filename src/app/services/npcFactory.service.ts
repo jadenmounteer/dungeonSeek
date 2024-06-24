@@ -9,7 +9,8 @@ import { BanditNpc } from '../types/bandit-npc-data';
 export class NpcFactory {
   constructor() {}
 
-  public renderNpc(npcData: NpcData): Npc {
+  // TODO
+  public createNpcObject(npcData: NpcData): Npc {
     switch (npcData.npcType) {
       case NpcType.BANDIT:
         return new BanditNpc(npcData);

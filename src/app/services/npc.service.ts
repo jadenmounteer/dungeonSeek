@@ -54,6 +54,6 @@ export class NpcService {
   }
 
   public deserializeNpcData(data: NpcData): Npc {
-    return this.npcFactory.renderNpc(data);
+    return this.npcFactory.createNpcObject(data);
   }
 }
