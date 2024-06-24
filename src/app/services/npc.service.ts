@@ -1,46 +1,22 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Npc, NpcInfo } from '../types/npc';
+import { Observable, map } from 'rxjs';
+import { Npc, NpcData } from '../types/npc';
 import {
   Firestore,
   addDoc,
   collection,
   collectionData,
 } from '@angular/fire/firestore';
-import { CardService } from './card.service';
-import { DeckName } from '../types/card-deck';
+import { NpcFactory } from './npcFactory.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NpcService {
   #firestore: Firestore = inject(Firestore);
-  private cardService: CardService = inject(CardService);
+  private npcFactory: NpcFactory = inject(NpcFactory);
 
-  // Map to hold the json data for the cards
-  private npcInfo: Map<string, NpcInfo> = new Map();
-
-  constructor() {
-    // We don't handle NPC cards like other card decks because specific npcs come from event cards.
-    // So, we fetch the data from JSON when the user enters the game session.
-    // They are then stored in a map for easy access.
-    this.fetchCardInfoFromJSON();
-  }
-
-  public async fetchCardInfoFromJSON(): Promise<void> {
-    const cards = (await this.cardService.fetchCardsInfoByDeck(
-      DeckName.BASE_GAME_NPCS
-    )) as NpcInfo[];
-    const mapOfCardNames = new Map<string, NpcInfo>();
-    cards.forEach((card) => {
-      mapOfCardNames.set(card.npcType, card);
-    });
-    this.npcInfo = mapOfCardNames;
-  }
-
-  public getCardInfo(cardName: string): NpcInfo | undefined {
-    return this.npcInfo.get(cardName);
-  }
+  constructor() {}
 
   public getNPCsInGameSession(gameSessionID: string): Observable<Npc[]> {
     const collectionRef = collection(
@@ -50,13 +26,21 @@ export class NpcService {
       'npcs'
     );
 
-    return collectionData(collectionRef, {
+    const listOfNpcData = collectionData(collectionRef, {
       // This sets the id to the id of the document
       idField: 'id',
     }) as Observable<Npc[]>;
+
+    return listOfNpcData.pipe(
+      map((npcsData) =>
+        npcsData.map((npcData) => this.deserializeNpcData(npcData))
+      )
+    );
   }
 
   public addNewNpcToGameSession(npc: Npc, gameSessionID: string): Promise<any> {
+    const serializedData = npc.serialize();
+
     const collectionRef = collection(
       this.#firestore,
       'game-sessions',
@@ -64,8 +48,12 @@ export class NpcService {
       'npcs'
     );
 
-    return addDoc(collectionRef, npc).catch((error) => {
+    return addDoc(collectionRef, serializedData).catch((error) => {
       console.error('Error adding document: ', error);
     });
+  }
+
+  public deserializeNpcData(data: NpcData): Npc {
+    return this.npcFactory.renderNpc(data);
   }
 }

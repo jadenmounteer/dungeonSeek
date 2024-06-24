@@ -3,9 +3,7 @@ import { Character } from '../types/character';
 import { AuthService } from '../auth/auth.service';
 import { TurnService } from './turn.service';
 import { GameSession } from '../types/game-session';
-import { Npc, NpcType } from '../types/npc';
-import { DeckName } from '../types/card-deck';
-import { CardRewardType } from '../types/card-reward-type';
+import { Npc, NpcData, NpcType } from '../types/npc';
 import { LocationKey, LocationNode } from './location-service';
 import { NpcFactory } from './npcFactory.service';
 import { NpcService } from './npc.service';
@@ -196,17 +194,17 @@ export class GameStateService {
 
   public async spawnNpcRelativeToPlayer(
     npcType: NpcType,
-    deckName: DeckName,
-    difficulty: CardRewardType,
     currentPlayer: Character
   ): Promise<void> {
-    const newNpc: Npc = this.#npcFactory.generateNewNpc(
-      npcType,
-      currentPlayer.currentLocation,
-      difficulty,
-      this.#getDirectionFacingRelativeToPlayer(currentPlayer),
-      deckName
-    );
+    const npcData: NpcData = {
+      id: '',
+      npcType: npcType,
+      currentLocation: currentPlayer.currentLocation,
+      position: currentPlayer.currentLocation.position,
+      directionFacing: this.#getDirectionFacingRelativeToPlayer(currentPlayer),
+      npcStats: null,
+    };
+    const newNpc: Npc = this.#npcFactory.renderNpc(npcData);
 
     const answer = await this.#npcService.addNewNpcToGameSession(
       newNpc,

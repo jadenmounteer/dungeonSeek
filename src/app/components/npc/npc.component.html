@@ -2,11 +2,12 @@
   <img
     class="npc"
     *ngIf="npc().directionFacing === 'Right'"
-    [src]="npcInfo.rightFacingImgUrl"
+    [src]="npc().rightFacingImgUrl"
   />
   <img
     class="npc"
     *ngIf="npc().directionFacing === 'Left'"
-    [src]="npcInfo.leftFacingImgUrl"
+    [src]="npc().leftFacingImgUrl"
   />
 </div>
+`

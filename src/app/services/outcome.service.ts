@@ -5,9 +5,8 @@ import { LootService } from './loot.service';
 import { GameStateService } from './game-state.service';
 import { CharacterService } from './character/character.service';
 import { GameDialogueData, GameDialogueService } from './game-dialogue.service';
-import { NpcType } from '../types/npc';
-import { DeckName } from '../types/card-deck';
 import { CardRewardType } from '../types/card-reward-type';
+import { NpcType } from '../types/npc';
 
 @Injectable({
   providedIn: 'root',
@@ -72,8 +71,6 @@ export class OutcomeService implements OnDestroy {
       // TODO Spawn the bandit npc
       await this.#gameStateService.spawnNpcRelativeToPlayer(
         NpcType.BANDIT,
-        DeckName.BASE_GAME_NPCS,
-        CardRewardType.EASY,
         this.#gameStateService.characterBeingControlledByClient
       );
 
