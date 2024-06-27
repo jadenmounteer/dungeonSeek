@@ -83,6 +83,7 @@ export class GameComponent implements OnDestroy {
 
   protected charactersSub!: Subscription;
   public npcsSub!: Subscription;
+  public combatSessionsSub!: Subscription;
   protected loading = true;
   protected locationsLoading = true;
   protected currentCharacterRolledForEventCardThisTurn = false;
@@ -169,6 +170,10 @@ export class GameComponent implements OnDestroy {
         if (!this.npcsSub) {
           this.setNPCsSub();
         }
+
+        if (!this.combatSessionsSub) {
+          this.setCombatSessionsSub();
+        }
       });
 
     this.playerPositionSub =
@@ -212,6 +217,7 @@ export class GameComponent implements OnDestroy {
     this.drawItemSubscription.unsubscribe();
     this.drawGoldSubscription.unsubscribe();
     this.npcsSub.unsubscribe();
+    this.combatSessionsSub.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameStateService.gameSession.playerIDs.length > 1) {
@@ -224,6 +230,14 @@ export class GameComponent implements OnDestroy {
       this.gameStateService.gameSession,
       this.gameStateService.charactersBeingControlledByClient
     );
+  }
+
+  private setCombatSessionsSub(): void {
+    this.combatSessionsSub = this.#combatService
+      .getCombatSessionsInGameSession(this.gameStateService.gameSession.id)
+      .subscribe((combatSessions) => {
+        this.gameStateService.combatSessions = combatSessions;
+      });
   }
 
   private setNPCsSub(): void {

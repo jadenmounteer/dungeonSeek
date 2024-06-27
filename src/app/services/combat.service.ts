@@ -6,6 +6,8 @@ import {
   collection,
   collectionData,
 } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { GameSession } from '../types/game-session';
 
 export interface CombatSession {
   playerIDs: string[];
@@ -22,7 +24,7 @@ export class CombatService {
 
   constructor() {}
 
-  public startCombatSession(): void {
+  public async startCombatSession(): Promise<void> {
     if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client.');
     }
@@ -53,10 +55,12 @@ export class CombatService {
     };
 
     // Save the combat session to the database
-    this.addNewCombatSessionToDatabase(
+    await this.addNewCombatSessionToDatabase(
       combatSession,
       this.gameStateService.gameSession.id
     );
+
+    this.gameStateService.combatSessions.push(combatSession);
   }
 
   private addNewCombatSessionToDatabase(
@@ -73,5 +77,22 @@ export class CombatService {
     return addDoc(collectionRef, combatSession).catch((error) => {
       console.error('Error adding document: ', error);
     });
+  }
+
+  public getCombatSessionsInGameSession(
+    gameSessionID: string
+  ): Observable<CombatSession[]> {
+    const collectionRef = collection(
+      this.#firestore,
+      'game-sessions',
+      gameSessionID,
+      'combat-sessions'
+    );
+
+    const listOfCombatSessions = collectionData(collectionRef, {
+      idField: 'id',
+    }) as Observable<CombatSession[]>;
+
+    return listOfCombatSessions;
   }
 }
