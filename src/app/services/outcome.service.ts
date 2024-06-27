@@ -12,7 +12,7 @@ import { NpcType } from '../types/npc';
   providedIn: 'root',
 })
 export class OutcomeService implements OnDestroy {
-  #combatService: CombatService = inject(CombatService);
+  combatService: CombatService = inject(CombatService);
   #lootService: LootService = inject(LootService);
   #gameStateService: GameStateService = inject(GameStateService);
   #characterService: CharacterService = inject(CharacterService);
@@ -36,11 +36,15 @@ export class OutcomeService implements OnDestroy {
       Outcome.FIND_INSANE_LOOT,
       () => this.#lootService.drawLootCard(CardRewardType.INSANE),
     ],
-    [Outcome.FIGHT_SINGLE_BANDIT, () => this.#combatService.startCombat()],
+    [Outcome.FIGHT_SINGLE_BANDIT, () => this.startCombat()],
     [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
   ]);
 
   ngOnDestroy(): void {}
+
+  private startCombat(): void {
+    this.combatService.startCombatSession();
+  }
 
   public makeChoice(outcome: Outcome): void {
     const strategy = this.#outcomeStrategies.get(outcome);
@@ -74,15 +78,7 @@ export class OutcomeService implements OnDestroy {
         this.#gameStateService.characterBeingControlledByClient
       );
 
-      this.#gameDialogueService.buttonOneCallback =
-        this.#combatService.startCombat.bind(this);
-
-      // TODO when I am implementing the enemies for the player to fight.
-      // Simply update the startCombat method to take the enemies as a parameter.
-      // this.#gameDialogueService.buttonOneCallback = () => {
-      //   const enemies = /* get the enemies the player will need to fight */;
-      //   this.#combatService.startCombat.bind(this, enemies);
-      // };
+      this.#gameDialogueService.buttonOneCallback = this.startCombat.bind(this);
 
       gameDialogueData.message = `"I changed my mind," the bandit says as he unsheathes his sword. "I'll take your gold and your life!"`;
       gameDialogueData.buttonOneText = 'Begin Combat';
