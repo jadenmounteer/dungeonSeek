@@ -7,5 +7,12 @@ export class BanditNpc extends Npc {
     this.rewardTypeForDefeatingNpc = CardRewardType.EASY;
     this.rightFacingImgUrl = 'assets/game-pieces/bandit/bandit-right.png';
     this.leftFacingImgUrl = 'assets/game-pieces/bandit/bandit-left.png';
+    this.npcStats = {
+      health: {
+        current: 10,
+        total: 10,
+      },
+      armorClass: 1,
+    };
   }
 }

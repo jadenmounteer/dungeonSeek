@@ -205,7 +205,14 @@ export class GameStateService {
       currentLocation: currentPlayer.currentLocation,
       position: currentPlayer.currentLocation.position,
       directionFacing: this.#getDirectionFacingRelativeToPlayer(currentPlayer),
-      npcStats: null,
+      // These are default stats
+      npcStats: {
+        health: {
+          current: 10,
+          total: 10,
+        },
+        armorClass: 1,
+      },
     };
     const newNpc: Npc = this.#npcFactory.createNpcObject(npcData);
 

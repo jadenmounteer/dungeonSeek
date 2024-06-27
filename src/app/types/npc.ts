@@ -9,7 +9,7 @@ export interface NpcData {
   currentLocation: LocationNode;
   position: Position;
   directionFacing: 'Right' | 'Left';
-  npcStats: NpcStats | null;
+  npcStats: NpcStats;
 }
 
 // These npc stats are added to the npc when it is created and set to the database.
@@ -43,7 +43,7 @@ export abstract class Npc {
   id: string = '';
   npcType: NpcType;
   movementSpeed: number = 4;
-  npcStats: NpcStats | null = null;
+  npcStats: NpcStats;
   currentLocation: LocationNode;
   position: Position;
   inParty: boolean = false;
