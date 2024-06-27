@@ -35,19 +35,30 @@ export class NpcComponent implements OnInit {
   });
 
   effect(): void {
-    const npcStats = this.npc().npcStats;
-
-    this.updateHealthBar(npcStats.health.current, npcStats.health.total);
+    this.updateHealthBar();
   }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    // setInterval(() => {
+    //   this.updateHealth();
+    // }, 1000);
+  }
 
-  public updateHealthBar(currentHealth: number, totalHealth: number): void {
-    const healthPercentage = (currentHealth / totalHealth) * 100;
+  public updateHealthBar(): void {
+    const npcStats = this.npc().npcStats;
+
+    const healthPercentage =
+      (npcStats.health.current / npcStats.health.total) * 100;
     const healthBar = document.getElementById('npcHealthBar');
 
     if (healthBar) {
       healthBar.style.width = `${healthPercentage}%`;
     }
+  }
+
+  // This is just to test the health bar
+  public updateHealth() {
+    this.npc().npcStats.health.current -= 1;
+    this.updateHealthBar();
   }
 }
