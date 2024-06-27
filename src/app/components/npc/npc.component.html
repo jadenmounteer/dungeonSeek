@@ -1,6 +1,6 @@
 <div>
   <div *ngIf="inCombat()">
-    <div class="npc-health-bar">IN COMBAT!</div>
+    <div class="npc-health-bar">{{ healthBarWidthPercentage() }}%</div>
     <img
       class="npc"
       *ngIf="npc().directionFacing === 'Right'"
