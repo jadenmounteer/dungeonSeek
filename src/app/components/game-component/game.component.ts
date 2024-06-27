@@ -236,6 +236,7 @@ export class GameComponent implements OnDestroy {
     this.combatSessionsSub = this.#combatService
       .getCombatSessionsInGameSession(this.gameStateService.gameSession.id)
       .subscribe((combatSessions) => {
+        console.log('Game sessions changed!');
         this.gameStateService.combatSessions = combatSessions;
       });
   }

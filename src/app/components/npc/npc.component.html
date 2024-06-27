@@ -1,13 +1,16 @@
 <div>
-  <img
-    class="npc"
-    *ngIf="npc().directionFacing === 'Right'"
-    [src]="npc().rightFacingImgUrl"
-  />
-  <img
-    class="npc"
-    *ngIf="npc().directionFacing === 'Left'"
-    [src]="npc().leftFacingImgUrl"
-  />
+  <div *ngIf="inCombat()">
+    <div class="npc-health-bar">IN COMBAT!</div>
+    <img
+      class="npc"
+      *ngIf="npc().directionFacing === 'Right'"
+      [src]="npc().rightFacingImgUrl"
+    />
+    <img
+      class="npc"
+      *ngIf="npc().directionFacing === 'Left'"
+      [src]="npc().leftFacingImgUrl"
+    />
+  </div>
+  `
 </div>
-`

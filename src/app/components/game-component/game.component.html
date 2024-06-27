@@ -56,7 +56,10 @@
       >
         <span class="character-name big-text">{{ npc.npcType }}</span>
 
-        <app-npc [npc]="npc" />
+        <app-npc
+          [npc]="npc"
+          [combatSessions]="gameStateService.combatSessions"
+        />
       </div>
     </span>
 

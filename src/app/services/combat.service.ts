@@ -59,8 +59,6 @@ export class CombatService {
       combatSession,
       this.gameStateService.gameSession.id
     );
-
-    this.gameStateService.combatSessions.push(combatSession);
   }
 
   private addNewCombatSessionToDatabase(
