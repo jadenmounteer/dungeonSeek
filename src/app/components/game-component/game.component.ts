@@ -319,7 +319,6 @@ export class GameComponent implements OnDestroy {
     // adjust the offsets accordingly.
     // I'll do this by storing a local map in the gameState service every location that has a player or NPC.
     // Then I'll loop through the map and adjust the offsets accordingly if there are multiple players or NPCs on the same location.
-    console.log(`Moving to ${location.name}`);
     this.gameStateService.adjustLocationsWithPeopleOnThem();
   }
 

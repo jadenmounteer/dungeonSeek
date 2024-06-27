@@ -59,6 +59,7 @@ export abstract class Npc {
     this.currentLocation = npcData.currentLocation;
     this.position = npcData.position;
     this.directionFacing = npcData.directionFacing;
+    this.id = npcData.id;
   }
 
   // Serializes the data to be stored in the database

@@ -119,8 +119,6 @@ export class DiceRollDialogComponent implements OnInit {
       });
     }
 
-    console.log(die);
-
     return die;
   }
 

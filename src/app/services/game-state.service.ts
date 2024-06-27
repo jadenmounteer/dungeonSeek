@@ -210,8 +210,6 @@ export class GameStateService {
       newNpc,
       this.gameSession.id
     );
-
-    console.log(answer);
   }
 
   #getDirectionFacingRelativeToPlayer(
