@@ -1,11 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { GameStateService } from './game-state.service';
-import { Character } from '../types/character';
-import { Npc } from '../types/npc';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  collectionData,
+} from '@angular/fire/firestore';
 
 export interface CombatSession {
-  players: Character[];
-  enemies: Npc[];
+  playerIDs: string[];
+  enemyIDs: string[];
   locationName: string;
 }
 
@@ -13,6 +17,7 @@ export interface CombatSession {
   providedIn: 'root',
 })
 export class CombatService {
+  #firestore: Firestore = inject(Firestore);
   private gameStateService: GameStateService = inject(GameStateService);
 
   constructor() {}
@@ -42,13 +47,31 @@ export class CombatService {
 
     // Create the combat session object with the current player and the enemies
     const combatSession: CombatSession = {
-      players: locationOfCombat.players,
-      enemies: locationOfCombat.enemies,
+      playerIDs: locationOfCombat.players.map((player) => player.id),
+      enemyIDs: locationOfCombat.enemies.map((enemy) => enemy.id),
       locationName: locationName,
     };
 
-    console.log('Combat session: ', combatSession);
-
     // Save the combat session to the database
+    this.addNewCombatSessionToDatabase(
+      combatSession,
+      this.gameStateService.gameSession.id
+    );
+  }
+
+  private addNewCombatSessionToDatabase(
+    combatSession: CombatSession,
+    gameSessionID: string
+  ): Promise<any> {
+    const collectionRef = collection(
+      this.#firestore,
+      'game-sessions',
+      gameSessionID,
+      'combat-sessions'
+    );
+
+    return addDoc(collectionRef, combatSession).catch((error) => {
+      console.error('Error adding document: ', error);
+    });
   }
 }
