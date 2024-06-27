@@ -34,11 +34,20 @@ export class NpcComponent implements OnInit {
     });
   });
 
-  public healthBarWidthPercentage: Signal<number> = computed(() => {
+  effect(): void {
     const npcStats = this.npc().npcStats;
 
-    return (npcStats.health.current / npcStats.health.total) * 100;
-  });
+    this.updateHealthBar(npcStats.health.current, npcStats.health.total);
+  }
 
   public ngOnInit(): void {}
+
+  public updateHealthBar(currentHealth: number, totalHealth: number): void {
+    const healthPercentage = (currentHealth / totalHealth) * 100;
+    const healthBar = document.getElementById('npcHealthBar');
+
+    if (healthBar) {
+      healthBar.style.width = `${healthPercentage}%`;
+    }
+  }
 }
