@@ -230,7 +230,11 @@
     >
       <div
         class="game-button"
-        *ngIf="!currentCharacterRolledForEventCardThisTurn"
+        *ngIf="
+          !currentCharacterRolledForEventCardThisTurn &&
+          gameStateService.characterBeingControlledByClient?.combatSessionId ===
+            null
+        "
         (click)="confirmEndMovement()"
       >
         End Movement
@@ -240,7 +244,9 @@
         class="game-button"
         *ngIf="
           currentCharacterRolledForEventCardThisTurn &&
-          !waitingForNextTurnToStart
+          !waitingForNextTurnToStart &&
+          gameStateService.characterBeingControlledByClient?.combatSessionId ===
+            null
         "
         (click)="currentCharacterFinishedTurn()"
       >
