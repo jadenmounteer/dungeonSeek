@@ -257,7 +257,7 @@
         class="game-button"
         *ngIf="
           gameStateService.characterBeingControlledByClient?.combatSessionId !==
-          null
+            null && gameStateService.currentPlayersCombatTurn
         "
       >
         Attack

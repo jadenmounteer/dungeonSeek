@@ -30,6 +30,7 @@ export class GameStateService {
   public allCharactersCurrentlyInGameSession: Character[] = [];
   public charactersBeingControlledByClient: Character[] = [];
   public characterBeingControlledByClient: Character | undefined;
+  public currentPlayersCombatTurn: boolean = false;
 
   public npcsInPlay: Npc[] = []; // The NPCs currently in play on the game board.
 
@@ -42,6 +43,32 @@ export class GameStateService {
   private distanceBetweenCharacters = 75;
 
   constructor() {}
+
+  public createCombatSessionsMap(combatSessionsFromDB: CombatSession[]): void {
+    combatSessionsFromDB.forEach((combatSession) => {
+      this.combatSessions.set(combatSession.id, combatSession);
+    });
+  }
+
+  public refreshCurrentPlayerCombatSessionsState(): void {
+    this.currentPlayersCombatTurn = this.isItMyTurnInCombatSession();
+  }
+
+  private isItMyTurnInCombatSession(): boolean {
+    const currentCombatSession = this.combatSessions.get(
+      this.characterBeingControlledByClient?.combatSessionId!
+    );
+
+    if (!currentCombatSession) {
+      return false;
+    }
+
+    const idOfNextCharacterOrNpcToGo = currentCombatSession.turnQueue[0];
+
+    return (
+      idOfNextCharacterOrNpcToGo === this.characterBeingControlledByClient?.id
+    );
+  }
 
   // Called when the game session is first loaded and when something moves.
   // Used to adjust the placement of things at locations.
@@ -191,6 +218,9 @@ export class GameStateService {
     this.charactersBeingControlledByClient.forEach((character) => {
       if (this.#turnService.isItMyTurnOnClientSide(gameSession, character.id)) {
         this.characterBeingControlledByClient = character;
+        if (this.characterBeingControlledByClient?.combatSessionId) {
+          this.refreshCurrentPlayerCombatSessionsState();
+        }
       }
     });
   }

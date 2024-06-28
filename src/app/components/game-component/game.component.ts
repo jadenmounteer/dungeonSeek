@@ -235,14 +235,8 @@ export class GameComponent implements OnDestroy {
   private setCombatSessionsSub(): void {
     this.combatSessionsSub = this.#combatService
       .getCombatSessionsInGameSession(this.gameStateService.gameSession.id)
-      .subscribe((combatSessions) => {
-        // Create a map where the key is the combat session ID and the value is the combat session object.
-        combatSessions.forEach((combatSession) => {
-          this.gameStateService.combatSessions.set(
-            combatSession.id,
-            combatSession
-          );
-        });
+      .subscribe((combatSessionsFromDB) => {
+        this.gameStateService.createCombatSessionsMap(combatSessionsFromDB);
       });
   }
 
