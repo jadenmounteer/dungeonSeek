@@ -252,6 +252,16 @@
       >
         End Turn
       </div>
+
+      <div
+        class="game-button"
+        *ngIf="
+          gameStateService.characterBeingControlledByClient?.combatSessionId !==
+          null
+        "
+      >
+        Attack
+      </div>
     </span>
   </div>
 
