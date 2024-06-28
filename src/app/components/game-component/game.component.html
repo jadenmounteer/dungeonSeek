@@ -102,13 +102,19 @@
       class="player-movement-section"
       *ngIf="
         gameStateService.characterBeingControlledByClient?.movementSpeed !=
-          undefined && !currentCharacterRolledForEventCardThisTurn
+          undefined &&
+        !currentCharacterRolledForEventCardThisTurn &&
+        gameStateService.characterBeingControlledByClient?.combatSessionId ===
+          null
       "
     >
       <p
         class="big-text sticky-text"
         *ngIf="
-          gameStateService.characterBeingControlledByClient!.movementSpeed > 0
+          gameStateService.characterBeingControlledByClient!.movementSpeed >
+            0 &&
+          gameStateService.characterBeingControlledByClient?.combatSessionId ===
+            null
         "
       >
         Movement:
@@ -118,12 +124,33 @@
       <p
         class="big-text sticky-text"
         *ngIf="
-          gameStateService.characterBeingControlledByClient!.movementSpeed <= 0
+          gameStateService.characterBeingControlledByClient!.movementSpeed <=
+            0 &&
+          gameStateService.characterBeingControlledByClient?.combatSessionId ===
+            null
         "
       >
         You cannot move anymore this turn.
       </p>
     </span>
+
+    @if(gameStateService.characterBeingControlledByClient?.combatSessionId) {
+    <span class="combat-messages-section">
+      <p
+        class="big-text sticky-text"
+        *ngIf="gameStateService.currentPlayersCombatTurn"
+      >
+        It's your turn to attack!
+      </p>
+
+      <p
+        class="big-text sticky-text"
+        *ngIf="!gameStateService.currentPlayersCombatTurn"
+      >
+        Waiting for others to take an action...
+      </p>
+    </span>
+    }
 
     <span class="player-misc-message-section">
       <p class="big-text sticky-text" *ngIf="waitingForNextTurnToStart">
