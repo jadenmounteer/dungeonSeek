@@ -62,8 +62,6 @@ export abstract class Npc {
     this.directionFacing = npcData.directionFacing;
     this.id = npcData.id;
     this.combatSessionID = npcData.combatSessionID;
-
-    console.log(`In npc constructor the id is: ${this.id}`);
   }
 
   // Serializes the data to be stored in the database

@@ -199,7 +199,6 @@ export class GameStateService {
     npcType: NpcType,
     currentPlayer: Character
   ): Promise<Npc> {
-    console.log('Spawning npc');
     const npcData: NpcData = {
       id: '',
       npcType: npcType,
@@ -225,7 +224,6 @@ export class GameStateService {
 
     // Give the npc ID the id of the npc in the database
     newNpc.id = answer.id;
-    console.log(`Just added npc to game session and the id is: ${answer.id}`);
 
     return newNpc;
   }
