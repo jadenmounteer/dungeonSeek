@@ -33,7 +33,7 @@ export class GameStateService {
 
   public npcsInPlay: Npc[] = []; // The NPCs currently in play on the game board.
 
-  public combatSessions: CombatSession[] = [];
+  public combatSessions: Map<string, CombatSession> = new Map(); // A map where the key is the combat session ID and the value is the combat session object.
 
   // Used to keep track of the state of the locations so we can adjust the UI accordingly and position everyone so they're not on top of each other.
   public locationsWithPeopleOnThem: Map<LocationKey, locationWithPeopleOnIt> =

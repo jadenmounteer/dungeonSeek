@@ -12,6 +12,7 @@ import { Npc } from '../types/npc';
 import { NpcService } from './npc.service';
 
 export interface CombatSession {
+  id: string;
   playerIDs: string[];
   enemyIDs: string[];
   locationName: string;
@@ -53,6 +54,7 @@ export class CombatService {
 
     // Create the combat session object with the current player and the enemies
     const combatSession: CombatSession = {
+      id: '',
       playerIDs: locationOfCombat.players.map((player) => player.id),
       enemyIDs: locationOfCombat.enemies.map((enemy) => enemy.id),
       locationName: locationName,
