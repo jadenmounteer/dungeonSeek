@@ -8,6 +8,8 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { CharacterService } from './character/character.service';
+import { Npc } from '../types/npc';
+import { NpcService } from './npc.service';
 
 export interface CombatSession {
   playerIDs: string[];
@@ -22,10 +24,11 @@ export class CombatService {
   #firestore: Firestore = inject(Firestore);
   private gameStateService: GameStateService = inject(GameStateService);
   private characterService: CharacterService = inject(CharacterService);
+  private npcService: NpcService = inject(NpcService);
 
   constructor() {}
 
-  public async startCombatSession(): Promise<void> {
+  public async startCombatSession(npcInCombat: Npc): Promise<void> {
     if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client.');
     }
@@ -68,6 +71,12 @@ export class CombatService {
       combatSessionID;
     this.characterService.updateCharacter(
       this.gameStateService.characterBeingControlledByClient,
+      this.gameStateService.gameSession.id
+    );
+
+    npcInCombat.combatSessionID = combatSessionID;
+    this.npcService.updateNpc(
+      npcInCombat,
       this.gameStateService.gameSession.id
     );
   }

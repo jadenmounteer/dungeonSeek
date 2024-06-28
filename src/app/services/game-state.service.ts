@@ -198,7 +198,8 @@ export class GameStateService {
   public async spawnNpcRelativeToPlayer(
     npcType: NpcType,
     currentPlayer: Character
-  ): Promise<void> {
+  ): Promise<Npc> {
+    console.log('Spawning npc');
     const npcData: NpcData = {
       id: '',
       npcType: npcType,
@@ -213,6 +214,7 @@ export class GameStateService {
         },
         armorClass: 1,
       },
+      combatSessionID: null,
     };
     const newNpc: Npc = this.#npcFactory.createNpcObject(npcData);
 
@@ -220,6 +222,12 @@ export class GameStateService {
       newNpc,
       this.gameSession.id
     );
+
+    // Give the npc ID the id of the npc in the database
+    newNpc.id = answer.id;
+    console.log(`Just added npc to game session and the id is: ${answer.id}`);
+
+    return newNpc;
   }
 
   #getDirectionFacingRelativeToPlayer(

@@ -6,7 +6,7 @@ import { GameStateService } from './game-state.service';
 import { CharacterService } from './character/character.service';
 import { GameDialogueData, GameDialogueService } from './game-dialogue.service';
 import { CardRewardType } from '../types/card-reward-type';
-import { NpcType } from '../types/npc';
+import { Npc, NpcType } from '../types/npc';
 
 @Injectable({
   providedIn: 'root',
@@ -36,14 +36,16 @@ export class OutcomeService implements OnDestroy {
       Outcome.FIND_INSANE_LOOT,
       () => this.#lootService.drawLootCard(CardRewardType.INSANE),
     ],
-    [Outcome.FIGHT_SINGLE_BANDIT, () => this.startCombat()],
+
+    // TODO: Implement these outcomes
+    // [Outcome.FIGHT_SINGLE_BANDIT, () => this.startCombat()],
     [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
   ]);
 
   ngOnDestroy(): void {}
 
-  private startCombat(): void {
-    this.combatService.startCombatSession();
+  private startCombat(npcInvolved: Npc): void {
+    this.combatService.startCombatSession(npcInvolved);
   }
 
   public makeChoice(outcome: Outcome): void {
@@ -73,12 +75,15 @@ export class OutcomeService implements OnDestroy {
       // If the player has less than 30 gold, show a dialogue stating the bandit is angry with your lack of gold and attacks you.
 
       // TODO Spawn the bandit npc
-      await this.#gameStateService.spawnNpcRelativeToPlayer(
+      const newNpc = await this.#gameStateService.spawnNpcRelativeToPlayer(
         NpcType.BANDIT,
         this.#gameStateService.characterBeingControlledByClient
       );
 
-      this.#gameDialogueService.buttonOneCallback = this.startCombat.bind(this);
+      this.#gameDialogueService.buttonOneCallback = this.startCombat.bind(
+        this,
+        newNpc
+      );
 
       gameDialogueData.message = `"I changed my mind," the bandit says as he unsheathes his sword. "I'll take your gold and your life!"`;
       gameDialogueData.buttonOneText = 'Begin Combat';

@@ -6,6 +6,8 @@ import {
   addDoc,
   collection,
   collectionData,
+  doc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { NpcFactory } from './npcFactory.service';
 
@@ -17,6 +19,19 @@ export class NpcService {
   private npcFactory: NpcFactory = inject(NpcFactory);
 
   constructor() {}
+
+  public updateNpc(npc: Npc, gameSessionID: string): Promise<any> {
+    const serializedData = npc.serialize();
+
+    const docRef = doc(
+      collection(this.#firestore, 'game-sessions', gameSessionID, 'npcs'),
+      npc.id
+    );
+
+    return updateDoc(docRef, { ...serializedData }).catch((error) => {
+      console.error('Error updating document: ', error);
+    });
+  }
 
   public getNPCsInGameSession(gameSessionID: string): Observable<Npc[]> {
     const collectionRef = collection(

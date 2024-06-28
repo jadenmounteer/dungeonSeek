@@ -10,6 +10,7 @@ export interface NpcData {
   position: Position;
   directionFacing: 'Right' | 'Left';
   npcStats: NpcStats;
+  combatSessionID: string | null; // Null if not in combat
 }
 
 // These npc stats are added to the npc when it is created and set to the database.
@@ -41,12 +42,12 @@ export interface MinMax {
 // The data that will be stored in the database is the data that is serialized and returned
 export abstract class Npc {
   id: string = '';
+  combatSessionID: string | null = null; // Null if not in combat
   npcType: NpcType;
   movementSpeed: number = 4;
   npcStats: NpcStats;
   currentLocation: LocationNode;
   position: Position;
-  combatSessionId: string | null = null; // Null if not in combat
   directionFacing: 'Right' | 'Left';
   rewardTypeForDefeatingNpc: CardRewardType = CardRewardType.EASY;
   public rightFacingImgUrl: string =
@@ -60,6 +61,9 @@ export abstract class Npc {
     this.position = npcData.position;
     this.directionFacing = npcData.directionFacing;
     this.id = npcData.id;
+    this.combatSessionID = npcData.combatSessionID;
+
+    console.log(`In npc constructor the id is: ${this.id}`);
   }
 
   // Serializes the data to be stored in the database
@@ -71,6 +75,7 @@ export abstract class Npc {
       currentLocation: this.currentLocation,
       position: this.position,
       directionFacing: this.directionFacing,
+      combatSessionID: this.combatSessionID,
     };
   }
 
