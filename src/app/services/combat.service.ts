@@ -16,6 +16,7 @@ export interface CombatSession {
   playerIDs: string[];
   enemyIDs: string[];
   locationName: string;
+  turnQueue: string[];
 }
 
 @Injectable({
@@ -28,6 +29,13 @@ export class CombatService {
   private npcService: NpcService = inject(NpcService);
 
   constructor() {}
+
+  public initializeCombatSessionTurnQueue(
+    combatSession: CombatSession
+  ): string[] {
+    // TODO For not this just inserts them in the order they are in the array. In the future I can add initiative or sneak or whatever.
+    return combatSession.playerIDs.concat(...combatSession.enemyIDs);
+  }
 
   public async startCombatSession(npcInCombat: Npc): Promise<void> {
     if (!this.gameStateService.characterBeingControlledByClient) {
@@ -58,7 +66,11 @@ export class CombatService {
       playerIDs: locationOfCombat.players.map((player) => player.id),
       enemyIDs: locationOfCombat.enemies.map((enemy) => enemy.id),
       locationName: locationName,
+      turnQueue: [],
     };
+
+    combatSession.turnQueue =
+      this.initializeCombatSessionTurnQueue(combatSession);
 
     // Save the combat session to the database
     const response = await this.addNewCombatSessionToDatabase(
