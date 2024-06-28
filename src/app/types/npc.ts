@@ -46,7 +46,7 @@ export abstract class Npc {
   npcStats: NpcStats;
   currentLocation: LocationNode;
   position: Position;
-  inParty: boolean = false;
+  combatSessionId: string | null = null; // Null if not in combat
   directionFacing: 'Right' | 'Left';
   rewardTypeForDefeatingNpc: CardRewardType = CardRewardType.EASY;
   public rightFacingImgUrl: string =

@@ -7,7 +7,7 @@ import {
   collectionData,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { GameSession } from '../types/game-session';
+import { CharacterService } from './character/character.service';
 
 export interface CombatSession {
   playerIDs: string[];
@@ -21,6 +21,7 @@ export interface CombatSession {
 export class CombatService {
   #firestore: Firestore = inject(Firestore);
   private gameStateService: GameStateService = inject(GameStateService);
+  private characterService: CharacterService = inject(CharacterService);
 
   constructor() {}
 
@@ -55,8 +56,18 @@ export class CombatService {
     };
 
     // Save the combat session to the database
-    await this.addNewCombatSessionToDatabase(
+    const response = await this.addNewCombatSessionToDatabase(
       combatSession,
+      this.gameStateService.gameSession.id
+    );
+
+    const combatSessionID = response.id;
+
+    // Add the combat session ID to those who are involved in the combat
+    this.gameStateService.characterBeingControlledByClient.combatSessionId =
+      combatSessionID;
+    this.characterService.updateCharacter(
+      this.gameStateService.characterBeingControlledByClient,
       this.gameStateService.gameSession.id
     );
   }

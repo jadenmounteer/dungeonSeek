@@ -7,7 +7,6 @@ export interface Character {
   class: CharacterClass;
   sex: CharacterSex;
   movementSpeed: number;
-  inParty: boolean;
   currentLocation: LocationNode;
   position: Position;
   directionFacing: 'Right' | 'Left';
@@ -15,6 +14,7 @@ export interface Character {
   characterStats: CharacterStats;
   characterMenu: CharacterMenu;
   gold: number;
+  combatSessionId: string | null; // null if not in combat
 }
 
 export type CharacterStats = {

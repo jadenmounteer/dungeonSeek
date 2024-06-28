@@ -69,11 +69,11 @@ export class AddOrEditCharacterComponent implements OnInit {
     level: 1,
     sex: 'Male',
     movementSpeed: 4,
-    inParty: false,
     directionFacing: 'Right',
     characterStats: this.characterStats,
     characterMenu: this.characterMenu,
     gold: 0,
+    combatSessionId: null,
   };
 
   constructor(
