@@ -243,7 +243,6 @@ export class GameComponent implements OnDestroy {
             combatSession
           );
         });
-        console.log(this.gameStateService.combatSessions);
       });
   }
 

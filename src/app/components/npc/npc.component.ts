@@ -23,25 +23,11 @@ import { CombatSession } from '../../services/combat.service';
 })
 export class NpcComponent implements OnInit {
   public npc: InputSignal<Npc> = input.required();
-  public combatSessions: InputSignal<CombatSession[]> = input.required();
 
-  public inCombat: Signal<boolean> = computed(() => {
-    return this.combatSessions().some((combatSession) => {
-      return (
-        combatSession.playerIDs.includes(this.npc().id) ||
-        combatSession.enemyIDs.includes(this.npc().id)
-      );
-    });
-  });
-
-  effect(): void {
-    this.updateHealthBar();
-  }
+  public inCombat = false;
 
   public ngOnInit(): void {
-    // setInterval(() => {
-    //   this.updateHealth();
-    // }, 1000);
+    this.inCombat = this.npc().combatSessionID !== null;
   }
 
   public updateHealthBar(): void {
