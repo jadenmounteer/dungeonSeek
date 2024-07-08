@@ -1,7 +1,9 @@
 import {
   Component,
+  EventEmitter,
   InputSignal,
   OnInit,
+  Output,
   Signal,
   computed,
   inject,
@@ -25,6 +27,7 @@ export class NpcComponent implements OnInit {
   public npc: InputSignal<Npc> = input.required();
   public selectable: InputSignal<boolean> = input.required();
   public selected: InputSignal<boolean> = input.required();
+  @Output() npcSelected = new EventEmitter<Npc>();
 
   public inCombat = false;
 
@@ -48,5 +51,11 @@ export class NpcComponent implements OnInit {
   public updateHealth() {
     this.npc().npcStats.health.current -= 1;
     this.updateHealthBar();
+  }
+
+  public selectNpc(): void {
+    if (this.selectable()) {
+      this.npcSelected.emit(this.npc());
+    }
   }
 }

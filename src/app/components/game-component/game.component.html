@@ -62,6 +62,7 @@
             gameStateService.currentPlayerSelectedEnemyToAttack?.id === npc.id
           "
           [selectable]="gameStateService.currentPlayersCombatTurn"
+          (npcSelected)="combatService.selectNpcToAttack($event)"
         />
       </div>
     </span>

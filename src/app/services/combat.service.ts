@@ -127,4 +127,8 @@ export class CombatService {
 
     return listOfCombatSessions;
   }
+
+  public selectNpcToAttack(npc: Npc): void {
+    this.gameStateService.currentPlayerSelectedEnemyToAttack = npc;
+  }
 }

@@ -67,7 +67,7 @@ import { NpcComponent } from '../npc/npc.component';
   animations: [fadeIn, fadeOut],
 })
 export class GameComponent implements OnDestroy {
-  #combatService: CombatService = inject(CombatService);
+  public combatService: CombatService = inject(CombatService);
   #outcomeService: OutcomeService = inject(OutcomeService);
   #npcService: NpcService = inject(NpcService);
 
@@ -233,7 +233,7 @@ export class GameComponent implements OnDestroy {
   }
 
   private setCombatSessionsSub(): void {
-    this.combatSessionsSub = this.#combatService
+    this.combatSessionsSub = this.combatService
       .getCombatSessionsInGameSession(this.gameStateService.gameSession.id)
       .subscribe((combatSessionsFromDB) => {
         this.gameStateService.createCombatSessionsMap(combatSessionsFromDB);
