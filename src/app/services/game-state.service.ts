@@ -31,6 +31,7 @@ export class GameStateService {
   public charactersBeingControlledByClient: Character[] = [];
   public characterBeingControlledByClient: Character | undefined;
   public currentPlayersCombatTurn: boolean = false;
+  public currentPlayerSelectedEnemyToAttack: Npc | undefined;
 
   public npcsInPlay: Npc[] = []; // The NPCs currently in play on the game board.
 

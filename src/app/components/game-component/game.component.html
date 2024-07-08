@@ -136,11 +136,21 @@
 
     @if(gameStateService.characterBeingControlledByClient?.combatSessionId) {
     <span class="combat-messages-section">
-      <p
+      <!-- <p
         class="big-text sticky-text"
         *ngIf="gameStateService.currentPlayersCombatTurn"
       >
         It's your turn to attack!
+      </p> -->
+
+      <p
+        class="big-text sticky-text"
+        *ngIf="
+          gameStateService.currentPlayersCombatTurn &&
+          !gameStateService.currentPlayerSelectedEnemyToAttack
+        "
+      >
+        Select an enemy to attack.
       </p>
 
       <p
