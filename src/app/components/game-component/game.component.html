@@ -162,6 +162,14 @@
 
       <p
         class="big-text sticky-text"
+        *ngIf="
+          gameStateService.currentPlayersCombatTurn &&
+          gameStateService.currentPlayerSelectedEnemyToAttack
+        "
+      ></p>
+
+      <p
+        class="big-text sticky-text"
         *ngIf="!gameStateService.currentPlayersCombatTurn"
       >
         Waiting for others to take an action...
@@ -301,7 +309,9 @@
         class="game-button"
         *ngIf="
           gameStateService.characterBeingControlledByClient?.combatSessionId !==
-            null && gameStateService.currentPlayersCombatTurn
+            null &&
+          gameStateService.currentPlayersCombatTurn &&
+          gameStateService.currentPlayerSelectedEnemyToAttack
         "
       >
         Attack
