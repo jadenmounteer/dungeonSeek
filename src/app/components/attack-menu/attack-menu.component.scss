@@ -1,5 +1,11 @@
 @import "../../../styles.scss";
 
+.attack-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .attack-menu-header {
   display: flex;
   flex-wrap: wrap;
@@ -7,4 +13,16 @@
   column-gap: 16px;
   flex-direction: column;
   text-align: center;
+}
+
+.attack-menu-action-buttons {
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.attack-menu-action-buttons > div {
+  max-width: 90%;
 }
