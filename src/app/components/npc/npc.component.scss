@@ -18,3 +18,12 @@
   border-radius: 5px; /* Match container's border-radius */
   transition: width 0.3s ease-in-out; /* Smooth transition for width changes */
 }
+
+.selectable {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.selected {
+  border: 2px solid red;
+}

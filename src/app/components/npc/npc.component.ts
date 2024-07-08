@@ -23,6 +23,8 @@ import { CombatSession } from '../../services/combat.service';
 })
 export class NpcComponent implements OnInit {
   public npc: InputSignal<Npc> = input.required();
+  public selectable: InputSignal<boolean> = input.required();
+  public selected: InputSignal<boolean> = input.required();
 
   public inCombat = false;
 

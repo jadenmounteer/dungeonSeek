@@ -1,4 +1,4 @@
-<div>
+<div [ngClass]="{ selectable: selectable(), selected: selected() }">
   <div *ngIf="inCombat">
     <!-- <div class="npc-health-bar">{{ healthBarWidthPercentage() }}%</div> -->
 
@@ -17,5 +17,4 @@
       [src]="npc().leftFacingImgUrl"
     />
   </div>
-  `
 </div>

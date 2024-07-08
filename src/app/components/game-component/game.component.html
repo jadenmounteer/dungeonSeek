@@ -56,7 +56,13 @@
       >
         <span class="character-name big-text">{{ npc.npcType }}</span>
 
-        <app-npc [npc]="npc" />
+        <app-npc
+          [npc]="npc"
+          [selected]="
+            gameStateService.currentPlayerSelectedEnemyToAttack?.id === npc.id
+          "
+          [selectable]="gameStateService.currentPlayersCombatTurn"
+        />
       </div>
     </span>
 
