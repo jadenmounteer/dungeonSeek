@@ -255,6 +255,9 @@
     (buttonOneClick)="this.gameDialogueService.handleButtonOneClick()"
     (buttonTwoClick)="this.gameDialogueService.handleButtonTwoClick()"
   />
+  } @defer (when showAttackMenu()) {
+  <app-attack-menu *ngIf="showAttackMenu()" (closeMenu)="toggleAttackMenu()">
+  </app-attack-menu>
   }
 
   <div class="game-buttons-section" *ngIf="!currentCharacterRollingDice">
@@ -313,6 +316,7 @@
           gameStateService.currentPlayersCombatTurn &&
           gameStateService.currentPlayerSelectedEnemyToAttack
         "
+        (click)="toggleAttackMenu()"
       >
         Attack
       </div>

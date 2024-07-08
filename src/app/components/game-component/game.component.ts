@@ -42,6 +42,7 @@ import {
 } from '../../services/game-dialogue.service';
 import { NpcService } from '../../services/npc.service';
 import { NpcComponent } from '../npc/npc.component';
+import { AttackMenuComponent } from '../attack-menu/attack-menu.component';
 
 @Component({
   selector: 'app-game',
@@ -59,6 +60,7 @@ import { NpcComponent } from '../npc/npc.component';
     WeaponMenuComponent,
     GoldMenuComponent,
     CharacterMenuComponent,
+    AttackMenuComponent,
     GameDialogueComponent,
     NpcComponent,
   ],
@@ -95,6 +97,7 @@ export class GameComponent implements OnDestroy {
   protected showItemCard = false;
   protected showGoldCard = false;
   protected showCharacterMenu = signal(false);
+  public showAttackMenu = signal(false);
   protected goldFoundAmount: number = 0;
 
   protected cardName: string | undefined;
@@ -682,6 +685,10 @@ export class GameComponent implements OnDestroy {
   protected toggleCharacterMenu(): void {
     // update the signal
     this.showCharacterMenu.set(!this.showCharacterMenu());
+  }
+
+  protected toggleAttackMenu(): void {
+    this.showAttackMenu.set(!this.showAttackMenu());
   }
 
   protected zoomIn(): void {
