@@ -256,7 +256,13 @@
     (buttonTwoClick)="this.gameDialogueService.handleButtonTwoClick()"
   />
   } @defer (when showAttackMenu()) {
-  <app-attack-menu *ngIf="showAttackMenu()" (closeMenu)="toggleAttackMenu()">
+  <app-attack-menu
+    *ngIf="
+      showAttackMenu() && gameStateService.currentPlayerSelectedEnemyToAttack
+    "
+    (closeMenu)="toggleAttackMenu()"
+    [npcToAttack]="gameStateService.currentPlayerSelectedEnemyToAttack"
+  >
   </app-attack-menu>
   }
 

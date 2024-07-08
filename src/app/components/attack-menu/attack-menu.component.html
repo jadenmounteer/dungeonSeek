@@ -1,1 +1,8 @@
-<app-menu [showCloseMenu]="true" (closeMenu)="onCloseMenu()"> </app-menu>
+<app-menu [showCloseMenu]="true" (closeMenu)="onCloseMenu()">
+  <div class="attack-menu">
+    <div class="attack-menu-header">
+      <p class="menu-text">Attack {{ npcToAttack().npcType }}</p>
+      <app-menu-underline></app-menu-underline>
+    </div>
+  </div>
+</app-menu>

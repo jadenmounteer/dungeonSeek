@@ -1,0 +1,10 @@
+@import "../../../styles.scss";
+
+.attack-menu-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 16px;
+  flex-direction: column;
+  text-align: center;
+}
