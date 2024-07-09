@@ -41,7 +41,6 @@ export type CharacterMenu = {
 
 export type CharacterMenuEquipment = {
   cardName: string;
-  equipped: boolean; // true if equipped, false if not
 };
 
 export type CharacterSex = 'Male' | 'Female';

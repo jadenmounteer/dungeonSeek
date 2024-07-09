@@ -35,7 +35,6 @@
       <app-game-card
         @fadeIn
         [card]="weaponCardService.getCardInfo(weaponCard.cardName)"
-        [equipped]="weaponCard.equipped"
         (click)="openWeaponMenu(weaponCard)"
       ></app-game-card>
       } }
@@ -47,7 +46,6 @@
 <app-weapon-card-info-view
   *ngIf="showWeaponMenu && weaponEquipmentToShow && weaponCardInfoToShow"
   [cardInfo]="weaponCardInfoToShow"
-  [equipped]="weaponEquipmentToShow.equipped"
   (closeMenu)="showWeaponMenu = false"
-  (toggleEquip)="showWeaponMenu = false; attackWithWeapon()"
+  (attackWithWeapon)="showWeaponMenu = false; attackWithWeapon()"
 ></app-weapon-card-info-view>

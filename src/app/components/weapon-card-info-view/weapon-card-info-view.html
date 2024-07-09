@@ -30,11 +30,6 @@
   </div>
 
   <div class="buttons-section" *ngIf="!viewOnly">
-    <div class="choice-button" *ngIf="!equipped" (click)="onToggleEquip()">
-      Equip
-    </div>
-    <div class="choice-button" *ngIf="equipped" (click)="onToggleEquip()">
-      Unequip
-    </div>
+    <div class="choice-button" (click)="onAttackWithWeapon()">Use</div>
   </div>
 </app-menu>

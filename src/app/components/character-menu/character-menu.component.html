@@ -58,7 +58,6 @@
           @fadeIn
           [card]="weaponCardService.getCardInfo(weaponCard.cardName)"
           (click)="openWeaponMenu(weaponCard)"
-          [equipped]="weaponCard.equipped"
         ></app-game-card>
         } } @else if(currentMenu === 'Items') { @for(itemCard of
         character.characterMenu.itemCards; track itemCard){
@@ -77,9 +76,8 @@
 <app-weapon-card-info-view
   *ngIf="showWeaponMenu && weaponEquipmentToShow && weaponCardInfoToShow"
   [cardInfo]="weaponCardInfoToShow"
-  [equipped]="weaponEquipmentToShow.equipped"
   (closeMenu)="showWeaponMenu = false"
-  (toggleEquip)="showWeaponMenu = false; toggleWeaponEquip()"
+  [viewOnly]="true"
 ></app-weapon-card-info-view>
 
 <app-item-card-info-view

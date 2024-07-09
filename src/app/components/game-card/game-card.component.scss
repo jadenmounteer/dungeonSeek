@@ -36,21 +36,6 @@ $card-border-radius: 25px;
   margin-bottom: auto;
 }
 
-.equipped-icon {
-  // Make a green circle around the icon
-  border: 2px solid $success-color;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: -16px;
-  right: -5px;
-  background-color: $success-color;
-  display: flex;
-  justify-content: center;
-  padding: 2px;
-}
-
 // Card hover effect found here: https://nestedsoftware.com/2019/11/05/card-with-expand-on-hover-effect-2ccm.200941.html
 .clickable:hover {
   cursor: pointer;

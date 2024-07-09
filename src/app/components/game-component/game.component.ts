@@ -568,7 +568,6 @@ export class GameComponent implements OnDestroy {
 
     const newEquipment: CharacterMenuEquipment = {
       cardName: this.cardName,
-      equipped: false,
     };
 
     this.gameStateService.characterBeingControlledByClient.characterMenu.weaponCards.push(

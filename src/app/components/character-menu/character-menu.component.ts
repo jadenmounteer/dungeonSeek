@@ -77,11 +77,6 @@ export class CharacterMenuComponent implements OnInit {
     if (!this.gameSessionID) {
       throw new Error('Game session ID not provided');
     }
-
-    if (this.character) {
-      this.sortEquipmentCards(this.character.characterMenu.weaponCards);
-      // TODO sort the other equippment cards
-    }
   }
 
   protected onCloseMenu() {
@@ -140,44 +135,5 @@ export class CharacterMenuComponent implements OnInit {
 
       this.characterService.updateCharacter(this.character, this.gameSessionID);
     }
-  }
-
-  protected toggleWeaponEquip(): void {
-    if (this.weaponEquipmentToShow) {
-      this.weaponEquipmentToShow.equipped =
-        !this.weaponEquipmentToShow.equipped;
-
-      // If we equipped the weapon, unequip all other weapons
-      if (this.weaponEquipmentToShow.equipped) {
-        this.character?.characterMenu.weaponCards.forEach((card) => {
-          if (card !== this.weaponEquipmentToShow) {
-            card.equipped = false;
-          }
-        });
-      }
-
-      if (this.character) {
-        // Save the character to the database
-        this.characterService.updateCharacter(
-          this.character,
-          this.gameSessionID
-        );
-
-        this.sortEquipmentCards(this.character.characterMenu.weaponCards);
-      }
-    }
-  }
-
-  private sortEquipmentCards(cardsToSort: CharacterMenuEquipment[]): void {
-    cardsToSort.sort((a, b) => {
-      // Shows equipped cards first
-      if (a.equipped && !b.equipped) {
-        return -1;
-      }
-      if (!a.equipped && b.equipped) {
-        return 1;
-      }
-      return 0;
-    });
   }
 }

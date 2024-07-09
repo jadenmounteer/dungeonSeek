@@ -17,9 +17,8 @@ import { CommonModule } from '@angular/common';
 })
 export class WeaponCardInfoViewComponent implements OnInit {
   @Output() closeMenu = new EventEmitter<any>();
-  @Output() toggleEquip = new EventEmitter<any>();
+  @Output() attackWithWeapon = new EventEmitter<any>();
   @Input() cardInfo!: WeaponCardInfo;
-  @Input() equipped: boolean = false;
   @Input() viewOnly: boolean = false; // If true, the menu will not have the action buttons.
 
   protected weaponAbility: CardAbility | undefined;
@@ -45,7 +44,7 @@ export class WeaponCardInfoViewComponent implements OnInit {
     this.closeMenu.emit();
   }
 
-  protected onToggleEquip() {
-    this.toggleEquip.emit();
+  protected onAttackWithWeapon() {
+    this.attackWithWeapon.emit();
   }
 }
