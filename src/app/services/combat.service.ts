@@ -138,8 +138,22 @@ export class CombatService {
     const npcToAttack = event.npc as Npc;
 
     // Roll for damage
+    this.rollForDamage(weaponInfo, npcToAttack);
+
     // Calculate the damage dealt
     // Update the npc
     // Update the current character
+  }
+
+  protected rollForDamage(weaponInfo: WeaponCardInfo, npcToAttack: Npc): void {
+    this.gameStateService.diceRollingData = {
+      title: `Attacking ${npcToAttack.npcType}`,
+      message: `Roll to see how much damage you can cause with your ${weaponInfo.name}`,
+      closeButtonName: 'Close',
+      numberOfDice: weaponInfo.stats.numberOfAttackDice,
+      comparator: undefined,
+      targetNumber: 6,
+    };
+    this.gameStateService.currentCharacterRollingDice = true;
   }
 }

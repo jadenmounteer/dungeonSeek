@@ -8,6 +8,7 @@ import { LocationKey, LocationNode } from './location-service';
 import { NpcFactory } from './npcFactory.service';
 import { NpcService } from './npc.service';
 import { CombatSession } from './combat.service';
+import { DiceRollDialogData } from '../components/dice-roll-dialog/dice-roll-dialog.component';
 
 // I know haha....I just want to code this game already so I can play it.
 // If I were to go back and redesign the game, I'd have the locations be the parents that house the state.
@@ -32,6 +33,11 @@ export class GameStateService {
   public characterBeingControlledByClient: Character | undefined;
   public currentPlayersCombatTurn: boolean = false;
   public currentPlayerSelectedEnemyToAttack: Npc | undefined;
+
+  // TODO I could extract the dice rolling logic into its own service.
+  public currentCharacterRollingDice = false;
+  public currentCharacterRolledForEventCardThisTurn = false;
+  public diceRollingData: DiceRollDialogData | undefined;
 
   public npcsInPlay: Npc[] = []; // The NPCs currently in play on the game board.
 

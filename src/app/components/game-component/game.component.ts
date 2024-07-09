@@ -77,8 +77,6 @@ export class GameComponent implements OnDestroy {
 
   public gameStateService: GameStateService = inject(GameStateService);
 
-  protected diceRollingData: DiceRollDialogData | undefined;
-
   private playerPositionSub: Subscription;
 
   private gameSessionSub: Subscription;
@@ -88,8 +86,6 @@ export class GameComponent implements OnDestroy {
   public combatSessionsSub!: Subscription;
   protected loading = true;
   protected locationsLoading = true;
-  protected currentCharacterRolledForEventCardThisTurn = false;
-  protected currentCharacterRollingDice = false;
 
   protected waitingForNextTurnToStart = false;
   protected showEventCard = false;
@@ -370,7 +366,7 @@ export class GameComponent implements OnDestroy {
   }
 
   protected async currentCharacterFinishedTurn(): Promise<void> {
-    this.currentCharacterRolledForEventCardThisTurn = false;
+    this.gameStateService.currentCharacterRolledForEventCardThisTurn = false;
 
     if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
@@ -670,7 +666,7 @@ export class GameComponent implements OnDestroy {
    * They have a 1 in 4 chance of drawing an event card.
    */
   protected rollForEventCard() {
-    this.diceRollingData = {
+    this.gameStateService.diceRollingData = {
       title: 'Roll for Event Card',
       message: 'If you roll a 3 or less, draw an event card.',
       closeButtonName: 'Draw Event Card',
@@ -678,18 +674,7 @@ export class GameComponent implements OnDestroy {
       comparator: '<=',
       targetNumber: 6, // use 6 for testing
     };
-    this.currentCharacterRollingDice = true;
-  }
-
-  protected rollForDamage() {
-    this.diceRollingData = {
-      title: 'Roll for damage',
-      message: 'Roll to see how much damage you cause.',
-      closeButtonName: 'Close',
-      numberOfDice: 1,
-      comparator: '>=',
-      targetNumber: 6,
-    };
+    this.gameStateService.currentCharacterRollingDice = true;
   }
 
   protected toggleCharacterMenu(): void {

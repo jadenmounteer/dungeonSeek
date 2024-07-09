@@ -10,7 +10,7 @@ export type DiceRollDialogData = {
   message: string;
   closeButtonName: string;
   numberOfDice: number;
-  comparator: DiceRollComparator;
+  comparator: DiceRollComparator | undefined;
   targetNumber: number;
 };
 
@@ -35,6 +35,10 @@ export class DiceRollDialogComponent implements OnInit {
   @Input() public data: DiceRollDialogData | undefined;
   @Output() public successClose: EventEmitter<void> = new EventEmitter<void>();
   @Output() public close: EventEmitter<void> = new EventEmitter<void>();
+
+  // Used to output the dice roll result
+  @Output() public resultClose: EventEmitter<number> =
+    new EventEmitter<number>();
 
   // This probability calculator helps in determining how many dice to use for a given probability: https://www.gigacalculator.com/calculators/dice-probability-calculator.php
   private dotPositionMatrix = {
@@ -125,14 +129,20 @@ export class DiceRollDialogComponent implements OnInit {
   protected onRoll(): void {
     this.rolledDice = true;
     this.sum = this.rollDice();
-    this.inTargetRange = this.checkTargetRange();
+
+    if (this.data?.comparator) {
+      this.inTargetRange = this.checkTargetRange(this.data.comparator);
+    } else {
+      // They are just rolling to get the result, not to see if something was successful
+      this.resultClose.emit(this.sum);
+    }
   }
 
-  private checkTargetRange(): boolean {
+  private checkTargetRange(comparator: DiceRollComparator): boolean {
     if (!this.data) {
       throw new Error('Data is not defined');
     }
-    switch (this.data.comparator) {
+    switch (comparator) {
       case '>=':
         return this.sum >= this.data.targetNumber;
       case '<=':

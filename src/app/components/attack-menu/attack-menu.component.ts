@@ -110,6 +110,8 @@ export class AttackMenuComponent {
         weaponInfo: weaponInfo,
         npc: this.npcToAttack(),
       });
+
+      this.closeMenu.emit();
     }
   }
 }
