@@ -6,7 +6,13 @@
     <!-- <div class="npc-health-bar">{{ healthPercentage }}%</div> -->
 
     <div class="health-bar-container">
-      <div class="health-bar" id="npcHealthBar"></div>
+      <div
+        class="health-bar"
+        [style.width]="
+          (npc().npcStats.health.current / npc().npcStats.health.total) * 100 +
+          '%'
+        "
+      ></div>
     </div>
 
     <img
