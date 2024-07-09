@@ -9,9 +9,13 @@
     "discardAfterUse": false,
     "quantity": 1,
     "stats": {
-      "attack": 30,
-      "defense": 0,
-      "speed": 0
+      "numberOfAttackDice": 3,
+      "costToUse": {
+        "healthCost": 0,
+        "manaCost": 0,
+        "staminaCost": 10
+      },
+      "weight": 15
     },
     "cardAbility": "Banish"
   },
@@ -25,9 +29,13 @@
     "discardAfterUse": false,
     "quantity": 1,
     "stats": {
-      "attack": 30,
-      "defense": 0,
-      "speed": 0
+      "numberOfAttackDice": 3,
+      "costToUse": {
+        "healthCost": 0,
+        "manaCost": 0,
+        "staminaCost": 10
+      },
+      "weight": 15
     },
     "cardAbility": "Banish"
   },
@@ -41,9 +49,13 @@
     "discardAfterUse": false,
     "quantity": 5,
     "stats": {
-      "attack": 20,
-      "defense": 0,
-      "speed": 0
+      "numberOfAttackDice": 3,
+      "costToUse": {
+        "healthCost": 0,
+        "manaCost": 0,
+        "staminaCost": 10
+      },
+      "weight": 15
     },
     "cardAbility": "null"
   }

@@ -1,5 +1,7 @@
 import { CardAbilityKey } from './card-ability';
 import { CardRewardType } from './card-reward-type';
+import { ItemCostToUse } from './item-cost-to-use';
+import { itemWeight } from './item-weight';
 
 export interface WeaponCardInfo {
   name: string;
@@ -17,9 +19,9 @@ export interface WeaponCardInfo {
 export type WeaponCardType = 'Sword' | 'Bow' | 'Staff';
 
 export interface WeaponCardStats {
-  attack: number;
-  defense: number;
-  speed: number;
+  numberOfAttackDice: number;
+  costToUse: ItemCostToUse;
+  weight: itemWeight;
 }
 
 export enum WeaponCardNames {

@@ -12,9 +12,22 @@
       <p class="menu-text">{{ cardInfo.description }}</p>
       <p class="menu-text">Type: {{ cardInfo.type }}</p>
       <p class="menu-text">Value: {{ cardInfo.fullPrice }}</p>
-      <p class="menu-text">Attack: {{ cardInfo.stats.attack }}</p>
-      <p class="menu-text">Defense: {{ cardInfo.stats.defense }}</p>
-      <p class="menu-text">Speed: {{ cardInfo.stats.speed }}</p>
+      <p class="menu-text">Weight: {{ cardInfo.stats.weight }} lbs.</p>
+
+      <p class="menu-text">🎲: {{ cardInfo.stats.numberOfAttackDice}}</p>
+      @if(cardInfo.stats.costToUse.healthCost) {
+      <p class="menu-text">
+        Health cost: {{ cardInfo.stats.costToUse.healthCost }}
+      </p>
+      } @if(cardInfo.stats.costToUse.manaCost) {
+      <p class="menu-text">
+        Mana cost: {{ cardInfo.stats.costToUse.manaCost }}
+      </p>
+      } @if(cardInfo.stats.costToUse.staminaCost) {
+      <p class="menu-text">
+        Stamina cost: {{ cardInfo.stats.costToUse.staminaCost }}
+      </p>
+      }
     </div>
 
     <div class="card-ability-section" *ngIf="weaponAbility">
