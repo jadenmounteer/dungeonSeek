@@ -1,13 +1,16 @@
-<div
-  class="stat-bar"
-  [ngClass]="{
-    health: statName === 'Health',
-    mana: statName === 'Mana',
-    stamina: statName === 'Stamina',
-    experience: statName === 'Experience'
-  }"
->
-  <span class="current">{{ stat.current }}</span>
-  <span>/</span>
-  <span class="total">{{ stat.total }}</span>
+<div class="stat-bar-container">
+  <div
+    class="stat-bar"
+    [ngClass]="{
+      health: statName === 'Health',
+      mana: statName === 'Mana',
+      stamina: statName === 'Stamina',
+      experience: statName === 'Experience'
+    }"
+    [style.width]="(stat.current / stat.total) * 100 + '%'"
+  >
+    <span class="current">{{ stat.current }}</span>
+    <span>/</span>
+    <span class="total">{{ stat.total }}</span>
+  </div>
 </div>

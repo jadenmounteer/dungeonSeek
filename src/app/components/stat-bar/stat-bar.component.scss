@@ -1,18 +1,24 @@
+.stat-bar-container {
+  width: 200px;
+  font-weight: bold;
+  background-color: #555; /* Background of the container */
+  border-radius: 5px; /* Optional: for rounded corners */
+  box-shadow: inset 0 0 5px #000; /* Optional: for inset shadow */
+}
+
 .stat-bar {
   display: flex;
   flex-direction: row;
+  box-shadow: inset 0 0 5px #000; /* Optional: for inset shadow */
   justify-content: center;
-  min-width: 200px;
-  font-weight: bold;
-  border: 1px solid black;
+  transition: width 0.3s ease-in-out; /* Smooth transition for width changes */
 }
-
 .health {
-  background-color: rgb(253, 144, 144);
+  background-color: #af4c4c;
 }
 
 .mana {
-  background-color: rgb(153, 153, 249);
+  background-color: rgb(108, 108, 209);
 }
 
 .experience {

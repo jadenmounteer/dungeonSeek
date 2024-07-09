@@ -14,7 +14,7 @@
 
 .health-bar {
   height: 100%;
-  background-color: #af4c4c; /* Green color; consider changing based on health percentage */
+  background-color: #af4c4c;
   border-radius: 5px; /* Match container's border-radius */
   transition: width 0.3s ease-in-out; /* Smooth transition for width changes */
 }

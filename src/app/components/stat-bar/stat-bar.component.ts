@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CharacterStat } from '../../types/character';
 import { CommonModule } from '@angular/common';
 
