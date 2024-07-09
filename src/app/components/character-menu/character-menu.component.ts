@@ -22,7 +22,8 @@ export type MenuType =
   | 'Spells'
   | 'Statuses'
   | 'Campaign'
-  | 'Side-quests';
+  | 'Side-quests'
+  | 'Scrolls';
 @Component({
   selector: 'app-character-menu',
   standalone: true,
@@ -60,6 +61,8 @@ export class CharacterMenuComponent implements OnInit {
   protected dropdownOptions: MenuType[] = [
     'Items',
     'Weapons',
+    'Scrolls',
+    'Spells',
     'Side-quests',
     'Campaign',
     'Statuses',
