@@ -39,6 +39,9 @@ export class CombatService implements OnDestroy {
     }
   );
 
+  // Defined if currently attacking with a weapon.
+  private weaponInfo: WeaponCardInfo | undefined;
+
   constructor() {}
 
   ngOnDestroy(): void {
@@ -148,7 +151,7 @@ export class CombatService implements OnDestroy {
   }
 
   public attackWithWeapon(event: any): void {
-    const weaponInfo = event.weaponInfo as WeaponCardInfo;
+    this.weaponInfo = event.weaponInfo as WeaponCardInfo;
     const npcToAttack =
       this.gameStateService.currentPlayerSelectedEnemyToAttack;
 
@@ -157,7 +160,7 @@ export class CombatService implements OnDestroy {
     }
 
     // Roll for damage
-    this.diceRollDialogueService.rollForDamage(weaponInfo, npcToAttack);
+    this.diceRollDialogueService.rollForDamage(this.weaponInfo, npcToAttack);
   }
 
   private dealDamageToNpc(damageRolled: number): void {
@@ -189,5 +192,25 @@ export class CombatService implements OnDestroy {
     );
 
     // Update the current character's stats
+    const currentPlayer =
+      this.gameStateService.characterBeingControlledByClient;
+    if (!currentPlayer || !this.weaponInfo) {
+      throw new Error('currentPlayer or weaponInfo is undefined.');
+    }
+
+    currentPlayer.characterStats.health.current -=
+      this.weaponInfo.stats.costToUse.healthCost;
+    currentPlayer.characterStats.mana.current -=
+      this.weaponInfo.stats.costToUse.manaCost;
+    currentPlayer.characterStats.stamina.current -=
+      this.weaponInfo.stats.costToUse.staminaCost;
+
+    this.characterService.updateCharacter(
+      currentPlayer,
+      this.gameStateService.gameSession.id
+    );
+
+    // They just attacked, so they are no longer attacking with this weapon.
+    this.weaponInfo = undefined;
   }
 }
