@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { GameStateService } from './game-state.service';
 import {
   Firestore,
@@ -24,7 +24,7 @@ export interface CombatSession {
 @Injectable({
   providedIn: 'root',
 })
-export class CombatService {
+export class CombatService implements OnDestroy {
   #firestore: Firestore = inject(Firestore);
   private gameStateService: GameStateService = inject(GameStateService);
   private diceRollDialogueService: DiceRollDialogueService = inject(
@@ -33,7 +33,17 @@ export class CombatService {
   private characterService: CharacterService = inject(CharacterService);
   private npcService: NpcService = inject(NpcService);
 
+  private dealDamageSub = this.diceRollDialogueService.dealDamageSub.subscribe(
+    (result) => {
+      this.dealDamageToNpc(result);
+    }
+  );
+
   constructor() {}
+
+  ngOnDestroy(): void {
+    this.dealDamageSub.unsubscribe();
+  }
 
   public initializeCombatSessionTurnQueue(
     combatSession: CombatSession
@@ -139,11 +149,18 @@ export class CombatService {
 
   public attackWithWeapon(event: any): void {
     const weaponInfo = event.weaponInfo as WeaponCardInfo;
-    const npcToAttack = event.npc as Npc;
+    const npcToAttack =
+      this.gameStateService.currentPlayerSelectedEnemyToAttack;
+
+    if (!npcToAttack) {
+      throw new Error('NPC to attack is undefined.');
+    }
 
     // Roll for damage
     this.diceRollDialogueService.rollForDamage(weaponInfo, npcToAttack);
+  }
 
+  private dealDamageToNpc(damageDealt: number): void {
     // Calculate the damage dealt
     // Update the npc
     // Update the current character
