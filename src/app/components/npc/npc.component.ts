@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
   Signal,
+  SimpleChanges,
   computed,
   inject,
   input,
@@ -31,26 +32,32 @@ export class NpcComponent implements OnInit {
 
   public inCombat = false;
 
+  public healthPercentage: number = 100;
+
   public ngOnInit(): void {
     this.inCombat = this.npc().combatSessionID !== null;
+  }
+
+  ngAfterViewInit(): void {
+    this.updateHealthBar();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['npc']) {
+      this.updateHealthBar();
+    }
   }
 
   public updateHealthBar(): void {
     const npcStats = this.npc().npcStats;
 
-    const healthPercentage =
+    this.healthPercentage =
       (npcStats.health.current / npcStats.health.total) * 100;
     const healthBar = document.getElementById('npcHealthBar');
 
     if (healthBar) {
-      healthBar.style.width = `${healthPercentage}%`;
+      healthBar.style.width = `${this.healthPercentage}%`;
     }
-  }
-
-  // This is just to test the health bar
-  public updateHealth() {
-    this.npc().npcStats.health.current -= 1;
-    this.updateHealthBar();
   }
 
   public selectNpc(): void {

@@ -174,6 +174,19 @@ export class CombatService implements OnDestroy {
     }
 
     // Update the npc
+    const npcToAttack =
+      this.gameStateService.currentPlayerSelectedEnemyToAttack;
+
+    if (!npcToAttack) {
+      throw new Error('npcToAttack is undefined.');
+    }
+
+    npcToAttack.npcStats.health.current -= damageDealt;
+
+    this.npcService.updateNpc(
+      npcToAttack,
+      this.gameStateService.gameSession.id
+    );
 
     // Update the current character's stats
   }

@@ -3,7 +3,7 @@
   (click)="selectNpc()"
 >
   <div *ngIf="inCombat">
-    <!-- <div class="npc-health-bar">{{ healthBarWidthPercentage() }}%</div> -->
+    <div class="npc-health-bar">{{ healthPercentage }}%</div>
 
     <div class="health-bar-container">
       <div class="health-bar" id="npcHealthBar"></div>

@@ -9,7 +9,7 @@ export interface NpcData {
   currentLocation: LocationNode;
   position: Position;
   directionFacing: 'Right' | 'Left';
-  npcStats: NpcStats;
+  npcStats: NpcStats | null;
   combatSessionID: string | null; // Null if not in combat
 }
 
@@ -56,7 +56,13 @@ export abstract class Npc {
 
   constructor(npcData: NpcData) {
     this.npcType = npcData.npcType;
-    this.npcStats = npcData.npcStats;
+    this.npcStats = npcData.npcStats ?? {
+      health: {
+        current: 10,
+        total: 10,
+      },
+      armorClass: 1,
+    };
     this.currentLocation = npcData.currentLocation;
     this.position = npcData.position;
     this.directionFacing = npcData.directionFacing;
