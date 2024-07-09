@@ -13,10 +13,7 @@ import { TurnService } from '../../services/turn.service';
 import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
 import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
 import { DeckName } from '../../types/card-deck';
-import {
-  DiceRollDialogComponent,
-  DiceRollDialogData,
-} from '../dice-roll-dialog/dice-roll-dialog.component';
+import { DiceRollDialogComponent } from '../dice-roll-dialog/dice-roll-dialog.component';
 import { CharacterInfoComponent } from '../character-info/character-info.component';
 import { EventMenuComponent } from '../event-menu/event-menu.component';
 import { ItemMenuComponent } from '../item-menu/item-menu.component';
@@ -43,6 +40,7 @@ import {
 import { NpcService } from '../../services/npc.service';
 import { NpcComponent } from '../npc/npc.component';
 import { AttackMenuComponent } from '../attack-menu/attack-menu.component';
+import { DiceRollDialogueService } from '../../services/dice-roll-dialogue.service';
 
 @Component({
   selector: 'app-game',
@@ -70,6 +68,9 @@ import { AttackMenuComponent } from '../attack-menu/attack-menu.component';
 })
 export class GameComponent implements OnDestroy {
   public combatService: CombatService = inject(CombatService);
+  public diceRollDialogueService: DiceRollDialogueService = inject(
+    DiceRollDialogueService
+  );
   #outcomeService: OutcomeService = inject(OutcomeService);
   #npcService: NpcService = inject(NpcService);
 
@@ -86,6 +87,11 @@ export class GameComponent implements OnDestroy {
   public combatSessionsSub!: Subscription;
   protected loading = true;
   protected locationsLoading = true;
+
+  protected drawEventCardSub: Subscription =
+    this.diceRollDialogueService.drawEventCardSub.subscribe(() => {
+      this.drawEventCard();
+    });
 
   protected waitingForNextTurnToStart = false;
   protected showEventCard = false;
@@ -217,6 +223,7 @@ export class GameComponent implements OnDestroy {
     this.drawGoldSubscription.unsubscribe();
     this.npcsSub.unsubscribe();
     this.combatSessionsSub.unsubscribe();
+    this.drawEventCardSub.unsubscribe();
 
     // If there are multiple players, signal to the server that the player is done with their turn
     if (this.gameStateService.gameSession.playerIDs.length > 1) {
@@ -366,7 +373,8 @@ export class GameComponent implements OnDestroy {
   }
 
   protected async currentCharacterFinishedTurn(): Promise<void> {
-    this.gameStateService.currentCharacterRolledForEventCardThisTurn = false;
+    this.diceRollDialogueService.currentCharacterRolledForEventCardThisTurn =
+      false;
 
     if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
@@ -651,30 +659,14 @@ export class GameComponent implements OnDestroy {
 
       this.gameDialogueService.showDialogue(gameDialogueData);
     } else {
-      this.rollForEventCard();
+      this.diceRollDialogueService.rollForEventCard();
     }
   }
 
   private endMovementEarly() {
     this.gameStateService.characterBeingControlledByClient!.movementSpeed = 0;
 
-    this.rollForEventCard();
-  }
-
-  /**
-   * Before ending their turn, a character must roll for an event card.
-   * They have a 1 in 4 chance of drawing an event card.
-   */
-  protected rollForEventCard() {
-    this.gameStateService.diceRollingData = {
-      title: 'Roll for Event Card',
-      message: 'If you roll a 3 or less, draw an event card.',
-      closeButtonName: 'Draw Event Card',
-      numberOfDice: 1,
-      comparator: '<=',
-      targetNumber: 6, // use 6 for testing
-    };
-    this.gameStateService.currentCharacterRollingDice = true;
+    this.diceRollDialogueService.rollForEventCard();
   }
 
   protected toggleCharacterMenu(): void {

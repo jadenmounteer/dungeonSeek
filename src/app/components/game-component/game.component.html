@@ -103,14 +103,14 @@
 
   <div
     class="player-game-messages-section"
-    *ngIf="!gameStateService.currentCharacterRollingDice"
+    *ngIf="!diceRollDialogueService.currentCharacterRollingDice"
   >
     <span
       class="player-movement-section"
       *ngIf="
         gameStateService.characterBeingControlledByClient?.movementSpeed !=
           undefined &&
-        !gameStateService.currentCharacterRolledForEventCardThisTurn &&
+        !diceRollDialogueService.currentCharacterRolledForEventCardThisTurn &&
         gameStateService.characterBeingControlledByClient?.combatSessionId ===
           null
       "
@@ -233,19 +233,12 @@
     [gameSessionID]="this.gameStateService.gameSession.id"
   >
   </app-character-menu>
-  } @defer (when gameStateService.currentCharacterRollingDice) {
+  } @defer (when diceRollDialogueService.currentCharacterRollingDice) {
   <app-dice-roll-dialog
-    *ngIf="gameStateService.currentCharacterRollingDice"
-    [data]="gameStateService.diceRollingData"
-    (successClose)="
-      gameStateService.currentCharacterRollingDice = false;
-      drawEventCard();
-      gameStateService.currentCharacterRolledForEventCardThisTurn = true
-    "
-    (close)="
-      gameStateService.currentCharacterRollingDice = false;
-      gameStateService.currentCharacterRolledForEventCardThisTurn = true
-    "
+    *ngIf="diceRollDialogueService.currentCharacterRollingDice"
+    [data]="diceRollDialogueService.diceRollingData"
+    (successClose)="diceRollDialogueService.handleSuccessClose()"
+    (resultClose)="diceRollDialogueService.handleResultClose($event)"
   ></app-dice-roll-dialog>
   } @defer (when this.gameDialogueService.showGameDialogue) {
   <app-game-dialogue
@@ -272,7 +265,7 @@
 
   <div
     class="game-buttons-section"
-    *ngIf="!gameStateService.currentCharacterRollingDice"
+    *ngIf="!diceRollDialogueService.currentCharacterRollingDice"
   >
     <div class="zoom-buttons-section">
       <div
@@ -299,7 +292,7 @@
       <div
         class="game-button"
         *ngIf="
-          !gameStateService.currentCharacterRolledForEventCardThisTurn &&
+          !diceRollDialogueService.currentCharacterRolledForEventCardThisTurn &&
           gameStateService.characterBeingControlledByClient?.combatSessionId ===
             null
         "
@@ -311,7 +304,7 @@
       <div
         class="game-button"
         *ngIf="
-          gameStateService.currentCharacterRolledForEventCardThisTurn &&
+          diceRollDialogueService.currentCharacterRolledForEventCardThisTurn &&
           !waitingForNextTurnToStart &&
           gameStateService.characterBeingControlledByClient?.combatSessionId ===
             null

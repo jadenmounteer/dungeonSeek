@@ -2,27 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
-
-export type DiceRollComparator = '>=' | '<=' | '=';
-
-export type DiceRollDialogData = {
-  title: string;
-  message: string;
-  closeButtonName: string;
-  numberOfDice: number;
-  comparator: DiceRollComparator | undefined;
-  targetNumber: number;
-};
-
-export interface Die {
-  value: number;
-  dots: Dot[];
-}
-
-export interface Dot {
-  topPosition: number;
-  leftPosition: number;
-}
+import {
+  DiceRollComparator,
+  DiceRollDialogData,
+  Die,
+} from '../../services/dice-roll-dialogue.service';
 
 @Component({
   selector: 'app-dice-roll-dialog',
@@ -34,7 +18,6 @@ export interface Dot {
 export class DiceRollDialogComponent implements OnInit {
   @Input() public data: DiceRollDialogData | undefined;
   @Output() public successClose: EventEmitter<void> = new EventEmitter<void>();
-  @Output() public close: EventEmitter<void> = new EventEmitter<void>();
 
   // Used to output the dice roll result
   @Output() public resultClose: EventEmitter<number> =
@@ -130,32 +113,38 @@ export class DiceRollDialogComponent implements OnInit {
     this.rolledDice = true;
     this.sum = this.rollDice();
 
-    if (this.data?.comparator) {
-      this.inTargetRange = this.checkTargetRange(this.data.comparator);
-    } else {
-      // They are just rolling to get the result, not to see if something was successful
-      this.resultClose.emit(this.sum);
+    if (this.data?.comparator && this.data?.targetNumber) {
+      // They are doing a pass or fail check, rather than wanting to get the result
+      this.inTargetRange = this.checkTargetRange(
+        this.data.comparator,
+        this.data.targetNumber
+      );
     }
   }
 
-  private checkTargetRange(comparator: DiceRollComparator): boolean {
+  private checkTargetRange(
+    comparator: DiceRollComparator,
+    targetNumber: number
+  ): boolean {
     if (!this.data) {
       throw new Error('Data is not defined');
     }
     switch (comparator) {
       case '>=':
-        return this.sum >= this.data.targetNumber;
+        return this.sum >= targetNumber;
       case '<=':
-        return this.sum <= this.data.targetNumber;
+        return this.sum <= targetNumber;
       case '=':
-        return this.sum === this.data.targetNumber;
+        return this.sum === targetNumber;
     }
   }
 
+  // Call this event if there is a pass or fail event and they fail, or you just need the result
   protected onClose(): void {
-    this.close.emit();
+    this.resultClose.emit(this.sum);
   }
 
+  // Call this event if there is a pass or fail event and they pass.
   protected OnSuccessClose(): void {
     this.successClose.emit();
   }

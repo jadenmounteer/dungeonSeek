@@ -11,6 +11,7 @@ import { CharacterService } from './character/character.service';
 import { Npc } from '../types/npc';
 import { NpcService } from './npc.service';
 import { WeaponCardInfo } from '../types/weapon-card-info';
+import { DiceRollDialogueService } from './dice-roll-dialogue.service';
 
 export interface CombatSession {
   id: string;
@@ -26,6 +27,9 @@ export interface CombatSession {
 export class CombatService {
   #firestore: Firestore = inject(Firestore);
   private gameStateService: GameStateService = inject(GameStateService);
+  private diceRollDialogueService: DiceRollDialogueService = inject(
+    DiceRollDialogueService
+  );
   private characterService: CharacterService = inject(CharacterService);
   private npcService: NpcService = inject(NpcService);
 
@@ -138,22 +142,10 @@ export class CombatService {
     const npcToAttack = event.npc as Npc;
 
     // Roll for damage
-    this.rollForDamage(weaponInfo, npcToAttack);
+    this.diceRollDialogueService.rollForDamage(weaponInfo, npcToAttack);
 
     // Calculate the damage dealt
     // Update the npc
     // Update the current character
-  }
-
-  protected rollForDamage(weaponInfo: WeaponCardInfo, npcToAttack: Npc): void {
-    this.gameStateService.diceRollingData = {
-      title: `Attacking ${npcToAttack.npcType}`,
-      message: `Roll to see how much damage you can cause with your ${weaponInfo.name}`,
-      closeButtonName: 'Close',
-      numberOfDice: weaponInfo.stats.numberOfAttackDice,
-      comparator: undefined,
-      targetNumber: 6,
-    };
-    this.gameStateService.currentCharacterRollingDice = true;
   }
 }
