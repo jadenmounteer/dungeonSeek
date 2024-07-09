@@ -12,7 +12,7 @@ export class BanditNpc extends Npc {
         current: 10,
         total: 10,
       },
-      armorClass: 1,
+      armorClass: 10,
     };
   }
 }

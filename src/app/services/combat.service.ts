@@ -160,9 +160,21 @@ export class CombatService implements OnDestroy {
     this.diceRollDialogueService.rollForDamage(weaponInfo, npcToAttack);
   }
 
-  private dealDamageToNpc(damageDealt: number): void {
+  private dealDamageToNpc(damageRolled: number): void {
+    const npcArmorClass =
+      this.gameStateService.currentPlayerSelectedEnemyToAttack?.npcStats
+        .armorClass ?? 1;
+
     // Calculate the damage dealt
+    let damageDealt = damageRolled - npcArmorClass;
+
+    // Always deal at least 1 point of damage
+    if (damageDealt < 1) {
+      damageDealt = 1;
+    }
+
     // Update the npc
-    // Update the current character
+
+    // Update the current character's stats
   }
 }
