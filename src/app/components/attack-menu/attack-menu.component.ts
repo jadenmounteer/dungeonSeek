@@ -3,23 +3,36 @@ import {
   EventEmitter,
   InputSignal,
   Output,
+  inject,
   input,
 } from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
 import { Npc } from '../../types/npc';
 import { CommonModule } from '@angular/common';
+import { GameCardComponent } from '../game-card/game-card.component';
+import { WeaponCardService } from '../../services/weapon-card.service';
+import { Character } from '../../types/character';
 
 @Component({
   selector: 'app-attack-menu',
   standalone: true,
-  imports: [MenuComponent, MenuUnderlineComponent, CommonModule],
+  imports: [
+    MenuComponent,
+    MenuUnderlineComponent,
+    CommonModule,
+    GameCardComponent,
+  ],
   templateUrl: './attack-menu.component.html',
   styleUrl: './attack-menu.component.scss',
 })
 export class AttackMenuComponent {
+  public weaponCardService: WeaponCardService = inject(WeaponCardService);
   public npcToAttack: InputSignal<Npc> = input.required();
+  public character: InputSignal<Character> = input.required();
+
   @Output() closeMenu = new EventEmitter<any>();
+
   public viewingWeapons = false;
   public viewingSpells = false;
   public viewingScrolls = false;

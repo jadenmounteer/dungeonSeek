@@ -258,10 +258,13 @@
   } @defer (when showAttackMenu()) {
   <app-attack-menu
     *ngIf="
-      showAttackMenu() && gameStateService.currentPlayerSelectedEnemyToAttack
+      showAttackMenu() &&
+      gameStateService.currentPlayerSelectedEnemyToAttack &&
+      gameStateService.characterBeingControlledByClient
     "
     (closeMenu)="toggleAttackMenu()"
     [npcToAttack]="gameStateService.currentPlayerSelectedEnemyToAttack"
+    [character]="gameStateService.characterBeingControlledByClient"
   >
   </app-attack-menu>
   }

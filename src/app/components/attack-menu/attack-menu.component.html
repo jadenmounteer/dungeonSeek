@@ -28,5 +28,16 @@
         Scroll 📜
       </div>
     </div>
+
+    <div class="card-section">
+      @if(viewingWeapons) { @for(weaponCard of
+      character().characterMenu.weaponCards; track weaponCard; ){
+      <app-game-card
+        @fadeIn
+        [card]="weaponCardService.getCardInfo(weaponCard.cardName)"
+        [equipped]="weaponCard.equipped"
+      ></app-game-card>
+      } }
+    </div>
   </div>
 </app-menu>
