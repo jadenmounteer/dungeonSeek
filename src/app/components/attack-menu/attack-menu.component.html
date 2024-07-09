@@ -36,8 +36,18 @@
         @fadeIn
         [card]="weaponCardService.getCardInfo(weaponCard.cardName)"
         [equipped]="weaponCard.equipped"
+        (click)="openWeaponMenu(weaponCard)"
       ></app-game-card>
       } }
     </div>
   </div>
 </app-menu>
+
+<!-- The sub menus that appear -->
+<app-weapon-card-info-view
+  *ngIf="showWeaponMenu && weaponEquipmentToShow && weaponCardInfoToShow"
+  [cardInfo]="weaponCardInfoToShow"
+  [equipped]="weaponEquipmentToShow.equipped"
+  (closeMenu)="showWeaponMenu = false"
+  (toggleEquip)="showWeaponMenu = false; attackWithWeapon()"
+></app-weapon-card-info-view>

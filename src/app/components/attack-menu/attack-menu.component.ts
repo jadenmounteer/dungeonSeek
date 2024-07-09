@@ -12,8 +12,10 @@ import { Npc } from '../../types/npc';
 import { CommonModule } from '@angular/common';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { WeaponCardService } from '../../services/weapon-card.service';
-import { Character } from '../../types/character';
+import { Character, CharacterMenuEquipment } from '../../types/character';
 import { fadeIn } from '../../animations/fade-in-animation';
+import { WeaponCardInfoViewComponent } from '../weapon-card-info-view/weapon-card-info-view.component';
+import { WeaponCardInfo } from '../../types/weapon-card-info';
 
 @Component({
   selector: 'app-attack-menu',
@@ -23,6 +25,7 @@ import { fadeIn } from '../../animations/fade-in-animation';
     MenuUnderlineComponent,
     CommonModule,
     GameCardComponent,
+    WeaponCardInfoViewComponent,
   ],
   templateUrl: './attack-menu.component.html',
   styleUrl: './attack-menu.component.scss',
@@ -32,6 +35,9 @@ export class AttackMenuComponent {
   public weaponCardService: WeaponCardService = inject(WeaponCardService);
   public npcToAttack: InputSignal<Npc> = input.required();
   public character: InputSignal<Character> = input.required();
+  protected weaponEquipmentToShow: CharacterMenuEquipment | undefined;
+  protected weaponCardInfoToShow: WeaponCardInfo | undefined;
+  protected showWeaponMenu = false;
 
   @Output() closeMenu = new EventEmitter<any>();
 
@@ -59,5 +65,19 @@ export class AttackMenuComponent {
     this.viewingScrolls = !this.viewingScrolls;
     this.viewingSpells = false;
     this.viewingWeapons = false;
+  }
+
+  protected openWeaponMenu(weaponCard: CharacterMenuEquipment) {
+    this.weaponEquipmentToShow = weaponCard;
+
+    this.weaponCardInfoToShow = this.weaponCardService.getCardInfo(
+      weaponCard.cardName
+    );
+
+    this.showWeaponMenu = true;
+  }
+
+  protected attackWithWeapon(): void {
+    // TODO implement this method
   }
 }
