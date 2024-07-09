@@ -681,6 +681,17 @@ export class GameComponent implements OnDestroy {
     this.currentCharacterRollingDice = true;
   }
 
+  protected rollForDamage() {
+    this.diceRollingData = {
+      title: 'Roll for damage',
+      message: 'Roll to see how much damage you cause.',
+      closeButtonName: 'Close',
+      numberOfDice: 1,
+      comparator: '>=',
+      targetNumber: 6,
+    };
+  }
+
   protected toggleCharacterMenu(): void {
     // update the signal
     this.showCharacterMenu.set(!this.showCharacterMenu());

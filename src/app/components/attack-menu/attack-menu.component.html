@@ -47,5 +47,7 @@
   *ngIf="showWeaponMenu && weaponEquipmentToShow && weaponCardInfoToShow"
   [cardInfo]="weaponCardInfoToShow"
   (closeMenu)="showWeaponMenu = false"
-  (attackWithWeapon)="showWeaponMenu = false; attackWithWeapon()"
+  (attackWithWeapon)="
+    showWeaponMenu = false; attackWithWeapon(weaponCardInfoToShow)
+  "
 ></app-weapon-card-info-view>

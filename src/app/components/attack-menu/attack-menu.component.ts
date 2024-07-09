@@ -77,8 +77,31 @@ export class AttackMenuComponent {
     this.showWeaponMenu = true;
   }
 
-  protected attackWithWeapon(): void {
-    // TODO implement this method
-    alert('Method not implemented');
+  protected attackWithWeapon(weaponInfo: WeaponCardInfo): void {
+    // Check if the character has enough stats to make the attack.
+    const characterHealth = this.character().characterStats.health.current;
+    const characterMana = this.character().characterStats.mana.current;
+    const characterStamina = this.character().characterStats.stamina.current;
+
+    const healthCost = weaponInfo.stats.costToUse.healthCost;
+    const manaCost = weaponInfo.stats.costToUse.manaCost;
+    const staminaCost = weaponInfo.stats.costToUse.healthCost;
+
+    let message: string | undefined;
+
+    if (healthCost > characterHealth) {
+      message = 'You do not have enough health to use this weapon.';
+    } else if (manaCost > characterMana) {
+      message = 'You do not have enough mana to use this weapon.';
+    } else if (staminaCost > characterStamina) {
+      message = 'You do not have enough stamina to use this weapon.';
+    }
+
+    if (message) {
+      // TODO replace this with a Toast message
+      alert(message);
+    } else {
+      alert('Attacked with sword!');
+    }
   }
 }
