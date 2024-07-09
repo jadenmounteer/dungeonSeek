@@ -3,8 +3,6 @@
 $justFoundGlow: rgb(226, 221, 189);
 
 .card-title {
-  font-size: 5vh;
-
   @include for-tablet-landscape-up {
     font-size: $big-text-font-size;
   }
