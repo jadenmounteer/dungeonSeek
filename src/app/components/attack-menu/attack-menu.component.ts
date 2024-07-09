@@ -40,6 +40,7 @@ export class AttackMenuComponent {
   protected showWeaponMenu = false;
 
   @Output() closeMenu = new EventEmitter<any>();
+  @Output() attack = new EventEmitter<WeaponCardInfo>();
 
   public viewingWeapons = false;
   public viewingSpells = false;
@@ -101,7 +102,8 @@ export class AttackMenuComponent {
       // TODO replace this with a Toast message
       alert(message);
     } else {
-      alert('Attacked with sword!');
+      // Emit the attack event
+      this.attack.emit(weaponInfo);
     }
   }
 }
