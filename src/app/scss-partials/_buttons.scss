@@ -1,3 +1,6 @@
+$game-button-color: gray;
+$selected-button-color: rgb(66, 64, 64);
+
 @mixin button-color {
   background-color: gray;
   border: 2px solid rgb(38, 38, 38);
@@ -32,6 +35,15 @@
   @include for-zoomed-in-screen {
     font-size: $sticky-text-font-size-for-zoomed-in-screen;
   }
+}
+
+.selected-button {
+  background-color: $selected-button-color;
+  transition: none;
+}
+
+.selected-button:hover {
+  background-color: $selected-button-color;
 }
 
 .disabled-button {

@@ -6,9 +6,27 @@
     </div>
 
     <div class="attack-menu-action-buttons">
-      <div class="game-button">Weapon 🗡️</div>
-      <div class="game-button">Spell 🔥</div>
-      <div class="game-button">Scroll 📜</div>
+      <div
+        class="game-button"
+        [ngClass]="{ 'selected-button': viewingWeapons }"
+        (click)="clickWeaponsButton()"
+      >
+        Weapon 🗡️
+      </div>
+      <div
+        class="game-button"
+        [ngClass]="{ 'selected-button': viewingSpells }"
+        (click)="clickSpellsButton()"
+      >
+        Spell 🔥
+      </div>
+      <div
+        class="game-button"
+        [ngClass]="{ 'selected-button': viewingScrolls }"
+        (click)="clickScrollsButton()"
+      >
+        Scroll 📜
+      </div>
     </div>
   </div>
 </app-menu>
