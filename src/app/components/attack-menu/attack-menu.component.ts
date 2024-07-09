@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { WeaponCardService } from '../../services/weapon-card.service';
 import { Character } from '../../types/character';
+import { fadeIn } from '../../animations/fade-in-animation';
 
 @Component({
   selector: 'app-attack-menu',
@@ -25,6 +26,7 @@ import { Character } from '../../types/character';
   ],
   templateUrl: './attack-menu.component.html',
   styleUrl: './attack-menu.component.scss',
+  animations: [fadeIn],
 })
 export class AttackMenuComponent {
   public weaponCardService: WeaponCardService = inject(WeaponCardService);
