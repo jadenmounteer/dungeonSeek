@@ -1,0 +1,28 @@
+.cards-loading-icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.cards-section {
+  margin-left: auto;
+  margin-right: auto;
+}
+.card-section {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+app-game-card {
+  transition: all 0.5s ease; /* back to normal */
+  // Make it smaller than the original size
+  transform: scale(0.8);
+}
+
+app-game-card:hover {
+  // Do a cool card hover effect here
+  transform: translate3D(0, -1px, 0) scale(0.9);
+  transition: all 0.4s ease; /* zoom in */
+}
