@@ -265,6 +265,7 @@
     (closeMenu)="toggleAttackMenu()"
     [npcToAttack]="gameStateService.currentPlayerSelectedEnemyToAttack"
     [character]="gameStateService.characterBeingControlledByClient"
+    (attackWithWeaponEvent)="combatService.attackWithWeapon($event)"
   >
   </app-attack-menu>
   }

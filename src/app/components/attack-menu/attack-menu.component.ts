@@ -40,7 +40,10 @@ export class AttackMenuComponent {
   protected showWeaponMenu = false;
 
   @Output() closeMenu = new EventEmitter<any>();
-  @Output() attack = new EventEmitter<WeaponCardInfo>();
+  @Output() attackWithWeaponEvent = new EventEmitter<{
+    weaponInfo: WeaponCardInfo;
+    npc: Npc;
+  }>();
 
   public viewingWeapons = false;
   public viewingSpells = false;
@@ -103,7 +106,10 @@ export class AttackMenuComponent {
       alert(message);
     } else {
       // Emit the attack event
-      this.attack.emit(weaponInfo);
+      this.attackWithWeaponEvent.emit({
+        weaponInfo: weaponInfo,
+        npc: this.npcToAttack(),
+      });
     }
   }
 }

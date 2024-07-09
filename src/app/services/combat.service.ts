@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { CharacterService } from './character/character.service';
 import { Npc } from '../types/npc';
 import { NpcService } from './npc.service';
+import { WeaponCardInfo } from '../types/weapon-card-info';
 
 export interface CombatSession {
   id: string;
@@ -130,5 +131,15 @@ export class CombatService {
 
   public selectNpcToAttack(npc: Npc): void {
     this.gameStateService.currentPlayerSelectedEnemyToAttack = npc;
+  }
+
+  public attackWithWeapon(event: any): void {
+    const weaponInfo = event.weaponInfo as WeaponCardInfo;
+    const npcToAttack = event.npc as Npc;
+
+    // Roll for damage
+    // Calculate the damage dealt
+    // Update the npc
+    // Update the current character
   }
 }
