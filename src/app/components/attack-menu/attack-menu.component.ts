@@ -79,5 +79,6 @@ export class AttackMenuComponent {
 
   protected attackWithWeapon(): void {
     // TODO implement this method
+    alert('Method not implemented');
   }
 }
