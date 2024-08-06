@@ -1,4 +1,5 @@
 import { LocationNode, Position } from '../services/location-service';
+import { ArmorClass } from './armor-class';
 import { CardRewardType } from './card-reward-type';
 import { CharacterStat } from './character';
 
@@ -17,7 +18,7 @@ export interface NpcData {
 // This is the info that is stored in the db. Everything else concerning the npc is fetched from JSON.
 export interface NpcStats {
   health: CharacterStat;
-  armorClass: number;
+  armorClass: ArmorClass;
 }
 
 export enum NpcType {

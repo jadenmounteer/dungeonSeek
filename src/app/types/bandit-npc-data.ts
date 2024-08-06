@@ -1,5 +1,6 @@
+import { ArmorClass } from './armor-class';
 import { CardRewardType } from './card-reward-type';
-import { Npc, NpcData, NpcType } from './npc';
+import { Npc, NpcData } from './npc';
 
 export class BanditNpc extends Npc {
   constructor(npcData: NpcData) {
@@ -12,7 +13,7 @@ export class BanditNpc extends Npc {
         current: 10,
         total: 10,
       },
-      armorClass: 10,
+      armorClass: ArmorClass.LIGHT,
     };
   }
 }
