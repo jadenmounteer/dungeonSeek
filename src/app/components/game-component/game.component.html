@@ -67,6 +67,7 @@
       </div>
     </span>
 
+    @if(!gameStateService.characterBeingControlledByClient?.combatSessionId) {
     <span *ngFor="let location of this.locationService.locationsMap | keyvalue">
       <div
         class="movement-node-wrapper"
@@ -88,6 +89,8 @@
         />
       </div>
     </span>
+
+    }
 
     <!-- Legacy because it will be replaced with other components. -->
     <!-- <app-game-footer
