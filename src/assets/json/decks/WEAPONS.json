@@ -49,7 +49,7 @@
     "discardAfterUse": false,
     "quantity": 5,
     "stats": {
-      "numberOfAttackDice": 3,
+      "numberOfAttackDice": 2,
       "costToUse": {
         "healthCost": 0,
         "manaCost": 0,
