@@ -184,6 +184,11 @@ export class CombatService implements OnDestroy {
       throw new Error('npcToAttack is undefined.');
     }
 
+    // FIXME come up with a better system for displaying messages
+    alert(
+      'You dealt ' + damageDealt + ' damage to the ' + npcToAttack.npcType + '!'
+    );
+
     npcToAttack.npcStats.health.current -= damageDealt;
 
     this.npcService.updateNpc(
