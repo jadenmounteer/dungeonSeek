@@ -42,7 +42,7 @@ export class DiceRollDialogueService {
   public currentCharacterRolledForEventCardThisTurn = false;
 
   public drawEventCardSub = new Subject<void>();
-  public dealDamageSub = new Subject<number>();
+  public dealDamageToNPCSub = new Subject<number>();
 
   constructor() {}
 
@@ -116,10 +116,10 @@ export class DiceRollDialogueService {
       targetNumber: undefined,
     };
     this.showDialogue(diceRollingData);
-    this.resultButtonCallback = this.dealDamage.bind(this);
+    this.resultButtonCallback = this.dealDamageToNPC.bind(this);
   }
 
-  private dealDamage(result: number): void {
-    this.dealDamageSub.next(result);
+  private dealDamageToNPC(result: number): void {
+    this.dealDamageToNPCSub.next(result);
   }
 }

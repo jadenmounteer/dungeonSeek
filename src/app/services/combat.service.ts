@@ -33,11 +33,13 @@ export class CombatService implements OnDestroy {
   private characterService: CharacterService = inject(CharacterService);
   private npcService: NpcService = inject(NpcService);
 
-  private dealDamageSub = this.diceRollDialogueService.dealDamageSub.subscribe(
-    (result) => {
-      this.dealDamageToNpc(result);
-    }
-  );
+  private dealDamageToNPCSub =
+    this.diceRollDialogueService.dealDamageToNPCSub.subscribe(
+      async (result) => {
+        await this.dealDamageToNpc(result);
+        this.endPlayerTurn();
+      }
+    );
 
   // Defined if currently attacking with a weapon.
   private weaponInfo: WeaponCardInfo | undefined;
@@ -45,7 +47,12 @@ export class CombatService implements OnDestroy {
   constructor() {}
 
   ngOnDestroy(): void {
-    this.dealDamageSub.unsubscribe();
+    this.dealDamageToNPCSub.unsubscribe();
+  }
+
+  private endPlayerTurn(): void {
+    this.gameStateService.currentPlayerSelectedEnemyToAttack = undefined;
+    this.gameStateService.currentPlayersCombatTurn = false;
   }
 
   public initializeCombatSessionTurnQueue(
@@ -163,7 +170,7 @@ export class CombatService implements OnDestroy {
     this.diceRollDialogueService.rollForDamage(this.weaponInfo, npcToAttack);
   }
 
-  private dealDamageToNpc(damageRolled: number): void {
+  private async dealDamageToNpc(damageRolled: number): Promise<void> {
     const npcArmorClass =
       this.gameStateService.currentPlayerSelectedEnemyToAttack?.npcStats
         .armorClass ?? 1;
@@ -191,7 +198,7 @@ export class CombatService implements OnDestroy {
 
     npcToAttack.npcStats.health.current -= damageDealt;
 
-    this.npcService.updateNpc(
+    await this.npcService.updateNpc(
       npcToAttack,
       this.gameStateService.gameSession.id
     );
@@ -210,7 +217,7 @@ export class CombatService implements OnDestroy {
     currentPlayer.characterStats.stamina.current -=
       this.weaponInfo.stats.costToUse.staminaCost;
 
-    this.characterService.updateCharacter(
+    await this.characterService.updateCharacter(
       currentPlayer,
       this.gameStateService.gameSession.id
     );
