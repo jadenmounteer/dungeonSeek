@@ -38,6 +38,11 @@ export class CombatService implements OnDestroy {
       async (result) => {
         await this.dealDamageToNpc(result);
         this.endPlayerTurn();
+        if (this.combatShouldEnd()) {
+          // TODO end combat session
+        } else {
+          this.startNextEnemyTurn();
+        }
       }
     );
 
@@ -50,9 +55,90 @@ export class CombatService implements OnDestroy {
     this.dealDamageToNPCSub.unsubscribe();
   }
 
+  private combatShouldEnd(): boolean {
+    let allEnemiesDead = true;
+    let allPlayersDead = true;
+
+    // First, get the combat session
+    const combatSessionID =
+      this.gameStateService.characterBeingControlledByClient?.combatSessionId;
+
+    if (!combatSessionID) {
+      throw new Error('No combat session ID found.');
+    }
+
+    const combatSession =
+      this.gameStateService.combatSessions.get(combatSessionID);
+
+    // If all enemies are dead, combat should end
+    combatSession?.enemyIDs.forEach((enemyId) => {
+      const enemy = this.gameStateService.npcsInPlay.find(
+        (npc) => npc.id === enemyId
+      );
+      const enemyHealth = enemy?.npcStats?.health?.current ?? 0;
+      if (enemyHealth > 0) {
+        allEnemiesDead = false;
+      }
+    });
+
+    if (allEnemiesDead) {
+      return true;
+    }
+
+    // If all players are dead, combat should end
+    combatSession?.playerIDs.forEach((playerId) => {
+      const player =
+        this.gameStateService.allCharactersCurrentlyInGameSession.find(
+          (character) => character.id === playerId
+        );
+      const playerHealth = player?.characterStats?.health?.current ?? 0;
+      if (playerHealth > 0) {
+        allPlayersDead = false;
+      }
+    });
+
+    if (allPlayersDead) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   private endPlayerTurn(): void {
     this.gameStateService.currentPlayerSelectedEnemyToAttack = undefined;
     this.gameStateService.currentPlayersCombatTurn = false;
+  }
+
+  private startNextEnemyTurn(): void {
+    // First, get the combat session
+    const combatSessionID =
+      this.gameStateService.characterBeingControlledByClient?.combatSessionId;
+
+    if (!combatSessionID) {
+      throw new Error('No combat session ID found.');
+    }
+
+    const combatSession =
+      this.gameStateService.combatSessions.get(combatSessionID);
+
+    if (!combatSession) {
+      throw new Error('No combat session found.');
+    }
+
+    // Get the next enemy to go
+    const nextEnemyID = combatSession.turnQueue.shift();
+    const nextEnemy = this.gameStateService.npcsInPlay.find(
+      (npc) => npc.id === nextEnemyID
+    );
+
+    if (!nextEnemyID || !nextEnemy) {
+      throw new Error('No next enemy found.');
+    }
+
+    // Put the ID of the enemy at the end of the queue so they go last
+    combatSession?.turnQueue.push(nextEnemyID);
+
+    // Attack a random player
   }
 
   public initializeCombatSessionTurnQueue(
