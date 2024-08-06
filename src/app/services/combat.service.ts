@@ -5,6 +5,8 @@ import {
   addDoc,
   collection,
   collectionData,
+  doc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { CharacterService } from './character/character.service';
@@ -41,7 +43,7 @@ export class CombatService implements OnDestroy {
         if (this.combatShouldEnd()) {
           // TODO end combat session
         } else {
-          this.startNextEnemyTurn();
+          this.startNextTurn();
         }
       }
     );
@@ -109,7 +111,7 @@ export class CombatService implements OnDestroy {
     this.gameStateService.currentPlayersCombatTurn = false;
   }
 
-  private startNextEnemyTurn(): void {
+  private startNextTurn(): void {
     // First, get the combat session
     const combatSessionID =
       this.gameStateService.characterBeingControlledByClient?.combatSessionId;
@@ -125,20 +127,32 @@ export class CombatService implements OnDestroy {
       throw new Error('No combat session found.');
     }
 
-    // Get the next enemy to go
-    const nextEnemyID = combatSession.turnQueue.shift();
-    const nextEnemy = this.gameStateService.npcsInPlay.find(
-      (npc) => npc.id === nextEnemyID
-    );
+    // Get the ID to go
+    const nextID = combatSession.turnQueue.shift();
 
-    if (!nextEnemyID || !nextEnemy) {
-      throw new Error('No next enemy found.');
+    if (!nextID) {
+      throw new Error('No next ID found.');
     }
 
-    // Put the ID of the enemy at the end of the queue so they go last
-    combatSession?.turnQueue.push(nextEnemyID);
+    // Put the ID of at the end of the queue so they go last
+    combatSession?.turnQueue.push(nextID);
 
-    // Attack a random player
+    const nextEnemy = this.gameStateService.npcsInPlay.find(
+      (npc) => npc.id === nextID
+    );
+
+    this.updateCombatSessionInDatabase(combatSession, combatSessionID);
+
+    if (nextEnemy) {
+      // TODO Start an enemy turn
+    } else {
+      const nextCharacter =
+        this.gameStateService.allCharactersCurrentlyInGameSession.find(
+          (character) => character.id === nextID
+        );
+
+      // TODO Start a character's turn
+    }
   }
 
   public initializeCombatSessionTurnQueue(
@@ -220,6 +234,23 @@ export class CombatService implements OnDestroy {
     return addDoc(collectionRef, combatSession).catch((error) => {
       console.error('Error adding document: ', error);
     });
+  }
+
+  private async updateCombatSessionInDatabase(
+    combatSession: CombatSession,
+    gameSessionID: string
+  ): Promise<void> {
+    const docRef = doc(
+      collection(
+        this.#firestore,
+        'game-sessions',
+        gameSessionID,
+        'combat-sessions'
+      ),
+      combatSession.id
+    );
+
+    return updateDoc(docRef, { ...combatSession });
   }
 
   public getCombatSessionsInGameSession(
