@@ -39,11 +39,11 @@ export class CombatService implements OnDestroy {
     this.diceRollDialogueService.dealDamageToNPCSub.subscribe(
       async (result) => {
         await this.dealDamageToNpc(result);
-        this.endPlayerTurn();
+        await this.endPlayerTurn();
         if (this.combatShouldEnd()) {
           // TODO end combat session
         } else {
-          this.startNextTurn();
+          await this.startNextTurn();
         }
       }
     );
@@ -106,7 +106,7 @@ export class CombatService implements OnDestroy {
     }
   }
 
-  private endPlayerTurn(): void {
+  private async endPlayerTurn(): Promise<void> {
     this.gameStateService.currentPlayerSelectedEnemyToAttack = undefined;
     this.gameStateService.currentPlayersCombatTurn = false;
 
@@ -133,10 +133,13 @@ export class CombatService implements OnDestroy {
     }
 
     // Save changes to db
-    this.updateCombatSessionInDatabase(combatSession, combatSessionID);
+    await this.updateCombatSessionInDatabase(
+      combatSession,
+      this.gameStateService.gameSession.id
+    );
   }
 
-  private startNextTurn(): void {
+  private async startNextTurn(): Promise<void> {
     // First, get the combat session
     const combatSessionID =
       this.gameStateService.characterBeingControlledByClient?.combatSessionId;
@@ -166,7 +169,10 @@ export class CombatService implements OnDestroy {
       (npc) => npc.id === nextID
     );
 
-    this.updateCombatSessionInDatabase(combatSession, combatSessionID);
+    await this.updateCombatSessionInDatabase(
+      combatSession,
+      this.gameStateService.gameSession.id
+    );
 
     if (nextEnemy) {
       // TODO Start an enemy turn

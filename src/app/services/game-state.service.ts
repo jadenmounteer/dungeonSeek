@@ -31,7 +31,9 @@ export class GameStateService {
   public charactersBeingControlledByClient: Character[] = [];
   public characterBeingControlledByClient: Character | undefined;
   public currentPlayersCombatTurn: boolean = false;
+  public npcCombatTurn: boolean = false; // Tracks if it's an NPCs turn in a combat session.
   public currentPlayerSelectedEnemyToAttack: Npc | undefined;
+  public npcCombatMessage: string = ''; // Used to display messages to the player during combat.
 
   public npcsInPlay: Npc[] = []; // The NPCs currently in play on the game board.
 
@@ -53,6 +55,30 @@ export class GameStateService {
 
   public refreshCurrentPlayerCombatSessionsState(): void {
     this.currentPlayersCombatTurn = this.isItMyTurnInCombatSession();
+    if (this.currentPlayersCombatTurn) {
+      this.npcCombatTurn = false;
+    }
+  }
+
+  public refreshNPCsCombatSessionsState(): void {
+    // Loop through all of the NPCs
+    this.npcsInPlay.forEach((npc: Npc) => {
+      // Check if the NPC is in a combat session
+      if (npc.combatSessionID) {
+        // Check if it is the NPC's turn
+        const currentCombatSession = this.combatSessions.get(
+          npc.combatSessionID
+        );
+        if (currentCombatSession) {
+          const idOfNextCharacterOrNpcToGo = currentCombatSession.turnQueue[0];
+          if (idOfNextCharacterOrNpcToGo === npc.id) {
+            // If it is the NPC's turn, set the NPC's combat turn to true
+            this.npcCombatTurn = true;
+            this.npcCombatMessage = `Waiting for ${npc.npcType} to attack!`;
+          }
+        }
+      }
+    });
   }
 
   private isItMyTurnInCombatSession(): boolean {

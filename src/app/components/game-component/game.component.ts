@@ -248,6 +248,7 @@ export class GameComponent implements OnDestroy {
           this.gameStateService.characterBeingControlledByClient.combatSessionId
         ) {
           this.gameStateService.refreshCurrentPlayerCombatSessionsState();
+          this.gameStateService.refreshNPCsCombatSessionsState();
         }
       });
   }

@@ -157,7 +157,8 @@
         class="big-text sticky-text"
         *ngIf="
           gameStateService.currentPlayersCombatTurn &&
-          !gameStateService.currentPlayerSelectedEnemyToAttack
+          !gameStateService.currentPlayerSelectedEnemyToAttack &&
+          !gameStateService.npcCombatTurn
         "
       >
         Select an enemy to attack.
@@ -167,15 +168,19 @@
         class="big-text sticky-text"
         *ngIf="
           gameStateService.currentPlayersCombatTurn &&
-          gameStateService.currentPlayerSelectedEnemyToAttack
+          gameStateService.currentPlayerSelectedEnemyToAttack &&
+          !gameStateService.npcCombatTurn
         "
       ></p>
 
       <p
         class="big-text sticky-text"
-        *ngIf="!gameStateService.currentPlayersCombatTurn"
+        *ngIf="
+          !gameStateService.currentPlayersCombatTurn &&
+          gameStateService.npcCombatTurn
+        "
       >
-        Waiting for others to take an action...
+        {{ gameStateService.npcCombatMessage }}
       </p>
     </span>
     }
