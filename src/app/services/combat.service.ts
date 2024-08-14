@@ -109,6 +109,31 @@ export class CombatService implements OnDestroy {
   private endPlayerTurn(): void {
     this.gameStateService.currentPlayerSelectedEnemyToAttack = undefined;
     this.gameStateService.currentPlayersCombatTurn = false;
+
+    // Update the turn queue
+    const combatSessionID =
+      this.gameStateService.characterBeingControlledByClient?.combatSessionId;
+
+    if (!combatSessionID) {
+      throw new Error('No combat session ID found.');
+    }
+
+    const combatSession =
+      this.gameStateService.combatSessions.get(combatSessionID);
+
+    if (!combatSession) {
+      throw new Error('No combat session found.');
+    }
+
+    // Get the ID of the current player
+    const playerID = combatSession.turnQueue.shift();
+
+    if (!playerID) {
+      throw new Error('No player ID found.');
+    }
+
+    // Save changes to db
+    this.updateCombatSessionInDatabase(combatSession, combatSessionID);
   }
 
   private startNextTurn(): void {
@@ -145,7 +170,9 @@ export class CombatService implements OnDestroy {
 
     if (nextEnemy) {
       // TODO Start an enemy turn
+      alert("It's the enemy's turn!");
     } else {
+      alert("It's the player's turn!");
       const nextCharacter =
         this.gameStateService.allCharactersCurrentlyInGameSession.find(
           (character) => character.id === nextID
