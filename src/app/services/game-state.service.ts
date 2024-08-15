@@ -60,7 +60,7 @@ export class GameStateService {
     }
   }
 
-  public refreshNPCsCombatSessionsState(): void {
+  public refreshNPCsCombatSessionsState(): Npc | void {
     // Loop through all of the NPCs
     this.npcsInPlay.forEach((npc: Npc) => {
       // Check if the NPC is in a combat session
@@ -75,6 +75,7 @@ export class GameStateService {
             // If it is the NPC's turn, set the NPC's combat turn to true
             this.npcCombatTurn = true;
             this.npcCombatMessage = `Waiting for ${npc.npcType} to attack!`;
+            return npc;
           }
         }
       }

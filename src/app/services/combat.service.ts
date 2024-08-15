@@ -375,4 +375,16 @@ export class CombatService implements OnDestroy {
     // They just attacked, so they are no longer attacking with this weapon.
     this.weaponInfo = undefined;
   }
+
+  // TODO Make sure this method is not called more than once. If it is, we can set a property in the state service for npc currently taking a turn and not call this method twice.
+  public async takeNPCTurn(npc: Npc): Promise<void> {
+    // SetTimeout to simulate the NPC thinking about what to do.
+    setTimeout(() => {
+      alert('NPC is now attacking!');
+    }, 2000);
+
+    // NPC chooses player to attack.
+    // NPC attacks player.
+    // NPC ends turn.
+  }
 }

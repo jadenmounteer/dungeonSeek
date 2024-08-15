@@ -249,7 +249,17 @@ export class GameComponent implements OnDestroy {
         ) {
           this.gameStateService.refreshCurrentPlayerCombatSessionsState();
         }
-        this.gameStateService.refreshNPCsCombatSessionsState();
+
+        if (!this.gameStateService.npcCombatTurn) {
+          const npcAttacking =
+            this.gameStateService.refreshNPCsCombatSessionsState();
+
+          if (npcAttacking) {
+            this.combatService.takeNPCTurn(npcAttacking);
+          } else {
+            throw new Error('No NPC attacking');
+          }
+        }
       });
   }
 
