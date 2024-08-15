@@ -14,6 +14,7 @@ import { Npc } from '../types/npc';
 import { NpcService } from './npc.service';
 import { WeaponCardInfo } from '../types/weapon-card-info';
 import { DiceRollDialogueService } from './dice-roll-dialogue.service';
+import { Character } from '../types/character';
 
 export interface CombatSession {
   id: string;
@@ -380,9 +381,33 @@ export class CombatService implements OnDestroy {
   public async takeNPCTurn(npc: Npc): Promise<void> {
     // SetTimeout to simulate the NPC thinking about what to do.
     setTimeout(() => {
+      // Get the current comnbat session
+      const combatSessionID = npc.combatSessionID;
+
+      if (!combatSessionID) {
+        throw new Error('No combat session ID found.');
+      }
+
+      const combatSession =
+        this.gameStateService.combatSessions.get(combatSessionID);
+
+      if (!combatSession) {
+        throw new Error('No combat session found.');
+      }
+
       // NPC chooses player to attack.
+      const characterIdToAttack = this.choosePlayerToAttack(combatSession);
+      alert(`Attacking player with ID: ${characterIdToAttack}`);
       // NPC attacks player.
       // NPC ends turn.
     }, 2000);
+  }
+
+  private choosePlayerToAttack(combatSession: CombatSession): string {
+    // Create a list of all the playerIDs in the combat session
+    const playerIDs = combatSession.playerIDs;
+    // Randomly choose a playerID
+    const randomIndex = Math.floor(Math.random() * playerIDs.length);
+    return playerIDs[randomIndex];
   }
 }
