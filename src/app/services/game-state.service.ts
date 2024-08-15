@@ -60,9 +60,11 @@ export class GameStateService {
     }
   }
 
-  public refreshNPCsCombatSessionsState(): Npc | void {
+  public refreshNPCsCombatSessionsState(): Npc | undefined {
+    let npcWhosTurnItIs: Npc | undefined;
     // Loop through all of the NPCs
-    this.npcsInPlay.forEach((npc: Npc) => {
+    for (let i = 0; i < this.npcsInPlay.length; i++) {
+      const npc = this.npcsInPlay[i];
       // Check if the NPC is in a combat session
       if (npc.combatSessionID) {
         // Check if it is the NPC's turn
@@ -75,11 +77,14 @@ export class GameStateService {
             // If it is the NPC's turn, set the NPC's combat turn to true
             this.npcCombatTurn = true;
             this.npcCombatMessage = `Waiting for ${npc.npcType} to attack!`;
-            return npc;
+            npcWhosTurnItIs = npc;
+            break; // Break out of the loop
           }
         }
       }
-    });
+    }
+
+    return npcWhosTurnItIs;
   }
 
   private isItMyTurnInCombatSession(): boolean {

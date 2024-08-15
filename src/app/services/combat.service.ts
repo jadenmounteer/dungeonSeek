@@ -380,11 +380,9 @@ export class CombatService implements OnDestroy {
   public async takeNPCTurn(npc: Npc): Promise<void> {
     // SetTimeout to simulate the NPC thinking about what to do.
     setTimeout(() => {
-      alert('NPC is now attacking!');
+      // NPC chooses player to attack.
+      // NPC attacks player.
+      // NPC ends turn.
     }, 2000);
-
-    // NPC chooses player to attack.
-    // NPC attacks player.
-    // NPC ends turn.
   }
 }
