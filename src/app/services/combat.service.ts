@@ -395,10 +395,11 @@ export class CombatService implements OnDestroy {
         throw new Error('No combat session found.');
       }
 
-      // NPC chooses player to attack.
       const characterIdToAttack = this.choosePlayerToAttack(combatSession);
-      alert(`Attacking player with ID: ${characterIdToAttack}`);
+
       // NPC attacks player.
+      // TODO this will be similar to the logic when a player attacks an NPC.
+
       // NPC ends turn.
     }, 2000);
   }
