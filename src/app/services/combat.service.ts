@@ -397,6 +397,8 @@ export class CombatService implements OnDestroy {
 
       const characterIdToAttack = this.choosePlayerToAttack(combatSession);
 
+      // Decide which action to take.
+
       // NPC attacks player.
       // TODO this will be similar to the logic when a player attacks an NPC.
 
