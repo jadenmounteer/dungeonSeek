@@ -2,6 +2,7 @@ import { LocationNode, Position } from '../services/location-service';
 import { ArmorClass } from './armor-class';
 import { CardRewardType } from './card-reward-type';
 import { CharacterStat } from './character';
+import { WeaponCardNames } from './weapon-card-info';
 
 // This is the serialized data that is stored in the database
 export interface NpcData {
@@ -12,10 +13,11 @@ export interface NpcData {
   directionFacing: 'Right' | 'Left';
   npcStats: NpcStats | null;
   combatSessionID: string | null; // Null if not in combat
+  weapons: WeaponCardNames[]; // The weapons the npc can use to attack
 }
 
 // These npc stats are added to the npc when it is created and set to the database.
-// This is the info that is stored in the db. Everything else concerning the npc is fetched from JSON.
+// This is the info that is stored in the db. Everything else concerning the npc is fetched from the class in the game.
 export interface NpcStats {
   health: CharacterStat;
   armorClass: ArmorClass;
@@ -54,6 +56,7 @@ export abstract class Npc {
   public rightFacingImgUrl: string =
     'assets/game-pieces/bandit/bandit-right.png';
   public leftFacingImgUrl: string = 'assets/game-pieces/bandit/bandit-left.png';
+  public weapons: WeaponCardNames[] = [WeaponCardNames.IRON_SWORD]; // The default weapon is an iron sword.
 
   constructor(npcData: NpcData) {
     this.npcType = npcData.npcType;
@@ -81,6 +84,7 @@ export abstract class Npc {
       position: this.position,
       directionFacing: this.directionFacing,
       combatSessionID: this.combatSessionID,
+      weapons: this.weapons,
     };
   }
 

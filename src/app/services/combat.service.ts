@@ -395,6 +395,7 @@ export class CombatService implements OnDestroy {
         throw new Error('No combat session found.');
       }
 
+      // TODO this method can probably be moved to the base npc class. This way the behavior can change according to the npc type.
       const characterIdToAttack = this.choosePlayerToAttack(combatSession);
 
       // Decide which action to take.

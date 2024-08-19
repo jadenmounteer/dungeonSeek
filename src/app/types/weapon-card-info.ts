@@ -16,7 +16,7 @@ export interface WeaponCardInfo {
   cardAbility: CardAbilityKey | null;
 }
 
-export type WeaponCardType = 'Sword' | 'Bow' | 'Staff';
+export type WeaponCardType = 'Sword' | 'Bow' | 'Staff' | 'Scroll';
 
 export interface WeaponCardStats {
   numberOfAttackDice: number;
