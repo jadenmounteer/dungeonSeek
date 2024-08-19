@@ -395,23 +395,24 @@ export class CombatService implements OnDestroy {
         throw new Error('No combat session found.');
       }
 
-      // TODO this method can probably be moved to the base npc class. This way the behavior can change according to the npc type.
-      const characterIdToAttack = this.choosePlayerToAttack(combatSession);
+      // TODO this method can probably be moved to the base npc class.
+      const characterIdToAttack = npc.choosePlayerToAttack(combatSession);
 
       // Decide which action to take.
+      const weaponToAttackWith = npc.chooseWeaponToAttackWith();
+
+      const characterBeingAttacked =
+        this.gameStateService.allCharactersCurrentlyInGameSession.find(
+          (character) => character.id === characterIdToAttack
+        );
+
+      this.gameStateService.npcCombatMessage = `${npc.npcType} is attacking ${characterBeingAttacked?.name} with ${weaponToAttackWith}`;
 
       // NPC attacks player.
+
       // TODO this will be similar to the logic when a player attacks an NPC.
 
       // NPC ends turn.
     }, 2000);
-  }
-
-  private choosePlayerToAttack(combatSession: CombatSession): string {
-    // Create a list of all the playerIDs in the combat session
-    const playerIDs = combatSession.playerIDs;
-    // Randomly choose a playerID
-    const randomIndex = Math.floor(Math.random() * playerIDs.length);
-    return playerIDs[randomIndex];
   }
 }

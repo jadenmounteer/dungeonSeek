@@ -1,3 +1,4 @@
+import { CombatSession } from '../services/combat.service';
 import { LocationNode, Position } from '../services/location-service';
 import { ArmorClass } from './armor-class';
 import { CardRewardType } from './card-reward-type';
@@ -88,5 +89,21 @@ export abstract class Npc {
     };
   }
 
-  // Define any common methods here
+  /**
+   * Define any common methods here. This way the behavior can change according to the npc type.
+   */
+
+  public choosePlayerToAttack(combatSession: CombatSession): string {
+    // Create a list of all the playerIDs in the combat session
+    const playerIDs = combatSession.playerIDs;
+    // Randomly choose a playerID
+    const randomIndex = Math.floor(Math.random() * playerIDs.length);
+    return playerIDs[randomIndex];
+  }
+
+  public chooseWeaponToAttackWith(): WeaponCardNames {
+    // Randomly choose a weapon to attack with
+    const randomIndex = Math.floor(Math.random() * this.weapons.length);
+    return this.weapons[randomIndex];
+  }
 }

@@ -271,6 +271,7 @@ export class GameStateService {
       // These are default stats
       npcStats: null,
       combatSessionID: null,
+      weapons: [],
     };
     const newNpc: Npc = this.#npcFactory.createNpcObject(npcData);
 
