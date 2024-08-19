@@ -45,11 +45,9 @@ export class CombatService implements OnDestroy {
     this.diceRollDialogueService.dealDamageToNPCSub.subscribe(
       async (result) => {
         await this.dealDamageToNpc(result);
-        await this.endPlayerTurn();
+        await this.endCurrentTurn();
         if (this.combatShouldEnd()) {
           // TODO end combat session
-        } else {
-          await this.startNextTurn();
         }
       }
     );
@@ -112,9 +110,11 @@ export class CombatService implements OnDestroy {
     }
   }
 
-  private async endPlayerTurn(): Promise<void> {
+  private async endCurrentTurn(): Promise<void> {
     this.gameStateService.currentPlayerSelectedEnemyToAttack = undefined;
     this.gameStateService.currentPlayersCombatTurn = false;
+    this.gameStateService.npcCombatMessage = '';
+    this.gameStateService.npcCombatTurn = false;
 
     // Update the turn queue
     const combatSessionID =
@@ -132,66 +132,20 @@ export class CombatService implements OnDestroy {
     }
 
     // Get the ID of the current player
-    const playerID = combatSession.turnQueue.shift();
+    const combatentID = combatSession.turnQueue.shift();
 
-    if (!playerID) {
+    if (!combatentID) {
       throw new Error('No player ID found.');
     }
+
+    // Put the ID of at the end of the queue so they go last
+    combatSession.turnQueue.push(combatentID);
 
     // Save changes to db
     await this.updateCombatSessionInDatabase(
       combatSession,
       this.gameStateService.gameSession.id
     );
-  }
-
-  private async startNextTurn(): Promise<void> {
-    // First, get the combat session
-    const combatSessionID =
-      this.gameStateService.characterBeingControlledByClient?.combatSessionId;
-
-    if (!combatSessionID) {
-      throw new Error('No combat session ID found.');
-    }
-
-    const combatSession =
-      this.gameStateService.combatSessions.get(combatSessionID);
-
-    if (!combatSession) {
-      throw new Error('No combat session found.');
-    }
-
-    // Get the ID to go
-    const nextID = combatSession.turnQueue.shift();
-
-    if (!nextID) {
-      throw new Error('No next ID found.');
-    }
-
-    // Put the ID of at the end of the queue so they go last
-    combatSession?.turnQueue.push(nextID);
-
-    const nextEnemy = this.gameStateService.npcsInPlay.find(
-      (npc) => npc.id === nextID
-    );
-
-    await this.updateCombatSessionInDatabase(
-      combatSession,
-      this.gameStateService.gameSession.id
-    );
-
-    if (nextEnemy) {
-      // TODO Start an enemy turn
-      alert("It's the enemy's turn!");
-    } else {
-      alert("It's the player's turn!");
-      const nextCharacter =
-        this.gameStateService.allCharactersCurrentlyInGameSession.find(
-          (character) => character.id === nextID
-        );
-
-      // TODO Start a character's turn
-    }
   }
 
   public initializeCombatSessionTurnQueue(
@@ -430,6 +384,10 @@ export class CombatService implements OnDestroy {
           characterBeingAttacked!,
           npc.npcType
         );
+
+        setTimeout(async () => {
+          await this.endCurrentTurn();
+        }, 3000);
       }, 3000);
 
       // NPC ends turn.

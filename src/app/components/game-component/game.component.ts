@@ -256,8 +256,6 @@ export class GameComponent implements OnDestroy {
 
           if (npcAttacking) {
             this.combatService.takeNPCTurn(npcAttacking);
-          } else {
-            throw new Error('No NPC attacking');
           }
         }
       });
