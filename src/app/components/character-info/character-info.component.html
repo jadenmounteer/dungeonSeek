@@ -1,8 +1,8 @@
 <div class="character-info-wrapper">
   <app-character-profile-image
     (click)="toggleCharacterMenu()"
-    [character]="character"
+    [character]="character()"
   ></app-character-profile-image>
 
-  <app-character-stats [character]="character"></app-character-stats>
+  <app-character-stats [character]="character()"></app-character-stats>
 </div>

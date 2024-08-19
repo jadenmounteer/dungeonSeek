@@ -4,10 +4,6 @@ import {
   InputSignal,
   OnInit,
   Output,
-  Signal,
-  SimpleChanges,
-  computed,
-  inject,
   input,
 } from '@angular/core';
 import { Npc } from '../../types/npc';

@@ -1,19 +1,19 @@
 <div class="character-stats-and-gold">
-  <div class="character-stats-section" *ngIf="character.characterStats">
+  <div class="character-stats-section" *ngIf="character().characterStats">
     <app-stat-bar
-      [stat]="character.characterStats.health"
+      [stat]="character().characterStats.health"
       [statName]="'Health'"
     ></app-stat-bar>
     <app-stat-bar
-      [stat]="character.characterStats.mana"
+      [stat]="character().characterStats.mana"
       [statName]="'Mana'"
     ></app-stat-bar>
     <app-stat-bar
-      [stat]="character.characterStats.stamina"
+      [stat]="character().characterStats.stamina"
       [statName]="'Stamina'"
     ></app-stat-bar>
     <app-stat-bar
-      [stat]="character.characterStats.experience"
+      [stat]="character().characterStats.experience"
       [statName]="'Experience'"
     ></app-stat-bar>
   </div>
@@ -23,8 +23,10 @@
       src="assets/game-pieces/coin.png"
       alt="A gold coin"
     />
-    <span class="character-gold medium-text"> {{ character.gold }}</span>
+    <span class="character-gold medium-text"> {{ character().gold }}</span>
   </div>
 
-  <app-location-info [location]="character.currentLocation"></app-location-info>
+  <app-location-info
+    [location]="character().currentLocation"
+  ></app-location-info>
 </div>

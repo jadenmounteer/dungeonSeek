@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input, InputSignal } from '@angular/core';
 import { StatBarComponent } from '../stat-bar/stat-bar.component';
 import { Character } from '../../types/character';
 import { CommonModule } from '@angular/common';
@@ -12,5 +12,5 @@ import { LocationInfoComponent } from '../location-info/location-info.component'
   styleUrl: './character-stats.component.scss',
 })
 export class CharacterStatsComponent {
-  @Input() character!: Character;
+  public character: InputSignal<Character> = input.required();
 }

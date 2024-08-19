@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  InputSignal,
+  Output,
+  input,
+} from '@angular/core';
 import { Character } from '../../types/character';
 import { CharacterProfileImageComponent } from '../character-profile-image/character-profile-image.component';
 import { CharacterStatsComponent } from '../character-stats/character-stats.component';
@@ -11,7 +18,7 @@ import { CharacterStatsComponent } from '../character-stats/character-stats.comp
   styleUrl: './character-info.component.scss',
 })
 export class CharacterInfoComponent {
-  @Input() character!: Character;
+  public character: InputSignal<Character> = input.required();
   @Output() showCharacterMenu = new EventEmitter<void>();
 
   protected toggleCharacterMenu(): void {
