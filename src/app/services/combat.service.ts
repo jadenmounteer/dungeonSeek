@@ -8,7 +8,7 @@ import {
   doc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CharacterService } from './character/character.service';
 import { Npc } from '../types/npc';
 import { NpcService } from './npc.service';
@@ -37,6 +37,9 @@ export class CombatService implements OnDestroy {
   private characterService: CharacterService = inject(CharacterService);
   private npcService: NpcService = inject(NpcService);
   private weaponCardService: WeaponCardService = inject(WeaponCardService);
+
+  public npcDealtDamageToCurrentPlayer$: Subject<number> =
+    new Subject<number>();
 
   private dealDamageToNPCSub =
     this.diceRollDialogueService.dealDamageToNPCSub.subscribe(
@@ -457,5 +460,7 @@ export class CombatService implements OnDestroy {
     );
 
     // Update the UI
+    // We use a subject so we don't have to make another backend call to update the UI.
+    this.npcDealtDamageToCurrentPlayer$.next(damageDealt);
   }
 }
