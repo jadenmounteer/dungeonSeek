@@ -15,6 +15,7 @@ import { NpcService } from './npc.service';
 import { WeaponCardInfo } from '../types/weapon-card-info';
 import { DiceRollDialogueService } from './dice-roll-dialogue.service';
 import { Character } from '../types/character';
+import { WeaponCardService } from './weapon-card.service';
 
 export interface CombatSession {
   id: string;
@@ -35,6 +36,7 @@ export class CombatService implements OnDestroy {
   );
   private characterService: CharacterService = inject(CharacterService);
   private npcService: NpcService = inject(NpcService);
+  private weaponCardService: WeaponCardService = inject(WeaponCardService);
 
   private dealDamageToNPCSub =
     this.diceRollDialogueService.dealDamageToNPCSub.subscribe(
@@ -409,10 +411,51 @@ export class CombatService implements OnDestroy {
       this.gameStateService.npcCombatMessage = `${npc.npcType} is attacking ${characterBeingAttacked?.name} with ${weaponToAttackWith}`;
 
       // NPC attacks player.
+      const weaponCardInfo =
+        this.weaponCardService.getCardInfo(weaponToAttackWith);
 
-      // TODO this will be similar to the logic when a player attacks an NPC.
+      if (!weaponCardInfo) {
+        throw new Error(`No weapon card info found for ${weaponToAttackWith}`);
+      }
+
+      const damageRolled = npc.rollForDamage(weaponCardInfo);
+
+      setTimeout(async () => {
+        await this.dealDamageToPlayer(
+          damageRolled,
+          characterBeingAttacked?.armorClass ?? 1,
+          characterBeingAttacked!,
+          npc.npcType
+        );
+      }, 3000);
 
       // NPC ends turn.
-    }, 2000);
+    }, 3000);
+  }
+
+  private async dealDamageToPlayer(
+    damageRolled: number,
+    playerArmorClass: number,
+    characterToAttack: Character,
+    npcName: string
+  ): Promise<void> {
+    // Calculate the damage dealt
+    let damageDealt = damageRolled - playerArmorClass;
+
+    // Always deal at least 1 point of damage
+    if (damageDealt < 1) {
+      damageDealt = 1;
+    }
+
+    this.gameStateService.npcCombatMessage = `${npcName} dealt ${damageDealt} damage to ${characterToAttack.name}!`;
+
+    characterToAttack.characterStats.health.current -= damageDealt;
+
+    await this.characterService.updateCharacter(
+      characterToAttack,
+      this.gameStateService.gameSession.id
+    );
+
+    // Update the UI
   }
 }

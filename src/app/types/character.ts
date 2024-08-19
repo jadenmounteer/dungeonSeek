@@ -15,6 +15,7 @@ export interface Character {
   characterMenu: CharacterMenu;
   gold: number;
   combatSessionId: string | null; // null if not in combat
+  armorClass: number;
 }
 
 export type CharacterStats = {

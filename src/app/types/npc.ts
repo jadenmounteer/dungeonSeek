@@ -3,7 +3,7 @@ import { LocationNode, Position } from '../services/location-service';
 import { ArmorClass } from './armor-class';
 import { CardRewardType } from './card-reward-type';
 import { CharacterStat } from './character';
-import { WeaponCardNames } from './weapon-card-info';
+import { WeaponCardInfo, WeaponCardNames } from './weapon-card-info';
 
 // This is the serialized data that is stored in the database
 export interface NpcData {
@@ -105,5 +105,19 @@ export abstract class Npc {
     // Randomly choose a weapon to attack with
     const randomIndex = Math.floor(Math.random() * this.weapons.length);
     return this.weapons[randomIndex];
+  }
+
+  public rollForDamage(weaponCardInfo: WeaponCardInfo): number {
+    // Roll the dice
+    return this.rollDice(weaponCardInfo.stats.numberOfAttackDice);
+  }
+
+  private rollDice(numberOfDice: number): number {
+    // Roll the number of six sided dice
+    let total = 0;
+    for (let i = 0; i < numberOfDice; i++) {
+      total += Math.floor(Math.random() * 6) + 1;
+    }
+    return total;
   }
 }
