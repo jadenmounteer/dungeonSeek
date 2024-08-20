@@ -61,9 +61,17 @@
   },
   {
     "name": "The Company",
-    "description": "A line of figures appear on the road ahead. As they grow closer you notice it is a small company of travelers. They are traveling to the nearest town and offer to let you join them.",
+    "description": "A line of figures appear on the road ahead. As they grow closer you notice it is a small company of travelers. They are traveling to the city of Goeth and offer to let you join them.",
     "quantity": 0,
     "discardAfterUse": false,
+    "cardCriteria": {
+      "locationKeys": [
+        "Hillmire North Road",
+        "Dunal East Road",
+        "Dunal West Road",
+        "West Hillmire Road"
+      ]
+    },
     "choices": [
       {
         "description": "Join them on their journey.",

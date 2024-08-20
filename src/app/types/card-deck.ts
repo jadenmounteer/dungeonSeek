@@ -1,4 +1,4 @@
-import { LocationType } from '../services/location-service';
+import { LocationKey, LocationType } from '../services/location-service';
 import { Outcome } from './Outcome';
 import { CardRewardType } from './card-reward-type';
 
@@ -6,6 +6,7 @@ import { CardRewardType } from './card-reward-type';
 // and another is drawn.
 export interface CardCriteria {
   locationType?: LocationType;
+  locationKeys?: LocationKey[];
   lootType?: CardRewardType;
   level?: number;
   gold?: number;
