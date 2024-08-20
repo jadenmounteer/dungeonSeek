@@ -5,6 +5,7 @@
   <div *ngIf="inCombat">
     <!-- <div class="npc-health-bar">{{ healthPercentage }}%</div> -->
 
+    @if(!dead()) {
     <div class="health-bar-container">
       <div
         class="health-bar"
@@ -14,6 +15,7 @@
         "
       ></div>
     </div>
+    }
 
     <div class="image-container">
       <img
