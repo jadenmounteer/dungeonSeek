@@ -25,6 +25,8 @@ export class NpcComponent implements OnInit {
   public selected: InputSignal<boolean> = input.required();
   @Output() npcSelected = new EventEmitter<Npc>();
 
+  public dead: boolean = true;
+
   public inCombat = false;
 
   public ngOnInit(): void {
