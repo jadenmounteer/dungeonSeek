@@ -15,7 +15,7 @@
         "manaCost": 0,
         "staminaCost": 10
       },
-      "weight": 15
+      "weight": 2
     },
     "cardAbility": "Banish"
   },
@@ -29,13 +29,13 @@
     "discardAfterUse": false,
     "quantity": 1,
     "stats": {
-      "numberOfAttackDice": 3,
+      "numberOfAttackDice": 4,
       "costToUse": {
         "healthCost": 0,
         "manaCost": 0,
         "staminaCost": 10
       },
-      "weight": 15
+      "weight": 2
     },
     "cardAbility": "Banish"
   },
@@ -55,7 +55,27 @@
         "manaCost": 0,
         "staminaCost": 10
       },
-      "weight": 15
+      "weight": 3.5
+    },
+    "cardAbility": "null"
+  },
+  {
+    "name": "Steel Sword",
+    "description": "A steel sword. Tougher and lighter than iron.",
+    "imgUrl": "assets/card-images/weapons/swords/sword.png",
+    "type": "Sword",
+    "fullPrice": 500,
+    "rewardType": "Moderate",
+    "discardAfterUse": false,
+    "quantity": 5,
+    "stats": {
+      "numberOfAttackDice": 3,
+      "costToUse": {
+        "healthCost": 0,
+        "manaCost": 0,
+        "staminaCost": 10
+      },
+      "weight": 2
     },
     "cardAbility": "null"
   }
