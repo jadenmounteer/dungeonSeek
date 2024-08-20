@@ -1,7 +1,25 @@
 @import "../../../styles.scss";
 
+$npc-width: calc($game-board-width / 60);
+
+.image-container {
+  position: relative;
+  width: $npc-width;
+}
+
 .npc {
-  width: calc($game-board-width / 60);
+  width: $npc-width;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+app-dead-icon {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  z-index: 2;
 }
 
 .health-bar-container {

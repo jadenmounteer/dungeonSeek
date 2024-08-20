@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Npc } from '../../types/npcs/npc';
+import { DeadIconComponent } from '../dead-icon/dead-icon.component';
 
 /**
  * This component is responsible for rendering an NPC and handling its interactions with the world.
@@ -15,7 +16,7 @@ import { Npc } from '../../types/npcs/npc';
 @Component({
   selector: 'app-npc',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DeadIconComponent],
   templateUrl: './npc.component.html',
   styleUrl: './npc.component.scss',
 })

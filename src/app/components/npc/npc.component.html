@@ -15,17 +15,23 @@
       ></div>
     </div>
 
-    <img
-      class="npc"
-      *ngIf="npc().directionFacing === 'Right'"
-      [src]="npc().rightFacingImgUrl"
-      [ngClass]="{ dead: dead }"
-    />
-    <img
-      class="npc"
-      *ngIf="npc().directionFacing === 'Left'"
-      [src]="npc().leftFacingImgUrl"
-      [ngClass]="{ dead: dead }"
-    />
+    <div class="image-container">
+      <img
+        class="npc"
+        *ngIf="npc().directionFacing === 'Right'"
+        [src]="npc().rightFacingImgUrl"
+        [ngClass]="{ dead: dead }"
+      />
+      <img
+        class="npc"
+        *ngIf="npc().directionFacing === 'Left'"
+        [src]="npc().leftFacingImgUrl"
+        [ngClass]="{ dead: dead }"
+      />
+
+      @if(dead) {
+      <app-dead-icon></app-dead-icon>
+      }
+    </div>
   </div>
 </div>
