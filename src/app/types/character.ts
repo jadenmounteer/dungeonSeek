@@ -1,4 +1,5 @@
 import { LocationNode, Position } from '../services/location-service';
+import { ArmorClass } from './armor-class';
 
 export interface Character {
   id: string;
@@ -15,7 +16,7 @@ export interface Character {
   characterMenu: CharacterMenu;
   gold: number;
   combatSessionId: string | null; // null if not in combat
-  armorClass: number;
+  armorClass: ArmorClass.LIGHT;
 }
 
 export type CharacterStats = {
