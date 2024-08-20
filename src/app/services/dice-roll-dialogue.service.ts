@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { WeaponCardInfo } from '../types/weapon-card-info';
-import { Npc } from '../types/npc';
+import { Npc } from '../types/npcs/npc';
 
 export type DiceRollComparator = '>=' | '<=' | '=';
 

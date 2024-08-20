@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuUnderlineComponent } from '../menu-underline/menu-underline.component';
-import { Npc } from '../../types/npc';
 import { CommonModule } from '@angular/common';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { WeaponCardService } from '../../services/weapon-card.service';
@@ -16,6 +15,7 @@ import { Character, CharacterMenuEquipment } from '../../types/character';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { WeaponCardInfoViewComponent } from '../weapon-card-info-view/weapon-card-info-view.component';
 import { WeaponCardInfo } from '../../types/weapon-card-info';
+import { Npc } from '../../types/npcs/npc';
 
 @Component({
   selector: 'app-attack-menu',

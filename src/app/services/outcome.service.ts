@@ -6,7 +6,7 @@ import { GameStateService } from './game-state.service';
 import { CharacterService } from './character/character.service';
 import { GameDialogueData, GameDialogueService } from './game-dialogue.service';
 import { CardRewardType } from '../types/card-reward-type';
-import { Npc, NpcType } from '../types/npc';
+import { Npc, NpcType } from '../types/npcs/npc';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,5 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Npc, NpcData } from '../types/npc';
 import {
   Firestore,
   addDoc,
@@ -10,6 +9,7 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import { NpcFactory } from './npcFactory.service';
+import { Npc, NpcData } from '../types/npcs/npc';
 
 @Injectable({
   providedIn: 'root',

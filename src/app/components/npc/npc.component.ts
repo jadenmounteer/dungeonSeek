@@ -6,9 +6,8 @@ import {
   Output,
   input,
 } from '@angular/core';
-import { Npc } from '../../types/npc';
 import { CommonModule } from '@angular/common';
-import { CombatSession } from '../../services/combat.service';
+import { Npc } from '../../types/npcs/npc';
 
 /**
  * This component is responsible for rendering an NPC and handling its interactions with the world.

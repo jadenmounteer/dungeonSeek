@@ -3,11 +3,11 @@ import { Character } from '../types/character';
 import { AuthService } from '../auth/auth.service';
 import { TurnService } from './turn.service';
 import { GameSession } from '../types/game-session';
-import { Npc, NpcData, NpcType } from '../types/npc';
 import { LocationKey, LocationNode } from './location-service';
 import { NpcFactory } from './npcFactory.service';
 import { NpcService } from './npc.service';
 import { CombatSession } from './combat.service';
+import { Npc, NpcType, NpcData } from '../types/npcs/npc';
 
 // I know haha....I just want to code this game already so I can play it.
 // If I were to go back and redesign the game, I'd have the locations be the parents that house the state.
