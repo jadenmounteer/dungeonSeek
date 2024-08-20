@@ -10,12 +10,12 @@ import {
 } from '@angular/fire/firestore';
 import { Observable, Subject } from 'rxjs';
 import { CharacterService } from './character/character.service';
-import { Npc } from '../types/npc';
 import { NpcService } from './npc.service';
 import { WeaponCardInfo } from '../types/weapon-card-info';
 import { DiceRollDialogueService } from './dice-roll-dialogue.service';
 import { Character } from '../types/character';
 import { WeaponCardService } from './weapon-card.service';
+import { Npc } from '../types/npcs/npc';
 
 export interface CombatSession {
   id: string;

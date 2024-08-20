@@ -1,8 +1,8 @@
-import { ArmorClass } from './armor-class';
-import { CardRewardType } from './card-reward-type';
+import { ArmorClass } from '../armor-class';
+import { CardRewardType } from '../card-reward-type';
 import { Npc, NpcData } from './npc';
 
-export class BanditNpc extends Npc {
+export class Bandit extends Npc {
   constructor(npcData: NpcData) {
     super(npcData);
     this.rewardTypeForDefeatingNpc = CardRewardType.EASY;

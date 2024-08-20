@@ -1,9 +1,9 @@
-import { CombatSession } from '../services/combat.service';
-import { LocationNode, Position } from '../services/location-service';
-import { ArmorClass } from './armor-class';
-import { CardRewardType } from './card-reward-type';
-import { CharacterStat } from './character';
-import { WeaponCardInfo, WeaponCardNames } from './weapon-card-info';
+import { CombatSession } from '../../services/combat.service';
+import { LocationNode, Position } from '../../services/location-service';
+import { ArmorClass } from '../armor-class';
+import { CardRewardType } from '../card-reward-type';
+import { CharacterStat } from '../character';
+import { WeaponCardNames, WeaponCardInfo } from '../weapon-card-info';
 
 // This is the serialized data that is stored in the database
 export interface NpcData {
