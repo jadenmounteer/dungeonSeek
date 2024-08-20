@@ -4,7 +4,9 @@ import {
   InputSignal,
   OnInit,
   Output,
+  computed,
   input,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Npc } from '../../types/npcs/npc';
@@ -26,7 +28,7 @@ export class NpcComponent implements OnInit {
   public selected: InputSignal<boolean> = input.required();
   @Output() npcSelected = new EventEmitter<Npc>();
 
-  public dead: boolean = true;
+  public dead = computed(() => this.npc().npcStats.health.current <= 0);
 
   public inCombat = false;
 
