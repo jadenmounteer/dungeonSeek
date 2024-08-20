@@ -1,5 +1,5 @@
 <div
-  [ngClass]="{ selectable: selectable(), selected: selected() }"
+  [ngClass]="{ selectable: selectable() && !dead(), selected: selected() }"
   (click)="selectNpc()"
 >
   <div *ngIf="inCombat">

@@ -6,7 +6,6 @@ import {
   Output,
   computed,
   input,
-  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Npc } from '../../types/npcs/npc';
