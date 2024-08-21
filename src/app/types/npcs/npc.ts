@@ -30,10 +30,14 @@ export enum NpcType {
   ORC = 'Orc',
   OGRE = 'Ogre',
   GIANT = 'Giant',
+  FROST_GIANT = 'Frost Giant',
+  TROLL = 'Troll',
   ZOMBIE = 'Zombie',
   SKELETON = 'Skeleton',
   VAMPIRE = 'Vampire',
   NECROMANCER = 'Necromancer',
+  WOLF = 'Wolf',
+  DRAGON = 'Dragon',
 }
 
 export interface MinMax {
