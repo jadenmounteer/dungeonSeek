@@ -38,6 +38,7 @@ export enum NpcType {
   NECROMANCER = 'Necromancer',
   WOLF = 'Wolf',
   DRAGON = 'Dragon',
+  WEREWOLF = 'Werewolf',
 }
 
 export interface MinMax {
