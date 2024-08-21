@@ -62,7 +62,7 @@
   {
     "name": "Steel Sword",
     "description": "A steel sword. Tougher and lighter than iron.",
-    "imgUrl": "assets/card-images/weapons/swords/sword.png",
+    "imgUrl": "assets/card-images/weapons/swords/steel-sword.png",
     "type": "Sword",
     "fullPrice": 500,
     "rewardType": "Moderate",
