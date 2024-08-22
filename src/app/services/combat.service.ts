@@ -86,7 +86,7 @@ export class CombatService implements OnDestroy {
         null;
     }
 
-    combatSession?.playerIDs.forEach((playerId) => {
+    combatSession?.playerIDs.forEach(async (playerId) => {
       const player =
         this.gameStateService.allCharactersCurrentlyInGameSession.find(
           (character) => character.id === playerId
@@ -104,18 +104,13 @@ export class CombatService implements OnDestroy {
         alert(
           `You received ${combatSession.experiencePointsGained} experience points!`
         );
-        this.lootService.drawLootCard(CardRewardType.EASY);
+
+        // Give the player the experience points
+        this.gameStateService.characterBeingControlledByClient.characterStats.experience.current +=
+          combatSession.experiencePointsGained;
+
+        this.lootService.drawLootCard(combatSession.lootType);
       }
-
-      // Give the player the experience points
-      player.characterStats.experience.current +=
-        combatSession.experiencePointsGained;
-
-      player.combatSessionId = null;
-      this.characterService.updateCharacter(
-        player,
-        this.gameStateService.gameSession.id
-      );
     });
 
     // Remove the combat session from the database
