@@ -38,13 +38,15 @@ export class NpcService {
     npcsInPlay: Npc[],
     gameSessionID: string
   ): Promise<void> {
-    const npc = npcsInPlay.find((npc) => npc.npcStats.health.current <= 0);
+    const deadNpcs: Npc[] = npcsInPlay.filter(
+      (npc) => npc.npcStats.health.current <= 0
+    );
 
-    if (!npc) {
-      throw new Error('No npc found.');
+    if (deadNpcs) {
+      deadNpcs.forEach(async (npc) => {
+        await this.deleteNpc(npc, gameSessionID);
+      });
     }
-
-    await this.deleteNpc(npc, gameSessionID);
   }
 
   public deleteNpc(npc: Npc, gameSessionID: string): Promise<any> {
