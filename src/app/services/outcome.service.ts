@@ -39,6 +39,7 @@ export class OutcomeService implements OnDestroy {
     [Outcome.FIGHT_SINGLE_BANDIT, () => this.fightSingleBandit()],
     [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
     [Outcome.FIGHT_SINGLE_WOLF, () => this.fightSingleWolf()],
+    [Outcome.FIGHT_WOLF_PACK, () => this.fightWolfPack()],
   ]);
 
   ngOnDestroy(): void {}
@@ -83,6 +84,20 @@ export class OutcomeService implements OnDestroy {
     );
 
     this.startCombat(newNpc, CardRewardType.EASY);
+  }
+
+  private async fightWolfPack(): Promise<void> {
+    if (!this.#gameStateService.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client.');
+    }
+
+    // Spawn the wolf npc
+    const newNpc = await this.#gameStateService.spawnNpcRelativeToPlayer(
+      NpcType.WOLF,
+      this.#gameStateService.characterBeingControlledByClient
+    );
+
+    this.startCombat(newNpc, CardRewardType.MODERATE);
   }
 
   async #banditTakesYourGold(): Promise<void> {

@@ -2,7 +2,7 @@
   {
     "name": "An Old Chest",
     "description": "As you walk through the forest your foot bumps an object hidden under some bramble. As you inspect it you notice it is an old wooden chest.",
-    "quantity": 2,
+    "quantity": 0,
     "discardAfterUse": true,
     "choices": [
       {
@@ -14,12 +14,24 @@
   {
     "name": "Wolf Attack",
     "description": "The forest is quiet. Something feels off. Suddenly you hear a growl. You turn to see a large wolf behind you. It looks hungry.",
-    "quantity": 1,
+    "quantity": 0,
     "discardAfterUse": false,
     "choices": [
       {
         "description": "Defend yourself",
         "outcome": "15"
+      }
+    ]
+  },
+  {
+    "name": "Wolf Pack Attack",
+    "description": "As you make your way through the forest you stop in a clearing for a break. You suddenly feel hungry eyes watching you from the trees.",
+    "quantity": 1,
+    "discardAfterUse": false,
+    "choices": [
+      {
+        "description": "Defend yourself",
+        "outcome": "16"
       }
     ]
   }

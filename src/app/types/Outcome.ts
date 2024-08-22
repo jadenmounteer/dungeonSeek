@@ -17,4 +17,5 @@ export enum Outcome {
   FIGHT_SINGLE_BANDIT = '13',
   BANDIT_TAKES_YOUR_GOLD = '14',
   FIGHT_SINGLE_WOLF = '15',
+  FIGHT_WOLF_PACK = '16',
 }
