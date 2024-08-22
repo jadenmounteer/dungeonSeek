@@ -40,6 +40,8 @@ export enum NpcType {
   DRAGON = 'Dragon',
   WEREWOLF = 'Werewolf',
   GIANT_SPIDER = 'Giant Spider',
+  MINOTAUR = 'Minotaur',
+  GIANT_SHAMAN = 'Giant Shaman',
 }
 
 export interface MinMax {
