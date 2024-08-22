@@ -13,7 +13,7 @@
   },
   {
     "name": "Wolf Attack",
-    "description": "The forest is quiet. After a moment you stop. Something feels off. It is too quiet. Suddenly you hear a growl. You turn to see a large wolf behind you. It looks hungry.",
+    "description": "The forest is quiet. Something feels off. It is too quiet. Suddenly you hear a growl. You turn to see a large wolf behind you. It looks hungry.",
     "quantity": 1,
     "discardAfterUse": false,
     "choices": [
