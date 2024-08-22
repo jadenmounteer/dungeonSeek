@@ -48,6 +48,7 @@ export class CombatService implements OnDestroy {
         await this.endCurrentTurn();
         if (this.combatShouldEnd()) {
           // TODO end combat session
+          alert('Combat has ended.');
         }
       }
     );
@@ -141,11 +142,57 @@ export class CombatService implements OnDestroy {
     // Put the ID of at the end of the queue so they go last
     combatSession.turnQueue.push(combatentID);
 
+    // Remove any dead players or NPCs from turn queue
+    combatSession.turnQueue = this.removeDeadPlayersFromTurnQueue(
+      combatSession.turnQueue
+    );
+
+    combatSession.turnQueue = this.removeDeadNPCsFromTurnQueue(
+      combatSession.turnQueue
+    );
+
     // Save changes to db
     await this.updateCombatSessionInDatabase(
       combatSession,
       this.gameStateService.gameSession.id
     );
+  }
+
+  private removeDeadPlayersFromTurnQueue(
+    turnQueue: Array<string>
+  ): Array<string> {
+    return turnQueue.filter((id) => {
+      const combatant =
+        this.gameStateService.allCharactersCurrentlyInGameSession.find(
+          (character) => character.id === id
+        );
+
+      if (!combatant) {
+        return false;
+      }
+
+      if (combatant.characterStats.health.current <= 0) {
+        return false;
+      }
+
+      return true;
+    });
+  }
+
+  private removeDeadNPCsFromTurnQueue(turnQueue: Array<string>): Array<string> {
+    return turnQueue.filter((id) => {
+      const npc = this.gameStateService.npcsInPlay.find((npc) => npc.id === id);
+
+      if (!npc) {
+        return false;
+      }
+
+      if (npc.npcStats.health.current <= 0) {
+        return false;
+      }
+
+      return true;
+    });
   }
 
   public initializeCombatSessionTurnQueue(
