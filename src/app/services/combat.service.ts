@@ -7,6 +7,7 @@ import {
   collectionData,
   doc,
   updateDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { Observable, Subject } from 'rxjs';
 import { CharacterService } from './character/character.service';
@@ -47,8 +48,7 @@ export class CombatService implements OnDestroy {
         await this.dealDamageToNpc(result);
         await this.endCurrentTurn();
         if (this.combatShouldEnd()) {
-          // TODO end combat session
-          alert('Combat has ended.');
+          this.endCombatSession();
         }
       }
     );
@@ -60,6 +60,48 @@ export class CombatService implements OnDestroy {
 
   ngOnDestroy(): void {
     this.dealDamageToNPCSub.unsubscribe();
+  }
+
+  private endCombatSession(): void {
+    // Get the combatSession ID
+    const combatSessionID =
+      this.gameStateService.characterBeingControlledByClient?.combatSessionId;
+
+    if (!combatSessionID) {
+      throw new Error('No combat session ID found.');
+    }
+
+    // Get the combat session
+    const combatSession =
+      this.gameStateService.combatSessions.get(combatSessionID);
+
+    // Remove the combat session ID from all players participating
+    if (this.gameStateService.characterBeingControlledByClient) {
+      this.gameStateService.characterBeingControlledByClient.combatSessionId =
+        null;
+    }
+
+    combatSession?.playerIDs.forEach((playerId) => {
+      const player =
+        this.gameStateService.allCharactersCurrentlyInGameSession.find(
+          (character) => character.id === playerId
+        );
+
+      if (!player) {
+        throw new Error('No player found.');
+      }
+      player.combatSessionId = null;
+      this.characterService.updateCharacter(
+        player,
+        this.gameStateService.gameSession.id
+      );
+    });
+
+    // Remove the combat session from the database
+    this.removeCombatSessionFromDatabase(
+      combatSessionID,
+      this.gameStateService.gameSession.id
+    );
   }
 
   private combatShouldEnd(): boolean {
@@ -274,6 +316,23 @@ export class CombatService implements OnDestroy {
     return addDoc(collectionRef, combatSession).catch((error) => {
       console.error('Error adding document: ', error);
     });
+  }
+
+  private async removeCombatSessionFromDatabase(
+    combatSessionID: string,
+    gameSessionID: string
+  ): Promise<void> {
+    const docRef = doc(
+      collection(
+        this.#firestore,
+        'game-sessions',
+        gameSessionID,
+        'combat-sessions'
+      ),
+      combatSessionID
+    );
+
+    return deleteDoc(docRef);
   }
 
   private async updateCombatSessionInDatabase(
