@@ -2,7 +2,7 @@
   {
     "name": "Fists",
     "description": "Your own hands.",
-    "imgUrl": "assets/card-images/weapons/swords/sword.png",
+    "imgUrl": "assets/card-images/weapons/fists.png",
     "type": "Fists",
     "fullPrice": 0,
     "rewardType": "Easy",
