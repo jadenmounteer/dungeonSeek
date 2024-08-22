@@ -14,8 +14,8 @@
   {
     "name": "Wolf Attack",
     "description": "The forest is quiet. After a moment you stop. Something feels off. It is too quiet. Suddenly you hear a growl. You turn to see a large wolf behind you. It looks hungry.",
-    "quantity": 2,
-    "discardAfterUse": true,
+    "quantity": 1,
+    "discardAfterUse": false,
     "choices": [
       {
         "description": "Defend yourself",
