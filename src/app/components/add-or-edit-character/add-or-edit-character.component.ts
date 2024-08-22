@@ -53,7 +53,11 @@ export class AddOrEditCharacterComponent implements OnInit {
   };
 
   private characterMenu: CharacterMenu = {
-    weaponCards: [],
+    weaponCards: [
+      {
+        cardName: 'Fists',
+      },
+    ],
     itemCards: [],
     spellCards: [],
     statusCards: [],
