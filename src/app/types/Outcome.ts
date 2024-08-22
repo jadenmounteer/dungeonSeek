@@ -16,4 +16,5 @@ export enum Outcome {
   FIND_INSANE_LOOT = '12', // Could be any type of loot
   FIGHT_SINGLE_BANDIT = '13',
   BANDIT_TAKES_YOUR_GOLD = '14',
+  FIGHT_SINGLE_WOLF = '15',
 }

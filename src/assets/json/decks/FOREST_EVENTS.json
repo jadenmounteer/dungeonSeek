@@ -1,13 +1,25 @@
 [
   {
-    "name": "A Hidden Chest",
-    "description": "As you walk through the forest your foot bumps an object hidden under some bramble. As you inspect it you notice it is a wooden chest.",
-    "quantity": 1,
-    "discardAfterUse": false,
+    "name": "An Old Chest",
+    "description": "As you walk through the forest your foot bumps an object hidden under some bramble. As you inspect it you notice it is an old wooden chest.",
+    "quantity": 2,
+    "discardAfterUse": true,
     "choices": [
       {
         "description": "Open the chest",
         "outcome": "9"
+      }
+    ]
+  },
+  {
+    "name": "Wolf Attack",
+    "description": "The forest is quiet. After a moment you stop. Something feels off. It is too quiet. Suddenly you hear a growl. You turn to see a large wolf behind you. It looks hungry.",
+    "quantity": 2,
+    "discardAfterUse": true,
+    "choices": [
+      {
+        "description": "Defend yourself",
+        "outcome": "15"
       }
     ]
   }
