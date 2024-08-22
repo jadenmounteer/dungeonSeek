@@ -286,6 +286,28 @@ export class GameStateService {
     return newNpc;
   }
 
+  /**
+   * Spawns multiple npcs of various types and quantities relative to the player's location.
+   */
+  public async spawnNpcsRelativeToPlayer(
+    npcMapTypeToQuantity: Map<NpcType, number>,
+    currentPlayer: Character
+  ): Promise<Npc[]> {
+    const npcsToSpawn: Npc[] = [];
+
+    for (const [npcType, quantity] of npcMapTypeToQuantity.entries()) {
+      for (let i = 0; i < quantity; i++) {
+        const newNpc = await this.spawnNpcRelativeToPlayer(
+          npcType,
+          currentPlayer
+        );
+        npcsToSpawn.push(newNpc);
+      }
+    }
+
+    return npcsToSpawn;
+  }
+
   #getDirectionFacingRelativeToPlayer(
     currentPlayer: Character
   ): 'Right' | 'Left' {

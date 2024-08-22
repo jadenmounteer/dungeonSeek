@@ -247,7 +247,7 @@ export class CombatService implements OnDestroy {
   }
 
   public async startCombatSession(
-    npcInCombat: Npc,
+    npcsInCombat: Npc[],
     lootType: CardRewardType
   ): Promise<void> {
     if (!this.gameStateService.characterBeingControlledByClient) {
@@ -301,11 +301,10 @@ export class CombatService implements OnDestroy {
       this.gameStateService.gameSession.id
     );
 
-    npcInCombat.combatSessionID = combatSessionID;
-    this.npcService.updateNpc(
-      npcInCombat,
-      this.gameStateService.gameSession.id
-    );
+    npcsInCombat.forEach((npc) => {
+      npc.combatSessionID = combatSessionID;
+      this.npcService.updateNpc(npc, this.gameStateService.gameSession.id);
+    });
   }
 
   private addNewCombatSessionToDatabase(

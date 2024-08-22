@@ -44,8 +44,8 @@ export class OutcomeService implements OnDestroy {
 
   ngOnDestroy(): void {}
 
-  private startCombat(npcInvolved: Npc, lootType: CardRewardType): void {
-    this.combatService.startCombatSession(npcInvolved, lootType);
+  private startCombat(npcsInvolved: Npc[], lootType: CardRewardType): void {
+    this.combatService.startCombatSession(npcsInvolved, lootType);
   }
 
   public makeChoice(outcome: Outcome): void {
@@ -69,7 +69,7 @@ export class OutcomeService implements OnDestroy {
       this.#gameStateService.characterBeingControlledByClient
     );
 
-    this.startCombat(newNpc, CardRewardType.EASY);
+    this.startCombat([newNpc], CardRewardType.EASY);
   }
 
   private async fightSingleWolf(): Promise<void> {
@@ -83,7 +83,7 @@ export class OutcomeService implements OnDestroy {
       this.#gameStateService.characterBeingControlledByClient
     );
 
-    this.startCombat(newNpc, CardRewardType.EASY);
+    this.startCombat([newNpc], CardRewardType.EASY);
   }
 
   private async fightWolfPack(): Promise<void> {
@@ -91,13 +91,19 @@ export class OutcomeService implements OnDestroy {
       throw new Error('No character being controlled by client.');
     }
 
-    // Spawn the wolf npc
-    const newNpc = await this.#gameStateService.spawnNpcRelativeToPlayer(
-      NpcType.WOLF,
+    // Spawn 3 wolf npcs
+    const npcMapTypeToQuantity: Map<NpcType, number> = new Map<
+      NpcType,
+      number
+    >();
+    npcMapTypeToQuantity.set(NpcType.WOLF, 3);
+
+    const newNpcs = await this.#gameStateService.spawnNpcsRelativeToPlayer(
+      npcMapTypeToQuantity,
       this.#gameStateService.characterBeingControlledByClient
     );
 
-    this.startCombat(newNpc, CardRewardType.MODERATE);
+    this.startCombat(newNpcs, CardRewardType.MODERATE);
   }
 
   async #banditTakesYourGold(): Promise<void> {
@@ -124,7 +130,7 @@ export class OutcomeService implements OnDestroy {
 
       this.#gameDialogueService.buttonOneCallback = this.startCombat.bind(
         this,
-        newNpc,
+        [newNpc],
         CardRewardType.EASY
       );
 
