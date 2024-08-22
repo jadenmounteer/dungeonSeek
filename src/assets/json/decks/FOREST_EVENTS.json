@@ -2,7 +2,7 @@
   {
     "name": "An Old Chest",
     "description": "As you walk through the forest your foot bumps an object hidden under some bramble. As you inspect it you notice it is an old wooden chest.",
-    "quantity": 0,
+    "quantity": 1,
     "discardAfterUse": true,
     "choices": [
       {
@@ -14,7 +14,7 @@
   {
     "name": "Wolf Attack",
     "description": "The forest is quiet. Something feels off. Suddenly you hear a growl. You turn to see a large wolf behind you. It looks hungry.",
-    "quantity": 0,
+    "quantity": 1,
     "discardAfterUse": false,
     "choices": [
       {
