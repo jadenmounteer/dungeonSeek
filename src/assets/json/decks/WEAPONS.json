@@ -98,5 +98,25 @@
       "weight": 2
     },
     "cardAbility": "null"
+  },
+  {
+    "name": "Fangs",
+    "description": "A wolf's fangs",
+    "imgUrl": "",
+    "type": "Fangs",
+    "fullPrice": 0,
+    "rewardType": "null",
+    "discardAfterUse": false,
+    "quantity": 0,
+    "stats": {
+      "numberOfAttackDice": 2,
+      "costToUse": {
+        "healthCost": 0,
+        "manaCost": 0,
+        "staminaCost": 3
+      },
+      "weight": 0
+    },
+    "cardAbility": "null"
   }
 ]

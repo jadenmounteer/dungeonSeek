@@ -16,7 +16,13 @@ export interface WeaponCardInfo {
   cardAbility: CardAbilityKey | null;
 }
 
-export type WeaponCardType = 'Sword' | 'Bow' | 'Staff' | 'Scroll' | 'Fists';
+export type WeaponCardType =
+  | 'Sword'
+  | 'Bow'
+  | 'Staff'
+  | 'Scroll'
+  | 'Fists'
+  | 'Fangs';
 
 export interface WeaponCardStats {
   numberOfAttackDice: number;
@@ -29,4 +35,5 @@ export enum WeaponCardNames {
   SWORD_OF_THE_ANCIENTS = 'Sword of the Ancients',
   IRON_SWORD = 'Iron Sword',
   STEEL_SWORD = 'Steel Sword',
+  FANGS = 'Fangs',
 }
