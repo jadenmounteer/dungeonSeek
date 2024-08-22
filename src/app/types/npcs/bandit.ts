@@ -10,8 +10,8 @@ export class Bandit extends Npc {
     this.leftFacingImgUrl = 'assets/game-pieces/bandit/bandit-left.png';
     this.npcStats = npcData.npcStats ?? {
       health: {
-        current: 10,
-        total: 10,
+        current: 1,
+        total: 1,
       },
       armorClass: ArmorClass.LIGHT,
     };

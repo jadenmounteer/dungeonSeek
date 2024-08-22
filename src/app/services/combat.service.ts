@@ -18,6 +18,7 @@ import { Character } from '../types/character';
 import { WeaponCardService } from './weapon-card.service';
 import { Npc } from '../types/npcs/npc';
 import { CardRewardType } from '../types/card-reward-type';
+import { LootService } from './loot.service';
 
 export interface CombatSession {
   id: string;
@@ -41,6 +42,7 @@ export class CombatService implements OnDestroy {
   private characterService: CharacterService = inject(CharacterService);
   private npcService: NpcService = inject(NpcService);
   private weaponCardService: WeaponCardService = inject(WeaponCardService);
+  private lootService: LootService = inject(LootService);
 
   public npcDealtDamageToCurrentPlayer$: Subject<number> =
     new Subject<number>();
@@ -101,6 +103,7 @@ export class CombatService implements OnDestroy {
         alert(
           `You received ${combatSession.experiencePointsGained} experience points!`
         );
+        this.lootService.drawLootCard(CardRewardType.EASY);
       }
 
       // Give the player the experience points
