@@ -93,6 +93,20 @@ export class CombatService implements OnDestroy {
       if (!player) {
         throw new Error('No player found.');
       }
+
+      // If the player is the current player being controlled, show them a dialogue box with the reward they received.
+      if (
+        player.id === this.gameStateService.characterBeingControlledByClient?.id
+      ) {
+        alert(
+          `You received ${combatSession.experiencePointsGained} experience points!`
+        );
+      }
+
+      // Give the player the experience points
+      player.characterStats.experience.current +=
+        combatSession.experiencePointsGained;
+
       player.combatSessionId = null;
       this.characterService.updateCharacter(
         player,
