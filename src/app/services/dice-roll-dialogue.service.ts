@@ -92,7 +92,7 @@ export class DiceRollDialogueService {
       closeButtonName: 'Draw Event Card',
       numberOfDice: 1,
       comparator: '<=',
-      targetNumber: 6, // use 6 for testing
+      targetNumber: 3, // use 6 for testing. 3 for production
     };
     this.currentCharacterRolledForEventCardThisTurn = true;
 
