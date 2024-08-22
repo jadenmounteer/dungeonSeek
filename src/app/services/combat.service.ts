@@ -185,13 +185,7 @@ export class CombatService implements OnDestroy {
     combatSession.turnQueue.push(combatentID);
 
     // Remove any dead players or NPCs from turn queue
-    combatSession.turnQueue = this.removeDeadPlayersFromTurnQueue(
-      combatSession.turnQueue
-    );
-
-    combatSession.turnQueue = this.removeDeadNPCsFromTurnQueue(
-      combatSession.turnQueue
-    );
+    combatSession.turnQueue = this.filterOutDeadPlayersAndNPCs(combatSession);
 
     // Save changes to db
     await this.updateCombatSessionInDatabase(
@@ -200,41 +194,43 @@ export class CombatService implements OnDestroy {
     );
   }
 
-  private removeDeadPlayersFromTurnQueue(
-    turnQueue: Array<string>
-  ): Array<string> {
-    return turnQueue.filter((id) => {
-      const combatant =
-        this.gameStateService.allCharactersCurrentlyInGameSession.find(
-          (character) => character.id === id
+  private filterOutDeadPlayersAndNPCs(combatSession: CombatSession): string[] {
+    const filteredTurnQueue = combatSession.turnQueue.filter((id) => {
+      if (combatSession.playerIDs.includes(id)) {
+        const player =
+          this.gameStateService.allCharactersCurrentlyInGameSession.find(
+            (character) => character.id === id
+          );
+
+        if (!player) {
+          throw new Error('No player found.');
+        }
+
+        if (player?.characterStats.health.current > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (combatSession.enemyIDs.includes(id)) {
+        const npc = this.gameStateService.npcsInPlay.find(
+          (npc) => npc.id === id
         );
 
-      if (!combatant) {
+        if (!npc) {
+          throw new Error('No npc found.');
+        }
+
+        if (npc?.npcStats.health.current > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
         return false;
       }
-
-      if (combatant.characterStats.health.current <= 0) {
-        return false;
-      }
-
-      return true;
     });
-  }
 
-  private removeDeadNPCsFromTurnQueue(turnQueue: Array<string>): Array<string> {
-    return turnQueue.filter((id) => {
-      const npc = this.gameStateService.npcsInPlay.find((npc) => npc.id === id);
-
-      if (!npc) {
-        return false;
-      }
-
-      if (npc.npcStats.health.current <= 0) {
-        return false;
-      }
-
-      return true;
-    });
+    return filteredTurnQueue;
   }
 
   public initializeCombatSessionTurnQueue(
