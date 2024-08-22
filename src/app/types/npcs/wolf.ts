@@ -10,7 +10,7 @@ export class Wolf extends Npc {
     this.leftFacingImgUrl = 'assets/game-pieces/wolf/wolf-left.png';
     this.npcStats = npcData.npcStats ?? {
       health: {
-        current: 1,
+        current: 10,
         total: 10,
       },
       armorClass: ArmorClass.NONE,
