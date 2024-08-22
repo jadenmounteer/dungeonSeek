@@ -6,8 +6,11 @@
     "discardAfterUse": true,
     "choices": [
       {
-        "description": "You do something...",
+        "description": "Give the man some gold and continue on your way.",
         "outcome": "SUBTRACT_GOLD"
+      },
+      {
+        "description": "Ignore the man and keep walking."
       }
     ]
   },
