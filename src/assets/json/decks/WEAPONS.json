@@ -1,5 +1,25 @@
 [
   {
+    "name": "Fists",
+    "description": "Your own hands.",
+    "imgUrl": "assets/card-images/weapons/swords/sword.png",
+    "type": "Fists",
+    "fullPrice": 0,
+    "rewardType": "Easy",
+    "discardAfterUse": false,
+    "quantity": 0,
+    "stats": {
+      "numberOfAttackDice": 1,
+      "costToUse": {
+        "healthCost": 0,
+        "manaCost": 0,
+        "staminaCost": 1
+      },
+      "weight": 0
+    },
+    "cardAbility": "null"
+  },
+  {
     "name": "Sword of Banishment",
     "description": "An enchanted sword. Wield it to banish your foes to distant lands.",
     "imgUrl": "assets/card-images/weapons/swords/sword.png",
