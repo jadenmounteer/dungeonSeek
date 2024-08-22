@@ -100,6 +100,7 @@ export class CombatService implements OnDestroy {
       if (
         player.id === this.gameStateService.characterBeingControlledByClient?.id
       ) {
+        // TODO we can replace this alert with another dialogue or a popup or something. Maybe a little animation next to your experience bar.
         alert(
           `You received ${combatSession.experiencePointsGained} experience points!`
         );

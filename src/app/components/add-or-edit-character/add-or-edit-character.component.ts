@@ -49,7 +49,7 @@ export class AddOrEditCharacterComponent implements OnInit {
     health: { total: 100, current: 100 },
     mana: { total: 50, current: 50 },
     stamina: { total: 100, current: 100 },
-    experience: { total: 0, current: 0 },
+    experience: { total: 50, current: 0 },
   };
 
   private characterMenu: CharacterMenu = {
