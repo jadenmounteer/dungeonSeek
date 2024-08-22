@@ -52,7 +52,7 @@ export class CombatService implements OnDestroy {
         await this.dealDamageToNpc(result);
         await this.endCurrentTurn();
         if (this.combatShouldEnd()) {
-          this.endCombatSessionPlayerVictory();
+          await this.endCombatSessionPlayerVictory();
         }
       }
     );
@@ -66,7 +66,7 @@ export class CombatService implements OnDestroy {
     this.dealDamageToNPCSub.unsubscribe();
   }
 
-  private endCombatSessionPlayerVictory(): void {
+  private async endCombatSessionPlayerVictory(): Promise<void> {
     // Get the combatSession ID
     const combatSessionID =
       this.gameStateService.characterBeingControlledByClient?.combatSessionId;
@@ -84,6 +84,11 @@ export class CombatService implements OnDestroy {
       this.gameStateService.characterBeingControlledByClient.combatSessionId =
         null;
     }
+
+    await this.removeCombatSessionFromDatabase(
+      combatSessionID,
+      this.gameStateService.gameSession.id
+    );
 
     combatSession?.playerIDs.forEach(async (playerId) => {
       const player =
@@ -103,12 +108,6 @@ export class CombatService implements OnDestroy {
         this.lootService.drawLootCard(combatSession.lootType);
       }
     });
-
-    // Remove the combat session from the database
-    this.removeCombatSessionFromDatabase(
-      combatSessionID,
-      this.gameStateService.gameSession.id
-    );
   }
 
   private combatShouldEnd(): boolean {
