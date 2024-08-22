@@ -38,7 +38,7 @@ export class OutcomeService implements OnDestroy {
     ],
 
     // TODO: Implement these outcomes
-    // [Outcome.FIGHT_SINGLE_BANDIT, () => this.startCombat()],
+    [Outcome.FIGHT_SINGLE_BANDIT, () => this.fightSingleBandit()],
     [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
   ]);
 
@@ -56,6 +56,20 @@ export class OutcomeService implements OnDestroy {
       // Handle unknown outcome.
       console.error('No strategy found for outcome: ', outcome);
     }
+  }
+
+  private async fightSingleBandit(): Promise<void> {
+    if (!this.#gameStateService.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client.');
+    }
+
+    // Spawn the bandit npc
+    const newNpc = await this.#gameStateService.spawnNpcRelativeToPlayer(
+      NpcType.BANDIT,
+      this.#gameStateService.characterBeingControlledByClient
+    );
+
+    this.startCombat(newNpc, CardRewardType.EASY);
   }
 
   async #banditTakesYourGold(): Promise<void> {
