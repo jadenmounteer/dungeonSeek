@@ -439,8 +439,12 @@ export class CombatService implements OnDestroy {
       this.weaponInfo.stats.costToUse.manaCost;
     currentPlayer.characterStats.stamina.current -=
       this.weaponInfo.stats.costToUse.staminaCost;
-    currentPlayer.characterStats.experience.current +=
-      npcToAttack.experiencePointsForDefeating;
+
+    // If the NPC is dead, give the player who dealt the blow experience points
+    if (npcToAttack.npcStats.health.current <= 0) {
+      currentPlayer.characterStats.experience.current +=
+        npcToAttack.experiencePointsForDefeating;
+    }
 
     await this.characterService.updateCharacter(
       currentPlayer,
