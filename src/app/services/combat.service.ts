@@ -17,6 +17,7 @@ import { DiceRollDialogueService } from './dice-roll-dialogue.service';
 import { Character } from '../types/character';
 import { WeaponCardService } from './weapon-card.service';
 import { Npc } from '../types/npcs/npc';
+import { CardRewardType } from '../types/card-reward-type';
 
 export interface CombatSession {
   id: string;
@@ -24,6 +25,8 @@ export interface CombatSession {
   enemyIDs: string[];
   locationName: string;
   turnQueue: string[];
+  lootType: CardRewardType; // The reward type the main player will receive once combat is over.
+  experiencePointsGained: number; // The experience points all players involved will receive once combat is over.
 }
 
 @Injectable({
@@ -240,7 +243,11 @@ export class CombatService implements OnDestroy {
     return combatSession.playerIDs.concat(...combatSession.enemyIDs);
   }
 
-  public async startCombatSession(npcInCombat: Npc): Promise<void> {
+  public async startCombatSession(
+    npcInCombat: Npc,
+    lootType: CardRewardType,
+    experiencePoints: number
+  ): Promise<void> {
     if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client.');
     }
@@ -270,6 +277,8 @@ export class CombatService implements OnDestroy {
       enemyIDs: locationOfCombat.enemies.map((enemy) => enemy.id),
       locationName: locationName,
       turnQueue: [],
+      lootType: lootType,
+      experiencePointsGained: experiencePoints,
     };
 
     combatSession.turnQueue =
