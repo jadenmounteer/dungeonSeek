@@ -44,16 +44,8 @@ export class OutcomeService implements OnDestroy {
 
   ngOnDestroy(): void {}
 
-  private startCombat(
-    npcInvolved: Npc,
-    lootType: CardRewardType,
-    experiencePoints: number
-  ): void {
-    this.combatService.startCombatSession(
-      npcInvolved,
-      lootType,
-      experiencePoints
-    );
+  private startCombat(npcInvolved: Npc, lootType: CardRewardType): void {
+    this.combatService.startCombatSession(npcInvolved, lootType);
   }
 
   public makeChoice(outcome: Outcome): void {
@@ -91,8 +83,7 @@ export class OutcomeService implements OnDestroy {
       this.#gameDialogueService.buttonOneCallback = this.startCombat.bind(
         this,
         newNpc,
-        CardRewardType.EASY,
-        10
+        CardRewardType.EASY
       );
 
       gameDialogueData.message = `"I changed my mind," the bandit says as he unsheathes his sword. "I'll take your gold and your life!"`;

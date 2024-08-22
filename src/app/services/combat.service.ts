@@ -26,8 +26,7 @@ export interface CombatSession {
   enemyIDs: string[];
   locationName: string;
   turnQueue: string[];
-  lootType: CardRewardType; // The reward type the main player will receive once combat is over.
-  experiencePointsGained: number; // The experience points all players involved will receive once combat is over.
+  lootType: CardRewardType; // The reward type the person who wins the combat session will get. The person who dealt the killing blow gets the loot.
 }
 
 @Injectable({
@@ -100,15 +99,7 @@ export class CombatService implements OnDestroy {
       if (
         player.id === this.gameStateService.characterBeingControlledByClient?.id
       ) {
-        // TODO we can replace this alert with another dialogue or a popup or something. Maybe a little animation next to your experience bar.
-        alert(
-          `You received ${combatSession.experiencePointsGained} experience points!`
-        );
-
-        // Give the player the experience points
-        this.gameStateService.characterBeingControlledByClient.characterStats.experience.current +=
-          combatSession.experiencePointsGained;
-
+        // We don't update the db here because we update it when they pick a loot card.
         this.lootService.drawLootCard(combatSession.lootType);
       }
     });
@@ -258,8 +249,7 @@ export class CombatService implements OnDestroy {
 
   public async startCombatSession(
     npcInCombat: Npc,
-    lootType: CardRewardType,
-    experiencePoints: number
+    lootType: CardRewardType
   ): Promise<void> {
     if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client.');
@@ -291,7 +281,6 @@ export class CombatService implements OnDestroy {
       locationName: locationName,
       turnQueue: [],
       lootType: lootType,
-      experiencePointsGained: experiencePoints,
     };
 
     combatSession.turnQueue =
@@ -450,6 +439,8 @@ export class CombatService implements OnDestroy {
       this.weaponInfo.stats.costToUse.manaCost;
     currentPlayer.characterStats.stamina.current -=
       this.weaponInfo.stats.costToUse.staminaCost;
+    currentPlayer.characterStats.experience.current +=
+      npcToAttack.experiencePointsForDefeating;
 
     await this.characterService.updateCharacter(
       currentPlayer,

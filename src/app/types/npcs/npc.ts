@@ -61,7 +61,7 @@ export abstract class Npc {
   currentLocation: LocationNode;
   position: Position;
   directionFacing: 'Right' | 'Left';
-  rewardTypeForDefeatingNpc: CardRewardType = CardRewardType.EASY;
+  experiencePointsForDefeating: number = 10;
   public rightFacingImgUrl: string =
     'assets/game-pieces/bandit/bandit-right.png';
   public leftFacingImgUrl: string = 'assets/game-pieces/bandit/bandit-left.png';
