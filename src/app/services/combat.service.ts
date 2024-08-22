@@ -48,7 +48,7 @@ export class CombatService implements OnDestroy {
         await this.dealDamageToNpc(result);
         await this.endCurrentTurn();
         if (this.combatShouldEnd()) {
-          this.endCombatSession();
+          this.endCombatSessionPlayerVictory();
         }
       }
     );
@@ -62,7 +62,7 @@ export class CombatService implements OnDestroy {
     this.dealDamageToNPCSub.unsubscribe();
   }
 
-  private endCombatSession(): void {
+  private endCombatSessionPlayerVictory(): void {
     // Get the combatSession ID
     const combatSessionID =
       this.gameStateService.characterBeingControlledByClient?.combatSessionId;

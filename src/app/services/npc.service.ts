@@ -5,6 +5,7 @@ import {
   addDoc,
   collection,
   collectionData,
+  deleteDoc,
   doc,
   updateDoc,
 } from '@angular/fire/firestore';
@@ -31,6 +32,28 @@ export class NpcService {
     return updateDoc(docRef, { ...serializedData }).catch((error) => {
       console.error('Error updating document: ', error);
     });
+  }
+
+  public async removeAllDeadNPCsFromGame(
+    npcsInPlay: Npc[],
+    gameSessionID: string
+  ): Promise<void> {
+    const npc = npcsInPlay.find((npc) => npc.npcStats.health.current <= 0);
+
+    if (!npc) {
+      throw new Error('No npc found.');
+    }
+
+    await this.deleteNpc(npc, gameSessionID);
+  }
+
+  public deleteNpc(npc: Npc, gameSessionID: string): Promise<any> {
+    const docRef = doc(
+      collection(this.#firestore, 'game-sessions', gameSessionID, 'npcs'),
+      npc.id
+    );
+
+    return deleteDoc(docRef);
   }
 
   public getNPCsInGameSession(gameSessionID: string): Observable<Npc[]> {

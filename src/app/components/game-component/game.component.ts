@@ -422,6 +422,11 @@ export class GameComponent implements OnDestroy {
       ) {
         this.waitingForNextTurnToStart = true;
 
+        this.#npcService.removeAllDeadNPCsFromGame(
+          this.gameStateService.npcsInPlay,
+          this.gameStateService.gameSession.id
+        );
+
         await this.turnService.createNewTurn(
           this.gameStateService.gameSession,
           this.gameStateService.allCharactersCurrentlyInGameSession.map(
