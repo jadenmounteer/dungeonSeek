@@ -59,17 +59,6 @@ export class GameStateService {
     }
   }
 
-  public playerBeingControlledByClientInCombat(): boolean {
-    if (
-      this.characterBeingControlledByClient &&
-      this.characterBeingControlledByClient.combatSessionId
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   public refreshNPCsCombatSessionsState(): Npc | undefined {
     let npcWhosTurnItIs: Npc | undefined;
     // Loop through all of the NPCs
