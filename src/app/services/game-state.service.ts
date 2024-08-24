@@ -54,8 +54,7 @@ export class GameStateService {
   }
 
   public refreshCurrentPlayerCombatSessionsState(): void {
-    this.currentPlayersCombatTurn = this.isItMyTurnInCombatSession();
-    if (this.currentPlayersCombatTurn) {
+    if (this.itIsCurrentPlayerBeingControlledTurnInCombat()) {
       this.npcCombatTurn = false;
     }
   }
@@ -98,7 +97,7 @@ export class GameStateService {
     return npcWhosTurnItIs;
   }
 
-  private isItMyTurnInCombatSession(): boolean {
+  private itIsCurrentPlayerBeingControlledTurnInCombat(): boolean {
     const currentCombatSession = this.combatSessions.get(
       this.characterBeingControlledByClient?.combatSessionId!
     );
@@ -324,5 +323,16 @@ export class GameStateService {
   ): 'Right' | 'Left' {
     // If the player is facing right, the npc should face left and vice versa.
     return currentPlayer.directionFacing === 'Right' ? 'Left' : 'Right';
+  }
+
+  public playerBeingControlledByClientInCombat(): boolean {
+    if (
+      this.characterBeingControlledByClient &&
+      this.characterBeingControlledByClient.combatSessionId
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
