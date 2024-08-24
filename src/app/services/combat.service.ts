@@ -538,4 +538,15 @@ export class CombatService implements OnDestroy {
     // We use a subject so we don't have to make another backend call to update the UI.
     this.npcDealtDamageToCurrentPlayer$.next(damageDealt);
   }
+
+  public playerBeingControlledByClientInCombat(): boolean {
+    if (
+      this.gameStateService.characterBeingControlledByClient &&
+      this.gameStateService.characterBeingControlledByClient.combatSessionId
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
