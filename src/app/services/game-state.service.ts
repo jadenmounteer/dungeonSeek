@@ -314,4 +314,15 @@ export class GameStateService {
     // If the player is facing right, the npc should face left and vice versa.
     return currentPlayer.directionFacing === 'Right' ? 'Left' : 'Right';
   }
+
+  public playerBeingControlledByClientInCombat(): boolean {
+    if (
+      this.characterBeingControlledByClient &&
+      this.characterBeingControlledByClient.combatSessionId
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

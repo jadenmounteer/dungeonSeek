@@ -244,7 +244,7 @@ export class GameComponent implements OnDestroy {
       .subscribe((combatSessionsFromDB) => {
         this.gameStateService.createCombatSessionsMap(combatSessionsFromDB);
 
-        if (this.combatService.playerBeingControlledByClientInCombat()) {
+        if (this.gameStateService.playerBeingControlledByClientInCombat()) {
           this.gameStateService.refreshCurrentPlayerCombatSessionsState();
         }
 
