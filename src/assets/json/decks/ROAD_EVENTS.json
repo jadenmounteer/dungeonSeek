@@ -47,6 +47,18 @@
     ]
   },
   {
+    "name": "Two Bandits",
+    "description": "As you make your way along the road you hear rustling in the bushes. Two bandits brandishing swords emerge. With a battle cry they charge at you!",
+    "quantity": 1,
+    "discardAfterUse": false,
+    "choices": [
+      {
+        "description": "Defend yourself!",
+        "outcome": "17"
+      }
+    ]
+  },
+  {
     "name": "The Merchant",
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a merchant! He's selling all sorts of goods. He offers to sell you some of his wares.",
     "quantity": 0,

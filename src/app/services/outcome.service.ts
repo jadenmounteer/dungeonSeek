@@ -40,6 +40,7 @@ export class OutcomeService implements OnDestroy {
     [Outcome.BANDIT_TAKES_YOUR_GOLD, () => this.#banditTakesYourGold()],
     [Outcome.FIGHT_SINGLE_WOLF, () => this.fightSingleWolf()],
     [Outcome.FIGHT_WOLF_PACK, () => this.fightWolfPack()],
+    [Outcome.TWO_BANDITS_ATTACK, () => this.fightTwoBandits()],
   ]);
 
   ngOnDestroy(): void {}
@@ -70,6 +71,26 @@ export class OutcomeService implements OnDestroy {
     );
 
     this.startCombat([newNpc], CardRewardType.EASY);
+  }
+
+  private async fightTwoBandits(): Promise<void> {
+    if (!this.#gameStateService.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client.');
+    }
+
+    // Spawn 2 bandit npcs
+    const npcMapTypeToQuantity: Map<NpcType, number> = new Map<
+      NpcType,
+      number
+    >();
+    npcMapTypeToQuantity.set(NpcType.BANDIT, 2);
+
+    const newNpcs = await this.#gameStateService.spawnNpcsRelativeToPlayer(
+      npcMapTypeToQuantity,
+      this.#gameStateService.characterBeingControlledByClient
+    );
+
+    this.startCombat(newNpcs, CardRewardType.MODERATE);
   }
 
   private async fightSingleWolf(): Promise<void> {
