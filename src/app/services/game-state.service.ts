@@ -54,8 +54,7 @@ export class GameStateService {
   }
 
   public refreshCurrentPlayerCombatSessionsState(): void {
-    this.currentPlayersCombatTurn = this.isItMyTurnInCombatSession();
-    if (this.currentPlayersCombatTurn) {
+    if (this.itIsCurrentPlayerBeingControlledTurnInCombat()) {
       this.npcCombatTurn = false;
     }
   }
@@ -87,7 +86,7 @@ export class GameStateService {
     return npcWhosTurnItIs;
   }
 
-  private isItMyTurnInCombatSession(): boolean {
+  private itIsCurrentPlayerBeingControlledTurnInCombat(): boolean {
     const currentCombatSession = this.combatSessions.get(
       this.characterBeingControlledByClient?.combatSessionId!
     );
