@@ -340,8 +340,6 @@ export class GameComponent implements OnDestroy {
       this.gameStateService.checkIfPlayerLandedOnCombatSession(location.name);
 
     if (combatSessionID != null) {
-      const combatSession =
-        this.gameStateService.combatSessions.get(combatSessionID);
       this.gameStateService.characterBeingControlledByClient.combatSessionId =
         combatSessionID;
     }
@@ -362,6 +360,10 @@ export class GameComponent implements OnDestroy {
     // I'll do this by storing a local map in the gameState service every location that has a player or NPC.
     // Then I'll loop through the map and adjust the offsets accordingly if there are multiple players or NPCs on the same location.
     this.gameStateService.adjustLocationsWithPeopleOnThem();
+
+    if (combatSessionID != null) {
+      await this.combatService.addCharacterToCombatSession(combatSessionID);
+    }
   }
 
   // TODO implement this method

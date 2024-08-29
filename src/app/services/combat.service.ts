@@ -84,6 +84,21 @@ export class CombatService implements OnDestroy {
       this.gameStateService.characterBeingControlledByClient.combatSessionId =
         null;
     }
+    combatSession?.playerIDs.forEach((playerID) => {
+      const player =
+        this.gameStateService.allCharactersCurrentlyInGameSession.find(
+          (character) => character.id === playerID
+        );
+      if (!player) {
+        throw new Error('No player found.');
+      }
+
+      player.combatSessionId = null;
+      this.characterService.updateCharacter(
+        player,
+        this.gameStateService.gameSession.id
+      );
+    });
 
     await this.removeCombatSessionFromDatabase(
       combatSessionID,
@@ -246,6 +261,36 @@ export class CombatService implements OnDestroy {
     return combatSession.playerIDs.concat(...combatSession.enemyIDs);
   }
 
+  public async addCharacterToCombatSession(combatSessionID: string) {
+    if (!this.gameStateService.characterBeingControlledByClient) {
+      throw new Error('No character being controlled by client.');
+    }
+
+    // Get the combat session
+    const combatSession =
+      this.gameStateService.combatSessions.get(combatSessionID);
+
+    if (!combatSession) {
+      throw new Error('No combat session found.');
+    }
+
+    // Add the character to the combat session
+    combatSession.playerIDs.push(
+      this.gameStateService.characterBeingControlledByClient.id
+    );
+
+    // Add the character to the turn queue
+    combatSession.turnQueue.push(
+      this.gameStateService.characterBeingControlledByClient.id
+    );
+
+    // Update the combat session
+    await this.updateCombatSessionInDatabase(
+      combatSession,
+      this.gameStateService.gameSession.id
+    );
+  }
+
   public async startCombatSession(
     npcsInCombat: Npc[],
     lootType: CardRewardType
@@ -296,10 +341,22 @@ export class CombatService implements OnDestroy {
     // Add the combat session ID to those who are involved in the combat
     this.gameStateService.characterBeingControlledByClient.combatSessionId =
       combatSessionID;
-    this.characterService.updateCharacter(
-      this.gameStateService.characterBeingControlledByClient,
-      this.gameStateService.gameSession.id
-    );
+
+    combatSession.playerIDs.forEach((playerID) => {
+      const player =
+        this.gameStateService.allCharactersCurrentlyInGameSession.find(
+          (character) => character.id === playerID
+        );
+      if (!player) {
+        throw new Error('No player found.');
+      }
+
+      player.combatSessionId = combatSessionID;
+      this.characterService.updateCharacter(
+        player,
+        this.gameStateService.gameSession.id
+      );
+    });
 
     npcsInCombat.forEach((npc) => {
       npc.combatSessionID = combatSessionID;
