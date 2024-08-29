@@ -336,6 +336,16 @@ export class GameComponent implements OnDestroy {
       yPosition: location.position.yPosition,
     };
 
+    const combatSessionID =
+      this.gameStateService.checkIfPlayerLandedOnCombatSession(location.name);
+
+    if (combatSessionID != null) {
+      const combatSession =
+        this.gameStateService.combatSessions.get(combatSessionID);
+      this.gameStateService.characterBeingControlledByClient.combatSessionId =
+        combatSessionID;
+    }
+
     await this.characterService.updateCharacter(
       this.gameStateService.characterBeingControlledByClient,
       this.gameStateService.gameSession.id

@@ -325,4 +325,16 @@ export class GameStateService {
       return false;
     }
   }
+
+  public checkIfPlayerLandedOnCombatSession(
+    locationName: LocationKey
+  ): string | null {
+    const location = this.locationsWithPeopleOnThem.get(locationName);
+    if (location) {
+      if (location.enemies.length > 0 && location.players.length > 0) {
+        return location.enemies[0].combatSessionID;
+      }
+    }
+    return null;
+  }
 }
