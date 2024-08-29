@@ -53,7 +53,16 @@ export class GameStateService {
     });
   }
 
-  public refreshCurrentPlayerCombatSessionsState(): void {
+  public refreshCurrentPlayerCombatSessionsState(
+    combatSessionID: string
+  ): void {
+    if (!this.characterBeingControlledByClient) {
+      return;
+    }
+
+    if (!this.characterBeingControlledByClient.combatSessionId) {
+      this.characterBeingControlledByClient.combatSessionId = combatSessionID;
+    }
     this.currentPlayersCombatTurn = this.isItMyTurnInCombatSession();
     if (this.currentPlayersCombatTurn) {
       this.npcCombatTurn = false;
@@ -252,7 +261,9 @@ export class GameStateService {
       if (this.#turnService.isItMyTurnOnClientSide(gameSession, character.id)) {
         this.characterBeingControlledByClient = character;
         if (this.characterBeingControlledByClient?.combatSessionId) {
-          this.refreshCurrentPlayerCombatSessionsState();
+          this.refreshCurrentPlayerCombatSessionsState(
+            this.characterBeingControlledByClient?.combatSessionId
+          );
         }
       }
     });
@@ -315,17 +326,6 @@ export class GameStateService {
     return currentPlayer.directionFacing === 'Right' ? 'Left' : 'Right';
   }
 
-  public playerBeingControlledByClientInCombat(): boolean {
-    if (
-      this.characterBeingControlledByClient &&
-      this.characterBeingControlledByClient.combatSessionId
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   public checkIfPlayerLandedOnCombatSession(
     locationName: LocationKey
   ): string | null {
@@ -333,6 +333,15 @@ export class GameStateService {
     if (location) {
       if (location.enemies.length > 0 && location.players.length > 0) {
         return location.enemies[0].combatSessionID;
+      }
+    }
+    return null;
+  }
+
+  public checkIfPlayerIsInCombatSession(playerID: string): string | null {
+    for (let combatSession of this.combatSessions.values()) {
+      if (combatSession.playerIDs.includes(playerID)) {
+        return combatSession.id;
       }
     }
     return null;
