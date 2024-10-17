@@ -182,6 +182,17 @@
       >
         {{ gameStateService.npcCombatMessage }}
       </p>
+
+      <!-- If you are in combat, but it is another player's turn -->
+      <p
+        class="big-text sticky-text"
+        *ngIf="
+          !gameStateService.currentPlayersCombatTurn &&
+          !gameStateService.npcCombatTurn
+        "
+      >
+        Waiting for party member to attack!
+      </p>
     </span>
     }
 

@@ -1,46 +1,46 @@
-import { Component, OnDestroy, inject, signal } from '@angular/core';
-import { PlayerComponent } from '../characters/player/player.component';
-import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
-import { LocationNode, LocationService } from '../../services/location-service';
-import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GameSessionService } from '../../services/game-session/game-session.service';
-import { CharacterMenuEquipment } from '../../types/character';
-import { CharacterService } from '../../services/character/character.service';
-import { AuthService } from '../../auth/auth.service';
-import { TurnService } from '../../services/turn.service';
-import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
-import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
-import { DeckName } from '../../types/card-deck';
-import { DiceRollDialogComponent } from '../dice-roll-dialog/dice-roll-dialog.component';
-import { CharacterInfoComponent } from '../character-info/character-info.component';
-import { EventMenuComponent } from '../event-menu/event-menu.component';
-import { ItemMenuComponent } from '../item-menu/item-menu.component';
-import { EventCardService } from '../../services/event-card.service';
-import { WeaponCardService } from '../../services/weapon-card.service';
-import { WeaponMenuComponent } from '../weapon-menu/weapon-menu.component';
-import { ItemCardService } from '../../services/item-card.service';
-import { LootService } from '../../services/loot.service';
-import { CardRewardType } from '../../types/card-reward-type';
-import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
-import { CharacterMenuComponent } from '../character-menu/character-menu.component';
-import { ZoomService } from '../../services/zoom.service';
+import { Subscription } from 'rxjs';
 import { fadeIn } from '../../animations/fade-in-animation';
 import { fadeOut } from '../../animations/fade-out-animation';
+import { AuthService } from '../../auth/auth.service';
+import { CharacterService } from '../../services/character/character.service';
 import { CombatService } from '../../services/combat.service';
-import { Outcome } from '../../types/Outcome';
-import { OutcomeService } from '../../services/outcome.service';
-import { GameStateService } from '../../services/game-state.service';
-import { GameDialogueComponent } from '../game-dialogue/game-dialogue.component';
+import { DiceRollDialogueService } from '../../services/dice-roll-dialogue.service';
+import { EventCardService } from '../../services/event-card.service';
 import {
   GameDialogueData,
   GameDialogueService,
 } from '../../services/game-dialogue.service';
+import { GameSessionService } from '../../services/game-session/game-session.service';
+import { GameStateService } from '../../services/game-state.service';
+import { ItemCardService } from '../../services/item-card.service';
+import { LocationNode, LocationService } from '../../services/location-service';
+import { LootService } from '../../services/loot.service';
 import { NpcService } from '../../services/npc.service';
-import { NpcComponent } from '../npc/npc.component';
+import { OutcomeService } from '../../services/outcome.service';
+import { TurnService } from '../../services/turn.service';
+import { WeaponCardService } from '../../services/weapon-card.service';
+import { ZoomService } from '../../services/zoom.service';
+import { DeckName } from '../../types/card-deck';
+import { CardRewardType } from '../../types/card-reward-type';
+import { CharacterMenuEquipment } from '../../types/character';
+import { Outcome } from '../../types/Outcome';
 import { AttackMenuComponent } from '../attack-menu/attack-menu.component';
-import { DiceRollDialogueService } from '../../services/dice-roll-dialogue.service';
+import { CharacterInfoComponent } from '../character-info/character-info.component';
+import { CharacterMenuComponent } from '../character-menu/character-menu.component';
+import { PlayerComponent } from '../characters/player/player.component';
+import { DiceRollDialogComponent } from '../dice-roll-dialog/dice-roll-dialog.component';
+import { EventMenuComponent } from '../event-menu/event-menu.component';
+import { GameDialogueComponent } from '../game-dialogue/game-dialogue.component';
+import { GameFooterComponent } from '../game-footer-legacy/game-footer.component';
+import { MovementNodeComponent } from '../game/movement-node/movement-node.component';
+import { GoldMenuComponent } from '../gold-menu/gold-menu.component';
+import { ItemMenuComponent } from '../item-menu/item-menu.component';
+import { NpcComponent } from '../npc/npc.component';
+import { TurnArrowComponent } from '../turn-arrow/turn-arrow.component';
+import { WeaponMenuComponent } from '../weapon-menu/weapon-menu.component';
 
 @Component({
   selector: 'app-game',
@@ -365,10 +365,6 @@ export class GameComponent implements OnDestroy {
       this.zoomPercentageDisplay
     );
 
-    // TODO Loop through all of the characters and enemies on the game board
-    // adjust the offsets accordingly.
-    // I'll do this by storing a local map in the gameState service every location that has a player or NPC.
-    // Then I'll loop through the map and adjust the offsets accordingly if there are multiple players or NPCs on the same location.
     this.gameStateService.adjustLocationsWithPeopleOnThem();
 
     if (combatSessionID != null) {
@@ -376,7 +372,6 @@ export class GameComponent implements OnDestroy {
     }
   }
 
-  // TODO implement this method
   private changePlayerDirection(location: LocationNode) {
     if (!this.gameStateService.characterBeingControlledByClient) {
       throw new Error('No character being controlled by client');
