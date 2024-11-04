@@ -299,6 +299,10 @@ export class GameComponent implements OnDestroy {
           this.loading = false;
         }
         this.gameStateService.adjustLocationsWithPeopleOnThem();
+
+        this.gameStateService.updateCurrentPlayerCombatState(
+          allCharactersInGameLobby
+        );
       });
   }
 

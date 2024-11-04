@@ -121,6 +121,25 @@ export class GameStateService {
     this.adjustPositionsForAllLocations();
   }
 
+  /**
+   * If the current player has just been given a combatSessionID from an action from another player, this method updates their state.
+   * @param characters
+   */
+  public updateCurrentPlayerCombatState(characters: Character[]): void {
+    const currentPlayer = characters.find(
+      (character) => character.id === this.characterBeingControlledByClient?.id
+    );
+
+    if (
+      currentPlayer &&
+      currentPlayer.combatSessionId &&
+      this.characterBeingControlledByClient
+    ) {
+      this.characterBeingControlledByClient.combatSessionId =
+        currentPlayer.combatSessionId;
+    }
+  }
+
   private resetLocations(): void {
     this.locationsWithPeopleOnThem.clear();
   }
