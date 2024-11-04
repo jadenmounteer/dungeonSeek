@@ -137,6 +137,10 @@ export class GameStateService {
     ) {
       this.characterBeingControlledByClient.combatSessionId =
         currentPlayer.combatSessionId;
+
+      this.refreshCurrentPlayerCombatSessionsState(
+        currentPlayer.combatSessionId
+      );
     }
   }
 
