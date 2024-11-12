@@ -33,7 +33,7 @@
   {
     "name": "The Bandit",
     "description": "A figure appears on the long road ahead. As you grow closer you notice the figure. It's a bandit! He's armed and dangerous. He demands you hand over all your gold.",
-    "quantity": 1,
+    "quantity": 3,
     "discardAfterUse": false,
     "choices": [
       {
