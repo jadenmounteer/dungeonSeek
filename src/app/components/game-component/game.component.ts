@@ -358,6 +358,14 @@ export class GameComponent implements OnDestroy {
         combatSessionID;
     }
 
+    if (combatSessionID != null) {
+      await this.combatService.addCharacterToCombatSession(combatSessionID);
+      // End their movement if they're entering combat
+      this.gameStateService.characterBeingControlledByClient.movementSpeed = 0;
+      this.diceRollDialogueService.currentCharacterRolledForEventCardThisTurn =
+        true; // We don't allow them to roll for an event card if they're entering combat
+    }
+
     await this.characterService.updateCharacter(
       this.gameStateService.characterBeingControlledByClient,
       this.gameStateService.gameSession.id
@@ -370,10 +378,6 @@ export class GameComponent implements OnDestroy {
     );
 
     this.gameStateService.adjustLocationsWithPeopleOnThem();
-
-    if (combatSessionID != null) {
-      await this.combatService.addCharacterToCombatSession(combatSessionID);
-    }
   }
 
   private changePlayerDirection(location: LocationNode) {
@@ -690,8 +694,6 @@ export class GameComponent implements OnDestroy {
         this.gameDialogueService.closeDialogue.bind(this);
 
       this.gameDialogueService.showDialogue(gameDialogueData);
-    } else {
-      this.diceRollDialogueService.rollForEventCard();
     }
   }
 
