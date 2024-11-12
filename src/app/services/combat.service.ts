@@ -19,12 +19,13 @@ import { WeaponCardService } from './weapon-card.service';
 import { Npc } from '../types/npcs/npc';
 import { CardRewardType } from '../types/card-reward-type';
 import { LootService } from './loot.service';
+import { LocationKey } from './location-service';
 
 export interface CombatSession {
   id: string;
   playerIDs: string[];
   enemyIDs: string[];
-  locationName: string;
+  locationName: LocationKey;
   turnQueue: string[];
   lootType: CardRewardType; // The reward type the person who wins the combat session will get. The person who dealt the killing blow gets the loot.
 }
@@ -80,49 +81,57 @@ export class CombatService implements OnDestroy {
       this.gameStateService.combatSessions.get(combatSessionID);
 
     // Remove the combat session ID from all players participating
-    if (this.gameStateService.characterBeingControlledByClient) {
-      this.gameStateService.characterBeingControlledByClient.combatSessionId =
-        null;
-    }
-    combatSession?.playerIDs.forEach((playerID) => {
-      const player =
-        this.gameStateService.allCharactersCurrentlyInGameSession.find(
-          (character) => character.id === playerID
-        );
-      if (!player) {
-        throw new Error('No player found.');
-      }
+    if (combatSession?.playerIDs) {
+      for (const playerId of combatSession?.playerIDs) {
+        const player =
+          this.gameStateService.allCharactersCurrentlyInGameSession.find(
+            (character) => character.id === playerId
+          );
+        if (!player) {
+          throw new Error('No player found.');
+        }
 
-      player.combatSessionId = null;
-      this.characterService.updateCharacter(
-        player,
-        this.gameStateService.gameSession.id
-      );
-    });
+        player.combatSessionId = null;
+
+        await this.characterService.updateCharacter(
+          player,
+          this.gameStateService.gameSession.id
+        );
+      }
+    }
 
     await this.removeCombatSessionFromDatabase(
       combatSessionID,
       this.gameStateService.gameSession.id
     );
 
-    combatSession?.playerIDs.forEach(async (playerId) => {
-      const player =
-        this.gameStateService.allCharactersCurrentlyInGameSession.find(
-          (character) => character.id === playerId
-        );
+    if (combatSession) {
+      await this.gameStateService.endCombatAtLocation(
+        combatSession.locationName
+      );
+    }
 
-      if (!player) {
-        throw new Error('No player found.');
-      }
+    if (combatSession?.playerIDs) {
+      for (const playerId of combatSession?.playerIDs) {
+        const player =
+          this.gameStateService.allCharactersCurrentlyInGameSession.find(
+            (character) => character.id === playerId
+          );
 
-      // If the player is the current player being controlled, show them a dialogue box with the reward they received.
-      if (
-        player.id === this.gameStateService.characterBeingControlledByClient?.id
-      ) {
-        // We don't update the db here because we update it when they pick a loot card.
-        this.lootService.drawLootCard(combatSession.lootType);
+        if (!player) {
+          throw new Error('No player found.');
+        }
+
+        // If the player is the current player being controlled, show them a dialogue box with the reward they received.
+        if (
+          player.id ===
+          this.gameStateService.characterBeingControlledByClient?.id
+        ) {
+          // We don't update the db here because we update it when they pick a loot card.
+          this.lootService.drawLootCard(combatSession.lootType);
+        }
       }
-    });
+    }
   }
 
   private combatShouldEnd(): boolean {

@@ -141,6 +141,13 @@ export class GameStateService {
       this.refreshCurrentPlayerCombatSessionsState(
         currentPlayer.combatSessionId
       );
+    } else {
+      // They are no longer in combat
+      this.currentPlayersCombatTurn = false;
+      this.currentPlayerSelectedEnemyToAttack = undefined;
+      if (this.characterBeingControlledByClient) {
+        this.characterBeingControlledByClient.combatSessionId = null;
+      }
     }
   }
 
@@ -359,6 +366,18 @@ export class GameStateService {
       }
     }
     return null;
+  }
+
+  public async endCombatAtLocation(locationName: LocationKey): Promise<void> {
+    const location = this.locationsWithPeopleOnThem.get(locationName);
+    if (location) {
+      for (const enemy of location.enemies) {
+        enemy.combatSessionID = null;
+
+        // update the enemy in the database
+        await this.#npcService.updateNpc(enemy, this.gameSession.id);
+      }
+    }
   }
 
   public checkIfPlayerIsInCombatSession(playerID: string): string | null {
