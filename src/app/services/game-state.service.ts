@@ -8,6 +8,7 @@ import { NpcFactory } from './npcFactory.service';
 import { NpcService } from './npc.service';
 import { CombatSession } from './combat.service';
 import { Npc, NpcType, NpcData } from '../types/npcs/npc';
+import { DiceRollDialogueService } from './dice-roll-dialogue.service';
 
 // I know haha....I just want to code this game already so I can play it.
 // If I were to go back and redesign the game, I'd have the locations be the parents that house the state.
@@ -25,6 +26,9 @@ export class GameStateService {
   #turnService: TurnService = inject(TurnService);
   #npcFactory: NpcFactory = inject(NpcFactory);
   #npcService: NpcService = inject(NpcService);
+  diceRollDialogueService: DiceRollDialogueService = inject(
+    DiceRollDialogueService
+  );
 
   public gameSession!: GameSession; // TODO dependant on the GameComponent to set this. I should try to refactor this component using an observable pattern.
   public allCharactersCurrentlyInGameSession: Character[] = [];
@@ -56,6 +60,13 @@ export class GameStateService {
   public refreshCurrentPlayerCombatSessionsState(
     combatSessionID: string
   ): void {
+    if (this.characterBeingControlledByClient) {
+      // End their movement if they're entering combat
+      this.characterBeingControlledByClient.movementSpeed = 0;
+      this.diceRollDialogueService.currentCharacterRolledForEventCardThisTurn =
+        true; // We don't allow them to roll for an event card if they're entering combat
+    }
+
     if (!this.characterBeingControlledByClient) {
       return;
     }

@@ -360,10 +360,6 @@ export class GameComponent implements OnDestroy {
 
     if (combatSessionID != null) {
       await this.combatService.addCharacterToCombatSession(combatSessionID);
-      // End their movement if they're entering combat
-      this.gameStateService.characterBeingControlledByClient.movementSpeed = 0;
-      this.diceRollDialogueService.currentCharacterRolledForEventCardThisTurn =
-        true; // We don't allow them to roll for an event card if they're entering combat
     }
 
     await this.characterService.updateCharacter(
