@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deployToFirebase": "sh src/scripts/deploy-to-firebase.sh"
+    "deploy": "sh src/scripts/deploy-to-firebase.sh"
   },
   "private": true,
   "dependencies": {
